@@ -163,7 +163,11 @@ public class WebDriverSetup {
 	 * @return 	Nothing
 	 */
 	public void launchApplication(){
-		driver.get(appURLRepository.getString(testApplication.toUpperCase() + "_" + testEnvironment.toUpperCase()));
+		if(testEnvironment.isEmpty()){
+			driver.get(appURLRepository.getString(testApplication.toUpperCase()));
+		}else{
+			driver.get(appURLRepository.getString(testApplication.toUpperCase() + "_" + testEnvironment.toUpperCase()));	
+		}
 	}
 	
 	/**

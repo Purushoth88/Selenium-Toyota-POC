@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+    <line>
+      <![CDATA[2015-03-10 09:12:52.246 ::  <font size = 2 color="green"><b><u>Assert True - Validating expected vs. actual operating systems</font></u></b><br />]]>
+    </line>
+    <line>
+      <![CDATA[<br/><b><font size = 4>Data Scenario: Change Zip Code</font></b><br/>]]>
+    </line>
+  </reporter-output>
+  <suite name="ChangeZipCode" duration-ms="54070" started-at="2015-03-10T13:12:51Z" finished-at="2015-03-10T13:13:45Z">
+    <groups>
+      <group name="regression">
+        <method signature="ChangeZipCode.testChangeZipCode(java.lang.String, java.lang.String)[pri:0, instance:toyota.ChangeZipCode@6be05ef2]" name="testChangeZipCode" class="toyota.ChangeZipCode"/>
+      </group> <!-- regression -->
+    </groups>
+    <test name="ChangeZipCode" duration-ms="54070" started-at="2015-03-10T13:12:51Z" finished-at="2015-03-10T13:13:45Z">
+      <class name="toyota.ChangeZipCode">
+        <test-method status="PASS" signature="setup(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:toyota.ChangeZipCode@6be05ef2]" name="setup" is-config="true" duration-ms="13" started-at="2015-03-10T09:12:51Z" finished-at="2015-03-10T09:12:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[local]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[31.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Vista]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="testChangeZipCode(java.lang.String, java.lang.String)[pri:0, instance:toyota.ChangeZipCode@6be05ef2]" name="testChangeZipCode" duration-ms="51776" started-at="2015-03-10T09:12:52Z" data-provider="dataScenario" finished-at="2015-03-10T09:13:43Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Change Zip Code]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+            <line>
+              <![CDATA[2015-03-10 09:12:52.246 ::  <font size = 2 color="green"><b><u>Assert True - Validating expected vs. actual operating systems</font></u></b><br />]]>
+            </line>
+            <line>
+              <![CDATA[<br/><b><font size = 4>Data Scenario: Change Zip Code</font></b><br/>]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- testChangeZipCode -->
+        <test-method status="PASS" signature="closeSession(org.testng.ITestResult)[pri:0, instance:toyota.ChangeZipCode@6be05ef2]" name="closeSession" is-config="true" duration-ms="1384" started-at="2015-03-10T09:13:43Z" finished-at="2015-03-10T09:13:45Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testChangeZipCode status=SUCCESS method=ChangeZipCode.testChangeZipCode(java.lang.String, java.lang.String)[pri:0, instance:toyota.ChangeZipCode@6be05ef2] output=2015-03-10 09:12:52.246 ::  <font size = 2 color="green"><b><u>Assert True - Validating expected vs. actual operating systems</font></u></b><br />]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeSession -->
+      </class> <!-- toyota.ChangeZipCode -->
+    </test> <!-- ChangeZipCode -->
+  </suite> <!-- ChangeZipCode -->
+</testng-results>
