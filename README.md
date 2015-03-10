@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Orasi Selenium Core Project
 
 This is the homepage for the Orasi Selenium Core libraries. These libraries contain both original code created by Orasi developers
@@ -31,3 +32,6 @@ These resources are being used directly, or have been extended upon.
 * Add as Maven Dependency: By adding the Orasi Selenium Core Jar to the Maven POM file, the consumer will always have easy access to
 							updated code. This also allows the option for versioning in the case the consumer needs to test the core
 							updates before fully committing to them.
+=======
+# Toyota
+>>>>>>> 3fde674cc37b0d671b0e2c52f3d163bc57973b1f
