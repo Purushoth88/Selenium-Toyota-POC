@@ -13,14 +13,13 @@ public class Constants {
     /** Location of the environment URLs properties file */
     final static public String ENVIRONMENT_URL_PATH = "EnvironmentURLs";
    		
-    
     /** Location of the user credentials properties file */
     final static public String USER_CREDENTIALS_PATH = "UserCredentials";
   
     
     /** Location of data provider files in the project  */
-    final static public String TOYOTA_DATAPROVIDER_PATH = "/toyota/dataProviders/";
-    final static public String BUYATOYOTA_DATAPROVIDER_PATH = "/buyAToyota/dataProviders/";
+    final static public String TOYOTA_DATAPROVIDER_PATH = "apps/toyota/dataProviders/";
+    final static public String BUYATOYOTA_DATAPROVIDER_PATH = "apps/buyAToyota/dataProviders/";
     
     final static public String SANDBOX_PATH = "/sandbox/";
     
