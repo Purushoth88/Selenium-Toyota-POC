@@ -18,8 +18,8 @@ public class Constants {
   
     
     /** Location of data provider files in the project  */
-    final static public String TOYOTA_DATAPROVIDER_PATH = "apps/toyota/dataProviders/";
-    final static public String BUYATOYOTA_DATAPROVIDER_PATH = "apps/buyAToyota/dataProviders/";
+    final static public String TOYOTA_DATAPROVIDER_PATH = "/apps/toyota/dataProviders/";
+    final static public String BUYATOYOTA_DATAPROVIDER_PATH = "/apps/buyAToyota/dataProviders/";
     
     final static public String SANDBOX_PATH = "/sandbox/";
     

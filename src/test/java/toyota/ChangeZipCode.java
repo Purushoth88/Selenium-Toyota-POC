@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
@@ -12,6 +13,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import apps.toyota.homePage.HomePage;
+import apps.toyota.mainNavigation.MainNavigation;
 
 import com.orasi.utils.Constants;
 import com.orasi.utils.TestReporter;
@@ -86,6 +90,10 @@ public class ChangeZipCode {
 		drivers.put(testName, driver);
 
 		TestReporter.logScenario(testScenario);
-
+		HomePage homePage = new HomePage(driver);
+		Assert.assertEquals(homePage.pageLoaded(), true);
+	
+		MainNavigation mainNav = new MainNavigation(driver);
+		mainNav.changeZipCodes(zipCode);
 	}
 }

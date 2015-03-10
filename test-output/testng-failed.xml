@@ -11,7 +11,8 @@
       <class name="toyota.ChangeZipCode">
         <methods>
           <include name="setup"/>
-          <include name="testChangeZipCode"/>
+          <include name="testChangeZipCode" invocation-numbers="0"/>
+          <include name="closeSession"/>
         </methods>
       </class> <!-- toyota.ChangeZipCode -->
     </classes>
