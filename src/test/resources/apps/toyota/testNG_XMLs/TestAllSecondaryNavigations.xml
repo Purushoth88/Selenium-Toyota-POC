@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestAllSecondaryNavigations" parallel="none">
+	<!-- <suite name="ChangeZipCode" parallel="instances" thread-count="5"> -->
+	<parameter name="browserUnderTest" value="chrome" />
+	<parameter name="environment" value="" />
+	<parameter name="runLocation" value="local" />
+	<!-- <parameter name="runLocation" value="remote"</parameter> -->
+	<parameter name="browserVersion" value="31.0" />
+	<parameter name="operatingSystem" value="vista" />
+	<test name="TestAllSecondaryNavigations">
+		<classes>
+			<class name="toyota.TestAllSecondaryNavigations" />
+		</classes>
+	</test> <!-- TestAllSecondaryNavigations -->
+</suite> <!-- TestAllSecondaryNavigations -->
