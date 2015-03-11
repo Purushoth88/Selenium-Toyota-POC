@@ -237,6 +237,7 @@ public class WebDriverSetup {
 				//Chrome
 			    else if(getBrowserUnderTest().equalsIgnoreCase("Chrome")){
 			    	file = new File(this.getClass().getResource(Constants.DRIVERS_PATH_LOCAL + "mac/chromedriver").getPath());
+			
 			    	System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 					try{
 						//Ensure the permission on the driver include executable permissions

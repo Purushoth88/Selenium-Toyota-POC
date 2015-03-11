@@ -61,7 +61,10 @@ public class ChangeZipCode {
 		if (test.getStatus() == ITestResult.FAILURE) {
 			new Screenshot().takeScreenShot(test, driver);
 		}
-		driver.quit();
+		
+		if(driver.getWindowHandles().size() != 0){
+			driver.quit();	
+		}
 	}
 
 	/**
