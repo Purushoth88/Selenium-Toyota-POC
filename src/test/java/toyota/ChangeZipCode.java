@@ -92,10 +92,12 @@ public class ChangeZipCode {
 		System.out.println(testName);
 		drivers.put(testName, driver);
 
+		//Ensure the home page is loaded
 		TestReporter.logScenario(testScenario);
 		HomePage homePage = new HomePage(driver);
 		Assert.assertEquals(homePage.pageLoaded(), true);
 	
+		//Change the zipcode
 		MainNavigation mainNav = new MainNavigation(driver);
 		mainNav.changeZipCodes(zipCode);
 	}

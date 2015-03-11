@@ -81,33 +81,67 @@ public class MainNavigation {
 	// *** HomePage Interactions ***
 	// ***********************************************
 
+	/**
+	 * @summary: clicks on the locations link to allow a new zipcode to be entered
+	 * @author: Waightstill W Avery
+	 * @param: NA
+	 * @return: NA
+	 */
 	private void clickYourLocation(){
+		//Attempt to use the Selenium 'click'
 		btnYourLocation.click();
 		if(!pageLoaded(eleZipCodePopup)){
+			//If the zipcode popup does not load, then try a JavaScript 'click'
 			initialize();
 			btnYourLocation.jsClick(driver);
 			Assert.assertEquals(pageLoaded(eleZipCodePopup), true, "The zip code popup was not displayed.");
 		}
 	}
 	
+	/**
+	 * @summary: if the zipcode is different than that found in the UI, this method will click the location icon, enter the new zipcode and verify the change is reflected in the UI
+	 * @author: Waightstill W Avery
+	 * @param: zipCode - String, value to be entered as the new zipcode to use
+	 * @return: NA
+	 */
 	public void changeZipCodes(String zipCode){
 		pageLoaded(txtZipCode);
+		//Capture the zipcode that currently exists in the UI
 		this.initialZipCode = captureCurrentZipCode();
 		TestReporter.log("Initial zip code: ["+initialZipCode+"].");
-		clickYourLocation();
-		txtZipCode.safeSet(zipCode);
-		initialize();
-		pageLoaded();
-		this.modifiedZipCode = captureCurrentZipCode();
-		TestReporter.log("Modified zip code: ["+modifiedZipCode+"].");
-		verifyZipCodeValue(zipCode);
+		//Determine if the existing zipcode in the UI is the same as the zipcode to be used in the test
+		if(!initialZipCode.equalsIgnoreCase(zipCode)){
+			//If the zipcode is different, enter the zipcode to be used for the test
+			clickYourLocation();
+			txtZipCode.safeSet(zipCode);
+			initialize();
+			pageLoaded();
+			//Capture the newly modified zipcode from the UI
+			this.modifiedZipCode = captureCurrentZipCode();
+			TestReporter.log("Modified zip code: ["+modifiedZipCode+"].");
+			//Ensure the expected and actual zipcdes match
+			verifyZipCodeValue(zipCode);	
+		}
 	}
 	
+	/**
+	 * @summary: verifies that the expected and actual zipcodes are equal
+	 * @author: Waightstill W Avery
+	 * @param: expectedZipCode - String, value of the zipcode that is expected to be reflected in the UI
+	 * @return: NA
+	 */
 	private void verifyZipCodeValue(String expectedZipCode){
 		Assert.assertEquals(captureCurrentZipCode(), expectedZipCode,  "The actual zipcode ["+captureCurrentZipCode()+"] did not match the expected zip code ["+expectedZipCode+"].");
 	}
 	
+	/**
+	 * @summary: captures the zipcode that is currently displayed in the UI
+	 * @author: Waightstill W Avery
+	 * @param: NA
+	 * @return: NA
+	 */
 	private String captureCurrentZipCode(){
+		pageLoaded(eleZipCode);
 		return eleZipCode.getText().trim();
 	}
 }
