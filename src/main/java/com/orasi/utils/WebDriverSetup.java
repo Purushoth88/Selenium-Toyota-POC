@@ -69,7 +69,7 @@ public class WebDriverSetup {
 	public static void setRunLocation(String location) {System.setProperty(Constants.RUN_LOCATION, location);}
 	
 	public static String getSeleniumHubURL() { return System.getProperty(Constants.SELENIUM_HUB_URL);}
-	public static void setSeleniumHubURL(String url) {System.setProperty(Constants.RUN_LOCATION, url);}	
+	public static void setSeleniumHubURL(String url) {System.setProperty(Constants.SELENIUM_HUB_URL, url);}	
 	
 	public void setDriver(WebDriver driverSession){driver = driverSession;}	
 	public WebDriver getDriver(){return driver;}	
@@ -104,7 +104,11 @@ public class WebDriverSetup {
 	 * @return 	Nothing
 	 */
 	public void launchApplication(){
-		driver.get(appURLRepository.getString(getTestApplication().toUpperCase() + "_" + getTestEnvironment().toUpperCase()));
+		if(getTestEnvironment().isEmpty()){
+			driver.get(appURLRepository.getString(getTestApplication().toUpperCase()));
+		}else{
+			driver.get(appURLRepository.getString(getTestApplication().toUpperCase() + "_" + getTestEnvironment().toUpperCase()));	
+		}
 	}
 	
 	/**

@@ -112,6 +112,7 @@ public class MainNavigation {
 		if(!initialZipCode.equalsIgnoreCase(zipCode)){
 			//If the zipcode is different, enter the zipcode to be used for the test
 			clickYourLocation();
+			pageLoaded();
 			txtZipCode.safeSet(zipCode);
 			initialize();
 			pageLoaded();
