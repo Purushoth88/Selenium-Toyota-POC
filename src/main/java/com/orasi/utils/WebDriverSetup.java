@@ -332,8 +332,8 @@ public class WebDriverSetup {
 		String homeDirectory = "/home";	
 		//Define the Firefox version
 		String firefoxVersion = getBrowserVersion();
-		System.out.println("Firefox version: " + browserVersion);
-		Assert.assertEquals(browserVersion.isEmpty(), false, "To ensure Firefox binaries are loaded on a Linux OS, a browser version is needed (e.g. 31.0) to be passed from the testNG XML.");
+		System.out.println("Firefox version: " + firefoxVersion);
+		Assert.assertEquals(firefoxVersion.isEmpty(), false, "To ensure Firefox binaries are loaded on a Linux OS, a browser version is needed (e.g. 31.0) to be passed from the testNG XML.");
 		//Define the binary directory
 		String binaryDirectory = "firefox";
 		//Define the expected binary location from the user's home directory
