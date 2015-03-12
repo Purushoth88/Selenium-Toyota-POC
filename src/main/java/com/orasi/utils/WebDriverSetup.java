@@ -329,7 +329,7 @@ public class WebDriverSetup {
 		 *   which Selenium will use to launch Firefox. 
 		 */
 		//Define the expected home directory location
-		String homeDirectory = "/home";	
+		String homeDirectory = "/home/gsodev";	
 		//Define the Firefox version
 		String firefoxVersion = getBrowserVersion();
 		System.out.println("Firefox version: " + firefoxVersion);
