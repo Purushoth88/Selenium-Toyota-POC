@@ -367,8 +367,8 @@ public class WebDriverSetup {
 					break;
 				}
 			}
-			TestReporter.assertTrue(osFound, "Validating expected vs. actual operating systems");
 			Assert.assertTrue(osFound, "The System OS ["+platform+"] did not match that which was passed in the TestNG XML ["+operatingSystem+"].");
+			TestReporter.assertTrue(osFound, "Validating expected vs. actual operating systems");
 			break;
 		}
 	}
