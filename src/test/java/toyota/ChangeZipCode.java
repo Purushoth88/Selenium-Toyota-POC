@@ -42,7 +42,7 @@ public class ChangeZipCode {
 	@BeforeTest(groups = { "regression" })
 	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 			"operatingSystem", "environment" })
-	public void setup(@Optional String runLocation, String browserUnderTest,
+	public void setup(String runLocation, String browserUnderTest,
 			String browserVersion, String operatingSystem, String environment) {
 		this.application = "Toyota";
 		this.runLocation = runLocation;
