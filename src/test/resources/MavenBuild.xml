@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="ChangeZipCode" parallel="none">
 	<!-- <suite name="ChangeZipCode" parallel="instances" thread-count="5"> -->
-	<parameter name="browserUnderTest" value="chrome" />
+	<parameter name="browserUnderTest" value="firefox" />
 	<parameter name="environment" value="staging" />
 	<parameter name="runLocation" value="local" />
 	<!-- <parameter name="runLocation" value="remote"</parameter> -->
