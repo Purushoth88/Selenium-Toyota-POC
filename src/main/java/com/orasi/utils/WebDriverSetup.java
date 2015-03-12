@@ -365,7 +365,7 @@ public class WebDriverSetup {
 			proc = Runtime.getRuntime().exec(new String[]{bashLocation,bashArguments,"bunzip2 " + binaryContainer });
 			proc.waitFor();
 			System.out.println(".......done");
-			Assert.assertEquals(checkShellProcessForErrors(proc), 0, "An error was encountered while unzipping the file ["+binaryContainer+"].");
+			//Assert.assertEquals(checkShellProcessForErrors(proc), 0, "An error was encountered while unzipping the file ["+binaryContainer+"].");
 			
 			//Extract the file files from the archive
 			System.out.print("Extracting the files from: "+binaryTarball);
