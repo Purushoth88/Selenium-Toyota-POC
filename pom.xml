@@ -61,7 +61,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.orasi</groupId>
-			<artifactId>Selenium-Java-Core</artifactId>
+			<artifactId>Orasi-Selenium-Java-Core</artifactId>
 			<version>${orasiCoreVersion}</version>
 			<classifier>jar-with-dependencies</classifier>
 		</dependency>
