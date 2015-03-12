@@ -43,7 +43,7 @@ public class WebDriverSetup {
 		setRunLocation(runLocation);
 		setTestEnvironment(environment);
 		setSeleniumHubURL(seleniumHubURL);
-		verifyExpectedAndActualOS();
+		//verifyExpectedAndActualOS();
 	}
 	
 	//Getters & Setters
@@ -329,10 +329,10 @@ public class WebDriverSetup {
 		 *   which Selenium will use to launch Firefox. 
 		 */
 		//Define the expected home directory location
-		String homeDirectory = "/home/gsodev";	
+		String homeDirectory = "/home/";
 		//Define the Firefox version
 		String firefoxVersion = getBrowserVersion();
-		System.out.println("Firefox version: " + firefoxVersion);
+		System.out.println("\nFirefox version: " + firefoxVersion + "\n");
 		Assert.assertEquals(firefoxVersion.isEmpty(), false, "To ensure Firefox binaries are loaded on a Linux OS, a browser version is needed (e.g. 31.0) to be passed from the testNG XML.");
 		//Define the binary directory
 		String binaryDirectory = "firefox";
@@ -365,7 +365,9 @@ public class WebDriverSetup {
 			proc = Runtime.getRuntime().exec(new String[]{bashLocation,bashArguments,"bunzip2 " + binaryContainer });
 			proc.waitFor();
 			System.out.println(".......done");
-			//Assert.assertEquals(checkShellProcessForErrors(proc), 0, "An error was encountered while unzipping the file ["+binaryContainer+"].");
+			if(checkShellProcessForErrors(proc) != 0){
+				TestReporter.log("An error was encountered while unzipping the file ["+binaryContainer+"].");
+			}
 			
 			//Extract the file files from the archive
 			System.out.print("Extracting the files from: "+binaryTarball);
