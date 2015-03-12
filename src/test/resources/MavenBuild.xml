@@ -6,8 +6,8 @@
 	<parameter name="environment" value="staging" />
 	<parameter name="runLocation" value="local" />
 	<!-- <parameter name="runLocation" value="remote"</parameter> -->
-	<parameter name="browserVersion" value="31.0" />
-	<parameter name="operatingSystem" value="Vista" />
+	<parameter name="browserVersion" value="" />
+	<parameter name="operatingSystem" value="linux" />
 	<test name="ChangeZipCode">
 		<classes>
 			<class name="toyota.ChangeZipCode" />

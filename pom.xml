@@ -14,8 +14,8 @@
 	<repositories>
 		<repository>
 			<id>Orasi-Selenium-Java-Core</id>
-			<!-- <url>https://github.com/Orasi/Selenium-Java-Core/Selenium-Java-Core/raw/master/lib/releases</url> -->
-			<url>https://github.com/Orasi/Selenium-Java-Core/Selenium-Java-Core/raw/master/lib/releases</url>
+			<url>https://github.com/Orasi/Selenium-Java-Core/raw/master/lib/releases</url>
+			<!-- <url>https://github.com/Orasi/Selenium-Java-Core/tree/master/lib/releases/com/orasi/Selenium-Java-Core</url> -->
 		</repository>
 	</repositories>
 

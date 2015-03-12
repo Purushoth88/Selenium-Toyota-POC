@@ -347,6 +347,8 @@ public class WebDriverSetup {
 	private void verifyExpectedAndActualOS(){
 		//Verify that the current OS is actually that which was indicated as expected by the TestNG XML
 		String platform = Platform.getCurrent().toString().toLowerCase();
+		System.out.println("Actual OS:    " + platform);
+		System.out.println("Expected OS: " + operatingSystem);
 		switch (operatingSystem) {
 		/*
 		 * Mac OS, Linux, Unix and Android are OS enumerations that have only one value. 
@@ -365,8 +367,8 @@ public class WebDriverSetup {
 					break;
 				}
 			}
-			TestReporter.assertTrue(osFound, "Validating expected vs. actual operating systems");
 			Assert.assertTrue(osFound, "The System OS ["+platform+"] did not match that which was passed in the TestNG XML ["+operatingSystem+"].");
+			TestReporter.assertTrue(osFound, "Validating expected vs. actual operating systems");
 			break;
 		}
 	}
