@@ -61,7 +61,10 @@ public class ChangeZipCode {
 		if (test.getStatus() == ITestResult.FAILURE) {
 			new Screenshot().takeScreenShot(test, driver);
 		}
-		driver.quit();
+		
+		if(driver.getWindowHandles().size() != 0){
+			driver.quit();	
+		}
 	}
 
 	/**
@@ -89,10 +92,12 @@ public class ChangeZipCode {
 		System.out.println(testName);
 		drivers.put(testName, driver);
 
+		//Ensure the home page is loaded
 		TestReporter.logScenario(testScenario);
 		HomePage homePage = new HomePage(driver);
 		Assert.assertEquals(homePage.pageLoaded(), true);
 	
+		//Change the zipcode
 		MainNavigation mainNav = new MainNavigation(driver);
 		mainNav.changeZipCodes(zipCode);
 	}

@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.orasi</groupId>
-	<artifactId>Selenium-Java-Core</artifactId>
+	<artifactId>Selenium-Java-Core-With-Jar</artifactId>
 	<version>1.0.1</version>
 	<packaging>jar</packaging>
 	
@@ -14,6 +14,7 @@
 	<repositories>
 		<repository>
 			<id>Orasi-Selenium-Java-Core</id>
+			<!-- <url>https://github.com/Orasi/Selenium-Java-Core/Selenium-Java-Core/raw/master/lib/releases</url> -->
 			<url>https://github.com/Orasi/Selenium-Java-Core/Selenium-Java-Core/raw/master/lib/releases</url>
 		</repository>
 	</repositories>
