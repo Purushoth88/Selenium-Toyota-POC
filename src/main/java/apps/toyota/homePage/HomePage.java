@@ -42,11 +42,11 @@ public class HomePage {
 	}
 
 	public boolean pageLoaded() {
-		return new PageLoaded().isPageHTMLLoaded(this.getClass(), driver, eleMarquee);
+		return new PageLoaded().isDomComplete(driver);
 	}
 
 	public boolean pageLoaded(Element element) {
-		return new PageLoaded().isPageHTMLLoaded(this.getClass(), driver, element);
+		return new PageLoaded().isElementLoaded(this.getClass(), driver, element);
 	}
 
 	public HomePage initialize() {

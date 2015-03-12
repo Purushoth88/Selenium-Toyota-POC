@@ -96,11 +96,11 @@ public class SecondaryNavigation {
 	}
 
 	public boolean pageLoaded() {
-		return new PageLoaded().isPageHTMLLoaded(this.getClass(), driver, lnkToyotaIcon);
+		return new PageLoaded().isDomComplete(driver);
 	}
 
 	public boolean pageLoaded(Element element) {
-		return new PageLoaded().isPageHTMLLoaded(this.getClass(), driver, element);
+		return new PageLoaded().isElementLoaded(this.getClass(), driver, element);
 	}
 
 	public SecondaryNavigation initialize() {

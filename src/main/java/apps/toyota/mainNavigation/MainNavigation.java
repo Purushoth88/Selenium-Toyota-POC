@@ -65,11 +65,11 @@ public class MainNavigation {
 	}
 
 	public boolean pageLoaded() {
-		return new PageLoaded().isPageHTMLLoaded(this.getClass(), driver, btnYourLocation);
+		return new PageLoaded().isDomComplete(driver);
 	}
 
 	public boolean pageLoaded(Element element) {
-		return new PageLoaded().isPageHTMLLoaded(this.getClass(), driver, element);
+		return new PageLoaded().isElementLoaded(this.getClass(), driver, element);
 	}
 
 	public MainNavigation initialize() {
