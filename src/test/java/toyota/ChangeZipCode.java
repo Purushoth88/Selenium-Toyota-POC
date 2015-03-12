@@ -83,7 +83,7 @@ public class ChangeZipCode {
 		String testName = new Object() {
 		}.getClass().getEnclosingMethod().getName();
 		//Uncomment the following line to have TestReporter outputs output to the console
-		//TestReporter.setPrintToConsole(true);
+		TestReporter.setPrintToConsole(true);
 		WebDriverSetup setup = new WebDriverSetup(application,
 				browserUnderTest, browserVersion, operatingSystem, runLocation,
 				environment);
