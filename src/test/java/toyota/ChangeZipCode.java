@@ -46,7 +46,7 @@ public class ChangeZipCode implements SauceOnDemandSessionIdProvider{
      * user name and access key. To use the authentication supplied by environment variables or
      * from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
      */
-    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("username", "password");
+    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("wwavery0352", "WirLachen5@");
     /**
      * JUnit Rule which marks Sauce Jobs as passed/failed when the test succeeds or fails.
      */
