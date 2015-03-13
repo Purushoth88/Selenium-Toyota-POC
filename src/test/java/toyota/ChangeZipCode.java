@@ -28,7 +28,7 @@ import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
 import com.saucelabs.junit.SauceOnDemandTestWatcher;
 
-public class ChangeZipCode{
+public class ChangeZipCode implements SauceOnDemandSessionIdProvider{
 
 	private String application = "";
 	private String browserUnderTest = "";
@@ -50,21 +50,21 @@ public class ChangeZipCode{
     /**
      * JUnit Rule which marks Sauce Jobs as passed/failed when the test succeeds or fails.
      */
-//    public @Rule
-//    SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
+    public @Rule
+    SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
     /**
      * JUnit Rule that records the test name of the current test. When this is referenced
      * during the creation of {@link DesiredCapabilities}, the test method name is assigned
      * to the Sauce Job name and recorded in Jenkins Console Output and in the Sauce Jobs
      * Report in the Jenkins project's home page.
      */
-//    public @Rule TestName testName = new TestName();
+    public @Rule TestName testName = new TestName();
     
-//    @Override
-//    public String getSessionId() {
-//        return "";
-//    }
-//    
+    @Override
+    public String getSessionId() {
+        return "";
+    }
+    
     //**************
     // Data Provider
     //**************
