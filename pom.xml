@@ -81,12 +81,10 @@
 			<artifactId>sauce-ondemand-driver</artifactId>
 			<version>1.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.saucelabs.selenium</groupId>
 			<artifactId>selenium-client-factory</artifactId>
 			<version>1.2</version>
 		</dependency>
-
 	</dependencies>
 </project>
