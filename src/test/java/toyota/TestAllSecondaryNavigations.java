@@ -62,8 +62,8 @@ public class TestAllSecondaryNavigations {
 				new Screenshot().takeScreenShot(test, driver);
 			}
 			
-			if(driver.getWindowHandles().size() != 0){
-				driver.quit();	
+			if(driver != null && driver.getWindowHandles().size() > 0){
+				driver.quit();
 			}
 		}
 

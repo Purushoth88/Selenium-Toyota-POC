@@ -11,7 +11,7 @@
 	<test name="ChangeZipCode">
 		<classes>
 			<class name="toyota.ChangeZipCode" />
-			<class name="toyota.TestAllSecondaryNavigations" />
+			<!-- <class name="toyota.TestAllSecondaryNavigations" /> -->
 		</classes>
 	</test> <!-- ChangeZipCode -->
 </suite> <!-- ChangeZipCode -->

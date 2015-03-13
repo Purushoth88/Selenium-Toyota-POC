@@ -172,7 +172,7 @@ public class ChangeZipCode{
         JSONArray tags = new JSONArray();
         tags.add("testingblah");
         updates.put("tags", tags);
-        client.updateJobInfo("1", updates);
+        client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
         System.out.println(client.getJobInfo("1"));
 	}
 }
