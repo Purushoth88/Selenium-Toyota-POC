@@ -5,12 +5,12 @@
 	<artifactId>Toyota</artifactId>
 	<version>1.0.1</version>
 	<packaging>jar</packaging>
-	
+
 	<properties>
 		<testNGSourceDirectory>src/test/resources</testNGSourceDirectory>
 		<orasiCoreVersion>1.0.1</orasiCoreVersion>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>Orasi-Selenium-Java-Core</id>
@@ -66,5 +66,27 @@
 			<version>${orasiCoreVersion}</version>
 			<classifier>jar-with-dependencies</classifier>
 		</dependency>
+		<dependency>
+			<groupId>com.saucelabs</groupId>
+			<artifactId>sauce_java_common</artifactId>
+			<version>2.1.18</version>
+		</dependency>
+		<dependency>
+			<groupId>com.saucelabs</groupId>
+			<artifactId>sauce_junit</artifactId>
+			<version>2.1.18</version>
+		</dependency>
+		<dependency>
+			<groupId>com.saucelabs.selenium</groupId>
+			<artifactId>sauce-ondemand-driver</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.saucelabs.selenium</groupId>
+			<artifactId>selenium-client-factory</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 	</dependencies>
 </project>
