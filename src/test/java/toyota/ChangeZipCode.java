@@ -1,13 +1,25 @@
 package toyota;
 
 import java.io.IOException;
+
+import org.junit.runner.Description;
+
+import com.saucelabs.saucerest.SauceREST;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.rules.TestWatcher;
 import org.junit.Rule;
 import org.junit.rules.TestName;
+import org.junit.runner.Description;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.IReporter;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
@@ -19,6 +31,7 @@ import org.testng.annotations.Test;
 import apps.toyota.homePage.HomePage;
 import apps.toyota.mainNavigation.MainNavigation;
 
+import com.mysql.jdbc.Statement;
 import com.orasi.utils.Constants;
 import com.orasi.utils.TestReporter;
 import com.orasi.utils.Screenshot;
@@ -26,10 +39,12 @@ import com.orasi.utils.WebDriverSetup;
 import com.orasi.utils.dataProviders.ExcelDataProvider;
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
+import com.saucelabs.common.Utils;
 import com.saucelabs.junit.SauceOnDemandTestWatcher;
 
-public class ChangeZipCode implements SauceOnDemandSessionIdProvider{
-
+public class ChangeZipCode{
+	private  SauceREST sauceREST;
+	private  SauceOnDemandSessionIdProvider sessionIdProvider;
 	private String application = "";
 	private String browserUnderTest = "";
 	private String browserVersion = "";
@@ -51,19 +66,15 @@ public class ChangeZipCode implements SauceOnDemandSessionIdProvider{
      * JUnit Rule which marks Sauce Jobs as passed/failed when the test succeeds or fails.
      */
     //public @Rule
-    //SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
+    //SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher( this, authentication);
+    
     /**
      * JUnit Rule that records the test name of the current test. When this is referenced
      * during the creation of {@link DesiredCapabilities}, the test method name is assigned
      * to the Sauce Job name and recorded in Jenkins Console Output and in the Sauce Jobs
      * Report in the Jenkins project's home page.
      */
-    public @Rule TestName testName = new TestName();
-    
-    @Override
-    public String getSessionId() {
-        return "";
-    }
+    //public @Rule TestName testName = new TestName();    
     
     //**************
     // Data Provider
@@ -121,7 +132,7 @@ public class ChangeZipCode implements SauceOnDemandSessionIdProvider{
 	 * @Return: N/A
 	 */
 	@Test(dataProvider = "dataScenario", groups = { "regression" })
-	public void testChangeZipCode (
+	public void testChangeZipCode(
 			String testScenario, String zipCode) throws InterruptedException, IOException {
 		
 		String testName = new Object() {

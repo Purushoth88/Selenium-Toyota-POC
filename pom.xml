@@ -8,7 +8,7 @@
 
 	<properties>
 		<testNGSourceDirectory>src/test/resources</testNGSourceDirectory>
-		<orasiCoreVersion>1.0.1</orasiCoreVersion>
+		<orasiCoreVersion>1.0.2</orasiCoreVersion>
 	</properties>
 
 	<repositories>
@@ -66,7 +66,7 @@
 			<version>${orasiCoreVersion}</version>
 			<classifier>jar-with-dependencies</classifier>
 		</dependency>
-		<dependency>
+<!-- 		<dependency>
 			<groupId>com.saucelabs</groupId>
 			<artifactId>sauce_java_common</artifactId>
 			<version>2.1.18</version>
@@ -85,6 +85,6 @@
 			<groupId>com.saucelabs.selenium</groupId>
 			<artifactId>selenium-client-factory</artifactId>
 			<version>1.2</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 </project>

@@ -9,7 +9,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Rule;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,24 +21,18 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 
-import com.saucelabs.common.SauceOnDemandAuthentication;
-import com.saucelabs.common.SauceOnDemandSessionIdProvider;
-import com.saucelabs.junit.SauceOnDemandTestWatcher;
-
-public class WebDriverSetup implements SauceOnDemandSessionIdProvider{
-	public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("wwavery0352", "05b29ecc-195e-425e-936b-07be6e9174ef");
-    public @Rule
-    SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
-    @Override
-    public String getSessionId() {
-        return ((RemoteWebDriver)driver).getSessionId().toString();
-    }
+//public class WebDriverSetup implements SauceOnDemandSessionIdProvider{
+public class WebDriverSetup{
     
-	public WebDriver driver;
+	public static WebDriver driver;
 	private String browserVersion = System.getProperty(Constants.BROWSER_VERSION);
 	
 	private static ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
-	private String seleniumHubURL = "http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub";
+	private String seleniumHubURL = "http://"
+			+ Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME"))
+			+ ":"
+			+ Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY"))
+			+ "@ondemand.saucelabs.com:80/wd/hub";
 	
 	//Define a variable to house the Linux OS username
 	private String username = "";
@@ -89,7 +82,7 @@ public class WebDriverSetup implements SauceOnDemandSessionIdProvider{
 	public static String getTestName(){ return System.getProperty("selenium.testName");}
 	
 	public void setDriver(WebDriver driverSession){driver = driverSession;}	
-	public WebDriver getDriver(){return driver;}	
+	public static WebDriver getDriver(){return driver;}	
 	
 	public ResourceBundle getEnvironmentURLRepository(){return appURLRepository;}
 
