@@ -112,10 +112,26 @@ public class ChangeZipCode{
 		System.out.println(test.getMethod().getMethodName());
 		WebDriver driver = drivers.get(test.getMethod().getMethodName());
 
+		ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
+		SauceREST client = new SauceREST(
+				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
+				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+        Map<String, Object> updates = new HashMap<String, Object>();
+        updates.put("name", WebDriverSetup.getTestName());
+        
 		// if is a failure, then take a screenshot
 		if (test.getStatus() == ITestResult.FAILURE) {
 			new Screenshot().takeScreenShot(test, driver);
+			updates.put("passed", false);
+		}else{
+			updates.put("passed", true);
 		}
+			
+        JSONArray tags = new JSONArray();
+        //tags.add("testingblah");
+        //updates.put("tags", tags);
+        client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
+        System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));
 		
 		if(driver != null && driver.getWindowHandles().size() > 0){
 			driver.quit();
@@ -161,18 +177,6 @@ public class ChangeZipCode{
 		
 		
 		
-		ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
-		SauceREST client = new SauceREST(
-				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
-				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
-
-        Map<String, Object> updates = new HashMap<String, Object>();
-        updates.put("name", testName);
-        updates.put("passed", true);
-        JSONArray tags = new JSONArray();
-        //tags.add("testingblah");
-        //updates.put("tags", tags);
-        client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
-        System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));
+		
 	}
 }
