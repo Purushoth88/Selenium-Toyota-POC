@@ -94,6 +94,7 @@ public class RestService {
 	    		
 	            sslsf).build();
 		HttpUriRequest request = new HttpGet(URL);
+		
 		CloseableHttpResponse  httpResponse = HttpClientBuilder.create().build().execute( request );
 		
 		setStatusCode(httpResponse);		

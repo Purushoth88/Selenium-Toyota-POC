@@ -21,6 +21,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 
+import com.orasi.utils.Base64Coder;
+import com.orasi.utils.Constants;
+import com.orasi.utils.TestReporter;
+
 //public class WebDriverSetup implements SauceOnDemandSessionIdProvider{
 public class WebDriverSetup{
     

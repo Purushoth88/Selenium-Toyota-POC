@@ -122,7 +122,8 @@ public class ChangeZipCode{
         String[] groups = test.getMethod().getGroups();
         for (int x = 0 ; x < groups.length ; x++){tags.add(groups[x]);}
         updates.put("tags", tags);
-        updates.put("build", job.getUrl());
+        System.out.println( job.getUrl().replace("perrybox:8080", "jenkins.orasi.com"));
+        updates.put("build", job.getUrl().replace("perrybox:8080", "jenkins.orasi.com"));
         client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
         System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));
 		} catch (IOException e) {
@@ -149,7 +150,7 @@ public class ChangeZipCode{
 	@Test(dataProvider = "dataScenario", groups = { "regression" })
 	public void testChangeZipCode(
 			String testScenario, String zipCode) throws InterruptedException, IOException {
-		
+	   
 		String testName = new Object() {
 		}.getClass().getEnclosingMethod().getName();
 		//Uncomment the following line to have TestReporter outputs output to the console
@@ -158,6 +159,7 @@ public class ChangeZipCode{
 		//WebDriverSetup.setSeleniumHubURL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub");
 		WebDriverSetup setup = new WebDriverSetup(application,  browserUnderTest, browserVersion, operatingSystem, runLocation,  environment, testName);
 		WebDriver driver = setup.initialize();
+		System.out.println(WebDriverSetup.getSeleniumHubURL());
 		
 		System.out.println(testName);
 		drivers.put(testName, driver);

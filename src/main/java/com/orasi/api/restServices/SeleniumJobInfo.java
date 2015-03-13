@@ -15,7 +15,7 @@ public class SeleniumJobInfo {
 	public String getUrl() {return url;	}
 	public String getNextBuildNumber() {return nextBuildNumber;}
 	
-	public static String lastBuildURL = "http://localhost/job/OpenSandbox/job/Toyota-SauceLabs/lastBuild/api/json";
+	public static String lastBuildURL = "http://jenkins.orasi.com/job/OpenSandbox/job/Toyota-SauceLabs/lastBuild/api/json";
 	
 	
 }
