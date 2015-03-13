@@ -2,6 +2,7 @@ package toyota;
 
 import java.io.IOException;
 
+import org.json.simple.JSONArray;
 import org.junit.runner.Description;
 
 import com.saucelabs.saucerest.SauceREST;
@@ -11,6 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import org.junit.rules.TestWatcher;
 import org.junit.Rule;
@@ -32,6 +34,7 @@ import apps.toyota.homePage.HomePage;
 import apps.toyota.mainNavigation.MainNavigation;
 
 import com.mysql.jdbc.Statement;
+import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
 import com.orasi.utils.TestReporter;
 import com.orasi.utils.Screenshot;
@@ -155,5 +158,21 @@ public class ChangeZipCode{
 		//Change the zipcode
 		MainNavigation mainNav = new MainNavigation(driver);
 		mainNav.changeZipCodes(zipCode);
+		
+		
+		
+		ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
+		SauceREST client = new SauceREST(
+				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
+				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+
+        Map<String, Object> updates = new HashMap<String, Object>();
+        updates.put("name", "this job has a name");
+        updates.put("passed", true);
+        JSONArray tags = new JSONArray();
+        tags.add("testingblah");
+        updates.put("tags", tags);
+        client.updateJobInfo("1", updates);
+        System.out.println(client.getJobInfo("1"));
 	}
 }

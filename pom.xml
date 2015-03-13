@@ -66,7 +66,7 @@
 			<version>${orasiCoreVersion}</version>
 			<classifier>jar-with-dependencies</classifier>
 		</dependency>
-<!-- 		<dependency>
+<!-- 	<dependency>
 			<groupId>com.saucelabs</groupId>
 			<artifactId>sauce_java_common</artifactId>
 			<version>2.1.18</version>
@@ -86,5 +86,11 @@
 			<artifactId>selenium-client-factory</artifactId>
 			<version>1.2</version>
 		</dependency> -->
+		<dependency>
+			<groupId>com.saucelabs</groupId>
+			<artifactId>saucerest</artifactId>
+			<version>1.0.22</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>
