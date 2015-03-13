@@ -167,12 +167,12 @@ public class ChangeZipCode{
 				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
 
         Map<String, Object> updates = new HashMap<String, Object>();
-        updates.put("name", "this job has a name");
+        updates.put("name", testName);
         updates.put("passed", true);
         JSONArray tags = new JSONArray();
-        tags.add("testingblah");
-        updates.put("tags", tags);
+        //tags.add("testingblah");
+        //updates.put("tags", tags);
         client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
-        System.out.println(client.getJobInfo("1"));
+        System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));
 	}
 }
