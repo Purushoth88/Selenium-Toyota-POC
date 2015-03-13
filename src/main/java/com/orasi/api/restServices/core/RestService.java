@@ -4,14 +4,20 @@ package com.orasi.api.restServices.core;
  * Just playing around with some different ways of using rest services with Jackson 
  */
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import org.apache.commons.httpclient.protocol.Protocol;
+import org.apache.commons.httpclient.protocol.SecureProtocolSocketFactory;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -19,7 +25,11 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpOptions;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLContextBuilder;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.entity.ContentType;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -65,8 +75,26 @@ public class RestService {
 	 * @throws 	IOException
 	 */
 	public String sendGetRequest(String URL) throws ClientProtocolException, IOException{
+		SSLContextBuilder builder = new SSLContextBuilder();
+	    try {
+			builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+		} catch (NoSuchAlgorithmException | KeyStoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    SSLConnectionSocketFactory sslsf = null;
+		try {
+			sslsf = new SSLConnectionSocketFactory(
+			        builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+		} catch (KeyManagementException | NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(
+	    		
+	            sslsf).build();
 		HttpUriRequest request = new HttpGet(URL);
-		HttpResponse httpResponse = HttpClientBuilder.create().setUserAgent(getUserAgent()).build().execute( request );
+		CloseableHttpResponse  httpResponse = HttpClientBuilder.create().build().execute( request );
 		
 		setStatusCode(httpResponse);		
 		setResponseFormat(httpResponse);

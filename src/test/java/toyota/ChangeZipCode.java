@@ -22,6 +22,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.IReporter;
+import org.testng.ITestNGListener;
+import org.testng.ITestNGListenerFactory;
+import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
@@ -29,11 +32,14 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.testng.xml.XmlTest;
 
 import apps.toyota.homePage.HomePage;
 import apps.toyota.mainNavigation.MainNavigation;
 
 import com.mysql.jdbc.Statement;
+import com.orasi.api.restServices.SeleniumJobInfo;
+import com.orasi.api.restServices.core.RestService;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
 import com.orasi.utils.TestReporter;
@@ -46,38 +52,13 @@ import com.saucelabs.common.Utils;
 import com.saucelabs.junit.SauceOnDemandTestWatcher;
 
 public class ChangeZipCode{
-	private  SauceREST sauceREST;
-	private  SauceOnDemandSessionIdProvider sessionIdProvider;
 	private String application = "";
 	private String browserUnderTest = "";
 	private String browserVersion = "";
 	private String operatingSystem = "";
 	private String runLocation = "";
 	private String environment = "";
-	private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
-	
-	//****************************
-	//  SauceLabs Implememntations
-	//****************************
-	 /**
-     * Constructs a {@link com.saucelabs.common.SauceOnDemandAuthentication} instance using the supplied Sauce
-     * user name and access key. To use the authentication supplied by environment variables or
-     * from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
-     */
-    //public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("wwavery0352", "05b29ecc-195e-425e-936b-07be6e9174ef");
-    /**
-     * JUnit Rule which marks Sauce Jobs as passed/failed when the test succeeds or fails.
-     */
-    //public @Rule
-    //SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher( this, authentication);
-    
-    /**
-     * JUnit Rule that records the test name of the current test. When this is referenced
-     * during the creation of {@link DesiredCapabilities}, the test method name is assigned
-     * to the Sauce Job name and recorded in Jenkins Console Output and in the Sauce Jobs
-     * Report in the Jenkins project's home page.
-     */
-    //public @Rule TestName testName = new TestName();    
+	private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();   
     
     //**************
     // Data Provider
@@ -111,13 +92,13 @@ public class ChangeZipCode{
 	public synchronized void closeSession(ITestResult test) {
 		System.out.println(test.getMethod().getMethodName());
 		WebDriver driver = drivers.get(test.getMethod().getMethodName());
-
+				
 		ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
 		SauceREST client = new SauceREST(
 				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
 				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
         Map<String, Object> updates = new HashMap<String, Object>();
-        updates.put("name", WebDriverSetup.getTestName());
+        updates.put("name",test.getMethod().getMethodName());
         
 		// if is a failure, then take a screenshot
 		if (test.getStatus() == ITestResult.FAILURE) {
@@ -126,13 +107,28 @@ public class ChangeZipCode{
 		}else{
 			updates.put("passed", true);
 		}
-			
+		RestService restService = new RestService();
+		try {
+			restService.sendGetRequest(SeleniumJobInfo.lastBuildURL);
+		} catch (IOException e) {
+			/// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		SeleniumJobInfo job;
+		try {
+			job = restService.mapJSONToObject(SeleniumJobInfo.class);
+		
         JSONArray tags = new JSONArray();
-        //tags.add("testingblah");
-        //updates.put("tags", tags);
+        String[] groups = test.getMethod().getGroups();
+        for (int x = 0 ; x < groups.length ; x++){tags.add(groups[x]);}
+        updates.put("tags", tags);
+        updates.put("build", job.getUrl());
         client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
         System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));
-		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(driver != null && driver.getWindowHandles().size() > 0){
 			driver.quit();
 		}
