@@ -59,16 +59,24 @@ public class ChangeZipCode implements SauceOnDemandSessionIdProvider{
      * Report in the Jenkins project's home page.
      */
     public @Rule TestName testName = new TestName();
+    
     @Override
     public String getSessionId() {
         return "";
     }
+    
+    //**************
+    // Data Provider
+    //**************
 	@DataProvider(name = "dataScenario")
 	public Object[][] scenarios() {
 		return new ExcelDataProvider(Constants.TOYOTA_DATAPROVIDER_PATH
 				+ "ChangeZipCode.xlsx", "ChangeZipCode").getTestData();
 	}
 
+	//*********************
+	// Before-Test Behavior 
+	//*********************
 	@BeforeTest(groups = { "regression" })
 	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 			"operatingSystem", "environment" })
@@ -82,6 +90,9 @@ public class ChangeZipCode implements SauceOnDemandSessionIdProvider{
 		this.environment = environment;
 	}
 
+	//**********************
+	// After Method Behavior 
+	//**********************
 	@AfterMethod(groups = { "regression" })
 	public synchronized void closeSession(ITestResult test) {
 		System.out.println(test.getMethod().getMethodName());
@@ -97,6 +108,9 @@ public class ChangeZipCode implements SauceOnDemandSessionIdProvider{
 		}
 	}
 
+	//*****
+	// TEST
+	//*****
 	/**
 	 * @throws IOException 
 	 * @throws InterruptedException 
@@ -118,12 +132,6 @@ public class ChangeZipCode implements SauceOnDemandSessionIdProvider{
 		WebDriverSetup.setSeleniumHubURL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub");
 		WebDriverSetup setup = new WebDriverSetup(application,  browserUnderTest, browserVersion, operatingSystem, runLocation,  environment);
 		WebDriver driver = setup.initialize();
-
-		
-//		WebDriverSetup setup = new WebDriverSetup(application,
-//				browserUnderTest, browserVersion, operatingSystem, runLocation,
-//				environment);
-//		WebDriver driver = setup.initialize();
 		
 		System.out.println(testName);
 		drivers.put(testName, driver);
