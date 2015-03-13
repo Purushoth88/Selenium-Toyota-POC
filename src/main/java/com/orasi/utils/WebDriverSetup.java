@@ -235,19 +235,16 @@ public class WebDriverSetup {
 				
 				//firefox
 				if (getBrowserUnderTest().equalsIgnoreCase("Firefox")){
-					caps = DesiredCapabilities.firefox();
-//					caps.setVersion(getBrowserVersion());    	
+					caps = DesiredCapabilities.firefox();  	
 			    }
 				//internet explorer
 			    else if(getBrowserUnderTest().equalsIgnoreCase("IE")){
 			    	caps = DesiredCapabilities.internetExplorer();
 			    	caps.setCapability("ignoreZoomSetting", true);
-//			    	caps.setVersion(browserVersion);
 			    }
 				//chrome
 			    else if(getBrowserUnderTest().equalsIgnoreCase("Chrome")){
-			    	caps = DesiredCapabilities.chrome();
-//			    	caps.setVersion(browserVersion);  		    	
+			    	caps = DesiredCapabilities.chrome(); 		    	
 			    }
 				//headless - HTML unit driver
 			    else if(getBrowserUnderTest().equalsIgnoreCase("html")){	
@@ -265,9 +262,7 @@ public class WebDriverSetup {
 					caps.setVersion(getBrowserVersion());
 				}
 				
-				caps.setPlatform(org.openqa.selenium.Platform.valueOf(getOperatingSystem()));
-//				caps.setCapability("platform", Platform.WIN8);
-//				caps.setCapability("version", getBrowserVersion());
+				//caps.setPlatform(org.openqa.selenium.Platform.valueOf(getOperatingSystem()));
 		    	driver = new RemoteWebDriver(new URL(getSeleniumHubURL()), caps);
 			} catch (MalformedURLException e) {
 				throw new RuntimeException("Selenium Hub URL set is not a valid URL: " + seleniumHubURL);
