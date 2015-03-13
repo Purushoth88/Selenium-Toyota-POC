@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Rule;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,13 +21,25 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
-public class WebDriverSetup {
 
+import com.saucelabs.common.SauceOnDemandAuthentication;
+import com.saucelabs.common.SauceOnDemandSessionIdProvider;
+import com.saucelabs.junit.SauceOnDemandTestWatcher;
+
+public class WebDriverSetup implements SauceOnDemandSessionIdProvider{
+	public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("wwavery0352", "05b29ecc-195e-425e-936b-07be6e9174ef");
+    public @Rule
+    SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
+    @Override
+    public String getSessionId() {
+        return ((RemoteWebDriver)driver).getSessionId().toString();
+    }
+    
 	public WebDriver driver;
 	private String browserVersion = System.getProperty(Constants.BROWSER_VERSION);
 	
 	private static ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
-	private static String seleniumHubURL = "http://10.238.242.50:4444/wd/hub";
+	private String seleniumHubURL = "http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub";
 	
 	//Define a variable to house the Linux OS username
 	private String username = "";
@@ -35,14 +48,15 @@ public class WebDriverSetup {
 
 	public WebDriverSetup(	String application, String browserUnderTest, 
 							String browserVersion, String operatingSystem,
-							String runLocation, String environment){
+							String runLocation, String environment, String testName){
 	    setTestApplication(application);
 		setBrowserUnderTest(browserUnderTest);
 		setBrowserVersion(browserVersion);
 		setOperatingSystem(operatingSystem);
 		setRunLocation(runLocation);
 		setTestEnvironment(environment);
-		//setSeleniumHubURL(seleniumHubURL);
+		setSeleniumHubURL(seleniumHubURL);
+		setTestName(testName);
 		//verifyExpectedAndActualOS();
 	}
 	
@@ -70,6 +84,9 @@ public class WebDriverSetup {
 	
 	public static String getSeleniumHubURL() { return System.getProperty(Constants.SELENIUM_HUB_URL);}
 	public static void setSeleniumHubURL(String url) {System.setProperty(Constants.SELENIUM_HUB_URL, url);}	
+	
+	public static void setTestName(String testName){ System.setProperty("selenium.testName", testName);	}	
+	public static String getTestName(){ return System.getProperty("selenium.testName");}
 	
 	public void setDriver(WebDriver driverSession){driver = driverSession;}	
 	public WebDriver getDriver(){return driver;}	
@@ -263,6 +280,7 @@ public class WebDriverSetup {
 				}
 				
 				caps.setPlatform(org.openqa.selenium.Platform.valueOf(getOperatingSystem()));
+				caps.setCapability("name", getTestName());
 		    	driver = new RemoteWebDriver(new URL(getSeleniumHubURL()), caps);
 			} catch (MalformedURLException e) {
 				throw new RuntimeException("Selenium Hub URL set is not a valid URL: " + seleniumHubURL);
@@ -271,7 +289,6 @@ public class WebDriverSetup {
 		}else{
 			throw new RuntimeException("Parameter for run [Location] was not set to 'Local' or 'Remote'");
 		}
-		
 		
 		driver.manage().timeouts().setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS).implicitlyWait(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS);	
 		setDefaultTestTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);

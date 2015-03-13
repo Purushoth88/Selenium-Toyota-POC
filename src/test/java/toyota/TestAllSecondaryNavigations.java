@@ -85,7 +85,7 @@ public class TestAllSecondaryNavigations {
 			//TestReporter.setPrintToConsole(true);
 			WebDriverSetup setup = new WebDriverSetup(application,
 					browserUnderTest, browserVersion, operatingSystem, runLocation,
-					environment);
+					environment, testName);
 			WebDriver driver = setup.initialize();
 			
 			System.out.println(testName);

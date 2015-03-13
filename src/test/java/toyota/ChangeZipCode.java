@@ -46,12 +46,12 @@ public class ChangeZipCode implements SauceOnDemandSessionIdProvider{
      * user name and access key. To use the authentication supplied by environment variables or
      * from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
      */
-    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("wwavery0352", "05b29ecc-195e-425e-936b-07be6e9174ef");
+    //public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("wwavery0352", "05b29ecc-195e-425e-936b-07be6e9174ef");
     /**
      * JUnit Rule which marks Sauce Jobs as passed/failed when the test succeeds or fails.
      */
-    public @Rule
-    SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
+    //public @Rule
+    //SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
     /**
      * JUnit Rule that records the test name of the current test. When this is referenced
      * during the creation of {@link DesiredCapabilities}, the test method name is assigned
@@ -129,8 +129,8 @@ public class ChangeZipCode implements SauceOnDemandSessionIdProvider{
 		//Uncomment the following line to have TestReporter outputs output to the console
 		TestReporter.setPrintToConsole(true);
 		
-		WebDriverSetup.setSeleniumHubURL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub");
-		WebDriverSetup setup = new WebDriverSetup(application,  browserUnderTest, browserVersion, operatingSystem, runLocation,  environment);
+		//WebDriverSetup.setSeleniumHubURL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub");
+		WebDriverSetup setup = new WebDriverSetup(application,  browserUnderTest, browserVersion, operatingSystem, runLocation,  environment, testName);
 		WebDriver driver = setup.initialize();
 		
 		System.out.println(testName);
