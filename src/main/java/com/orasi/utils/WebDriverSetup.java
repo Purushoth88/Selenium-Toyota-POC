@@ -42,7 +42,7 @@ public class WebDriverSetup {
 		setOperatingSystem(operatingSystem);
 		setRunLocation(runLocation);
 		setTestEnvironment(environment);
-		setSeleniumHubURL(seleniumHubURL);
+		//setSeleniumHubURL(seleniumHubURL);
 		//verifyExpectedAndActualOS();
 	}
 	
