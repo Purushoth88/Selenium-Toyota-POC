@@ -75,26 +75,9 @@ public class RestService {
 	 * @throws 	IOException
 	 */
 	public String sendGetRequest(String URL) throws ClientProtocolException, IOException{
-		SSLContextBuilder builder = new SSLContextBuilder();
-	    try {
-			builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-		} catch (NoSuchAlgorithmException | KeyStoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    SSLConnectionSocketFactory sslsf = null;
-		try {
-			sslsf = new SSLConnectionSocketFactory(
-			        builder.build(),SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-		} catch (KeyManagementException | NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(
-	    		
-	            sslsf).build();
+		
 		HttpUriRequest request = new HttpGet(URL);
-		CloseableHttpResponse  httpResponse = HttpClientBuilder.create().build().execute( request );
+		HttpResponse  httpResponse = HttpClientBuilder.create().build().execute( request );
 		
 		setStatusCode(httpResponse);		
 		setResponseFormat(httpResponse);

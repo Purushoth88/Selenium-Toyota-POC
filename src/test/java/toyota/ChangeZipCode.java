@@ -38,8 +38,6 @@ import apps.toyota.homePage.HomePage;
 import apps.toyota.mainNavigation.MainNavigation;
 
 import com.mysql.jdbc.Statement;
-import com.orasi.api.restServices.SeleniumJobInfo;
-import com.orasi.api.restServices.core.RestService;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
 import com.orasi.utils.TestReporter;
@@ -107,28 +105,14 @@ public class ChangeZipCode{
 		}else{
 			updates.put("passed", true);
 		}
-		RestService restService = new RestService();
-		try {
-			restService.sendGetRequest(SeleniumJobInfo.lastBuildURL);
-		} catch (IOException e) {
-			/// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		SeleniumJobInfo job;
-		try {
-			job = restService.mapJSONToObject(SeleniumJobInfo.class);
-		
+			
         JSONArray tags = new JSONArray();
         String[] groups = test.getMethod().getGroups();
         for (int x = 0 ; x < groups.length ; x++){tags.add(groups[x]);}
         updates.put("tags", tags);
-        updates.put("build", job.getUrl());
         client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
         System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		if(driver != null && driver.getWindowHandles().size() > 0){
 			driver.quit();
 		}
