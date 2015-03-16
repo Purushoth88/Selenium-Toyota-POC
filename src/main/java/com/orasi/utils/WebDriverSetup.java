@@ -273,7 +273,7 @@ public class WebDriverSetup{
 					caps.setVersion(getBrowserVersion());
 				}
 				//caps.setPlatform(org.openqa.selenium.Platform.valueOf(getOperatingSystem()));
-				caps.setPlatform(Platform.valueOf("OS X 10.9"));
+				caps.setPlatform(Platform.valueOf("MAVERICKS"));
 				caps.setCapability("name", getTestName());
 		    	driver = new RemoteWebDriver(new URL(getSeleniumHubURL()), caps);
 			} catch (MalformedURLException e) {
