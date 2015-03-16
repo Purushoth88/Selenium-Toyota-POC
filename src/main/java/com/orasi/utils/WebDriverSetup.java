@@ -16,6 +16,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.NotConnectedException;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -273,6 +274,8 @@ public class WebDriverSetup{
 				}
 				caps.setPlatform(org.openqa.selenium.Platform.valueOf(getOperatingSystem()));
 				caps.setCapability("name", getTestName());
+				System.out.println("\n\nMajor Version: " + Platform.MAC.getMajorVersion());
+				System.out.println("Minor Version: " + Platform.MAC.getMinorVersion() + "\n\n");
 		    	driver = new RemoteWebDriver(new URL(getSeleniumHubURL()), caps);
 			} catch (MalformedURLException e) {
 				throw new RuntimeException("Selenium Hub URL set is not a valid URL: " + seleniumHubURL);
