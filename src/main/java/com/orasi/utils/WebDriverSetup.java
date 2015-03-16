@@ -272,8 +272,7 @@ public class WebDriverSetup{
 				if(!getBrowserUnderTest().equalsIgnoreCase("html")){
 					caps.setVersion(getBrowserVersion());
 				}
-				//caps.setPlatform(org.openqa.selenium.Platform.valueOf(getOperatingSystem()));
-				caps.setPlatform(Platform.valueOf("MAVERICKS"));
+				caps.setPlatform(org.openqa.selenium.Platform.valueOf(getOperatingSystem()));
 				caps.setCapability("name", getTestName());
 		    	driver = new RemoteWebDriver(new URL(getSeleniumHubURL()), caps);
 			} catch (MalformedURLException e) {
