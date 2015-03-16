@@ -2,11 +2,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="ChangeZipCode" parallel="classes" thread-count="2">
 	<!-- <suite name="ChangeZipCode" parallel="instances" thread-count="5"> -->
-	<parameter name="browserUnderTest" value="firefox" />
+	<parameter name="browserUnderTest" value="safari" />
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="remote" />
 	<!-- <parameter name="runLocation" value="remote"</parameter> -->
-	<parameter name="browserVersion" value="" />
+	<parameter name="browserVersion" value="7" />
 	<parameter name="operatingSystem" value="MAC" />
 	<test name="ChangeZipCode">
 		<classes>
