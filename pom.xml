@@ -66,26 +66,12 @@
 			<version>${orasiCoreVersion}</version>
 			<classifier>jar-with-dependencies</classifier>
 		</dependency>
-<!-- 	<dependency>
-			<groupId>com.saucelabs</groupId>
-			<artifactId>sauce_java_common</artifactId>
-			<version>2.1.18</version>
-		</dependency>
 		<dependency>
 			<groupId>com.saucelabs</groupId>
-			<artifactId>sauce_junit</artifactId>
+			<artifactId>sauce_testng</artifactId>
 			<version>2.1.18</version>
+			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.saucelabs.selenium</groupId>
-			<artifactId>sauce-ondemand-driver</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.saucelabs.selenium</groupId>
-			<artifactId>selenium-client-factory</artifactId>
-			<version>1.2</version>
-		</dependency> -->
 		<dependency>
 			<groupId>com.saucelabs</groupId>
 			<artifactId>saucerest</artifactId>

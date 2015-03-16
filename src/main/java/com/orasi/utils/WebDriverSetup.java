@@ -272,7 +272,21 @@ public class WebDriverSetup{
 				if(!getBrowserUnderTest().equalsIgnoreCase("html")){
 					caps.setVersion(getBrowserVersion());
 				}
-				caps.setPlatform(org.openqa.selenium.Platform.valueOf(getOperatingSystem()));
+				//caps.setPlatform(org.openqa.selenium.Platform.valueOf(getOperatingSystem()));
+				
+				
+				
+				
+				caps.setCapability(CapabilityType.BROWSER_NAME, "safari");
+		        if (browserVersion != null) {
+		        	caps.setCapability(CapabilityType.VERSION, browserVersion);
+		        }
+		        caps.setCapability(CapabilityType.PLATFORM, getOperatingSystem());
+		        caps.setCapability("name", "Sauce Sample Test");
+		        
+		        
+		        
+		        
 				caps.setCapability("name", getTestName());
 		    	driver = new RemoteWebDriver(new URL(getSeleniumHubURL()), caps);
 			} catch (MalformedURLException e) {

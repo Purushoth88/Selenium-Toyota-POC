@@ -1,54 +1,35 @@
 package toyota;
 
 import java.io.IOException;
-
-import org.json.simple.JSONArray;
-import org.junit.runner.Description;
-
-import com.saucelabs.saucerest.SauceREST;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import org.junit.rules.TestWatcher;
-import org.junit.Rule;
-import org.junit.rules.TestName;
-import org.junit.runner.Description;
+import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.IReporter;
-import org.testng.ITestNGListener;
-import org.testng.ITestNGListenerFactory;
-import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Optional;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.xml.XmlTest;
 
 import apps.toyota.homePage.HomePage;
 import apps.toyota.mainNavigation.MainNavigation;
 
-import com.mysql.jdbc.Statement;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
-import com.orasi.utils.TestReporter;
 import com.orasi.utils.Screenshot;
+import com.orasi.utils.TestReporter;
 import com.orasi.utils.WebDriverSetup;
 import com.orasi.utils.dataProviders.ExcelDataProvider;
-import com.saucelabs.common.SauceOnDemandAuthentication;
-import com.saucelabs.common.SauceOnDemandSessionIdProvider;
-import com.saucelabs.common.Utils;
-import com.saucelabs.junit.SauceOnDemandTestWatcher;
+import com.saucelabs.saucerest.SauceREST;
+import com.saucelabs.testng.SauceOnDemandTestListener;
 
+@Listeners({SauceOnDemandTestListener.class})
 public class ChangeZipCode{
 	private String application = "";
 	private String browserUnderTest = "";
