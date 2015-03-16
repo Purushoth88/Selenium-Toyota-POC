@@ -273,7 +273,6 @@ public class WebDriverSetup{
 				}
 				caps.setPlatform(org.openqa.selenium.Platform.valueOf(getOperatingSystem()));
 				caps.setCapability("name", getTestName());
-				System.out.println("\n\nVERSION:  " + caps.getVersion() + "\n\n");
 		    	driver = new RemoteWebDriver(new URL(getSeleniumHubURL()), caps);
 			} catch (MalformedURLException e) {
 				throw new RuntimeException("Selenium Hub URL set is not a valid URL: " + seleniumHubURL);
