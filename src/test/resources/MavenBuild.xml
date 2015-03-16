@@ -6,7 +6,7 @@
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="remote" />
 	<!-- <parameter name="runLocation" value="remote"</parameter> -->
-	<parameter name="browserVersion" value="6" />
+	<parameter name="browserVersion" value="" />
 	<parameter name="operatingSystem" value="MAC" />
 	<test name="ChangeZipCode">
 		<classes>
