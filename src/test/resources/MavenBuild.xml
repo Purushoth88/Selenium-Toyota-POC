@@ -6,7 +6,7 @@
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="remote" />
 	<!-- <parameter name="runLocation" value="remote"</parameter> -->
-	<parameter name="browserVersion" value="11" />
+	<parameter name="browserVersion" value="8" />
 	<parameter name="operatingSystem" value="WIN8_1" />
 	<test name="ChangeZipCode">
 		<classes>
