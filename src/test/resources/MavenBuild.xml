@@ -7,7 +7,7 @@
 	<parameter name="runLocation" value="remote" />
 	<!-- <parameter name="runLocation" value="remote"</parameter> -->
 	<parameter name="browserVersion" value="7" />
-	<parameter name="operatingSystem" value="Mac" />
+	<parameter name="operatingSystem" value="MAC" />
 	<test name="ChangeZipCode">
 		<classes>
 			<class name="toyota.ChangeZipCode" />
