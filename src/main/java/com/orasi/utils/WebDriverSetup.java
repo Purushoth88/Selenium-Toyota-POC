@@ -315,7 +315,7 @@ public class WebDriverSetup{
 	                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
 	                capabilities));
 	        sessionId.set(((RemoteWebDriver) getWebDriver()).getSessionId().toString());
-			driver = (WebDriver) webDriver;
+			driver = webDriver.get();
 		}else{
 			throw new RuntimeException("Parameter for run [Location] was not set to 'Local' or 'Remote'");
 		}
