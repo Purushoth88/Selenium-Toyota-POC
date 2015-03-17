@@ -127,7 +127,6 @@ public class ChangeZipCode{
 		//Uncomment the following line to have TestReporter outputs output to the console
 		TestReporter.setPrintToConsole(true);
 		
-		//WebDriverSetup.setSeleniumHubURL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub");
 		WebDriverSetup setup = new WebDriverSetup(application,  browserUnderTest, browserVersion, operatingSystem, runLocation,  environment, testName);
 		WebDriver driver = setup.initialize();
 		
