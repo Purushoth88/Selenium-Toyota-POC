@@ -181,13 +181,19 @@ public class SecondaryNavigation {
 	}
 	
 	private void clickFindADealer(){
-		//lnkFindADealer.highlight(driver);
-		lnkFindADealer.click();
-		if(!pageLoaded(txtFindADealer)){
-			initialize();
-			lnkFindADealer.jsClick(driver);
-			Assert.assertEquals(pageLoaded(txtFindADealer), true, "The 'Build Your Toyota' page was not loaded.");
-		}
+		//Grab the number of links on the current page
+		List<WebElement> list = driver.findElements(By.tagName("a")); 
+		lnkFindADealer.jsClick(driver);
+		initialize();
+		//Loop until the number of links changes, thereby indicating that a new page was loaded
+		loopCounter = 0;
+		List<WebElement> list2;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			Assert.assertNotEquals(loopCounter, timeout);
+			list2 = driver.findElements(By.tagName("a"));		
+		}while(list2.size() == list.size());
 	}
 	
 	private void clickBuildAndPrice(){
