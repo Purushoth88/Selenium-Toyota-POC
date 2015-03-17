@@ -10,7 +10,7 @@
 	<parameter name="operatingSystem" value="Windows 7" />
 	<test name="ChangeZipCode">
 		<classes>
-			<class name="toyota.ChangeZipCode" />
+			<!-- <class name="toyota.ChangeZipCode" /> -->
 			<class name="toyota.TestAllSecondaryNavigations" />
 		</classes>
 	</test> <!-- ChangeZipCode -->
