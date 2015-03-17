@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="ChangeZipCode" parallel="tests" thread-count="2">
+<suite name="Win7_Firefox" parallel="tests" thread-count="2">
 	<parameter name="browserUnderTest" value="firefox" />
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="remote" />
 	<parameter name="browserVersion" value="" />
 	<parameter name="operatingSystem" value="Windows 7" />
-	<test name="ChangeZipCode">
+	<test name="Win7_Firefox">
 		<!-- <classes> <class name="toyota.ChangeZipCode" /> <class name="toyota.TestAllSecondaryNavigations" 
 			/> </classes> -->
 		<groups>
@@ -19,5 +19,5 @@
 			</package>
 		</packages>
 
-	</test> <!-- ChangeZipCode -->
-</suite> <!-- ChangeZipCode -->
+	</test> <!-- Win7_Firefox -->
+</suite> <!-- Win7_Firefox -->
