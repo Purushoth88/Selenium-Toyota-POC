@@ -59,7 +59,8 @@
 				</executions>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild.xml</suiteXmlFile>
+						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_Chrome.xml</suiteXmlFile>
+						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_Firefox.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
