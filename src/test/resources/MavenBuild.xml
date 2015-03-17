@@ -6,8 +6,8 @@
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="remote" />
 	<!-- <parameter name="runLocation" value="remote"</parameter> -->
-	<parameter name="browserVersion" value="7" />
-	<parameter name="operatingSystem" value="OS X 10.9" />
+	<parameter name="browserVersion" value="8" />
+	<parameter name="operatingSystem" value="OS X 10.10" />
 	<test name="ChangeZipCode">
 		<classes>
 			<class name="toyota.ChangeZipCode" />

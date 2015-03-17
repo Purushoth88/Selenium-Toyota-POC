@@ -116,7 +116,6 @@ public class MainNavigation {
 			clickYourLocation();
 			pageLoaded();
 			String os = WebDriverSetup.getOperatingSystem().toLowerCase();
-			System.out.println("\n\nOperating System: " + os + "\n\n");
 			if(os.contains("mac") || os.contains("os x")){
 				txtZipCode.set(zipCode);
 				txtZipCode.sendKeys(Keys.ENTER);
