@@ -15,8 +15,7 @@
 			</run>
 		</groups>
 		<packages>
-			<package name="">
-				toyota
+			<package name="toyota">
 			</package>
 		</packages>
 
