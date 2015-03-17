@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Win7_IE_8" parallel="tests" thread-count="2">
+	<parameter name="browserUnderTest" value="iexplore" />
+	<parameter name="environment" value="" />
+	<parameter name="runLocation" value="remote" />
+	<parameter name="browserVersion" value="8" />
+	<parameter name="operatingSystem" value="Windows 7" />
+	<test name="Win7_IE_8">
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+
+	</test> <!-- Win7_IE_8 -->
+</suite> <!-- Win7_IE_8 -->
