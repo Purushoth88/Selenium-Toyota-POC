@@ -263,47 +263,6 @@ public class WebDriverSetup{
 		
 		//Code for running on the selenium grid
 		}else if(getRunLocation().equalsIgnoreCase("remote")){
-			//Set the URL for selenium grid
-//			try {
-//				
-//				DesiredCapabilities caps = null;
-//				
-//				//firefox
-//				if (getBrowserUnderTest().equalsIgnoreCase("Firefox")){
-//					caps = DesiredCapabilities.firefox();  	
-//			    }
-//				//internet explorer
-//			    else if(getBrowserUnderTest().equalsIgnoreCase("IE")){
-//			    	caps = DesiredCapabilities.internetExplorer();
-//			    	caps.setCapability("ignoreZoomSetting", true);
-//			    }
-//				//chrome
-//			    else if(getBrowserUnderTest().equalsIgnoreCase("Chrome")){
-//			    	caps = DesiredCapabilities.chrome(); 		    	
-//			    }
-//				//headless - HTML unit driver
-//			    else if(getBrowserUnderTest().equalsIgnoreCase("html")){	
-//			    	caps = DesiredCapabilities.htmlUnitWithJs();		    	
-//			    }
-//				//safari
-//			    else if(getBrowserUnderTest().equals("safari")){
-//			    	caps = DesiredCapabilities.safari();
-//			    }
-//			    else {
-//			    	throw new RuntimeException("Parameter not set for browser type");
-//			    }
-//					
-//				if(!getBrowserUnderTest().equalsIgnoreCase("html")){
-//					caps.setVersion(getBrowserVersion());
-//				}
-//				//caps.setPlatform(org.openqa.selenium.Platform.valueOf(getOperatingSystem()));
-//				
-//				caps.setCapability("name", getTestName());
-//		    	driver = new RemoteWebDriver(new URL(getSeleniumHubURL()), caps);
-//			} catch (MalformedURLException e) {
-//				throw new RuntimeException("Selenium Hub URL set is not a valid URL: " + seleniumHubURL);
-//			}
-//				
 	        DesiredCapabilities capabilities = new DesiredCapabilities();
 	        capabilities.setCapability(CapabilityType.BROWSER_NAME, getBrowserUnderTest());
 	        if (getBrowserVersion() != null) {
@@ -314,6 +273,7 @@ public class WebDriverSetup{
 	        		getBrowserUnderTest().toLowerCase().contains("iexplore")){
 	        	capabilities.setCapability("ignoreZoomSetting", true);
 		    }
+	        capabilities.setCapability("name", getTestName());
 	        webDriver.set(new RemoteWebDriver(
 	                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
 	                capabilities));

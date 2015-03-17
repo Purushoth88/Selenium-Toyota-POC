@@ -141,9 +141,5 @@ public class ChangeZipCode{
 		//Change the zipcode
 		MainNavigation mainNav = new MainNavigation(driver);
 		mainNav.changeZipCodes(zipCode);
-		
-		
-		
-		
 	}
 }

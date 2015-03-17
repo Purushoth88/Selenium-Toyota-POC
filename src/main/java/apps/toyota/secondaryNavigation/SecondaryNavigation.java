@@ -162,6 +162,8 @@ public class SecondaryNavigation {
 			Sleeper.sleep(1000);
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Shopping Tools dropdown was not closed after ["+String.valueOf(timeout)+"] seconds.");
+			initialize();
+			pageLoaded(btnShoppingTools);
 		}while(btnShoppingTools.getAttribute("class").contains("open"));
 	}
 	
