@@ -1,5 +1,6 @@
 package apps.toyota.mainNavigation;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -114,6 +115,9 @@ public class MainNavigation {
 			clickYourLocation();
 			pageLoaded();
 			txtZipCode.safeSet(zipCode);
+			if(!txtZipCode.syncHidden(driver, 5, false)){
+				txtZipCode.sendKeys(Keys.ENTER);
+			}
 			initialize();
 			pageLoaded();
 			//Capture the newly modified zipcode from the UI
