@@ -11,6 +11,7 @@ import com.orasi.core.interfaces.Textbox;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.PageLoaded;
 import com.orasi.utils.TestReporter;
+import com.orasi.utils.WebDriverSetup;
 
 
 /**
@@ -114,9 +115,13 @@ public class MainNavigation {
 			//If the zipcode is different, enter the zipcode to be used for the test
 			clickYourLocation();
 			pageLoaded();
-			txtZipCode.safeSet(zipCode);
-			if(!txtZipCode.syncHidden(driver, 5, false)){
+			String os = WebDriverSetup.getOperatingSystem().toLowerCase();
+			System.out.println("\n\nOperating System: " + os + "\n\n");
+			if(os.contains("mac") || os.contains("os x")){
+				txtZipCode.set(zipCode);
 				txtZipCode.sendKeys(Keys.ENTER);
+			}else{
+				txtZipCode.safeSet(zipCode);
 			}
 			initialize();
 			pageLoaded();
