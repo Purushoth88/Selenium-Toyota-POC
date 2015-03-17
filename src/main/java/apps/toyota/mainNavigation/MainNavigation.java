@@ -115,6 +115,7 @@ public class MainNavigation {
 			//If the zipcode is different, enter the zipcode to be used for the test
 			clickYourLocation();
 			pageLoaded();
+			//Safari does not seem to behave the same with safeSet, so it is being handled differently
 			String os = WebDriverSetup.getOperatingSystem().toLowerCase();
 			if(os.contains("mac") || os.contains("os x")){
 				txtZipCode.set(zipCode);

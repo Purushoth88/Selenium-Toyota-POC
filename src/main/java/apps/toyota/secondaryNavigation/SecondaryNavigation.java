@@ -1,6 +1,10 @@
 package apps.toyota.secondaryNavigation;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -8,6 +12,7 @@ import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Link;
 import com.orasi.core.interfaces.Textbox;
+import com.orasi.core.interfaces.impl.ElementImpl;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.PageLoaded;
 import com.orasi.utils.Sleeper;
@@ -71,6 +76,10 @@ public class SecondaryNavigation {
 	@FindBy(xpath = "//*[@id=\"landing\"]/div[1]/h1")
 	private Element eleBuildYourToyota;
 	
+	//Build Your Toyota Lander element
+	@FindBy(id = "landing")
+	private Element eleBuildYourToyotaLander;
+	
 	//Local Specials link
 	@FindBy(xpath = "//*[@id=\"tcom-secondary-nav\"]/ul/li[6]/a")
 	private Link lnkLocalSpecials;
@@ -126,7 +135,7 @@ public class SecondaryNavigation {
 	}
 
 	private void openSelectVehicleDropdown(){
-		btnSelectVehicle.highlight(driver);
+		//btnSelectVehicle.highlight(driver);
 		btnSelectVehicle.click();
 		loopCounter = 0;
 		do{
@@ -137,7 +146,7 @@ public class SecondaryNavigation {
 	}
 	
 	private void closeSelectVehicleDropdown(){
-		btnSelectVehicle.highlight(driver);
+		//btnSelectVehicle.highlight(driver);
 		btnSelectVehicle.click();
 		loopCounter = 0;
 		do{
@@ -148,7 +157,7 @@ public class SecondaryNavigation {
 	}
 	
 	private void openShoppingToolsDropdown(){
-		btnShoppingTools.highlight(driver);
+		//btnShoppingTools.highlight(driver);
 		btnShoppingTools.click();
 		loopCounter = 0;
 		do{
@@ -159,7 +168,7 @@ public class SecondaryNavigation {
 	}
 	
 	private void closeShoppingToolsDropdown(){
-		btnShoppingTools.highlight(driver);
+		//btnShoppingTools.highlight(driver);
 		btnShoppingTools.click();
 		loopCounter = 0;
 		do{
@@ -172,7 +181,7 @@ public class SecondaryNavigation {
 	}
 	
 	private void clickFindADealer(){
-		lnkFindADealer.highlight(driver);
+		//lnkFindADealer.highlight(driver);
 		lnkFindADealer.click();
 		if(!pageLoaded(txtFindADealer)){
 			initialize();
@@ -182,19 +191,24 @@ public class SecondaryNavigation {
 	}
 	
 	private void clickBuildAndPrice(){
-		int timeoutBefore = WebDriverSetup.getDefaultTestTimeout();
-		lnkBuildAndPrice.click();
-		WebDriverSetup.setDefaultTestTimeout(10);
-		if(!pageLoaded(eleBuildYourToyota)){
-			initialize();
-			lnkBuildAndPrice.jsClick(driver);
-			Assert.assertEquals(pageLoaded(eleBuildYourToyota), true, "The 'Build Your Toyota' page was not loaded.");
-		}
-		WebDriverSetup.setDefaultTestTimeout(timeoutBefore);
+		//Grab the number of links on the current page
+		List<WebElement> list = driver.findElements(By.tagName("a")); 
+		//Click the link
+		lnkBuildAndPrice.jsClick(driver);
+		initialize();
+		//Loop until the number of links changes, thereby indicating that a new page was loaded
+		loopCounter = 0;
+		List<WebElement> list2;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			Assert.assertNotEquals(loopCounter, timeout);
+			list2 = driver.findElements(By.tagName("a"));		
+		}while(list2.size() == list.size());
 	}
 	
 	private void clickLocalSpecials(){
-		lnkLocalSpecials.highlight(driver);
+		//lnkLocalSpecials.highlight(driver);
 		lnkLocalSpecials.click();
 		if(!pageLoaded(txtLocalSpecialsZipCode)){
 			initialize();

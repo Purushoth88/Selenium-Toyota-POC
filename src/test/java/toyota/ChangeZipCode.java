@@ -60,7 +60,7 @@ public class ChangeZipCode{
 	//*********************
 	// Before-Test Behavior 
 	//*********************
-	@BeforeTest(groups = { "regression" })
+	@BeforeTest(groups = { "regressions" })
 	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 			"operatingSystem", "environment" })
 	public void setup(String runLocation, String browserUnderTest,
