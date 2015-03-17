@@ -7,7 +7,7 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<testNGSourceDirectory>src/test/resources</testNGSourceDirectory>
+		<testNGSourceDirectory>src/test/resources/Build</testNGSourceDirectory>
 		<orasiCoreVersion>1.0.2</orasiCoreVersion>
 	</properties>
 
@@ -59,8 +59,7 @@
 				</executions>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_Chrome.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_Firefox.xml</suiteXmlFile>
+						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild*</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
