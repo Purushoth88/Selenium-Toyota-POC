@@ -39,12 +39,14 @@ public class ChangeZipCode{
 	private String runLocation = "";
 	private String environment = "";
 	private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>(); 
-	
+	private static ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
     /**
      * Constructs a {@link com.saucelabs.common.SauceOnDemandAuthentication} instance using the supplied user name/access key.  To use the authentication
      * supplied by environment variables or from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
      */
-    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("wwavery0352", "05b29ecc-195e-425e-936b-07be6e9174ef");
+	public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
+			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
+			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
     
     //**************
     // Data Provider

@@ -41,19 +41,14 @@ public class TestAllSecondaryNavigations {
 		private String runLocation = "";
 		private String environment = "";
 		private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
-		
+		private static ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
 	    /**
 	     * Constructs a {@link com.saucelabs.common.SauceOnDemandAuthentication} instance using the supplied user name/access key.  To use the authentication
 	     * supplied by environment variables or from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
 	     */
-	    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("wwavery0352", "05b29ecc-195e-425e-936b-07be6e9174ef");
-	  
-
-//		@DataProvider(name = "dataScenario")
-//		public Object[][] scenarios() {
-//			return new ExcelDataProvider(Constants.TOYOTA_DATAPROVIDER_PATH
-//					+ "TestAllSecondaryNavigations.xlsx", "TestAllSecondaryNavigations").getTestData();
-//		}
+		public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
+				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
+				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
 
 		@BeforeTest(groups = { "regression" })
 		@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
@@ -115,7 +110,7 @@ public class TestAllSecondaryNavigations {
 			String testName = new Object() {
 			}.getClass().getEnclosingMethod().getName();
 			//Uncomment the following line to have TestReporter outputs output to the console
-			//TestReporter.setPrintToConsole(true);
+			TestReporter.setPrintToConsole(true);
 			WebDriverSetup setup = new WebDriverSetup(application,
 					browserUnderTest, browserVersion, operatingSystem, runLocation,
 					environment, testName);

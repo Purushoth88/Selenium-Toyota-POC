@@ -44,7 +44,9 @@ public class WebDriverSetup{
      * Constructs a {@link com.saucelabs.common.SauceOnDemandAuthentication} instance using the supplied user name/access key.  To use the authentication
      * supplied by environment variables or from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
      */
-    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("wwavery0352", "05b29ecc-195e-425e-936b-07be6e9174ef");
+	public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
+			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
+			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
 
     /**
      * ThreadLocal variable which contains the  {@link WebDriver} instance which is used to perform browser interactions with.

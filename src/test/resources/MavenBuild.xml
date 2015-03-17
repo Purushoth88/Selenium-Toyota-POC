@@ -20,4 +20,26 @@
 		</packages>
 
 	</test> <!-- ChangeZipCode -->
+	
+	
+	
+	<parameter name="browserUnderTest" value="chrome" />
+	<parameter name="environment" value="" />
+	<parameter name="runLocation" value="remote" />
+	<parameter name="browserVersion" value="" />
+	<parameter name="operatingSystem" value="Windows 7" />
+	<test name="ChangeZipCode">
+		<!-- <classes> <class name="toyota.ChangeZipCode" /> <class name="toyota.TestAllSecondaryNavigations" 
+			/> </classes> -->
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+
+	</test> <!-- ChangeZipCode -->
 </suite> <!-- ChangeZipCode -->

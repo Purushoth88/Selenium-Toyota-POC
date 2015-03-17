@@ -67,6 +67,10 @@ public class SecondaryNavigation {
 	@FindBy(xpath = "//*[@id=\"errorRedirect\"]/div/div/div[2]/a")
 	private Link lnkBuildAndPriceContinue;
 	
+	//Build Your Toyota Header element
+	@FindBy(xpath = "//*[@id=\"landing\"]/div[1]/h1")
+	private Element eleBuildYourToyota;
+	
 	//Local Specials link
 	@FindBy(xpath = "//*[@id=\"tcom-secondary-nav\"]/ul/li[6]/a")
 	private Link lnkLocalSpecials;
@@ -178,13 +182,15 @@ public class SecondaryNavigation {
 	}
 	
 	private void clickBuildAndPrice(){
-		lnkBuildAndPrice.highlight(driver);
+		int timeoutBefore = WebDriverSetup.getDefaultTestTimeout();
 		lnkBuildAndPrice.click();
-		if(!pageLoaded(lnkBuildAndPriceContinue)){
+		WebDriverSetup.setDefaultTestTimeout(10);
+		if(!pageLoaded(eleBuildYourToyota)){
 			initialize();
 			lnkBuildAndPrice.jsClick(driver);
-			Assert.assertEquals(pageLoaded(lnkBuildAndPriceContinue), true, "The 'Build Your Toyota' page was not loaded.");
+			Assert.assertEquals(pageLoaded(eleBuildYourToyota), true, "The 'Build Your Toyota' page was not loaded.");
 		}
+		WebDriverSetup.setDefaultTestTimeout(timeoutBefore);
 	}
 	
 	private void clickLocalSpecials(){
