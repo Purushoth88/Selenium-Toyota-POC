@@ -26,6 +26,7 @@ import com.orasi.utils.Screenshot;
 import com.orasi.utils.TestReporter;
 import com.orasi.utils.WebDriverSetup;
 import com.orasi.utils.dataProviders.ExcelDataProvider;
+import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.saucerest.SauceREST;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
@@ -37,7 +38,13 @@ public class ChangeZipCode{
 	private String operatingSystem = "";
 	private String runLocation = "";
 	private String environment = "";
-	private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();   
+	private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>(); 
+	
+    /**
+     * Constructs a {@link com.saucelabs.common.SauceOnDemandAuthentication} instance using the supplied user name/access key.  To use the authentication
+     * supplied by environment variables or from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
+     */
+    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("wwavery0352", "05b29ecc-195e-425e-936b-07be6e9174ef");
     
     //**************
     // Data Provider

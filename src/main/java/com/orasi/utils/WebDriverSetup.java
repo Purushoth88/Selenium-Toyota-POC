@@ -28,7 +28,7 @@ import com.saucelabs.common.SauceOnDemandAuthentication;
 public class WebDriverSetup{
     
 	public static WebDriver driver;
-	private String browserVersion = System.getProperty(Constants.BROWSER_VERSION);
+	//private String browserVersion = System.getProperty(Constants.BROWSER_VERSION);
 	
 	private static ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
 	private String seleniumHubURL = "http://"
@@ -320,10 +320,10 @@ public class WebDriverSetup{
 			throw new RuntimeException("Parameter for run [Location] was not set to 'Local' or 'Remote'");
 		}
 		
-		driver.manage().timeouts().setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS).implicitlyWait(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS);	
+		//driver.manage().timeouts().setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS).implicitlyWait(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS);	
 		setDefaultTestTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);
 		//driver.manage().deleteAllCookies();
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 	}
 	
 	/**
