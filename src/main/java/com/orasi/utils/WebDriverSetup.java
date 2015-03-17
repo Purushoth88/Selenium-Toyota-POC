@@ -310,7 +310,10 @@ public class WebDriverSetup{
 	            capabilities.setCapability(CapabilityType.VERSION, getBrowserVersion());
 	        }
 	        capabilities.setCapability(CapabilityType.PLATFORM, getOperatingSystem());
-	        capabilities.setCapability("name", "Sauce Sample Test");
+	        if(getBrowserUnderTest().toLowerCase().contains("ie") || 
+	        		getBrowserUnderTest().toLowerCase().contains("iexplore")){
+	        	capabilities.setCapability("ignoreZoomSetting", true);
+		    }
 	        webDriver.set(new RemoteWebDriver(
 	                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
 	                capabilities));
@@ -320,10 +323,10 @@ public class WebDriverSetup{
 			throw new RuntimeException("Parameter for run [Location] was not set to 'Local' or 'Remote'");
 		}
 		
-		//driver.manage().timeouts().setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS).implicitlyWait(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS);	
+		driver.manage().timeouts().setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS).implicitlyWait(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS);	
 		setDefaultTestTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);
-		//driver.manage().deleteAllCookies();
-		//driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		driver.manage().window().maximize();
 	}
 	
 	/**
