@@ -10,6 +10,7 @@ import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Textbox;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.PageLoaded;
+import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestReporter;
 import com.orasi.utils.WebDriverSetup;
 
@@ -25,6 +26,8 @@ public class MainNavigation {
 	// ******************************
 	String initialZipCode = "";
 	String modifiedZipCode = "";
+	int timeout = WebDriverSetup.getDefaultTestTimeout();
+	int loopCounter = 0;
 	
 	// ********************************
 	// *** Main Navigation Elements ***
@@ -106,7 +109,7 @@ public class MainNavigation {
 	 * @return: NA
 	 */
 	public void changeZipCodes(String zipCode){
-		pageLoaded(txtZipCode);
+		pageLoaded(btnYourLocation);
 		//Capture the zipcode that currently exists in the UI
 		this.initialZipCode = captureCurrentZipCode();
 		TestReporter.log("Initial zip code: ["+initialZipCode+"].");
@@ -123,8 +126,15 @@ public class MainNavigation {
 			}else{
 				txtZipCode.safeSet(zipCode);
 			}
+			
 			initialize();
 			pageLoaded();
+			loopCounter = 0;
+			do{
+				Sleeper.sleep(1000);
+				loopCounter++;
+				Assert.assertNotEquals(loopCounter, timeout, "The zipcode was found to not have changed within ["+String.valueOf(timeout)+"] seconds.");
+			}while(eleZipCode.getText().equalsIgnoreCase(initialZipCode));
 			//Capture the newly modified zipcode from the UI
 			this.modifiedZipCode = captureCurrentZipCode();
 			TestReporter.log("Modified zip code: ["+modifiedZipCode+"].");
