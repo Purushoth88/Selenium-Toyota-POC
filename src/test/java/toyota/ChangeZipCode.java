@@ -9,8 +9,11 @@ import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -20,6 +23,7 @@ import org.testng.annotations.Test;
 import apps.toyota.homePage.HomePage;
 import apps.toyota.mainNavigation.MainNavigation;
 
+import com.orasi.reporting.OrasiReporter;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
 import com.orasi.utils.Screenshot;
@@ -38,6 +42,7 @@ public class ChangeZipCode{
 	private String operatingSystem = "";
 	private String runLocation = "";
 	private String environment = "";
+	String testName = "";
 	private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>(); 
 	private static ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
     /**
@@ -47,14 +52,17 @@ public class ChangeZipCode{
 	public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
 			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
 			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
-    
+	OrasiReporter htmlReport = new OrasiReporter();
+	
     //**************
     // Data Provider
     //**************
 	@DataProvider(name = "dataScenario")
 	public Object[][] scenarios() {
-		return new ExcelDataProvider(Constants.TOYOTA_DATAPROVIDER_PATH
+		Object[][] excelData = new ExcelDataProvider(Constants.TOYOTA_DATAPROVIDER_PATH
 				+ "ChangeZipCode.xlsx", "ChangeZipCode").getTestData();
+		OrasiReporter.testCount = excelData.length;
+		return excelData;
 	}
 
 	//*********************
@@ -80,7 +88,8 @@ public class ChangeZipCode{
 	public synchronized void closeSession(ITestResult test) {
 		System.out.println(test.getMethod().getMethodName());
 		WebDriver driver = drivers.get(test.getMethod().getMethodName());
-				
+//		htmlReport.ReportEvent("Stop",test.getMethod().getMethodName(), null, false);	
+		
 		ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
 		SauceREST client = new SauceREST(
 				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
@@ -92,9 +101,12 @@ public class ChangeZipCode{
 		if (test.getStatus() == ITestResult.FAILURE) {
 			new Screenshot().takeScreenShot(test, driver);
 			updates.put("passed", false);
+			htmlReport.ReportEvent("Fail",test.getMethod().getMethodName(), null, true);
 		}else{
 			updates.put("passed", true);
+			htmlReport.ReportEvent("Pass",test.getMethod().getMethodName(), null, false);
 		}
+		htmlReport.ReportEvent("Stop",test.getMethod().getMethodName(), null, false);
 			
         JSONArray tags = new JSONArray();
         String[] groups = test.getMethod().getGroups();
@@ -106,6 +118,11 @@ public class ChangeZipCode{
 		if(driver != null && driver.getWindowHandles().size() > 0){
 			driver.quit();
 		}
+	}
+	
+	@AfterSuite
+	public void outputHTML(ITestContext ctx){
+		htmlReport.GenerateHTML(testName, ctx.getCurrentXmlTest().getSuite().getName());
 	}
 
 	//*****
@@ -124,13 +141,15 @@ public class ChangeZipCode{
 	public void testChangeZipCode(
 			String testScenario, String zipCode) throws InterruptedException, IOException {
 		
-		String testName = new Object() {
+		testName = new Object() {
 		}.getClass().getEnclosingMethod().getName();
 		//Uncomment the following line to have TestReporter outputs output to the console
 		TestReporter.setPrintToConsole(true);
 		
 		WebDriverSetup setup = new WebDriverSetup(application,  browserUnderTest, browserVersion, operatingSystem, runLocation,  environment, testName);
 		WebDriver driver = setup.initialize();
+		
+		htmlReport.ReportEvent("Start", null, testName, false);
 		
 		System.out.println(testName);
 		drivers.put(testName, driver);
