@@ -178,7 +178,8 @@ public class OrasiReporter {
 			stepCount = 0;
 			//rename file
 			String outputFileName = action;
-			File file2 = new File("C:\\Temp\\"+testIteration+"_"+ outputFileName+".xml");
+//			File file2 = new File("C:\\Temp\\"+testIteration+"_"+ outputFileName+".xml");
+			File file2 = new File("C:\\Temp\\"+outputFileName+".xml");
 			if(file2.exists()){
 				file2.delete();
 			}
@@ -189,7 +190,9 @@ public class OrasiReporter {
 		}
 	}
 	public void GenerateHTML(String xmlFiles,String outputName){
-		String[] XMLs = xmlFiles.split(","); 
+//		String[] XMLs = xmlFiles.split(","); 
+		String[] XMLs = findAllReportFiles();
+		System.out.println();
 		try {
 			reportFileWriter = new FileWriter(htmlFile,true);
 			reportPrintWriter = new PrintWriter(reportFileWriter);
@@ -234,8 +237,11 @@ public class OrasiReporter {
 		reportPrintWriter.println("<td align=right id=\"totalWarnings\">0</td>");
 		reportPrintWriter.println("</tr></table></center>");
 		for(int i=0;i<XMLs.length;i++){
-			try { 
-				File xmlFile = new File("C:\\Temp\\"+XMLs[i]+".xml");
+			try {
+				if(!XMLs[i].toLowerCase().endsWith(".xml")){
+					XMLs[i] = XMLs[i] + ".xml";
+				}
+				File xmlFile = new File("C:\\Temp\\"+XMLs[i]);
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 				Document doc = dBuilder.parse(xmlFile);
@@ -412,5 +418,35 @@ public class OrasiReporter {
 		htmlFile.renameTo(file2);
 		Reporter.setEscapeHtml(false);
 		Reporter.log("<a href="+file2.getAbsolutePath()+">"+file2.getAbsolutePath()+"</a>");
+	}
+	
+	private String[] findAllReportFiles(){
+		// Directory path
+		String path = "C:\\Temp\\";
+
+		//File object for the directory
+		File folder = new File(path);
+		//File array of all files in the directory
+		File[] listOfFiles = folder.listFiles();
+		//Determine the number of "Temp" files
+		int numberOfTempFiles = 0;
+		for(File file:listOfFiles){
+			if(file.getName().toLowerCase().contains("temp")){
+				numberOfTempFiles++;
+			}
+		}
+		//Determine the number of non-"Temp" files
+		int numberOfNonTempFiles = listOfFiles.length - numberOfTempFiles;
+		String[] files = new String[numberOfNonTempFiles];
+
+		int fileCounter = 0;
+		for (File file: listOfFiles) {
+			if (file.isFile() && !(file.getName().toLowerCase().contains("temp"))) {
+				files[fileCounter] = file.getName();
+				fileCounter++;
+			}
+		}
+		
+		return files;
 	}
 }

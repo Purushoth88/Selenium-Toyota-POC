@@ -87,13 +87,8 @@ public class ChangeZipCode{
 	@AfterMethod(groups = { "regression" })
 	public synchronized void closeSession(ITestResult test) {
 		System.out.println(test.getMethod().getMethodName());
-		WebDriver driver = drivers.get(test.getMethod().getMethodName());
-//		htmlReport.ReportEvent("Stop",test.getMethod().getMethodName(), null, false);	
-		
-		ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
-		SauceREST client = new SauceREST(
-				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
-				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+		WebDriver driver = drivers.get(test.getMethod().getMethodName());	
+	
         Map<String, Object> updates = new HashMap<String, Object>();
         updates.put("name",test.getMethod().getMethodName());
         
@@ -112,14 +107,24 @@ public class ChangeZipCode{
         String[] groups = test.getMethod().getGroups();
         for (int x = 0 ; x < groups.length ; x++){tags.add(groups[x]);}
         updates.put("tags", tags);
-        client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
-        System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));
+        
+        if(runLocation.equalsIgnoreCase("remote")){
+    		ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
+    		SauceREST client = new SauceREST(
+    				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
+    				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+        	client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
+        	System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));	
+        }
 		
 		if(driver != null && driver.getWindowHandles().size() > 0){
 			driver.quit();
 		}
 	}
 	
+	//*********************
+	// After-Suite Behavior
+	//*********************
 	@AfterSuite
 	public void outputHTML(ITestContext ctx){
 		htmlReport.GenerateHTML(testName, ctx.getCurrentXmlTest().getSuite().getName());

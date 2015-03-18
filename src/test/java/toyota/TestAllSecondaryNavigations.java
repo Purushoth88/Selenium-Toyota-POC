@@ -9,8 +9,10 @@ import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -22,6 +24,7 @@ import apps.toyota.homePage.HomePage;
 import apps.toyota.mainNavigation.MainNavigation;
 import apps.toyota.secondaryNavigation.SecondaryNavigation;
 
+import com.orasi.reporting.OrasiReporter;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
 import com.orasi.utils.TestReporter;
@@ -40,6 +43,7 @@ public class TestAllSecondaryNavigations {
 		private String operatingSystem = "";
 		private String runLocation = "";
 		private String environment = "";
+		String testName = "";
 		private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
 		private static ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
 	    /**
@@ -49,7 +53,25 @@ public class TestAllSecondaryNavigations {
 		public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
 				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
 				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
-
+		OrasiReporter htmlReport = new OrasiReporter();
+		
+	    //**************
+	    // Data Provider
+	    //**************
+		@DataProvider(name = "dataScenario")
+//		public Object[][] scenarios() {
+//			Object[][] excelData = new ExcelDataProvider(Constants.TOYOTA_DATAPROVIDER_PATH
+//					+ "ChangeZipCode.xlsx", "ChangeZipCode").getTestData();
+//			OrasiReporter.testCount = excelData.length;
+//			return excelData;
+//		}
+		public void scenarios() {
+			OrasiReporter.testCount = 1;
+		}
+		
+		//*********************
+		// Before-Test Behavior 
+		//*********************
 		@BeforeTest(groups = { "regression" })
 		@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 				"operatingSystem", "environment" })
@@ -63,15 +85,14 @@ public class TestAllSecondaryNavigations {
 			this.environment = environment;
 		}
 
+		//**********************
+		// After Method Behavior 
+		//**********************
 		@AfterMethod(groups = { "regression" })
 		public synchronized void closeSession(ITestResult test) {
 			System.out.println(test.getMethod().getMethodName());
-			WebDriver driver = drivers.get(test.getMethod().getMethodName());
-					
-			ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
-			SauceREST client = new SauceREST(
-					Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
-					Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+			WebDriver driver = drivers.get(test.getMethod().getMethodName());	
+		
 	        Map<String, Object> updates = new HashMap<String, Object>();
 	        updates.put("name",test.getMethod().getMethodName());
 	        
@@ -79,26 +100,47 @@ public class TestAllSecondaryNavigations {
 			if (test.getStatus() == ITestResult.FAILURE) {
 				new Screenshot().takeScreenShot(test, driver);
 				updates.put("passed", false);
+				htmlReport.ReportEvent("Fail",test.getMethod().getMethodName(), null, true);
 			}else{
 				updates.put("passed", true);
+				htmlReport.ReportEvent("Pass",test.getMethod().getMethodName(), null, false);
 			}
+			htmlReport.ReportEvent("Stop",test.getMethod().getMethodName(), null, false);
 				
 	        JSONArray tags = new JSONArray();
 	        String[] groups = test.getMethod().getGroups();
 	        for (int x = 0 ; x < groups.length ; x++){tags.add(groups[x]);}
 	        updates.put("tags", tags);
-	        client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
-	        System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));
+	        
+	        if(runLocation.equalsIgnoreCase("remote")){
+	    		ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
+	    		SauceREST client = new SauceREST(
+	    				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
+	    				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+	        	client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
+	        	System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));	
+	        }
 			
 			if(driver != null && driver.getWindowHandles().size() > 0){
 				driver.quit();
 			}
 		}
+		
+		//*********************
+		// After-Suite Behavior
+		//*********************
+		@AfterSuite
+		public void outputHTML(ITestContext ctx){
+			htmlReport.GenerateHTML(testName, ctx.getCurrentXmlTest().getSuite().getName());
+		}
 
+		//*****
+		// TEST
+		//*****
 		/**
 		 * @throws IOException 
 		 * @throws InterruptedException 
-		 * @Summary: Changes zip code on Toyota.com website
+		 * @Summary: Tests secondary navigation buttons/links
 		 * @Precondition:NA
 		 * @Author: Waightstill W Avery
 		 * @Version: 03/10/2015
@@ -111,10 +153,13 @@ public class TestAllSecondaryNavigations {
 			}.getClass().getEnclosingMethod().getName();
 			//Uncomment the following line to have TestReporter outputs output to the console
 			TestReporter.setPrintToConsole(true);
+			
 			WebDriverSetup setup = new WebDriverSetup(application,
 					browserUnderTest, browserVersion, operatingSystem, runLocation,
 					environment, testName);
 			WebDriver driver = setup.initialize();
+			
+			htmlReport.ReportEvent("Start", null, testName, false);
 			
 			System.out.println(testName);
 			drivers.put(testName, driver);

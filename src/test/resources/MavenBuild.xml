@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Toyota" parallel="tests" thread-count="8">
+<suite name="Toyota" parallel="none" thread-count="8">
 	<parameter name="browserUnderTest" value="chrome" />
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="remote" />
 	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="Windows 7" />
+	<parameter name="operatingSystem" value="Vista" />
 	<test name="ChangeZipCode">
 		<classes>
 			<class name="toyota.ChangeZipCode" />
