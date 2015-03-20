@@ -26,6 +26,7 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
+import com.orasi.utils.Constants;
 import com.orasi.utils.WebDriverSetup;
 
 public class OrasiReporter {
@@ -168,6 +169,7 @@ public class OrasiReporter {
 			reportPrintWriter.println("<testStartTime>"+fullDateFormat.format(Calendar.getInstance().getTime())+"</testStartTime>");
 			Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 			reportPrintWriter.println("<testBrowser>"+ cap.getBrowserName() + " " + cap.getVersion() + "</testBrowser>");
+			reportPrintWriter.println("<testOperatingSystem>"+ System.getProperty(Constants.OPERATING_SYSTEM) + "</testOperatingSystem>");
 			reportPrintWriter.println("<results>");
 			reportPrintWriter.close();
 			break;

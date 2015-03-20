@@ -5,10 +5,10 @@
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="remote" />
 	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="Vista" />
+	<parameter name="operatingSystem" value="Mac OS X 10.9" />
 	<test name="ChangeZipCode">
 		<classes>
-			<class name="toyota.ChangeZipCode" />
+<!-- 			<class name="toyota.ChangeZipCode" /> -->
 			<class name="toyota.TestAllSecondaryNavigations" />
 		</classes>
 	</test> <!-- ChangeZipCode -->

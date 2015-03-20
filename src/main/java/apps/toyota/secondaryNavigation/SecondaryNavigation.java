@@ -191,7 +191,7 @@ public class SecondaryNavigation {
 		do{
 			Sleeper.sleep(1000);
 			loopCounter++;
-			Assert.assertNotEquals(loopCounter, timeout);
+			Assert.assertNotEquals(loopCounter, timeout, "The 'Find Your Toyota Dealer' page was not loaded after ["+String.valueOf(timeout)+"] seconds.");
 			list2 = driver.findElements(By.tagName("a"));		
 		}while(list2.size() == list.size());
 	}
@@ -208,18 +208,24 @@ public class SecondaryNavigation {
 		do{
 			Sleeper.sleep(1000);
 			loopCounter++;
-			Assert.assertNotEquals(loopCounter, timeout);
+			Assert.assertNotEquals(loopCounter, timeout, "The 'Build Your Toyota' page was not loaded after ["+String.valueOf(timeout)+"] seconds.");
 			list2 = driver.findElements(By.tagName("a"));		
 		}while(list2.size() == list.size());
 	}
 	
 	private void clickLocalSpecials(){
-		//lnkLocalSpecials.highlight(driver);
+		List<WebElement> list = driver.findElements(By.tagName("a")); 		
+		
 		lnkLocalSpecials.click();
-		if(!pageLoaded(txtLocalSpecialsZipCode)){
-			initialize();
-			lnkLocalSpecials.jsClick(driver);
-			Assert.assertEquals(pageLoaded(txtLocalSpecialsZipCode), true, "The 'Build Your Toyota' page was not loaded.");
-		}
+		initialize();
+		//Loop until the number of links changes, thereby indicating that a new page was loaded
+		loopCounter = 0;
+		List<WebElement> list2;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			Assert.assertNotEquals(loopCounter, timeout, "The 'Local Specials' page was not loaded after ["+String.valueOf(timeout)+"] seconds.");
+			list2 = driver.findElements(By.tagName("a"));		
+		}while(list2.size() == list.size());
 	}
 }
