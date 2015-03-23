@@ -1,4 +1,4 @@
-package com.orasi.core.interfaces.impl;
+package com.orasi.core.interfaces.impl_OrasiReporter;
 
 import com.orasi.core.interfaces.Link;
 import com.orasi.reporting.OrasiReporter;
@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
  * Wraps a label on a html form with some behavior.
  */
 public class LinkImpl extends ElementImpl implements Link {
+	OrasiReporter htmlReport = new OrasiReporter();
 	//private java.util.Date date= new java.util.Date();
     /**
      * Creates a Element for a given WebElement.
@@ -28,10 +29,12 @@ public class LinkImpl extends ElementImpl implements Link {
     	try{
     	    executor.executeScript("arguments[0].click();", element);
     	}catch(RuntimeException rte){
+    		htmlReport.ReportEvent("Fail", "["+getElementLocatorInfo() + "] Link Clicked", "The link [" + getElementLocatorInfo() + "] was clicked.", true);
     	    TestReporter.interfaceLog(" Click Link [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]", true);
     	    throw rte;
     	}
     	TestReporter.interfaceLog(" Click Link [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
+    	htmlReport.ReportEvent("Info", "["+getElementLocatorInfo() + "] Link Clicked", "The link [" + getElementLocatorInfo() + "] was clicked.", false);
     }
     
     @Override
@@ -40,8 +43,10 @@ public class LinkImpl extends ElementImpl implements Link {
             getWrappedElement().click();
         }catch(RuntimeException rte){
             TestReporter.interfaceLog(" Click Link [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]", true);
+            htmlReport.ReportEvent("Fail", "["+getElementLocatorInfo() + "] Link Clicked", "The link [" + getElementLocatorInfo() + "] was clicked.", true);
             throw rte;
         }
     	TestReporter.interfaceLog(" Click Link [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
+    	htmlReport.ReportEvent("Info", "["+getElementLocatorInfo() + "] Link Clicked", "The link [" + getElementLocatorInfo() + "] was clicked.", false);
     }
 }

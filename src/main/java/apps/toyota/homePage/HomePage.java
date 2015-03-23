@@ -1,23 +1,32 @@
 package apps.toyota.homePage;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.PageLoaded;
+import com.orasi.utils.WebDriverSetup;
 
 
 /**
  * @summary Contains the methods & objects for the Toyota.com homepage
- * @version Created 09/10/2014
+ * @version Created 03/01/2015
  * @author Waightstill W. Avery
  */
 public class HomePage {
-
-	// *******************************************
-	// *** Accommodation WrapUp Frame Elements ***
-	// *******************************************
+	// ***********************
+	// *** HomePage Fields ***
+	// ***********************
+	int timeout = WebDriverSetup.getDefaultTestTimeout();
+	int loopCounter = 0;
+	
+	// *************************
+	// *** HomePage Elements ***
+	// *************************
 	@FindBy(id = "marquee")
 	private Element eleMarquee;
 
@@ -29,7 +38,7 @@ public class HomePage {
 	/**
 	 * 
 	 * @summary Constructor to initialize the page
-	 * @version Created 09/10/2014
+	 * @version Created 03/01/2015
 	 * @author Waightstill W Avery
 	 * @param driver
 	 * @throws NA
@@ -53,7 +62,7 @@ public class HomePage {
 		return ElementFactory.initElements(driver, this.getClass());
 	}
 
-	// ***********************************************
+	// *****************************
 	// *** HomePage Interactions ***
-	// ***********************************************
+	// *****************************
 }

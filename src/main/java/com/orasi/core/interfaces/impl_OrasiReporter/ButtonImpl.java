@@ -1,4 +1,4 @@
-package com.orasi.core.interfaces.impl;
+package com.orasi.core.interfaces.impl_OrasiReporter;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +12,7 @@ import com.orasi.utils.TestReporter;
  * Wraps a label on a html form with some behavior.
  */
 public class ButtonImpl extends ElementImpl implements Button {
+	OrasiReporter htmlReport = new OrasiReporter();
 	
 	//private java.util.Date date= new java.util.Date();
     /**
@@ -28,11 +29,13 @@ public class ButtonImpl extends ElementImpl implements Button {
     	try{
     		getWrappedElement().click(); 
     	}catch(RuntimeException rte){
+    		htmlReport.ReportEvent("Fail","["+ getElementLocatorInfo() + "] Button Clicked", "The button [" + getElementLocatorInfo() + "] was clicked.", true);
     	    TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo() + "</b>]", true);
     	    throw rte;
     	}
  	
-	 	TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo() + "</b>]");    	
+	 	TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo() + "</b>]");
+	 	htmlReport.ReportEvent("Info","["+ getElementLocatorInfo() + "] Button Clicked", "The button [" + getElementLocatorInfo() + "] was clicked.", false);    	
     }
     
     @Override
@@ -42,9 +45,11 @@ public class ButtonImpl extends ElementImpl implements Button {
     	try{
     	    jse.executeScript("arguments[0].click();", element );
      	}catch(RuntimeException rte){
+     		htmlReport.ReportEvent("Fail","["+ getElementLocatorInfo() + "] Button Clicked", "The button [" + getElementLocatorInfo() + "] was clicked.", true);
      	    TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo() +"</b>]", true);
      	    throw rte;
      	}
 		TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo() + "</b>]");
+		htmlReport.ReportEvent("Info","["+ getElementLocatorInfo() + "] Button Clicked", "The button [" + getElementLocatorInfo() + "] was clicked.", false);
     }
 }
