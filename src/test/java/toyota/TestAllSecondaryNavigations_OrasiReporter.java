@@ -36,7 +36,7 @@ import com.saucelabs.saucerest.SauceREST;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
 @Listeners({SauceOnDemandTestListener.class})
-public class TestAllSecondaryNavigations {
+public class TestAllSecondaryNavigations_OrasiReporter {
 		private String application = "";
 		private String browserUnderTest = "";
 		private String browserVersion = "";
@@ -53,6 +53,7 @@ public class TestAllSecondaryNavigations {
 		public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
 				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
 				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+		OrasiReporter htmlReport = new OrasiReporter();
 		
 	    //**************
 	    // Data Provider
@@ -99,9 +100,12 @@ public class TestAllSecondaryNavigations {
 			if (test.getStatus() == ITestResult.FAILURE) {
 				new Screenshot().takeScreenShot(test, driver);
 				updates.put("passed", false);
+				htmlReport.ReportEvent("Fail",test.getMethod().getMethodName(), null, true);
 			}else{
 				updates.put("passed", true);
+				htmlReport.ReportEvent("Pass",test.getMethod().getMethodName(), null, false);
 			}
+			htmlReport.ReportEvent("Stop",test.getMethod().getMethodName(), null, false);
 				
 	        JSONArray tags = new JSONArray();
 	        String[] groups = test.getMethod().getGroups();
@@ -120,6 +124,14 @@ public class TestAllSecondaryNavigations {
 			if(driver != null && driver.getWindowHandles().size() > 0){
 				driver.quit();
 			}
+		}
+		
+		//*********************
+		// After-Suite Behavior
+		//*********************
+		@AfterSuite
+		public void outputHTML(ITestContext ctx){
+			htmlReport.GenerateHTML(testName, ctx.getCurrentXmlTest().getSuite().getName());
 		}
 
 		//*****
@@ -146,6 +158,8 @@ public class TestAllSecondaryNavigations {
 					browserUnderTest, browserVersion, operatingSystem, runLocation,
 					environment, testName);
 			WebDriver driver = setup.initialize();
+			
+			htmlReport.ReportEvent("Start", null, testName, false);
 			
 			System.out.println(testName);
 			drivers.put(testName, driver);

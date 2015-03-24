@@ -21,20 +21,19 @@ import com.orasi.utils.WebDriverSetup;
 
 /**
  * @summary Contains the methods & objects for the Toyota.com Secondary Navigation bar
- * @version Created 09/10/2014
+ * @version Created 03/01/2015
  * @author Waightstill W. Avery
  */
 public class SecondaryNavigation {
-	// ***************************************
-	// *** Secondary Navigation Bar Fields ***
-	// ***************************************
+	// **************************************
+	// *** SecondaryNavigation Bar Fields ***
+	// **************************************
 	int timeout = WebDriverSetup.getDefaultTestTimeout();
 	int loopCounter = 0;
 	
-	
-	// *****************************************
-	// *** Secondary Navigation Bar Elements ***
-	// *****************************************
+	// ****************************************
+	// *** SecondaryNavigation Bar Elements ***
+	// ****************************************
 	
 	//Toyota Icon link
 	@FindBy(id = "tcom-nav-logo-desktop")
@@ -96,7 +95,7 @@ public class SecondaryNavigation {
 	/**
 	 * 
 	 * @summary Constructor to initialize the page
-	 * @version Created 09/10/2014
+	 * @version Created 03/01/2015
 	 * @author Waightstill W Avery
 	 * @param driver
 	 * @throws NA
@@ -120,9 +119,9 @@ public class SecondaryNavigation {
 		return ElementFactory.initElements(driver, this.getClass());
 	}
 
-	// ***********************************************
-	// *** HomePage Interactions ***
-	// ***********************************************
+	// ****************************************
+	// *** SecondaryNavigation Interactions ***
+	// ****************************************
 	
 	public void navigateAllSecondaryNavigationTabs(){
 		openSelectVehicleDropdown();

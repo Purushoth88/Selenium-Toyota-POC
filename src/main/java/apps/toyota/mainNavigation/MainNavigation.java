@@ -17,21 +17,21 @@ import com.orasi.utils.WebDriverSetup;
 
 /**
  * @summary Contains the methods & objects for the Toyota.com Main Navigation Bar
- * @version Created 09/10/2014
+ * @version Created 03/01/2015
  * @author Waightstill W. Avery
  */
 public class MainNavigation {
-	// ******************************
-	// *** Main Navigation Fields ***
-	// ******************************
+	// *****************************
+	// *** MainNavigation Fields ***
+	// *****************************
 	String initialZipCode = "";
 	String modifiedZipCode = "";
 	int timeout = WebDriverSetup.getDefaultTestTimeout();
 	int loopCounter = 0;
 	
-	// ********************************
-	// *** Main Navigation Elements ***
-	// ********************************
+	// *******************************
+	// *** MainNavigation Elements ***
+	// *******************************
 	
 	//Your Location button
 	@FindBy(xpath = "//*[@id=\"tcom-main-nav\"]/ul/li[3]/button")
@@ -57,7 +57,7 @@ public class MainNavigation {
 	/**
 	 * 
 	 * @summary Constructor to initialize the page
-	 * @version Created 09/10/2014
+	 * @version Created 03/01/2015
 	 * @author Waightstill W Avery
 	 * @param driver
 	 * @throws NA
@@ -81,9 +81,9 @@ public class MainNavigation {
 		return ElementFactory.initElements(driver, this.getClass());
 	}
 
-	// ***********************************************
-	// *** HomePage Interactions ***
-	// ***********************************************
+	// ***********************************
+	// *** MainNavigation Interactions ***
+	// ***********************************
 
 	/**
 	 * @summary: clicks on the locations link to allow a new zipcode to be entered
