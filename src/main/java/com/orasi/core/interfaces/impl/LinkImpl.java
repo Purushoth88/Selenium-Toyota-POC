@@ -1,7 +1,6 @@
 package com.orasi.core.interfaces.impl;
 
 import com.orasi.core.interfaces.Link;
-import com.orasi.reporting.OrasiReporter;
 import com.orasi.utils.TestReporter;
 
 import org.openqa.selenium.JavascriptExecutor;

@@ -23,7 +23,6 @@ import org.testng.annotations.Test;
 import apps.toyota.homePage.HomePage;
 import apps.toyota.mainNavigation.MainNavigation;
 
-import com.orasi.reporting.OrasiReporter;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
 import com.orasi.utils.Screenshot;
@@ -60,7 +59,6 @@ public class ChangeZipCode{
 	public Object[][] scenarios() {
 		Object[][] excelData = new ExcelDataProvider(Constants.TOYOTA_DATAPROVIDER_PATH
 				+ "ChangeZipCode.xlsx", "ChangeZipCode").getTestData();
-		OrasiReporter.testCount = excelData.length;
 		return excelData;
 	}
 

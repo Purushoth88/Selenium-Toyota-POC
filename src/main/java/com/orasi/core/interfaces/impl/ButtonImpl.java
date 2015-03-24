@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.orasi.core.interfaces.Button;
-import com.orasi.reporting.OrasiReporter;
 import com.orasi.utils.TestReporter;
 
 /**
