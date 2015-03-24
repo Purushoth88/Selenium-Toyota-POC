@@ -54,6 +54,9 @@ public class TestAllSecondaryNavigations {
 				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
 				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
 		
+		WebDriver driver = null;
+		WebDriverSetup setup = null;
+		
 	    //**************
 	    // Data Provider
 	    //**************
