@@ -68,7 +68,7 @@ public class ChangeZipCode_OrasiReporter{
 	//*********************
 	// Before-Test Behavior 
 	//*********************
-	@BeforeTest(groups = { "regression" })
+	@BeforeTest()
 	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 			"operatingSystem", "environment" })
 	public void setup(String runLocation, String browserUnderTest,
@@ -84,7 +84,7 @@ public class ChangeZipCode_OrasiReporter{
 	//**********************
 	// After Method Behavior 
 	//**********************
-	@AfterMethod(groups = { "regression" })
+	@AfterMethod()
 	public synchronized void closeSession(ITestResult test) {
 		System.out.println(test.getMethod().getMethodName());
 		WebDriver driver = drivers.get(test.getMethod().getMethodName());	
@@ -142,7 +142,7 @@ public class ChangeZipCode_OrasiReporter{
 	 * @Version: 03/10/2015
 	 * @Return: N/A
 	 */
-	@Test(dataProvider = "dataScenario", groups = { "regression" })
+	@Test(dataProvider = "dataScenario")
 	public void testChangeZipCode(
 			String testScenario, String zipCode) throws InterruptedException, IOException {
 		
