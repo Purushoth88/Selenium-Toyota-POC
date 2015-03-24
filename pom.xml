@@ -60,16 +60,16 @@
 				<configuration>
 					<suiteXmlFiles>
 						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_10_Safari_8.xml</suiteXmlFile>
- 						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Chrome.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Firefox.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Safari_7.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win_8_1_Chrome.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win_8_1_Firefox.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win_8_1_IE_11.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_Chrome.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_Firefox.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_IE_11.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_IE_8.xml</suiteXmlFile>		
+ 						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Chrome.xml</suiteXmlFile> -->
+						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Firefox.xml</suiteXmlFile> -->
+						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Safari_7.xml</suiteXmlFile> -->
+						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win_8_1_Chrome.xml</suiteXmlFile> -->
+						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win_8_1_Firefox.xml</suiteXmlFile> -->
+						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win_8_1_IE_11.xml</suiteXmlFile> -->
+						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_Chrome.xml</suiteXmlFile> -->
+						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_Firefox.xml</suiteXmlFile> -->
+						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_IE_11.xml</suiteXmlFile> -->
+						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_IE_8.xml</suiteXmlFile>		 -->
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
