@@ -26,12 +26,10 @@ import org.w3c.dom.Element;
 import com.orasi.utils.Constants;
 import com.orasi.utils.WebDriverSetup;
 
-public class OrasiReporter {
+public class CopyOfOrasiReporter {
 	public WebDriver driver;
 	public File htmlFile = new File("C:\\Temp\\Temp.html");
-	public File file = null;
-	public File file2 = null;
-	public File xmlFile = null;
+	public File file;
 	public FileWriter reportFileWriter;
 	public PrintWriter reportPrintWriter;
 	public static int testCount;
@@ -39,15 +37,9 @@ public class OrasiReporter {
 	public static int stepCount;
 	DateFormat fullDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	DateFormat simpleTime = new SimpleDateFormat("HH:mm:ss");
-	String filePath = "";
 	
 	public void ReportEvent(String eventCase,String action,String message, boolean screenshot){
-		if(System.getProperty(Constants.OPERATING_SYSTEM).toLowerCase().contains("win")){
-			file = new File("C:\\Temp\\Temp"+testIteration+".xml");
-		}else{
-			file = new File("test-output/Temp"+testIteration+".xml");
-		}
-		
+		file = new File("C:\\Temp\\Temp"+testIteration+".xml");
 		try {
 			reportFileWriter = new FileWriter(file,true);
 		} catch (IOException e1) {
@@ -70,11 +62,7 @@ public class OrasiReporter {
 				File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			    // now save the screenshot to a file some place
 			    try {
-			    	if(System.getProperty(Constants.OPERATING_SYSTEM).toLowerCase().contains("win")){
-			    		filePath = "C:\\Temp\\images\\"+System.currentTimeMillis()+".png";
-			    	}else{
-			    		filePath = "test-output/"+System.currentTimeMillis()+".png";
-			    	}
+			    	String filePath = "c:\\Temp\\images\\"+System.currentTimeMillis()+".png";
 			    	FileUtils.copyFile(scrFile, new File(filePath));
 			    	reportPrintWriter.println("<stepScreenshot>"+filePath+"</stepScreenshot>");
 				} catch (IOException e) {
@@ -96,11 +84,7 @@ public class OrasiReporter {
 				File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			    // now save the screenshot to a file some place
 			    try {
-			    	if(System.getProperty(Constants.OPERATING_SYSTEM).toLowerCase().contains("win")){
-			    		filePath = "C:\\Temp\\images\\"+System.currentTimeMillis()+".png";
-			    	}else{
-			    		filePath = "test-output/"+System.currentTimeMillis()+".png";
-			    	}
+			    	String filePath = "c:\\Temp\\images\\"+System.currentTimeMillis()+".png";
 			    	FileUtils.copyFile(scrFile, new File(filePath));
 			    	reportPrintWriter.println("<stepScreenshot>"+filePath+"</stepScreenshot>");
 				} catch (IOException e) {
@@ -122,11 +106,7 @@ public class OrasiReporter {
 				File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			    // now save the screenshot to a file some place
 			    try {
-			    	if(System.getProperty(Constants.OPERATING_SYSTEM).toLowerCase().contains("win")){
-			    		filePath = "C:\\Temp\\images\\"+System.currentTimeMillis()+".png";
-			    	}else{
-			    		filePath = "test-output/"+System.currentTimeMillis()+".png";
-			    	}
+			    	String filePath = "c:\\Temp\\images\\"+System.currentTimeMillis()+".png";
 			    	FileUtils.copyFile(scrFile, new File(filePath));
 			    	reportPrintWriter.println("<stepScreenshot>"+filePath+"</stepScreenshot>");
 				} catch (IOException e) {
@@ -148,11 +128,7 @@ public class OrasiReporter {
 				File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			    // now save the screenshot to a file some place
 			    try {
-			    	if(System.getProperty(Constants.OPERATING_SYSTEM).toLowerCase().contains("win")){
-			    		filePath = "C:\\Temp\\images\\"+System.currentTimeMillis()+".png";
-			    	}else{
-			    		filePath = "test-output/"+System.currentTimeMillis()+".png";
-			    	}
+			    	String filePath = "c:\\Temp\\images\\"+System.currentTimeMillis()+".png";
 			    	FileUtils.copyFile(scrFile, new File(filePath));
 			    	reportPrintWriter.println("<stepScreenshot>"+filePath+"</stepScreenshot>");
 				} catch (IOException e) {
@@ -165,11 +141,7 @@ public class OrasiReporter {
 		case "Start":
 			stepCount=0;
 			testIteration++;
-			if(System.getProperty(Constants.OPERATING_SYSTEM).toLowerCase().contains("win")){
-				file = new File("C:\\Temp\\Temp"+testIteration+".xml");
-			}else{
-				file = new File("test-output/Temp"+testIteration+".xml");
-			}
+			file = new File("C:\\Temp\\Temp"+testIteration+".xml");
 			if(file.exists()){
 				reportPrintWriter.close();
 				try {
@@ -206,11 +178,7 @@ public class OrasiReporter {
 			//rename file
 			String outputFileName = action;
 //			File file2 = new File("C:\\Temp\\"+testIteration+"_"+ outputFileName+".xml");
-			if(System.getProperty(Constants.OPERATING_SYSTEM).toLowerCase().contains("win")){
-				file2 = new File("C:\\Temp\\"+outputFileName+".xml");
-			}else{
-				file2 = new File("test-output/"+outputFileName+".xml");
-			}
+			File file2 = new File("C:\\Temp\\"+outputFileName+".xml");
 			if(file2.exists()){
 				file2.delete();
 			}
@@ -272,11 +240,7 @@ public class OrasiReporter {
 				if(!XMLs[i].toLowerCase().endsWith(".xml")){
 					XMLs[i] = XMLs[i] + ".xml";
 				}
-				if(System.getProperty(Constants.OPERATING_SYSTEM).toLowerCase().contains("win")){
-					File xmlFile = new File("C:\\Temp\\"+XMLs[i]);
-				}else{
-					File xmlFile = new File("test-output/"+XMLs[i]);
-				}
+				File xmlFile = new File("C:\\Temp\\"+XMLs[i]);
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 				Document doc = dBuilder.parse(xmlFile);
@@ -293,7 +257,6 @@ public class OrasiReporter {
 				//Run Information
 				reportPrintWriter.println("<h2>"+ testName.getTextContent() + ":"+testStartTime.getTextContent()+"</h2>");
 				reportPrintWriter.println("<h3>"+ testBrowser.getTextContent() + "</h3>");
-				reportPrintWriter.println("<h3>"+ System.getProperty(Constants.OPERATING_SYSTEM) + "</h3>");
 				//Summary Table
 				reportPrintWriter.println("<table id=\"summaryTable"+i+"\" border=\"1\" style=\"width:75%\">");
 				reportPrintWriter.println("<tr>");
@@ -447,11 +410,7 @@ public class OrasiReporter {
 		
 		//rename file
 		String outputFileName = outputName;
-		if(System.getProperty(Constants.OPERATING_SYSTEM).toLowerCase().contains("win")){
-			file2 = new File("C:\\Temp\\"+ outputFileName+".html");
-		}else{
-			file2 = new File("test-output/"+ outputFileName+".html");
-		}
+		File file2 = new File("C:\\Temp\\"+ outputFileName+".html");
 		if(file2.exists()){
 			file2.delete();
 		}
@@ -464,7 +423,7 @@ public class OrasiReporter {
 		String path = "";
 		// Directory path
 		if(System.getProperty(Constants.OPERATING_SYSTEM).toLowerCase().contains("mac")){
-			path = "test-output/";
+			path = ".";
 		}else{
 			path = "C:\\Temp\\";
 		}
