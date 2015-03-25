@@ -13,6 +13,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -22,6 +23,7 @@ import org.testng.annotations.Test;
 
 import apps.toyota.homePage.HomePage;
 import apps.toyota.mainNavigation.MainNavigation;
+import apps.whatsMyIp.Homepage;
 
 import com.orasi.reporting.OrasiReporter;
 import com.orasi.utils.Base64Coder;
@@ -67,7 +69,7 @@ public class ChangeZipCode{
 	//*********************
 	// Before-Test Behavior 
 	//*********************
-	@BeforeTest(groups = { "regression" })
+	@BeforeTest(groups = { "regression", "toyota"})
 	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 			"operatingSystem", "environment" })
 	public void setup(String runLocation, String browserUnderTest,
@@ -83,8 +85,8 @@ public class ChangeZipCode{
 	//**********************
 	// After Method Behavior 
 	//**********************
-	@AfterMethod(groups = { "regression" })
-	public synchronized void closeSession(ITestResult test) {
+	@AfterTest(groups = { "regression", "toyota" })
+	public void closeSession(ITestResult test) {
 		System.out.println(test.getMethod().getMethodName());
 		WebDriver driver = drivers.get(test.getMethod().getMethodName());	
 	
@@ -130,7 +132,7 @@ public class ChangeZipCode{
 	 * @Version: 03/10/2015
 	 * @Return: N/A
 	 */
-	@Test(dataProvider = "dataScenario", groups = { "regression" })
+	@Test(dataProvider = "dataScenario", groups = { "regression", "toyota" })
 	public void testChangeZipCode(
 			String testScenario, String zipCode) throws InterruptedException, IOException {
 		

@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -26,6 +27,7 @@ import apps.toyota.mainNavigation.MainNavigation;
 import apps.toyota.secondaryNavigation.SecondaryNavigation;
 import apps.whatsMyIp.Homepage;
 
+import com.orasi.core.interfaces.Element;
 import com.orasi.reporting.OrasiReporter;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
@@ -38,7 +40,7 @@ import com.saucelabs.saucerest.SauceREST;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
 @Listeners({SauceOnDemandTestListener.class})
-public class TestAllSecondaryNavigations {
+public class Whatsmyip2 {
 		private String application = "";
 		private String browserUnderTest = "";
 		private String browserVersion = "";
@@ -56,29 +58,15 @@ public class TestAllSecondaryNavigations {
 				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
 				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
 		
-	    //**************
-	    // Data Provider
-	    //**************
-		@DataProvider(name = "dataScenario")
-//		public Object[][] scenarios() {
-//			Object[][] excelData = new ExcelDataProvider(Constants.TOYOTA_DATAPROVIDER_PATH
-//					+ "ChangeZipCode.xlsx", "ChangeZipCode").getTestData();
-//			OrasiReporter.testCount = excelData.length;
-//			return excelData;
-//		}
-		public void scenarios() {
-			OrasiReporter.testCount = 1;
-		}
-		
 		//*********************
 		// Before-Test Behavior 
 		//*********************
-		@BeforeTest(groups = { "regression", "toyota" })
+		@BeforeTest()
 		@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 				"operatingSystem", "environment" })
 		public void setup(@Optional String runLocation, String browserUnderTest,
 				String browserVersion, String operatingSystem, String environment) {
-			this.application = "Toyota";
+			this.application = "WHATSMYIP";
 			this.runLocation = runLocation;
 			this.browserUnderTest = browserUnderTest;
 			this.browserVersion = browserVersion;
@@ -89,7 +77,7 @@ public class TestAllSecondaryNavigations {
 		//**********************
 		// After Method Behavior 
 		//**********************
-		@AfterTest(groups = { "regression", "toyota" })
+		@AfterMethod()
 		public void closeSession(ITestResult test) {
 			System.out.println(test.getMethod().getMethodName());
 			WebDriver driver = drivers.get(test.getMethod().getMethodName());	
@@ -136,9 +124,8 @@ public class TestAllSecondaryNavigations {
 		 * @Version: 03/10/2015
 		 * @Return: N/A
 		 */
-		@Test(groups = { "regression", "toyota" })
-		public void testAllSecondaryNavigations() throws InterruptedException, IOException {
-			
+		@Test(threadPoolSize = 1)
+		public void whatsMyIp2() throws InterruptedException, IOException {
 			String testName = new Object() {
 			}.getClass().getEnclosingMethod().getName();
 			//Uncomment the following line to have TestReporter outputs output to the console
@@ -151,15 +138,9 @@ public class TestAllSecondaryNavigations {
 			
 			System.out.println(testName);
 			drivers.put(testName, driver);
-
-			//Ensure the home page is loaded
-			TestReporter.log("Load the Home Page");
-			HomePage homePage = new HomePage(driver);
-			Assert.assertEquals(homePage.pageLoaded(), true);
-		
-			//Test the secondary navigation bar functionality
-			TestReporter.log("Test the Secondary Navigation Bar Functionality");
-			SecondaryNavigation secNav = new SecondaryNavigation(driver);
-			secNav.navigateAllSecondaryNavigationTabs();
+			
+			Homepage hp = new Homepage(driver);
+			Assert.assertEquals(hp.pageLoaded(), true);
+			System.out.println(hp.getIpAddress());
 		}
 }
