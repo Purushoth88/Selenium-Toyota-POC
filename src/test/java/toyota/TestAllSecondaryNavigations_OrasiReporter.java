@@ -72,7 +72,7 @@ public class TestAllSecondaryNavigations_OrasiReporter {
 		//*********************
 		// Before-Test Behavior 
 		//*********************
-		@BeforeTest(groups = { "" })
+		@BeforeTest()
 		@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 				"operatingSystem", "environment" })
 		public void setup(@Optional String runLocation, String browserUnderTest,
@@ -88,7 +88,7 @@ public class TestAllSecondaryNavigations_OrasiReporter {
 		//**********************
 		// After Method Behavior 
 		//**********************
-		@AfterMethod(groups = { "" })
+		@AfterMethod()
 		public synchronized void closeSession(ITestResult test) {
 			System.out.println(test.getMethod().getMethodName());
 			WebDriver driver = drivers.get(test.getMethod().getMethodName());	
@@ -146,7 +146,7 @@ public class TestAllSecondaryNavigations_OrasiReporter {
 		 * @Version: 03/10/2015
 		 * @Return: N/A
 		 */
-		@Test(groups = { "" })
+		@Test()
 		public void testAllSecondaryNavigations() throws InterruptedException, IOException {
 			
 			String testName = new Object() {
