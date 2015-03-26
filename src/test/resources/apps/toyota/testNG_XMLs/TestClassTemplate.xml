@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="ChangeZipCode" parallel="false">
+<suite name="TestClassTemplate" parallel="false">
+
 	<parameter name="browserUnderTest" value="chrome" />
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="local" />
 	<parameter name="browserVersion" value="" />
 	<parameter name="operatingSystem" value="windows" />
-<!-- 	<listeners>
-		<listener class-name="com.orasi.reporting.HtmlReportListener" />
-	</listeners> -->
-	<test name="ChangeZipCode">
+
+	<test name="TestClassTemplate">
 		<classes>
-			<class name="toyota.ChangeZipCode" />
+			<class name="toyota.TestClassTemplate" />
 		</classes>
-	</test> <!-- ChangeZipCode -->
-</suite> <!-- ChangeZipCode -->
+	</test> <!-- TestClassTemplate -->
+
+</suite> <!-- TestClassTemplate -->

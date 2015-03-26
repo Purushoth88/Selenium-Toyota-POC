@@ -167,7 +167,7 @@ public class WebDriverSetup{
 			DesiredCapabilities caps = null;
 			File file = null;
 			switch (getOperatingSystem().toLowerCase().trim().replace(" ", "")) {
-			case "windows": case "": case "vista":
+			case "windows":
 				if (getBrowserUnderTest().equalsIgnoreCase("Firefox") || getBrowserUnderTest().equalsIgnoreCase("FF")){
 			    	driver = new FirefoxDriver();	    	
 			    }
