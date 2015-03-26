@@ -9,30 +9,22 @@ import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import apps.toyota.homePage.HomePage;
-import apps.toyota.mainNavigation.MainNavigation;
 import apps.toyota.secondaryNavigation.SecondaryNavigation;
-import apps.whatsMyIp.Homepage;
 
-import com.orasi.reporting.OrasiReporter;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
 import com.orasi.utils.TestReporter;
 import com.orasi.utils.Screenshot;
 import com.orasi.utils.WebDriverSetup;
-import com.orasi.utils.dataProviders.ExcelDataProvider;
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.saucerest.SauceREST;
 import com.saucelabs.testng.SauceOnDemandTestListener;
@@ -58,20 +50,6 @@ public class TestAllSecondaryNavigations {
 		
 		WebDriver driver = null;
 		WebDriverSetup setup = null;
-		
-	    //**************
-	    // Data Provider
-	    //**************
-		@DataProvider(name = "dataScenario")
-//		public Object[][] scenarios() {
-//			Object[][] excelData = new ExcelDataProvider(Constants.TOYOTA_DATAPROVIDER_PATH
-//					+ "ChangeZipCode.xlsx", "ChangeZipCode").getTestData();
-//			OrasiReporter.testCount = excelData.length;
-//			return excelData;
-//		}
-		public void scenarios() {
-			OrasiReporter.testCount = 1;
-		}
 		
 		//*********************
 		// Before-Test Behavior 

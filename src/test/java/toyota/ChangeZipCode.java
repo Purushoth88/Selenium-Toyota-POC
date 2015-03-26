@@ -9,12 +9,8 @@ import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -23,9 +19,7 @@ import org.testng.annotations.Test;
 
 import apps.toyota.homePage.HomePage;
 import apps.toyota.mainNavigation.MainNavigation;
-import apps.whatsMyIp.Homepage;
 
-import com.orasi.reporting.OrasiReporter;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
 import com.orasi.utils.Screenshot;
@@ -62,7 +56,6 @@ public class ChangeZipCode{
 	public Object[][] scenarios() {
 		Object[][] excelData = new ExcelDataProvider(Constants.TOYOTA_DATAPROVIDER_PATH
 				+ "ChangeZipCode.xlsx", "ChangeZipCode").getTestData();
-		OrasiReporter.testCount = excelData.length;
 		return excelData;
 	}
 
