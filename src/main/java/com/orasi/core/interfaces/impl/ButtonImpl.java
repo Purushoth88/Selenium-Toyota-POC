@@ -11,7 +11,6 @@ import com.orasi.utils.TestReporter;
  * Wraps a label on a html form with some behavior.
  */
 public class ButtonImpl extends ElementImpl implements Button {
-	
 	//private java.util.Date date= new java.util.Date();
     /**
      * Creates a Element for a given WebElement.
@@ -24,14 +23,16 @@ public class ButtonImpl extends ElementImpl implements Button {
     
     @Override
     public void click() {
+
     	try{
-    		getWrappedElement().click(); 
+ 	   getWrappedElement().click(); 
     	}catch(RuntimeException rte){
     	    TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo() + "</b>]", true);
     	    throw rte;
     	}
  	
-	 	TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo() + "</b>]");    	
+ 	TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo() + "</b>]");
+    	
     }
     
     @Override
@@ -44,6 +45,7 @@ public class ButtonImpl extends ElementImpl implements Button {
      	    TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo() +"</b>]", true);
      	    throw rte;
      	}
-		TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo() + "</b>]");
+  	 TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo() + "</b>]");
+    	
     }
 }
