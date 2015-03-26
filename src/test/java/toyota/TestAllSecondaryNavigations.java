@@ -24,9 +24,7 @@ import org.testng.annotations.Test;
 import apps.toyota.homePage.HomePage;
 import apps.toyota.mainNavigation.MainNavigation;
 import apps.toyota.secondaryNavigation.SecondaryNavigation;
-import apps.whatsMyIp.Homepage;
 
-import com.orasi.reporting.OrasiReporter;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
 import com.orasi.utils.TestReporter;
@@ -69,9 +67,6 @@ public class TestAllSecondaryNavigations {
 //			OrasiReporter.testCount = excelData.length;
 //			return excelData;
 //		}
-		public void scenarios() {
-			OrasiReporter.testCount = 1;
-		}
 		
 		//*********************
 		// Before-Test Behavior 
