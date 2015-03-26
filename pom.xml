@@ -7,13 +7,10 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<testNGSourceDirectory>src/test/resources/Build</testNGSourceDirectory>
+		<testNGSourceDirectory>src/test/resources</testNGSourceDirectory>
 		<orasiCoreVersion>1.0.2</orasiCoreVersion>
 	</properties>
 
-	<!-- <repositories> <repository> <id>Orasi-Selenium-Java-Core</id> <url>https://github.com/Orasi/Selenium-Java-Core/raw/master/lib/releases</url> 
-		<url>https://github.com/Orasi/Selenium-Java-Core/tree/master/lib/releases/com/orasi/Selenium-Java-Core</url> 
-		</repository> </repositories> -->
 	<repositories>
 		<repository>
 			<id>eviware</id>
@@ -59,7 +56,8 @@
 				</executions>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_10_Safari_8.xml</suiteXmlFile>
+						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild.xml</suiteXmlFile>
+						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_10_Safari_8.xml</suiteXmlFile> -->
  						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Chrome.xml</suiteXmlFile> -->
 						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Firefox.xml</suiteXmlFile> -->
 						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Safari_7.xml</suiteXmlFile> -->
