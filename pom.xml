@@ -93,5 +93,6 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- End Sauce Labs requirements -->
+		
 	</dependencies>
 </project>
