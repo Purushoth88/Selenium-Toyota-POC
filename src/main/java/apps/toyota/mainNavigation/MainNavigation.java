@@ -120,12 +120,9 @@ public class MainNavigation {
 			pageLoaded();
 			//Safari does not seem to behave the same with safeSet, so it is being handled differently
 			String os = WebDriverSetup.getOperatingSystem().toLowerCase();
-			if(os.contains("mac") || os.contains("os x")){
-				txtZipCode.set(zipCode);
-				txtZipCode.sendKeys(Keys.ENTER);
-			}else{
-				txtZipCode.safeSet(zipCode);
-			}
+			
+			txtZipCode.set(zipCode);
+			txtZipCode.sendKeys(Keys.ENTER);
 			
 			initialize();
 			pageLoaded();

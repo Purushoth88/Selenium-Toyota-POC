@@ -44,25 +44,11 @@ public class TestAllSecondaryNavigations {
 		private String environment = "";
 		String testName = "";
 		private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
-		private static ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
-	    /**
-	     * Constructs a {@link com.saucelabs.common.SauceOnDemandAuthentication} instance using the supplied user name/access key.  To use the authentication
-	     * supplied by environment variables or from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
-	     */
-		public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
-				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
-				Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
 		
-	    //**************
-	    // Data Provider
-	    //**************
-		@DataProvider(name = "dataScenario")
-//		public Object[][] scenarios() {
-//			Object[][] excelData = new ExcelDataProvider(Constants.TOYOTA_DATAPROVIDER_PATH
-//					+ "ChangeZipCode.xlsx", "ChangeZipCode").getTestData();
-//			OrasiReporter.testCount = excelData.length;
-//			return excelData;
-//		}
+		private static ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
+		
+		WebDriver driver = null;
+		WebDriverSetup setup = null;
 		
 		//*********************
 		// Before-Test Behavior 

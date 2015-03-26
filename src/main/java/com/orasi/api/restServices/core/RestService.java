@@ -4,20 +4,14 @@ package com.orasi.api.restServices.core;
  * Just playing around with some different ways of using rest services with Jackson 
  */
 import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-import org.apache.commons.httpclient.protocol.Protocol;
-import org.apache.commons.httpclient.protocol.SecureProtocolSocketFactory;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -25,11 +19,7 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpOptions;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.SSLContextBuilder;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.entity.ContentType;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -41,10 +31,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class RestService {
-
-
-	
-	
 	int statusCode = 0;
 	String responseFormat;
 	String responseAsString = null;
@@ -54,17 +40,23 @@ public class RestService {
 		      configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	
 	//constructor
-	public RestService() {
-		
-	}
+	public RestService() {}
 	
-	public void setUserAgent(String userAgent){
-	    this.userAgent = userAgent;
-	}
+	/*
+	 * Encapsulation area 
+	 */
 	
-	public String getUserAgent(){
-	    return this.userAgent;
-	}
+	public String getUserAgent(){ return this.userAgent;}
+	
+	public void setUserAgent(String userAgent){ this.userAgent = userAgent;	}	
+	
+	public int getStatusCode(){ return statusCode; }
+	
+	private void setStatusCode(HttpResponse httpResponse){ 	statusCode = httpResponse.getStatusLine().getStatusCode(); }
+	
+	public String getResponseFormat(){ return responseFormat; }
+	
+	private void setResponseFormat(HttpResponse httpResponse){ responseFormat = ContentType.getOrDefault(httpResponse.getEntity()).getMimeType().replace("application/", "");	}
 	
 	/**
 	 * Sends a GET request
@@ -75,9 +67,8 @@ public class RestService {
 	 * @throws 	IOException
 	 */
 	public String sendGetRequest(String URL) throws ClientProtocolException, IOException{
-		
 		HttpUriRequest request = new HttpGet(URL);
-		HttpResponse  httpResponse = HttpClientBuilder.create().build().execute( request );
+		HttpResponse httpResponse = HttpClientBuilder.create().setUserAgent(getUserAgent()).build().execute( request );
 		
 		setStatusCode(httpResponse);		
 		setResponseFormat(httpResponse);
@@ -218,28 +209,9 @@ public class RestService {
 		setResponseFormat(httpResponse);
 		
 		return headers;
-		
+	}
+	
 
-	}
-	
-	private void setStatusCode(HttpResponse httpResponse){
-		statusCode = httpResponse.getStatusLine().getStatusCode();
-		System.out.println("Status Line: " + httpResponse.getStatusLine());
-		System.out.println("Status code: " + statusCode);
-	}
-
-	public int getStatusCode(){
-		return statusCode;
-	}
-	
-	public String getResponseFormat(){
-		return responseFormat;
-	}
-	
-	private void setResponseFormat(HttpResponse httpResponse){
-		responseFormat = ContentType.getOrDefault(httpResponse.getEntity()).getMimeType().replace("application/", "");
-		System.out.println(responseFormat);
-	}
 	
 	/**
 	 * Uses the class instance of the responeAsString to map to object

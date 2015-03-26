@@ -31,6 +31,7 @@ public class LinkImpl extends ElementImpl implements Link {
     	    throw rte;
     	}
     	TestReporter.interfaceLog(" Click Link [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
+        
     }
     
     @Override
@@ -42,5 +43,6 @@ public class LinkImpl extends ElementImpl implements Link {
             throw rte;
         }
     	TestReporter.interfaceLog(" Click Link [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
+    	
     }
 }
