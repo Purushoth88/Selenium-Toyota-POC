@@ -4,19 +4,10 @@
 	<groupId>com.orasi</groupId>
 	<artifactId>Toyota</artifactId>
 	<version>1.0.1</version>
-	<packaging>jar</packaging>
 
 	<properties>
 		<testNGSourceDirectory>src/test/resources/Build</testNGSourceDirectory>
-		<orasiCoreVersion>1.0.3</orasiCoreVersion>
 	</properties>
-
-<!-- 	<repositories>
-		<repository>
-			<id>Orasi-Selenium-Java-Core</id>
-			<url>https://github.com/Orasi/Selenium-Java-Core/raw/master/lib/releases</url>
-		</repository>
-	</repositories> -->
 	<repositories>
 		<repository>
 			<id>eviware</id>
@@ -79,33 +70,6 @@
 		</plugins>
 	</build>
 	<dependencies>
-		<!-- <dependency>
-			<groupId>com.orasi</groupId>
-			<artifactId>Selenium-Java-Core</artifactId>
-			<version>${orasiCoreVersion}</version>
-			<classifier>jar-with-dependencies</classifier>
-		</dependency> -->
-		<!-- Start Selenium requirements -->
-<!-- 		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>2.43.1</version>
-		</dependency> -->
-		<!-- End Selenium requirements -->
-		<!-- Start Sauce Labs requirements -->
-<!-- 		<dependency>
-			<groupId>com.saucelabs</groupId>
-			<artifactId>sauce_testng</artifactId>
-			<version>2.1.18</version>
-			<scope>test</scope>
-		</dependency> -->
-		<!-- End Sauce Labs requirements -->
-		
-		
-		
-		
-		
-		
 		<!-- Start Selenium requirements -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
