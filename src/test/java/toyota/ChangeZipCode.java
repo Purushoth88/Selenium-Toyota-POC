@@ -1,8 +1,12 @@
 package toyota;
 
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -142,7 +146,8 @@ public class ChangeZipCode{
 		System.out.println(testName);
 		drivers.put(testName, driver);
 		
-		localHostIpAddress();
+		//localHostIpAddress();
+		getIp();
 
 		//Ensure the home page is loaded
 		TestReporter.logScenario(testScenario);
@@ -163,5 +168,33 @@ public class ChangeZipCode{
         //Hostname
         String hostname = addr.getHostName();
         System.out.println("Name of hostname : " + hostname);
+	}
+	
+	public static String getIp(){
+	    String ipAddress = null;
+	    Enumeration<NetworkInterface> net = null;
+	    try {
+	        net = NetworkInterface.getNetworkInterfaces();
+	    } catch (SocketException e) {
+	        throw new RuntimeException(e);
+	    }
+
+	    while(net.hasMoreElements()){
+	        NetworkInterface element = net.nextElement();
+	        Enumeration<InetAddress> addresses = element.getInetAddresses();
+	        while (addresses.hasMoreElements()){
+	            InetAddress ip = addresses.nextElement();
+	            if (ip instanceof Inet4Address){
+
+	                if (ip.isSiteLocalAddress()){
+
+	                    ipAddress = ip.getHostAddress();
+	                }
+
+	            }
+
+	        }
+	    }
+	    return ipAddress;
 	}
 }
