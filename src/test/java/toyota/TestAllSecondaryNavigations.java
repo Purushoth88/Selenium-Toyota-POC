@@ -138,7 +138,6 @@ public class TestAllSecondaryNavigations {
 		System.out.println(testName);
 		drivers.put(testName, driver);
 
-		localHostIpAddress();
 		getIp();
 		
 		//Ensure the home page is loaded
@@ -163,8 +162,9 @@ public class TestAllSecondaryNavigations {
         System.out.println("Name of hostname : " + hostname);
 	}
 	
-	public static String getIp(){
+	public void getIp() throws UnknownHostException{
 	    String ipAddress = null;
+	    String hostName = null;
 	    Enumeration<NetworkInterface> net = null;
 	    try {
 	        net = NetworkInterface.getNetworkInterfaces();
@@ -182,12 +182,16 @@ public class TestAllSecondaryNavigations {
 	                if (ip.isSiteLocalAddress()){
 
 	                    ipAddress = ip.getHostAddress();
+	                    hostName = ip.getHostName();
 	                }
 
 	            }
 
 	        }
 	    }
-	    return ipAddress;
+	    
+	    System.out.println("Local Host IPv4 Address: " + ipAddress);
+	    System.out.println("Local Host Name: " + hostName);
+	    localHostIpAddress();
 	}
 }

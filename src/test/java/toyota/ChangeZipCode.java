@@ -146,7 +146,6 @@ public class ChangeZipCode{
 		System.out.println(testName);
 		drivers.put(testName, driver);
 		
-		//localHostIpAddress();
 		getIp();
 
 		//Ensure the home page is loaded
