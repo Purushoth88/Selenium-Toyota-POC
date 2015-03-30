@@ -1,6 +1,8 @@
 package toyota;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -139,6 +141,8 @@ public class ChangeZipCode{
 		
 		System.out.println(testName);
 		drivers.put(testName, driver);
+		
+		localHostIpAddress();
 
 		//Ensure the home page is loaded
 		TestReporter.logScenario(testScenario);
@@ -148,5 +152,16 @@ public class ChangeZipCode{
 		//Change the zipcode
 		MainNavigation mainNav = new MainNavigation(driver);
 		mainNav.changeZipCodes(zipCode);
+	}
+	
+	private void localHostIpAddress() throws UnknownHostException{
+		InetAddress addr = InetAddress.getLocalHost();
+		String ipAddress = addr.getHostAddress();
+	      
+        System.out.println("IP address of localhost from Java Program: " + ipAddress);
+      
+        //Hostname
+        String hostname = addr.getHostName();
+        System.out.println("Name of hostname : " + hostname);
 	}
 }
