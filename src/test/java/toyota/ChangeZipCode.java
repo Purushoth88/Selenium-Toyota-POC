@@ -170,7 +170,7 @@ public class ChangeZipCode{
         System.out.println("Name of hostname : " + hostname);
 	}
 	
-	public static void getIp(){
+	public void getIp() throws UnknownHostException{
 	    String ipAddress = null;
 	    String hostName = null;
 	    Enumeration<NetworkInterface> net = null;
@@ -200,5 +200,6 @@ public class ChangeZipCode{
 	    
 	    System.out.println("Local Host IPv4 Address: " + ipAddress);
 	    System.out.println("Local Host Name: " + hostName);
+	    localHostIpAddress();
 	}
 }
