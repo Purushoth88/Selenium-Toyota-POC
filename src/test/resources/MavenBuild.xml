@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Toyota" parallel="classes" thread-count="8">
+<suite name="Toyota" parallel="instances" thread-count="8">
 
 	<test name="Mac_OS_X_10_10_Safari_8">
 		<parameter name="browserUnderTest" value="safari" />

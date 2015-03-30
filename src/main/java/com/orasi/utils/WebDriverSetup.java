@@ -27,7 +27,7 @@ import com.saucelabs.common.SauceOnDemandAuthentication;
 //public class WebDriverSetup implements SauceOnDemandSessionIdProvider{
 public class WebDriverSetup{
     
-	public static WebDriver driver;
+	public WebDriver driver;
 	//private String browserVersion = System.getProperty(Constants.BROWSER_VERSION);
 	
 	private static ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
@@ -109,7 +109,7 @@ public class WebDriverSetup{
 	public static String getTestName(){ return System.getProperty("selenium.testName");}
 	
 	public void setDriver(WebDriver driverSession){driver = driverSession;}	
-	public static WebDriver getDriver(){return driver;}	
+	public WebDriver getDriver(){return driver;}	
 	
 	public ResourceBundle getEnvironmentURLRepository(){return appURLRepository;}
 
