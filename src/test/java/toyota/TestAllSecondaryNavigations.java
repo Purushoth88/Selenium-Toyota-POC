@@ -124,6 +124,7 @@ public class TestAllSecondaryNavigations {
 	 */
 	@Test(groups = { "regression" })
 	public void testAllSecondaryNavigations() throws InterruptedException, IOException {
+		getIp();
 		
 		String testName = new Object() {
 		}.getClass().getEnclosingMethod().getName();
@@ -137,8 +138,6 @@ public class TestAllSecondaryNavigations {
 		
 		System.out.println(testName);
 		drivers.put(testName, driver);
-
-		getIp();
 		
 		//Ensure the home page is loaded
 		TestReporter.log("Load the Home Page");

@@ -135,6 +135,8 @@ public class ChangeZipCode{
 	public void testChangeZipCode(
 			String testScenario, String zipCode) throws InterruptedException, IOException {
 		
+		getIp();
+		
 		testName = new Object() {
 		}.getClass().getEnclosingMethod().getName();
 		//Uncomment the following line to have TestReporter outputs output to the console
@@ -145,8 +147,6 @@ public class ChangeZipCode{
 		
 		System.out.println(testName);
 		drivers.put(testName, driver);
-		
-		getIp();
 
 		//Ensure the home page is loaded
 		TestReporter.logScenario(testScenario);
