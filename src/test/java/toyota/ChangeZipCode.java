@@ -170,8 +170,9 @@ public class ChangeZipCode{
         System.out.println("Name of hostname : " + hostname);
 	}
 	
-	public static String getIp(){
+	public static void getIp(){
 	    String ipAddress = null;
+	    String hostName = null;
 	    Enumeration<NetworkInterface> net = null;
 	    try {
 	        net = NetworkInterface.getNetworkInterfaces();
@@ -189,12 +190,15 @@ public class ChangeZipCode{
 	                if (ip.isSiteLocalAddress()){
 
 	                    ipAddress = ip.getHostAddress();
+	                    hostName = ip.getHostName();
 	                }
 
 	            }
 
 	        }
 	    }
-	    return ipAddress;
+	    
+	    System.out.println("Local Host IPv4 Address: " + ipAddress);
+	    System.out.println("Local Host Name: " + hostName);
 	}
 }
