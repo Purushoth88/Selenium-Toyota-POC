@@ -119,7 +119,7 @@ public class MainNavigation {
 			clickYourLocation();
 			pageLoaded();
 			//Safari does not seem to behave the same with safeSet, so it is being handled differently
-			String os = WebDriverSetup.getOperatingSystem().toLowerCase();
+			//String os = WebDriverSetup.getOperatingSystem().toLowerCase();
 			
 			txtZipCode.set(zipCode);
 			txtZipCode.sendKeys(Keys.ENTER);

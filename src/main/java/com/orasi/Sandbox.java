@@ -9,7 +9,7 @@ public class Sandbox {
 	
 	@Test
 	public void main(){
-		System.out.println(base.encodeString("waightstillavery"));
-		System.out.println(base.encodeString("13a01cd8-aaa5-4996-889f-572b406bbb83"));
+		System.out.println(base.encodeString("sarahjane328"));
+		System.out.println(base.encodeString("912bf2a5-6123-4a9f-9265-c662d7c7c60c"));
 	}
 }

@@ -51,7 +51,7 @@ public class TestClassTemplate {
 		//*********************
 		// Before-Test Behavior 
 		//*********************
-		@BeforeTest(groups = { "regression" })
+		@BeforeTest(groups = { "template" })
 		@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 				"operatingSystem", "environment" })
 		public void setup(@Optional String runLocation, String browserUnderTest,
@@ -67,7 +67,7 @@ public class TestClassTemplate {
 		//**********************
 		// After Method Behavior 
 		//**********************
-		@AfterMethod(groups = { "regression" })
+		@AfterMethod(groups = { "template" })
 		public synchronized void closeSession(ITestResult test) {
 			System.out.println(test.getMethod().getMethodName());
 			WebDriver driver = drivers.get(test.getMethod().getMethodName());	
@@ -123,7 +123,7 @@ public class TestClassTemplate {
 		 * @Version: 03/10/2015
 		 * @Return: N/A
 		 */
-		@Test(dataProvider = "dataScenario", groups = { "regressions" })
+		@Test(dataProvider = "dataScenario", groups = { "template" })
 		public void testAllSecondaryNavigations() throws InterruptedException, IOException {
 			
 			String testName = new Object() {

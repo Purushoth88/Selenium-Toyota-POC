@@ -30,7 +30,7 @@ public class WebDriverSetup{
 	public WebDriver driver;
 	//private String browserVersion = System.getProperty(Constants.BROWSER_VERSION);
 	
-	private static ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
+	private ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
 	private String seleniumHubURL = "http://"
 			+ Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME"))
 			+ ":"
