@@ -135,7 +135,7 @@ public class ChangeZipCode{
 	public void testChangeZipCode(
 			String testScenario, String zipCode) throws InterruptedException, IOException {
 		
-		getIp();
+		//getIp();
 		
 		testName = new Object() {
 		}.getClass().getEnclosingMethod().getName();
