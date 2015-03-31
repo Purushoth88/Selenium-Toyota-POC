@@ -94,7 +94,7 @@ public class WebDriverSetup{
 		}else{
 			System.setProperty(Constants.OPERATING_SYSTEM , operatingSystem);	
 		}
-	}
+	} 
 
 	public static void setBrowserUnderTest(String browser) {
 		if(browser.equalsIgnoreCase("jenkinsParameter")){
