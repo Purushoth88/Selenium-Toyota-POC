@@ -88,13 +88,31 @@ public class WebDriverSetup{
 	public static String getTestApplication(){return System.getProperty(Constants.APPLICATION_UNDER_TEST);}
 
 	public static String getOperatingSystem() {return System.getProperty(Constants.OPERATING_SYSTEM);}
-	public static void setOperatingSystem(String operatingSystem) {	System.setProperty(Constants.OPERATING_SYSTEM , operatingSystem);}
+	public static void setOperatingSystem(String operatingSystem) {	
+		if(operatingSystem.equalsIgnoreCase("parameter")){
+			System.setProperty(Constants.OPERATING_SYSTEM , System.getProperty("jenkinsOperatingSystem"));
+		}else{
+			System.setProperty(Constants.OPERATING_SYSTEM , operatingSystem);	
+		}
+	}
 
-	public static void setBrowserUnderTest(String browser) {System.setProperty(Constants.BROWSER, browser);}	
+	public static void setBrowserUnderTest(String browser) {
+		if(browser.equalsIgnoreCase("parameter")){
+			System.setProperty(Constants.BROWSER, System.getProperty("jenkinsBrowser"));
+		}else{
+			System.setProperty(Constants.BROWSER, browser);	
+		}
+	}	
 	public static String getBrowserUnderTest(){return System.getProperty(Constants.BROWSER);}
 	
 	public static String getBrowserVersion() {return System.getProperty(Constants.BROWSER_VERSION);}
-	public static void setBrowserVersion(String browserVersion) {System.setProperty(Constants.BROWSER_VERSION, browserVersion);}
+	public static void setBrowserVersion(String browserVersion) {
+		if(browserVersion.equalsIgnoreCase("paramter")){
+			System.setProperty(Constants.BROWSER_VERSION, System.getProperty("jenkinsBrowserVersion"));
+		}else{
+			System.setProperty(Constants.BROWSER_VERSION, browserVersion);	
+		}
+	}
 
 	public static void setDefaultTestTimeout(int timeout){System.setProperty(Constants.TEST_DRIVER_TIMEOUT, Integer.toString(timeout));}
 	public static int getDefaultTestTimeout(){return Integer.parseInt(System.getProperty(Constants.TEST_DRIVER_TIMEOUT));}
