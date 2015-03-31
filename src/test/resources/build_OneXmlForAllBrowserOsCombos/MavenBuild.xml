@@ -6,7 +6,7 @@
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
 		<parameter name="browserVersion" value="parameter" />
-		<parameter name="operatingSystem" value="paramter" />
+		<parameter name="operatingSystem" value="parameter" />
 		<groups>
 			<run>
 				<include name="regression" />
