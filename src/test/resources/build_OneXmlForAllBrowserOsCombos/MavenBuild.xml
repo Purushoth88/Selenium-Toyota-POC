@@ -2,11 +2,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Toyota" parallel="tests" thread-count="8">
 	<test name="Mac_OS_X_10_10_Safari_8">
-		<parameter name="browserUnderTest" value="parameter" />
+		<parameter name="browserUnderTest" value="jenkinsParameter" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
-		<parameter name="browserVersion" value="parameter" />
-		<parameter name="operatingSystem" value="parameter" />
+		<parameter name="browserVersion" value="jenkinsParameter" />
+		<parameter name="operatingSystem" value="jenkinsParameter" />
 		<groups>
 			<run>
 				<include name="regression" />

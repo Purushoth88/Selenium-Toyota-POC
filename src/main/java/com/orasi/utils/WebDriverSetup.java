@@ -89,7 +89,7 @@ public class WebDriverSetup{
 
 	public static String getOperatingSystem() {return System.getProperty(Constants.OPERATING_SYSTEM);}
 	public static void setOperatingSystem(String operatingSystem) {	
-		if(operatingSystem.equalsIgnoreCase("parameter")){
+		if(operatingSystem.equalsIgnoreCase("jenkinsParameter")){
 			System.setProperty(Constants.OPERATING_SYSTEM , System.getProperty("jenkinsOperatingSystem"));
 		}else{
 			System.setProperty(Constants.OPERATING_SYSTEM , operatingSystem);	
@@ -97,7 +97,7 @@ public class WebDriverSetup{
 	}
 
 	public static void setBrowserUnderTest(String browser) {
-		if(browser.equalsIgnoreCase("parameter")){
+		if(browser.equalsIgnoreCase("jenkinsParameter")){
 			System.setProperty(Constants.BROWSER, System.getProperty("jenkinsBrowser"));
 		}else{
 			System.setProperty(Constants.BROWSER, browser);	
@@ -107,7 +107,7 @@ public class WebDriverSetup{
 	
 	public static String getBrowserVersion() {return System.getProperty(Constants.BROWSER_VERSION);}
 	public static void setBrowserVersion(String browserVersion) {
-		if(browserVersion.equalsIgnoreCase("parameter")){
+		if(browserVersion.equalsIgnoreCase("jenkinsParameter")){
 			System.setProperty(Constants.BROWSER_VERSION, System.getProperty("jenkinsBrowserVersion"));
 		}else{
 			System.setProperty(Constants.BROWSER_VERSION, browserVersion);	
