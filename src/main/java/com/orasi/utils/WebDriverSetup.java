@@ -108,6 +108,7 @@ public class WebDriverSetup{
 	public static String getBrowserVersion() {return System.getProperty(Constants.BROWSER_VERSION);}
 	public static void setBrowserVersion(String browserVersion) {
 		if(browserVersion.equalsIgnoreCase("jenkinsParameter")){
+			
 			if(System.getProperty("jenkinsBrowserVersion") == null || System.getProperty("jenkinsBrowserVersion") == "null"){
 				System.setProperty(Constants.BROWSER_VERSION, "");
 			}else{
