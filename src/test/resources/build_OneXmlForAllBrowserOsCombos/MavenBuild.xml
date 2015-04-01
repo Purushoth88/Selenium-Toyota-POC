@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Toyota" parallel="tests" thread-count="8">
+
+	<!-- 
+		MAC OS X 10.10 
+	-->
 	<test name="Mac_OS_X_10_10_Safari_8">
-		<parameter name="browserUnderTest" value="jenkinsParameter" />
+		<parameter name="browserUnderTest" value="MAC OS X 10.10" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
-		<parameter name="browserVersion" value="jenkinsParameter" />
-		<parameter name="operatingSystem" value="jenkinsParameter" />
+		<parameter name="browserVersion" value="safari" />
+		<parameter name="operatingSystem" value="8" />
 		<groups>
 			<run>
 				<include name="regression" />
@@ -17,4 +21,176 @@
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_10_Safari_8 -->
+	
+	<!-- 
+		MAC OS X 10.9 
+	-->
+	<test name="Mac_OS_X_10_9_Safari_7">
+		<parameter name="browserUnderTest" value="MAC OS X 10.9" />
+		<parameter name="environment" value="" />
+		<parameter name="runLocation" value="remote" />
+		<parameter name="browserVersion" value="safari" />
+		<parameter name="operatingSystem" value="7" />
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+	</test> <!-- Mac_OS_X_10_9_Safari_7 -->
+	<test name="Mac_OS_X_10_9_Chrome">
+		<parameter name="browserUnderTest" value="MAC OS X 10.9" />
+		<parameter name="environment" value="" />
+		<parameter name="runLocation" value="remote" />
+		<parameter name="browserVersion" value="chrome" />
+		<parameter name="operatingSystem" value="" />
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+	</test> <!-- Mac_OS_X_10_9_Chrome -->
+	<test name="Mac_OS_X_10_9_Firefox">
+		<parameter name="browserUnderTest" value="MAC OS X 10.9" />
+		<parameter name="environment" value="" />
+		<parameter name="runLocation" value="remote" />
+		<parameter name="browserVersion" value="firefox" />
+		<parameter name="operatingSystem" value="" />
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+	</test> <!-- Mac_OS_X_10_9_Firefox -->
+	
+	<!-- 
+		Windows 7 
+	-->
+	<test name="Windows_7_Chrome">
+		<parameter name="browserUnderTest" value="Windows 7" />
+		<parameter name="environment" value="" />
+		<parameter name="runLocation" value="remote" />
+		<parameter name="browserVersion" value="chrome" />
+		<parameter name="operatingSystem" value="" />
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+	</test> <!-- Windows_7_Chrome -->
+	<test name="Windows_7_Firefox">
+		<parameter name="browserUnderTest" value="Windows 7" />
+		<parameter name="environment" value="" />
+		<parameter name="runLocation" value="remote" />
+		<parameter name="browserVersion" value="firefox" />
+		<parameter name="operatingSystem" value="" />
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+	</test> <!-- Windows_7_Firefox -->
+	<test name="Windows_7_IE_8">
+		<parameter name="browserUnderTest" value="Windows 7" />
+		<parameter name="environment" value="" />
+		<parameter name="runLocation" value="remote" />
+		<parameter name="browserVersion" value="iexplore" />
+		<parameter name="operatingSystem" value="8" />
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+	</test> <!-- Windows_7_Firefox -->
+	<test name="Windows_7_IE_11">
+		<parameter name="browserUnderTest" value="Windows 7" />
+		<parameter name="environment" value="" />
+		<parameter name="runLocation" value="remote" />
+		<parameter name="browserVersion" value="iexplore" />
+		<parameter name="operatingSystem" value="11" />
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+	</test> <!-- Windows_7_IE_11 -->
+	
+	<!-- 
+		Windows 8.1 
+	-->
+	<test name="Windows_8_1_Chrome">
+		<parameter name="browserUnderTest" value="Windows 8.1" />
+		<parameter name="environment" value="" />
+		<parameter name="runLocation" value="remote" />
+		<parameter name="browserVersion" value="chrome" />
+		<parameter name="operatingSystem" value="" />
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+	</test> <!-- Windows_8_1_Chrome -->
+	<test name="Windows_8_1_Firefox">
+		<parameter name="browserUnderTest" value="Windows 8.1" />
+		<parameter name="environment" value="" />
+		<parameter name="runLocation" value="remote" />
+		<parameter name="browserVersion" value="firefox" />
+		<parameter name="operatingSystem" value="" />
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+	</test> <!-- Windows_8_1_Firefox -->
+	<test name="Windows_8_1_IE_11">
+		<parameter name="browserUnderTest" value="Windows 8.1" />
+		<parameter name="environment" value="" />
+		<parameter name="runLocation" value="remote" />
+		<parameter name="browserVersion" value="iexplore" />
+		<parameter name="operatingSystem" value="11" />
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+	</test> <!-- Windows_8_1_IE_11 -->
 </suite> <!-- Toyota -->
