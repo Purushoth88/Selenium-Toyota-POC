@@ -8,7 +8,6 @@
 	<properties>
 		<testNGSourceDirectory>src/test/resources</testNGSourceDirectory>
 	</properties>
-	
 
 	<repositories>
 		<repository>
