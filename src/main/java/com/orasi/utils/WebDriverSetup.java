@@ -1,15 +1,11 @@
 package com.orasi.utils;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -20,8 +16,6 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import org.testng.Assert;
-
 import com.saucelabs.common.SauceOnDemandAuthentication;
 
 //public class WebDriverSetup implements SauceOnDemandSessionIdProvider{
@@ -57,12 +51,6 @@ public class WebDriverSetup{
      * ThreadLocal variable which contains the Sauce Job Id.
      */
     private ThreadLocal<String> sessionId = new ThreadLocal<String>();
-    
-    
-    
-	
-	//Define a variable to house the Linux OS username
-	private String username = "";
 		
 	public WebDriverSetup(){}
 
@@ -77,7 +65,6 @@ public class WebDriverSetup{
 		setTestEnvironment(environment);
 		setSeleniumHubURL(seleniumHubURL);
 		setTestName(testName);
-		//verifyExpectedAndActualOS();
 	}
 	
 	//Getters & Setters
@@ -90,7 +77,7 @@ public class WebDriverSetup{
 	public static String getOperatingSystem() {return System.getProperty(Constants.OPERATING_SYSTEM);}
 	public static void setOperatingSystem(String operatingSystem) {	
 		if(operatingSystem.equalsIgnoreCase("jenkinsParameter")){
-			System.setProperty(Constants.OPERATING_SYSTEM , System.getProperty("jenkinsOperatingSystem"));
+			System.setProperty(Constants.OPERATING_SYSTEM , System.getProperty("jenkinsOperatingSystem").trim());
 		}else{
 			System.setProperty(Constants.OPERATING_SYSTEM , operatingSystem);	
 		}
@@ -98,7 +85,7 @@ public class WebDriverSetup{
 
 	public static void setBrowserUnderTest(String browser) {
 		if(browser.equalsIgnoreCase("jenkinsParameter")){
-			System.setProperty(Constants.BROWSER, System.getProperty("jenkinsBrowser"));
+			System.setProperty(Constants.BROWSER, System.getProperty("jenkinsBrowser").trim());
 		}else{
 			System.setProperty(Constants.BROWSER, browser);	
 		}
@@ -111,7 +98,7 @@ public class WebDriverSetup{
 			if(System.getProperty("jenkinsBrowserVersion") == null || System.getProperty("jenkinsBrowserVersion") == "null"){
 				System.setProperty(Constants.BROWSER_VERSION, "");
 			}else{
-				System.setProperty(Constants.BROWSER_VERSION, System.getProperty("jenkinsBrowserVersion"));	
+				System.setProperty(Constants.BROWSER_VERSION, System.getProperty("jenkinsBrowserVersion").trim());	
 			}
 		}else{
 			System.setProperty(Constants.BROWSER_VERSION, browserVersion);	

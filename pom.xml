@@ -6,12 +6,8 @@
 	<version>1.0.1</version>
 
 	<properties>
-		<testNGSourceDirectory>src/test/resources/build_OneXmlForAllBrowserOsCombos</testNGSourceDirectory>
+		<testNGSourceDirectory>src/test/resources</testNGSourceDirectory>
 	</properties>
-<!-- 	<properties>
-		<testNGSourceDirectory>src/test/resources/build_OneXmlPerBrowserOsCombo</testNGSourceDirectory>
-	</properties> -->
-	
 
 	<repositories>
 		<repository>
@@ -63,7 +59,7 @@
 							<jenkinsBrowserVersion>${browserVersion}</jenkinsBrowserVersion>
 						</systemPropertyVariables> 
 					<suiteXmlFiles>
-						<suiteXmlFile>${testNGSourceDirectory}/${buildXml}.xml</suiteXmlFile>		
+						<suiteXmlFile>${testNGSourceDirectory}/${buildPackage}/${buildXml}.xml</suiteXmlFile>		
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
