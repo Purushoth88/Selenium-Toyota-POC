@@ -52,14 +52,22 @@
 						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-						<systemPropertyVariables>
+				<configuration><!-- 
+					<systemPropertyVariables>
 							<jenkinsOperatingSystem>${operatingSystem}</jenkinsOperatingSystem>
 							<jenkinsBrowser>${browser}</jenkinsBrowser>
 							<jenkinsBrowserVersion>${browserVersion}</jenkinsBrowserVersion>
 						</systemPropertyVariables> 
 					<suiteXmlFiles>
 						<suiteXmlFile>${testNGSourceDirectory}/${buildPackage}/${buildXml}.xml</suiteXmlFile>		
+					</suiteXmlFiles> -->
+					<systemPropertyVariables>
+							<jenkinsOperatingSystem></jenkinsOperatingSystem>
+							<jenkinsBrowser></jenkinsBrowser>
+							<jenkinsBrowserVersion></jenkinsBrowserVersion>
+						</systemPropertyVariables> 
+					<suiteXmlFiles>
+						<suiteXmlFile>${testNGSourceDirectory}/build_OneXmlForAllBrowserOsCombos/MavenBuild.xml</suiteXmlFile>		
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
