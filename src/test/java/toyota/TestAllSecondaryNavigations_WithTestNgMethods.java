@@ -73,4 +73,5 @@ public class TestAllSecondaryNavigations_WithTestNgMethods {
 		SecondaryNavigation secNav = new SecondaryNavigation(driver);
 		secNav.navigateAllSecondaryNavigationTabs();
 	}
+	
 }
