@@ -35,6 +35,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.orasi.api.soapServices.core.SoapService;
+import com.orasi.utils.Regex;
 
 public class XMLTools extends SoapService {
 
