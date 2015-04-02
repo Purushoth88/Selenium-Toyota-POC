@@ -213,6 +213,8 @@ public class SecondaryNavigation {
 	}
 	
 	private void clickLocalSpecials(){
+		initialize();
+		pageLoaded(lnkLocalSpecials);
 		List<WebElement> list = driver.findElements(By.tagName("a")); 		
 		
 		lnkLocalSpecials.click();

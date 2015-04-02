@@ -8,7 +8,7 @@
 	<properties>
 		<testNGSourceDirectory>src/test/resources</testNGSourceDirectory>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>eviware</id>
@@ -27,7 +27,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
 					<configuration>
-						<source>1.7</source>
+						<source>1.7</source> 
+						
 						<target>1.7</target>
 					</configuration>
 				</plugin>
@@ -53,7 +54,7 @@
 					</execution>
 				</executions>
 				<configuration>
-						<systemPropertyVariables>
+					<systemPropertyVariables>
 							<jenkinsOperatingSystem>${operatingSystem}</jenkinsOperatingSystem>
 							<jenkinsBrowser>${browser}</jenkinsBrowser>
 							<jenkinsBrowserVersion>${browserVersion}</jenkinsBrowserVersion>
@@ -61,6 +62,14 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>${testNGSourceDirectory}/${buildPackage}/${buildXml}.xml</suiteXmlFile>		
 					</suiteXmlFiles>
+<!-- 					<systemPropertyVariables>
+							<jenkinsOperatingSystem></jenkinsOperatingSystem>
+							<jenkinsBrowser></jenkinsBrowser>
+							<jenkinsBrowserVersion></jenkinsBrowserVersion>
+						</systemPropertyVariables> 
+					<suiteXmlFiles>
+						<suiteXmlFile>${testNGSourceDirectory}/build_OneXmlForAllBrowserOsCombos/MavenBuild.xml</suiteXmlFile>		
+					</suiteXmlFiles> -->
 				</configuration>
 			</plugin>
 		</plugins>
@@ -124,7 +133,6 @@
 			<groupId>com.saucelabs</groupId>
 			<artifactId>saucerest</artifactId>
 			<version>1.0.22</version>
-			<scope>test</scope>
 		</dependency>
 		<!-- End Sauce Labs requirements -->
 

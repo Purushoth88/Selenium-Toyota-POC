@@ -21,7 +21,7 @@
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_10_Safari_8 -->
-	
+
 	<!-- 
 		MAC OS X 10.9 
 	-->
@@ -73,7 +73,7 @@
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Firefox -->
-	
+
 	<!-- 
 		Windows 7 
 	-->
@@ -141,7 +141,7 @@
 			</package>
 		</packages>
 	</test> <!-- Windows_7_IE_11 -->
-	
+
 	<!-- 
 		Windows 8.1 
 	-->

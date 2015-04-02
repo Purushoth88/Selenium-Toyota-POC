@@ -68,7 +68,7 @@ public class ChangeZipCode{
 	//*********************
 	// Before-Test Behavior 
 	//*********************
-	@BeforeTest(groups = { "regression" })
+	@BeforeTest(groups = { "regressions" })
 	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 			"operatingSystem", "environment" })
 	public void setup(String runLocation, String browserUnderTest,
@@ -84,7 +84,7 @@ public class ChangeZipCode{
 	//**********************
 	// After Method Behavior 
 	//**********************
-	@AfterMethod(groups = { "regression" })
+	@AfterMethod(groups = { "regressions" })
 	public synchronized void closeSession(ITestResult test) {
 		System.out.println(test.getMethod().getMethodName());
 		WebDriver driver = drivers.get(test.getMethod().getMethodName());	
@@ -131,7 +131,7 @@ public class ChangeZipCode{
 	 * @Version: 03/10/2015
 	 * @Return: N/A
 	 */
-	@Test(dataProvider = "dataScenario", groups = { "regression" })
+	@Test(dataProvider = "dataScenario", groups = { "regressions" })
 	public void testChangeZipCode(
 			String testScenario, String zipCode) throws InterruptedException, IOException {
 		
