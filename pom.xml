@@ -53,7 +53,7 @@
 						</configuration>
 					</execution>
 				</executions>
-				<configuration><!-- 
+				<configuration>
 					<systemPropertyVariables>
 							<jenkinsOperatingSystem>${operatingSystem}</jenkinsOperatingSystem>
 							<jenkinsBrowser>${browser}</jenkinsBrowser>
@@ -61,15 +61,15 @@
 						</systemPropertyVariables> 
 					<suiteXmlFiles>
 						<suiteXmlFile>${testNGSourceDirectory}/${buildPackage}/${buildXml}.xml</suiteXmlFile>		
-					</suiteXmlFiles> -->
-					<systemPropertyVariables>
+					</suiteXmlFiles>
+<!-- 					<systemPropertyVariables>
 							<jenkinsOperatingSystem></jenkinsOperatingSystem>
 							<jenkinsBrowser></jenkinsBrowser>
 							<jenkinsBrowserVersion></jenkinsBrowserVersion>
 						</systemPropertyVariables> 
 					<suiteXmlFiles>
 						<suiteXmlFile>${testNGSourceDirectory}/build_OneXmlForAllBrowserOsCombos/MavenBuild.xml</suiteXmlFile>		
-					</suiteXmlFiles>
+					</suiteXmlFiles> -->
 				</configuration>
 			</plugin>
 		</plugins>
