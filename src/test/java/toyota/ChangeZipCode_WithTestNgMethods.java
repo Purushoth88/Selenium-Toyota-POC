@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -93,17 +94,15 @@ public class ChangeZipCode_WithTestNgMethods {
 	}
 	
 	private void outputBrowserOsConfiguration(){
-		System.out.println();
-		System.out.println("****************************");
-		System.out.println("* Browser/OS Configuration *");
-		System.out.println("****************************");
-		System.out.println("Operating System: " + WebDriverSetup.getOperatingSystem());
-		System.out.println("Browser: " + WebDriverSetup.getBrowserUnderTest());
-		System.out.println("Browser Version: " + WebDriverSetup.getBrowserVersion());
-		System.out.println("Default Test Timeout: " + WebDriverSetup.getDefaultTestTimeout());
-		System.out.println("****************************");
-		System.out.println("****************************");
-		System.out.println("****************************");
-		System.out.println();
+		Reporter.log("****************************", true);
+		Reporter.log("* Browser/OS Configuration *", true);
+		Reporter.log("****************************", true);
+		Reporter.log("Operating System: " + WebDriverSetup.getOperatingSystem(), true);
+		Reporter.log("Browser: " + WebDriverSetup.getBrowserUnderTest(), true);
+		Reporter.log("Browser Version: " + WebDriverSetup.getBrowserVersion(), true);
+		Reporter.log("Default Test Timeout: " + WebDriverSetup.getDefaultTestTimeout(), true);
+		Reporter.log("****************************", true);
+		Reporter.log("****************************", true);
+		Reporter.log("****************************", true);
 	}
 }
