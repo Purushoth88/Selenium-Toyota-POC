@@ -86,6 +86,7 @@ public class TestAllSecondaryNavigations_WithTestNgMethods {
 		System.out.println("Operating System: " + WebDriverSetup.getOperatingSystem());
 		System.out.println("Browser: " + WebDriverSetup.getBrowserUnderTest());
 		System.out.println("Browser Version: " + WebDriverSetup.getBrowserVersion());
+		System.out.println("Default Test Timeout: " + WebDriverSetup.getDefaultTestTimeout());
 		System.out.println("****************************");
 		System.out.println("****************************");
 		System.out.println("****************************");
