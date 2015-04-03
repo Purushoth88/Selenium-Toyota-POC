@@ -105,7 +105,14 @@ public class WebDriverSetup{
 		}
 	}
 
-	public static void setDefaultTestTimeout(int timeout){System.setProperty(Constants.TEST_DRIVER_TIMEOUT, Integer.toString(timeout));}
+	public static void setDefaultTestTimeout(int timeout){
+		//Double the timeout to accommodate the IE driver
+		if(getBrowserUnderTest().toLowerCase().contains("explore")){
+			System.setProperty(Constants.TEST_DRIVER_TIMEOUT, Integer.toString(timeout*2));
+		}else{
+			System.setProperty(Constants.TEST_DRIVER_TIMEOUT, Integer.toString(timeout));	
+		}
+	}
 	public static int getDefaultTestTimeout(){return Integer.parseInt(System.getProperty(Constants.TEST_DRIVER_TIMEOUT));}
 	
 	public static String getRunLocation() {	return System.getProperty(Constants.RUN_LOCATION);}
