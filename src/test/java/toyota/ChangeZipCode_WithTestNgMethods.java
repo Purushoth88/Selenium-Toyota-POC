@@ -42,7 +42,7 @@ public class ChangeZipCode_WithTestNgMethods {
 	// *********************
 	// Before-Test Behavior
 	// *********************
-	@BeforeTest(groups = { "regression" })
+	@BeforeTest(groups = { "regressions" })
 	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 			"operatingSystem", "environment" })
 	public void setupClass(String runLocation, String browserUnderTest,
@@ -54,7 +54,7 @@ public class ChangeZipCode_WithTestNgMethods {
 	// **********************
 	// After Method Behavior
 	// **********************
-	@AfterMethod(groups = { "regression" })
+	@AfterMethod(groups = { "regressions" })
 	public synchronized void tearDownClass(ITestResult results) {
 		test.after(results, driver);
 	}
@@ -71,7 +71,7 @@ public class ChangeZipCode_WithTestNgMethods {
 	 * @Version: 03/10/2015
 	 * @Return: N/A
 	 */
-	@Test(dataProvider = "dataScenario", groups = { "regression" })
+	@Test(dataProvider = "dataScenario", groups = { "regressions" })
 	public void testChangeZipCode(String testScenario, String zipCode)
 			throws InterruptedException, IOException {
 

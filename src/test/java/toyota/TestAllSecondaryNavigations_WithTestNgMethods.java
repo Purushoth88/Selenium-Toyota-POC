@@ -29,7 +29,7 @@ public class TestAllSecondaryNavigations_WithTestNgMethods {
 	// *********************
 	// Before-Test Behavior
 	// *********************
-	@BeforeTest(groups = { "regression" })
+	@BeforeTest(groups = { "regressions" })
 	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 			"operatingSystem", "environment" })
 	public void setupClass(String runLocation, String browserUnderTest,
@@ -41,7 +41,7 @@ public class TestAllSecondaryNavigations_WithTestNgMethods {
 	// **********************
 	// After Method Behavior
 	// **********************
-	@AfterMethod(groups = { "regression" })
+	@AfterMethod(groups = { "regressions" })
 	public synchronized void tearDownClass(ITestResult results) {
 		test.after(results, driver);
 	}
@@ -58,7 +58,7 @@ public class TestAllSecondaryNavigations_WithTestNgMethods {
 	 * @Version: 03/10/2015
 	 * @Return: N/A
 	 */
-	@Test(groups = { "regression" })
+	@Test(groups = { "regressions" })
 	public void testAllSecondaryNavigations() throws InterruptedException, IOException {
 		
 		testName = new Object() {}.getClass().getEnclosingMethod().getName();
