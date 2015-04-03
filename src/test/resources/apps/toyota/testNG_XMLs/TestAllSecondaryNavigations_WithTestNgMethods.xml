@@ -11,4 +11,5 @@
 			<class name="toyota.TestAllSecondaryNavigations_WithTestNgMethods" />
 		</classes>
 	</test> <!-- ChangeZipCode -->
+	
 </suite> <!-- ChangeZipCode -->
