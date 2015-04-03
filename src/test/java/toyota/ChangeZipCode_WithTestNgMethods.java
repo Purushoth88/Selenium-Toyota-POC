@@ -72,14 +72,16 @@ public class ChangeZipCode_WithTestNgMethods {
 	 * @Version: 03/10/2015
 	 * @Return: N/A
 	 */
-	@Test(dataProvider = "dataScenario", groups = { "regression" })
+	@Test(dataProvider = "dataScenario", groups = { "regression" }, singleThreaded=true)
 	public void testChangeZipCode(String testScenario, String zipCode)
 			throws InterruptedException, IOException {
 
-		testName = new Object() {
-		}.getClass().getEnclosingMethod().getName();
+		testName = new Object(){}.getClass().getEnclosingMethod().getName() 
+				+ "_" + test.getOperatingSystem()
+				+ "_" + test.getBrowserUnderTest()
+				+ "_" + test.getBowserVersion();
 
-		driver = test.testStart(new Object(){}.getClass().getEnclosingMethod().getName());
+		driver = test.testStart(testName);
 
 		outputBrowserOsConfiguration();
 		

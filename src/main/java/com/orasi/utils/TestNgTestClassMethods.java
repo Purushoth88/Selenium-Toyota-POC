@@ -95,4 +95,34 @@ public class TestNgTestClassMethods {
 
 		return drivers.get(testName);
 	}
+	
+//	private String application = "";
+//	private String browserUnderTest = "";
+//	private String browserVersion = "";
+//	private String operatingSystem = "";
+//	private String runLocation = "";
+//	private String environment = "";
+	public String getApplicationUnderTest(){
+		return application;
+	}
+	
+	public String getBrowserUnderTest(){
+		return browserUnderTest;
+	}
+	
+	public String getBowserVersion(){
+		return browserVersion;
+	}
+	
+	public String getOperatingSystem(){
+		return operatingSystem;
+	}
+	
+	public String getRunLocation(){
+		return runLocation;
+	}
+	
+	public String getEnvironment(){
+		return environment;
+	}
 }

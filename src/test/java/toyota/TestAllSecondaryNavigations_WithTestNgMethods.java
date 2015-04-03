@@ -59,12 +59,15 @@ public class TestAllSecondaryNavigations_WithTestNgMethods {
 	 * @Version: 03/10/2015
 	 * @Return: N/A
 	 */
-	@Test(groups = { "regression" })
+	@Test(groups = { "regression" }, singleThreaded=true)
 	public void testAllSecondaryNavigations() throws InterruptedException, IOException {
 		
-		testName = new Object() {}.getClass().getEnclosingMethod().getName();
-		
-		driver = test.testStart(new Object(){}.getClass().getEnclosingMethod().getName());
+		testName = new Object(){}.getClass().getEnclosingMethod().getName() 
+				+ "_" + test.getOperatingSystem()
+				+ "_" + test.getBrowserUnderTest()
+				+ "_" + test.getBowserVersion();
+
+		driver = test.testStart(testName);
 		
 		outputBrowserOsConfiguration();
 		
