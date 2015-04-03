@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Win7_Chrome" parallel="tests" thread-count="8">
-	<parameter name="browserUnderTest" value="chrome" />
+<suite name="Mac_OS_X_10_9_Firefox" parallel="classes" thread-count="8">
+	<parameter name="browserUnderTest" value="firefox" />
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="remote" />
 	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="Windows 7" />
-	<test name="Win7_Chrome">
+	<parameter name="operatingSystem" value="MAC OS X 10.9" />
+	<test name="Mac_OS_X_10_9_Firefox">
 		<groups>
 			<run>
 				<include name="regression" />
@@ -17,5 +17,5 @@
 			</package>
 		</packages>
 
-	</test> <!-- Win7_Chrome -->
-</suite> <!-- Win7_Chrome -->
+	</test> <!-- Mac_OS_X_10_9_Firefox -->
+</suite> <!-- Mac_OS_X_10_9_Firefox -->

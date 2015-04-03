@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="TestAllSecondaryNavigations" parallel="false">
-	<!-- <suite name="ChangeZipCode" parallel="instances" thread-count="5"> -->
 	<parameter name="browserUnderTest" value="chrome" />
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="remote" />
-	<!-- <parameter name="runLocation" value="remote"</parameter> -->
 	<parameter name="browserVersion" value="" />
 	<parameter name="operatingSystem" value="WIN8_1" />
 	<test name="TestAllSecondaryNavigations">

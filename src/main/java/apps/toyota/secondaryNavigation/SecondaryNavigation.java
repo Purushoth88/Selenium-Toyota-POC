@@ -135,7 +135,7 @@ public class SecondaryNavigation {
 
 	private void openSelectVehicleDropdown(){
 		//btnSelectVehicle.highlight(driver);
-		btnSelectVehicle.click();
+		btnSelectVehicle.jsClick(driver);
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
@@ -146,7 +146,7 @@ public class SecondaryNavigation {
 	
 	private void closeSelectVehicleDropdown(){
 		//btnSelectVehicle.highlight(driver);
-		btnSelectVehicle.click();
+		btnSelectVehicle.jsClick(driver);
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
@@ -157,7 +157,7 @@ public class SecondaryNavigation {
 	
 	private void openShoppingToolsDropdown(){
 		//btnShoppingTools.highlight(driver);
-		btnShoppingTools.click();
+		btnShoppingTools.jsClick(driver);
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
@@ -168,7 +168,7 @@ public class SecondaryNavigation {
 	
 	private void closeShoppingToolsDropdown(){
 		//btnShoppingTools.highlight(driver);
-		btnShoppingTools.click();
+		btnShoppingTools.jsClick(driver);
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
@@ -213,9 +213,11 @@ public class SecondaryNavigation {
 	}
 	
 	private void clickLocalSpecials(){
+		initialize();
+		pageLoaded(lnkLocalSpecials);
 		List<WebElement> list = driver.findElements(By.tagName("a")); 		
 		
-		lnkLocalSpecials.click();
+		lnkLocalSpecials.jsClick(driver);
 		initialize();
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;

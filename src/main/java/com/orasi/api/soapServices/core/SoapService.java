@@ -1,19 +1,10 @@
 package com.orasi.api.soapServices.core;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringBufferInputStream;
 import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPBody;
@@ -30,19 +21,12 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
 import org.apache.xmlbeans.XmlException;
-import org.jaxen.SimpleNamespaceContext;
 import org.testng.Reporter;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -484,8 +468,7 @@ public abstract class SoapService{
 					.newInstance(SOAPConstants.SOAP_1_1_PROTOCOL);
 
 			// Convert XML Request to SoapMessage
-			request = messageFactory.createMessage(new MimeHeaders(),
-					new StringBufferInputStream(getRequest()));
+			request = messageFactory.createMessage(new MimeHeaders(), new StringBufferInputStream(getRequest()));
 			request.writeTo(System.out);
 			System.out.println();
 

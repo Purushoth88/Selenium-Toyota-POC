@@ -38,8 +38,12 @@ public class MainNavigation {
 	private Button btnYourLocation;
 	
 	//ZIP Code Popup
-	@FindBy(xpath = "//*[@id=\"tcom-nav-zip-flyout\"]/div")
+	@FindBy(id = "tcom-nav-zip-flyout")
 	private Element eleZipCodePopup;
+	
+	//ZIP Code Popup Body
+	@FindBy(xpath = "//*[@id=\"tcom-nav-zip-flyout\"]/div")
+	private Element eleZipCodePopupBody;
 	
 	//ZIP Code textbox
 	@FindBy(xpath = "//*[@id=\"tcom-nav-zip-flyout\"]/div/div/div[2]/div/input")
@@ -94,12 +98,13 @@ public class MainNavigation {
 	private void clickYourLocation(){
 		//Attempt to use the Selenium 'click'
 		btnYourLocation.click();
-		if(!pageLoaded(eleZipCodePopup)){
-			//If the zipcode popup does not load, then try a JavaScript 'click'
-			initialize();
-			btnYourLocation.jsClick(driver);
-			Assert.assertEquals(pageLoaded(eleZipCodePopup), true, "The zip code popup was not displayed.");
-		}
+		
+		loopCounter = 0;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			Assert.assertNotEquals(loopCounter, timeout, "The");
+		}while(!eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
 	}
 	
 	/**
@@ -119,7 +124,7 @@ public class MainNavigation {
 			clickYourLocation();
 			pageLoaded();
 			//Safari does not seem to behave the same with safeSet, so it is being handled differently
-			String os = WebDriverSetup.getOperatingSystem().toLowerCase();
+			//String os = WebDriverSetup.getOperatingSystem().toLowerCase();
 			
 			txtZipCode.set(zipCode);
 			txtZipCode.sendKeys(Keys.ENTER);

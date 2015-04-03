@@ -6,8 +6,9 @@
 	<version>1.0.1</version>
 
 	<properties>
-		<testNGSourceDirectory>src/test/resources/Build</testNGSourceDirectory>
+		<testNGSourceDirectory>src/test/resources</testNGSourceDirectory>
 	</properties>
+
 	<repositories>
 		<repository>
 			<id>eviware</id>
@@ -26,7 +27,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
 					<configuration>
-						<source>1.7</source>
+						<source>1.7</source> 
+						
 						<target>1.7</target>
 					</configuration>
 				</plugin>
@@ -52,19 +54,22 @@
 					</execution>
 				</executions>
 				<configuration>
+					<systemPropertyVariables>
+							<jenkinsOperatingSystem>${operatingSystem}</jenkinsOperatingSystem>
+							<jenkinsBrowser>${browser}</jenkinsBrowser>
+							<jenkinsBrowserVersion>${browserVersion}</jenkinsBrowserVersion>
+						</systemPropertyVariables> 
 					<suiteXmlFiles>
-						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_10_Safari_8.xml</suiteXmlFile> -->
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Chrome.xml</suiteXmlFile>
-						<!-- <suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Firefox.xml</suiteXmlFile> 
-							<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Safari_7.xml</suiteXmlFile> 
-							<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win_8_1_Chrome.xml</suiteXmlFile> 
-							<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win_8_1_Firefox.xml</suiteXmlFile> 
-							<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win_8_1_IE_11.xml</suiteXmlFile> 
-							<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_Chrome.xml</suiteXmlFile> 
-							<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_Firefox.xml</suiteXmlFile> 
-							<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_IE_11.xml</suiteXmlFile> 
-							<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_IE_8.xml</suiteXmlFile> -->
+						<suiteXmlFile>${testNGSourceDirectory}/${buildPackage}/${buildXml}.xml</suiteXmlFile>		
 					</suiteXmlFiles>
+<!-- 					<systemPropertyVariables>
+							<jenkinsOperatingSystem></jenkinsOperatingSystem>
+							<jenkinsBrowser></jenkinsBrowser>
+							<jenkinsBrowserVersion></jenkinsBrowserVersion>
+						</systemPropertyVariables> 
+					<suiteXmlFiles>
+						<suiteXmlFile>${testNGSourceDirectory}/build_OneXmlForAllBrowserOsCombos/MavenBuild.xml</suiteXmlFile>		
+					</suiteXmlFiles> -->
 				</configuration>
 			</plugin>
 		</plugins>
@@ -128,7 +133,6 @@
 			<groupId>com.saucelabs</groupId>
 			<artifactId>saucerest</artifactId>
 			<version>1.0.22</version>
-			<scope>test</scope>
 		</dependency>
 		<!-- End Sauce Labs requirements -->
 

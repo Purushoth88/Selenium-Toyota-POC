@@ -1,6 +1,12 @@
 package toyota;
 
 import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -62,7 +68,7 @@ public class ChangeZipCode{
 	//*********************
 	// Before-Test Behavior 
 	//*********************
-	@BeforeTest(groups = { "regression" })
+	@BeforeTest(groups = { "regressions" })
 	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 			"operatingSystem", "environment" })
 	public void setup(String runLocation, String browserUnderTest,
@@ -78,7 +84,7 @@ public class ChangeZipCode{
 	//**********************
 	// After Method Behavior 
 	//**********************
-	@AfterMethod(groups = { "regression" })
+	@AfterMethod(groups = { "regressions" })
 	public synchronized void closeSession(ITestResult test) {
 		System.out.println(test.getMethod().getMethodName());
 		WebDriver driver = drivers.get(test.getMethod().getMethodName());	
@@ -125,9 +131,11 @@ public class ChangeZipCode{
 	 * @Version: 03/10/2015
 	 * @Return: N/A
 	 */
-	@Test(dataProvider = "dataScenario", groups = { "regression" })
+	@Test(dataProvider = "dataScenario", groups = { "regressions" })
 	public void testChangeZipCode(
 			String testScenario, String zipCode) throws InterruptedException, IOException {
+		
+		//getIp();
 		
 		testName = new Object() {
 		}.getClass().getEnclosingMethod().getName();
@@ -148,5 +156,49 @@ public class ChangeZipCode{
 		//Change the zipcode
 		MainNavigation mainNav = new MainNavigation(driver);
 		mainNav.changeZipCodes(zipCode);
+	}
+	
+	private void localHostIpAddress() throws UnknownHostException{
+		InetAddress addr = InetAddress.getLocalHost();
+		String ipAddress = addr.getHostAddress();
+	      
+        System.out.println("IP address of localhost from Java Program: " + ipAddress);
+      
+        //Hostname
+        String hostname = addr.getHostName();
+        System.out.println("Name of hostname : " + hostname);
+	}
+	
+	public void getIp() throws UnknownHostException{
+	    String ipAddress = null;
+	    String hostName = null;
+	    Enumeration<NetworkInterface> net = null;
+	    try {
+	        net = NetworkInterface.getNetworkInterfaces();
+	    } catch (SocketException e) {
+	        throw new RuntimeException(e);
+	    }
+
+	    while(net.hasMoreElements()){
+	        NetworkInterface element = net.nextElement();
+	        Enumeration<InetAddress> addresses = element.getInetAddresses();
+	        while (addresses.hasMoreElements()){
+	            InetAddress ip = addresses.nextElement();
+	            if (ip instanceof Inet4Address){
+
+	                if (ip.isSiteLocalAddress()){
+
+	                    ipAddress = ip.getHostAddress();
+	                    hostName = ip.getHostName();
+	                }
+
+	            }
+
+	        }
+	    }
+	    
+	    System.out.println("Local Host IPv4 Address: " + ipAddress);
+	    System.out.println("Local Host Name: " + hostName);
+	    localHostIpAddress();
 	}
 }
