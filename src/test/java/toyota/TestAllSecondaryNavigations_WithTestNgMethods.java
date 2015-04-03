@@ -80,15 +80,15 @@ public class TestAllSecondaryNavigations_WithTestNgMethods {
 	}
 	
 	private void outputBrowserOsConfiguration(){
-		Reporter.log("****************************", true);
-		Reporter.log("* Browser/OS Configuration *", true);
-		Reporter.log("****************************", true);
-		Reporter.log("Operating System: " + WebDriverSetup.getOperatingSystem(), true);
-		Reporter.log("Browser: " + WebDriverSetup.getBrowserUnderTest(), true);
-		Reporter.log("Browser Version: " + WebDriverSetup.getBrowserVersion(), true);
-		Reporter.log("Default Test Timeout: " + WebDriverSetup.getDefaultTestTimeout(), true);
-		Reporter.log("****************************", true);
-		Reporter.log("****************************", true);
-		Reporter.log("****************************", true);
+		TestReporter.log("****************************", true);
+		TestReporter.log("* Browser/OS Configuration *", true);
+		TestReporter.log("****************************", true);
+		TestReporter.log("Operating System: " + WebDriverSetup.getOperatingSystem(), true);
+		TestReporter.log("Browser: " + WebDriverSetup.getBrowserUnderTest(), true);
+		TestReporter.log("Browser Version: " + WebDriverSetup.getBrowserVersion(), true);
+		TestReporter.log("Default Test Timeout: " + WebDriverSetup.getDefaultTestTimeout(), true);
+		TestReporter.log("****************************", true);
+		TestReporter.log("****************************", true);
+		TestReporter.log("****************************", true);
 	}
 }
