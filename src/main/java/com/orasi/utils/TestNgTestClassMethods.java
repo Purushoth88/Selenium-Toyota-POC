@@ -1,52 +1,42 @@
 package com.orasi.utils;
 
-import com.orasi.utils.Base64Coder;
-import com.orasi.utils.Constants;
-import com.orasi.utils.Screenshot;
-import com.orasi.utils.TestReporter;
-import com.orasi.utils.WebDriverSetup;
-import com.saucelabs.saucerest.SauceREST;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.Optional;
 
-public class TestNgTestClassMethods {
-	private String application = "";
-	private String browserUnderTest = "";
-	private String browserVersion = "";
-	private String operatingSystem = "";
-	private String runLocation = "";
-	private String environment = "";
+import com.saucelabs.saucerest.SauceREST;
 
-	private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
-	private static ResourceBundle appURLRepository = ResourceBundle
-			.getBundle(Constants.ENVIRONMENT_URL_PATH);
-
-	public TestNgTestClassMethods(String application) {
-		this.application = application;
+/**
+ * 
+ * @summary Contains the methods to be used within the test class testNG annotated methods.
+ * 			This allows the test class to become much cleaner and more organized.
+ * @author Jonathan Doll and Waightstill W Avery
+ * @date April 7, 2015
+ *
+ */
+public class TestNgTestClassMethods extends TestEnvironment{
+	/*
+	 * Constructor that invokes the TestEnvironment super class
+	 */
+	public TestNgTestClassMethods(String application, TestEnvironment te) {
+		super(te);
 	}
 
-	public void before(@Optional String runLocation, String browserUnderTest,
-			String browserVersion, String operatingSystem, String environment) {
-		this.runLocation = runLocation;
-		this.browserUnderTest = browserUnderTest;
-		this.browserVersion = browserVersion;
-		this.operatingSystem = operatingSystem;
-		this.environment = environment;
-	}
-
-	public void after(ITestResult test, WebDriver driver) {
-		System.out.println(test.getMethod().getMethodName());
-		//WebDriver driver = drivers.get(test.getMethod().getMethodName());
-
+	/**
+	 * @summary testNG "before" method (http://testng.org/doc/documentation-main.html#annotations)
+	 * 			This will be used to absorb testNG XML parameters and pass them to the TestEnvironment
+	 * 			instance that is extended or implemented by all page and test classes.  Also contains 
+	 * 			functionality that is used to update SauceLabs tests results in the SauceLabs VM farm
+	 * @param test - testNG variable which contains the results of the previously run test
+	 * @param driver - the WebDriver used by the test
+	 * @return N/A
+	 */
+	public void after_sauceLabs(ITestResult test, WebDriver driver) {
 		Map<String, Object> updates = new HashMap<String, Object>();
 		updates.put("name", test.getMethod().getMethodName());
 
@@ -66,7 +56,6 @@ public class TestNgTestClassMethods {
 		updates.put("tags", tags);
 
 		if (runLocation.equalsIgnoreCase("remote")) {
-			ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
 			SauceREST client = new SauceREST(
 					Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
 					Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
@@ -77,52 +66,39 @@ public class TestNgTestClassMethods {
 		if (driver != null && driver.getWindowHandles().size() > 0) {
 			driver.quit();
 		}
+	}	
+	
+	/**
+	 * @summary testNG "before" method (http://testng.org/doc/documentation-main.html#annotations)
+	 * 			This will be used to absorb testNG XML parameters and pass them to the TestEnvironment
+	 * 			instance that is extended or implemented by all page and test classes
+	 * @param te
+	 */
+	public void after(ITestResult test, WebDriver driver) {
+		Map<String, Object> updates = new HashMap<String, Object>();
+		updates.put("name", test.getMethod().getMethodName());
+
+		// if is a failure, then take a screenshot
+		if (test.getStatus() == ITestResult.FAILURE) {
+			new Screenshot().takeScreenShot(test, driver);
+		}
+
+		if (driver != null && driver.getWindowHandles().size() > 0) {
+			driver.quit();
+		}
 	}
 
-	public WebDriver testStart(String testName) throws InterruptedException,
+	public WebDriver testStart(String testName, TestEnvironment te) throws InterruptedException,
 			IOException {
 		// Uncomment the following line to have TestReporter outputs output to
 		// the console
 		TestReporter.setPrintToConsole(true);
 
-		WebDriverSetup setup = new WebDriverSetup(application,
-				browserUnderTest, browserVersion, operatingSystem, runLocation,
-				environment, testName);
-		WebDriver driver = setup.initialize();
+		WebDriver driver = initialize();
 
 		System.out.println(testName);
 		drivers.put(testName, driver);
 
 		return drivers.get(testName);
-	}
-	
-//	private String application = "";
-//	private String browserUnderTest = "";
-//	private String browserVersion = "";
-//	private String operatingSystem = "";
-//	private String runLocation = "";
-//	private String environment = "";
-	public String getApplicationUnderTest(){
-		return application;
-	}
-	
-	public String getBrowserUnderTest(){
-		return browserUnderTest;
-	}
-	
-	public String getBowserVersion(){
-		return browserVersion;
-	}
-	
-	public String getOperatingSystem(){
-		return operatingSystem;
-	}
-	
-	public String getRunLocation(){
-		return runLocation;
-	}
-	
-	public String getEnvironment(){
-		return environment;
 	}
 }

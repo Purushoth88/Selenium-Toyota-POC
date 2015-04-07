@@ -1,7 +1,6 @@
 package apps.toyota.mainNavigation;
 
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -9,24 +8,22 @@ import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Textbox;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
-import com.orasi.utils.PageLoaded;
 import com.orasi.utils.Sleeper;
+import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
-import com.orasi.utils.WebDriverSetup;
-
 
 /**
  * @summary Contains the methods & objects for the Toyota.com Main Navigation Bar
  * @version Created 03/01/2015
  * @author Waightstill W. Avery
  */
-public class MainNavigation {
+public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	// *****************************
 	// *** MainNavigation Fields ***
 	// *****************************
 	String initialZipCode = "";
 	String modifiedZipCode = "";
-	int timeout = WebDriverSetup.getDefaultTestTimeout();
+	int timeout = getDefaultTestTimeout();
 	int loopCounter = 0;
 	
 	// *******************************
@@ -56,35 +53,29 @@ public class MainNavigation {
 	// *********************
 	// ** Build page area **
 	// *********************
-	private WebDriver driver;
-
 	/**
 	 * 
 	 * @summary Constructor to initialize the page
 	 * @version Created 03/01/2015
 	 * @author Waightstill W Avery
-	 * @param driver
+	 * @param te - TestEnvironment instance containing the WebDriver to be used for the page class
 	 * @throws NA
 	 * @return NA
 	 * 
 	 */
-	public MainNavigation(WebDriver driver){
-		this.driver = driver;	
-		ElementFactory.initElements(driver, this);  
-	}
-
-	public boolean pageLoaded() {
-		return new PageLoaded().isDomComplete(driver);
+	public MainNavigation(TestEnvironment te){
+		super(te);
+		ElementFactory.initElements(getDriver(), this);  
 	}
 
 	public boolean pageLoaded(Element element) {
-		return new PageLoaded().isElementLoaded(this.getClass(), driver, element);
+		return this.pageLoaded(this.getClass(), element);
 	}
 
-	public MainNavigation initialize() {
-		return ElementFactory.initElements(driver, this.getClass());
+	public void initializePage() {
+		this.initializePage(this.getClass());	
 	}
-
+	
 	// ***********************************
 	// *** MainNavigation Interactions ***
 	// ***********************************
@@ -103,7 +94,7 @@ public class MainNavigation {
 		do{
 			Sleeper.sleep(1000);
 			loopCounter++;
-			Assert.assertNotEquals(loopCounter, timeout, "The");
+			Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not opened after [" +String.valueOf(timeout)+ "] seconds.");
 		}while(!eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
 	}
 	
@@ -126,10 +117,19 @@ public class MainNavigation {
 			//Safari does not seem to behave the same with safeSet, so it is being handled differently
 			//String os = WebDriverSetup.getOperatingSystem().toLowerCase();
 			
+			Assert.assertEquals(txtZipCode.syncVisible(driver), true, "The zipcode textbox is not visible.");
+			txtZipCode.highlight(driver);
 			txtZipCode.set(zipCode);
 			txtZipCode.sendKeys(Keys.ENTER);
 			
-			initialize();
+			loopCounter = 0;
+			do{
+				Sleeper.sleep(1000);
+				loopCounter++;
+				Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not closed after [" +String.valueOf(timeout)+ "] seconds.");
+			}while(eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
+			
+			initializePage();
 			pageLoaded();
 			loopCounter = 0;
 			do{

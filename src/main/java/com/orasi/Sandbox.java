@@ -16,7 +16,6 @@ import com.orasi.core.interfaces.impl.ElementImpl;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
 import com.orasi.utils.Sleeper;
-import com.orasi.utils.WebDriverSetup;
 
 public class Sandbox {
 	Base64Coder base = new Base64Coder();
