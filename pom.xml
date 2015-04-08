@@ -54,24 +54,13 @@
 					</execution>
 				</executions>
 				<configuration>
-<!-- 					<systemPropertyVariables>
-							<jenkinsOperatingSystem>${operatingSystem}</jenkinsOperatingSystem>
-							<jenkinsBrowser>${browser}</jenkinsBrowser>
-							<jenkinsBrowserVersion>${browserVersion}</jenkinsBrowserVersion>
-						</systemPropertyVariables> 
-					<suiteXmlFiles>
-						<suiteXmlFile>${testNGSourceDirectory}/${buildPackage}/${buildXml}.xml</suiteXmlFile>		
-					</suiteXmlFiles> -->
-<!-- 					<systemPropertyVariables>
+					<systemPropertyVariables>
 							<jenkinsOperatingSystem></jenkinsOperatingSystem>
 							<jenkinsBrowser></jenkinsBrowser>
 							<jenkinsBrowserVersion></jenkinsBrowserVersion>
 						</systemPropertyVariables> 
 					<suiteXmlFiles>
 						<suiteXmlFile>${testNGSourceDirectory}/build_OneXmlForAllBrowserOsCombos/MavenBuild.xml</suiteXmlFile>		
-					</suiteXmlFiles> -->
-										<suiteXmlFiles>
-						<suiteXmlFile>${testNGSourceDirectory}/apps/toyota/testNG_XMLs/ChangeZipCode_WithTestNgMethods.xml</suiteXmlFile>		
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
