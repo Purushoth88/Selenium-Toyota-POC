@@ -17,7 +17,7 @@ public class TestClassTemplate_SauceLabs {
 	// **********************
 	// After Method Behavior
 	// **********************	
-	@AfterMethod(groups = { "regressions" })
+	@AfterMethod(groups = { "regression" })
 	public synchronized void tearDownClass(ITestResult results) {
 		test.after_sauceLabs(results, te.getDriver());
 	}
