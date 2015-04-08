@@ -48,8 +48,7 @@ public class TestEnvironment {
 	/*
 	 * WebDriver Fields
 	 */
-	protected WebDriver driver;
-	/*
+	protected WebDriver driver;	/*
 	 * Define a collection of webdrivers and test names inside a Map.
 	 * This allows for more than one driver to be used within a test class.
 	 * This also allows for a particular driver to be tied to a specific test 
@@ -68,7 +67,6 @@ public class TestEnvironment {
 			+ ":"
 			+ Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY"))
 			+ "@ondemand.saucelabs.com:80/wd/hub";
-	
 	/*
 	 * Sauce Labs Fields
 	 */

@@ -1,18 +1,17 @@
 package toyota;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.Reporter;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import apps.toyota.homePage.HomePage;
 import apps.toyota.mainNavigation.MainNavigation;
 
 import com.orasi.utils.Constants;
@@ -23,19 +22,24 @@ import com.orasi.utils.dataProviders.ExcelDataProvider;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
 @Listeners({ SauceOnDemandTestListener.class })
-public class ChangeZipCode {
-	String testName = "";
-	String application = "Toyota";
-	private TestEnvironment te = null;
-	private TestNgTestClassMethods test;
-
+public class ChangeZipCode extends TestClassTemplate{
+	private String application = "Toyota";
+	
+	/*
+	 * Define a collection of webdrivers and test names inside a Map.
+	 * This allows for more than one driver to be used within a test class.
+	 * This also allows for a particular driver to be tied to a specific test 
+	 * based on test name.
+	 */
+	protected Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
+	
 	// **************
 	// Data Provider
 	// **************
 	@DataProvider(name = "dataScenario")
 	public Object[][] scenarios() {
 		Object[][] excelData = new ExcelDataProvider(
-				Constants.TOYOTA_DATAPROVIDER_PATH + "ChangeZipCode.xlsx", "ChangeZipCode").getTestData();
+				Constants.TOYOTA_DATAPROVIDER_PATH + "ChangeZipCode"+".xlsx", "ChangeZipCode").getTestData();
 		return excelData;
 	}
 
@@ -47,19 +51,11 @@ public class ChangeZipCode {
 			"operatingSystem", "environment" })
 	public void setupClass(String runLocation, String browserUnderTest,
 			String browserVersion, String operatingSystem, String environment) {
-		te = new TestEnvironment(application, browserUnderTest, browserVersion, operatingSystem,
+		this.te = new TestEnvironment(application, browserUnderTest, browserVersion, operatingSystem,
 				runLocation, environment);
-		test = new TestNgTestClassMethods(application, te);
+		this.test = new TestNgTestClassMethods(application, this.te);
 	}
-
-	// **********************
-	// After Method Behavior
-	// **********************
-	@AfterMethod(groups = { "regression" })
-	public synchronized void tearDownClass(ITestResult results) {
-		test.after_sauceLabs(results, te.getDriver());
-	}
-
+	
 	// *****
 	// TEST
 	// *****
@@ -75,36 +71,19 @@ public class ChangeZipCode {
 	@Test(dataProvider = "dataScenario", groups = { "regression" }, singleThreaded=true )
 	public void testChangeZipCode(String testScenario, String zipCode)
 			throws InterruptedException, IOException {
+		this.testName = new Object(){}.getClass().getEnclosingMethod().getName() 
+				+ "_" + this.te.getOperatingSystem()
+				+ "_" + this.te.getBrowserUnderTest()
+				+ "_" + this.te.getBrowserVersion();
 
-		testName = new Object(){}.getClass().getEnclosingMethod().getName() 
-				+ "_" + te.getOperatingSystem()
-				+ "_" + te.getBrowserUnderTest()
-				+ "_" + te.getBrowserVersion();
-
-		//driver = test.testStart(testName, te);
-		te.setDriver(test.testStart(testName, te));
-		outputBrowserOsConfiguration();
+		this.te.setDriver(this.test.testStart(this.testName, this.te));
 		
 		// Ensure the home page is loaded
 		TestReporter.logScenario(testScenario);
-		HomePage homePage = new HomePage(te);
-		Assert.assertEquals(te.pageLoaded(), true);
+		Assert.assertEquals(this.te.pageLoaded(), true);
 
 		// Change the zipcode
-		MainNavigation mainNav = new MainNavigation(te);
+		MainNavigation mainNav = new MainNavigation(this.te);
 		mainNav.changeZipCodes(zipCode);
-	}
-	
-	private void outputBrowserOsConfiguration(){
-		Reporter.log("****************************", true);
-		Reporter.log("* Browser/OS Configuration *", true);
-		Reporter.log("****************************", true);
-		Reporter.log("Operating System: " + te.getOperatingSystem(), true);
-		Reporter.log("Browser: " + te.getBrowserUnderTest(), true);
-		Reporter.log("Browser Version: " + te.getBrowserVersion(), true);
-		Reporter.log("Default Test Timeout: " + te.getDefaultTestTimeout(), true);
-		Reporter.log("****************************", true);
-		Reporter.log("****************************", true);
-		Reporter.log("****************************", true);
 	}
 }

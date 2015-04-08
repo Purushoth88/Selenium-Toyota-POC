@@ -36,6 +36,7 @@ public class TestNgTestClassMethods extends TestEnvironment{
 	 * @param driver - the WebDriver used by the test
 	 * @return N/A
 	 */
+	@SuppressWarnings("unchecked")
 	public void after_sauceLabs(ITestResult test, WebDriver driver) {
 		Map<String, Object> updates = new HashMap<String, Object>();
 		updates.put("name", test.getMethod().getMethodName());
@@ -97,8 +98,8 @@ public class TestNgTestClassMethods extends TestEnvironment{
 		WebDriver driver = initialize();
 
 		System.out.println(testName);
-		drivers.put(testName, driver);
+		this.drivers.put(testName, driver);
 
-		return drivers.get(testName);
+		return this.drivers.get(testName);
 	}
 }
