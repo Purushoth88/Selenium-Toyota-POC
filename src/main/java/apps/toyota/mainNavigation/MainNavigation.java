@@ -67,14 +67,6 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 		super(te);
 		ElementFactory.initElements(getDriver(), this);  
 	}
-
-	public boolean pageLoaded(Element element) {
-		return this.pageLoaded(this.getClass(), element);
-	}
-
-	public void initializePage() {
-		this.initializePage(this.getClass());	
-	}
 	
 	// ***********************************
 	// *** MainNavigation Interactions ***
@@ -105,7 +97,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	 * @return: NA
 	 */
 	public void changeZipCodes(String zipCode){
-		pageLoaded(btnYourLocation);
+		pageLoaded(this.getClass(), btnYourLocation);
 		//Capture the zipcode that currently exists in the UI
 		this.initialZipCode = captureCurrentZipCode();
 		TestReporter.log("Initial zip code: ["+initialZipCode+"].");
@@ -129,7 +121,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 				Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not closed after [" +String.valueOf(timeout)+ "] seconds.");
 			}while(eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
 			
-			initializePage();
+			initializePage(this.getClass());
 			pageLoaded();
 			loopCounter = 0;
 			do{
@@ -162,7 +154,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	 * @return: NA
 	 */
 	private String captureCurrentZipCode(){
-		pageLoaded(eleZipCode);
+		pageLoaded(this.getClass(), eleZipCode);
 		return eleZipCode.getText().trim();
 	}
 }

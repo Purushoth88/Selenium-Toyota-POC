@@ -102,14 +102,6 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		ElementFactory.initElements(getDriver(), this);  
 	}
 
-	public boolean pageLoaded(Element element) {
-		return this.pageLoaded(this.getClass(), element);
-	}
-
-	public void initializePage() {
-		this.initializePage(this.getClass());	
-	}
-
 	// ****************************************
 	// *** SecondaryNavigation Interactions ***
 	// ****************************************
@@ -165,8 +157,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 			Sleeper.sleep(1000);
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Shopping Tools dropdown was not closed after ["+String.valueOf(timeout)+"] seconds.");
-			initializePage();
-			pageLoaded(btnShoppingTools);
+			initializePage(this.getClass());
+			pageLoaded(this.getClass(), btnShoppingTools);
 		}while(btnShoppingTools.getAttribute("class").contains("open"));
 	}
 	
@@ -174,7 +166,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		//Grab the number of links on the current page
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
 		lnkFindADealer.jsClick(getDriver());
-		initializePage();
+		initializePage(this.getClass());
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
 		List<WebElement> list2;
@@ -191,7 +183,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
 		//Click the link
 		lnkBuildAndPrice.jsClick(getDriver());
-		initializePage();
+		initializePage(this.getClass());
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
 		List<WebElement> list2;
@@ -204,12 +196,12 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 	}
 	
 	private void clickLocalSpecials(){
-		initializePage();
-		pageLoaded(lnkLocalSpecials);
+		initializePage(this.getClass());
+		pageLoaded(this.getClass(), lnkLocalSpecials);
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 		
 		
 		lnkLocalSpecials.jsClick(getDriver());
-		initializePage();
+		initializePage(this.getClass());
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
 		List<WebElement> list2;

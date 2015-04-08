@@ -47,14 +47,6 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		ElementFactory.initElements(getDriver(), this);  
 	}
 
-	public boolean pageLoaded(Element element) {
-		return this.pageLoaded(this.getClass(), element);
-	}
-
-	public void initializePage() {
-		this.initializePage(this.getClass());	
-	}
-
 	// *****************************
 	// *** HomePage Interactions ***
 	// *****************************

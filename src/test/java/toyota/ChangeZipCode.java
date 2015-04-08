@@ -31,7 +31,7 @@ public class ChangeZipCode extends TestClassTemplate_SauceLabs{
 	 * This also allows for a particular driver to be tied to a specific test 
 	 * based on test name.
 	 */
-	protected Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
+	private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
 	
 	// **************
 	// Data Provider
