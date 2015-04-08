@@ -76,9 +76,6 @@ public class TestNgTestClassMethods extends TestEnvironment{
 	 * @param te
 	 */
 	public void after(ITestResult test, WebDriver driver) {
-		Map<String, Object> updates = new HashMap<String, Object>();
-		updates.put("name", test.getMethod().getMethodName());
-
 		// if is a failure, then take a screenshot
 		if (test.getStatus() == ITestResult.FAILURE) {
 			new Screenshot().takeScreenShot(test, driver);

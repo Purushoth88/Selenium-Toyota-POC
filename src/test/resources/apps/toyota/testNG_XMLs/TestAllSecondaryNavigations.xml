@@ -5,7 +5,7 @@
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="remote" />
 	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="WIN8_1" />
+	<parameter name="operatingSystem" value="windows" />
 	<test name="TestAllSecondaryNavigations">
 		<classes>
 			<class name="toyota.TestAllSecondaryNavigations" />

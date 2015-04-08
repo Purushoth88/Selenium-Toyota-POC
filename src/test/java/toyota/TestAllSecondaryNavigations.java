@@ -19,7 +19,7 @@ import com.orasi.utils.TestReporter;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
 @Listeners({SauceOnDemandTestListener.class})
-public class TestAllSecondaryNavigations extends TestClassTemplate{
+public class TestAllSecondaryNavigations extends TestClassTemplate_SauceLabs{
 	private String application = "Toyota";
 	/*
 	 * Define a collection of webdrivers and test names inside a Map.

@@ -22,7 +22,7 @@ import com.orasi.utils.dataProviders.ExcelDataProvider;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
 @Listeners({ SauceOnDemandTestListener.class })
-public class ChangeZipCode extends TestClassTemplate{
+public class ChangeZipCode extends TestClassTemplate_SauceLabs{
 	private String application = "Toyota";
 	
 	/*
