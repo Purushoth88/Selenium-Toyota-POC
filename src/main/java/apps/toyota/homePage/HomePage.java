@@ -6,7 +6,6 @@ import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.TestEnvironment;
 
-
 /**
  * @summary Contains the methods & objects for the Toyota.com homepage
  * @version Created 03/01/2015
@@ -25,9 +24,6 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	@FindBy(id = "marquee")
 	private Element eleMarquee;
 
-	// *********************
-	// ** Build page area **
-	// *********************
 
 	// *********************
 	// ** Build page area **
