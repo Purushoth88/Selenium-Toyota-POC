@@ -3,7 +3,6 @@ package apps.toyota.secondaryNavigation;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -12,29 +11,26 @@ import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Link;
 import com.orasi.core.interfaces.Textbox;
-import com.orasi.core.interfaces.impl.ElementImpl;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
-import com.orasi.utils.PageLoaded;
 import com.orasi.utils.Sleeper;
-import com.orasi.utils.WebDriverSetup;
+import com.orasi.utils.TestEnvironment;
 
 
 /**
  * @summary Contains the methods & objects for the Toyota.com Secondary Navigation bar
- * @version Created 09/10/2014
+ * @version Created 03/01/2015
  * @author Waightstill W. Avery
  */
-public class SecondaryNavigation {
-	// ***************************************
-	// *** Secondary Navigation Bar Fields ***
-	// ***************************************
-	int timeout = WebDriverSetup.getDefaultTestTimeout();
+public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
+	// **************************************
+	// *** SecondaryNavigation Bar Fields ***
+	// **************************************
+	int timeout = getDefaultTestTimeout();
 	int loopCounter = 0;
 	
-	
-	// *****************************************
-	// *** Secondary Navigation Bar Elements ***
-	// *****************************************
+	// ****************************************
+	// *** SecondaryNavigation Bar Elements ***
+	// ****************************************
 	
 	//Toyota Icon link
 	@FindBy(id = "tcom-nav-logo-desktop")
@@ -90,39 +86,25 @@ public class SecondaryNavigation {
 
 	// *********************
 	// ** Build page area **
-	// *********************
-	private WebDriver driver;
-
+	// *********************	// *********************
 	/**
 	 * 
 	 * @summary Constructor to initialize the page
-	 * @version Created 09/10/2014
+	 * @version Created 03/01/2015
 	 * @author Waightstill W Avery
-	 * @param driver
+	 * @param te - TestEnvironment instance containing the WebDriver to be used for the page class
 	 * @throws NA
 	 * @return NA
 	 * 
 	 */
-	public SecondaryNavigation(WebDriver driver){
-		this.driver = driver;	
-		ElementFactory.initElements(driver, this);  
+	public SecondaryNavigation(TestEnvironment te){
+		super(te);
+		ElementFactory.initElements(getDriver(), this);  
 	}
 
-	public boolean pageLoaded() {
-		return new PageLoaded().isDomComplete(driver);
-	}
-
-	public boolean pageLoaded(Element element) {
-		return new PageLoaded().isElementLoaded(this.getClass(), driver, element);
-	}
-
-	public SecondaryNavigation initialize() {
-		return ElementFactory.initElements(driver, this.getClass());
-	}
-
-	// ***********************************************
-	// *** HomePage Interactions ***
-	// ***********************************************
+	// ****************************************
+	// *** SecondaryNavigation Interactions ***
+	// ****************************************
 	
 	public void navigateAllSecondaryNavigationTabs(){
 		openSelectVehicleDropdown();
@@ -136,7 +118,7 @@ public class SecondaryNavigation {
 
 	private void openSelectVehicleDropdown(){
 		//btnSelectVehicle.highlight(driver);
-		btnSelectVehicle.click();
+		btnSelectVehicle.jsClick(getDriver());
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
@@ -147,7 +129,7 @@ public class SecondaryNavigation {
 	
 	private void closeSelectVehicleDropdown(){
 		//btnSelectVehicle.highlight(driver);
-		btnSelectVehicle.click();
+		btnSelectVehicle.jsClick(getDriver());
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
@@ -158,7 +140,7 @@ public class SecondaryNavigation {
 	
 	private void openShoppingToolsDropdown(){
 		//btnShoppingTools.highlight(driver);
-		btnShoppingTools.click();
+		btnShoppingTools.jsClick(getDriver());
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
@@ -169,57 +151,65 @@ public class SecondaryNavigation {
 	
 	private void closeShoppingToolsDropdown(){
 		//btnShoppingTools.highlight(driver);
-		btnShoppingTools.click();
+		btnShoppingTools.jsClick(getDriver());
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Shopping Tools dropdown was not closed after ["+String.valueOf(timeout)+"] seconds.");
-			initialize();
-			pageLoaded(btnShoppingTools);
+			initializePage(this.getClass());
+			pageLoaded(this.getClass(), btnShoppingTools);
 		}while(btnShoppingTools.getAttribute("class").contains("open"));
 	}
 	
 	private void clickFindADealer(){
 		//Grab the number of links on the current page
-		List<WebElement> list = driver.findElements(By.tagName("a")); 
-		lnkFindADealer.jsClick(driver);
-		initialize();
+		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
+		lnkFindADealer.jsClick(getDriver());
+		initializePage(this.getClass());
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
 		List<WebElement> list2;
 		do{
 			Sleeper.sleep(1000);
 			loopCounter++;
-			Assert.assertNotEquals(loopCounter, timeout);
-			list2 = driver.findElements(By.tagName("a"));		
+			Assert.assertNotEquals(loopCounter, timeout, "The 'Find Your Toyota Dealer' page was not loaded after ["+String.valueOf(timeout)+"] seconds.");
+			list2 = getDriver().findElements(By.tagName("a"));		
 		}while(list2.size() == list.size());
 	}
 	
 	private void clickBuildAndPrice(){
 		//Grab the number of links on the current page
-		List<WebElement> list = driver.findElements(By.tagName("a")); 
+		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
 		//Click the link
-		lnkBuildAndPrice.jsClick(driver);
-		initialize();
+		lnkBuildAndPrice.jsClick(getDriver());
+		initializePage(this.getClass());
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
 		List<WebElement> list2;
 		do{
 			Sleeper.sleep(1000);
 			loopCounter++;
-			Assert.assertNotEquals(loopCounter, timeout);
-			list2 = driver.findElements(By.tagName("a"));		
+			Assert.assertNotEquals(loopCounter, timeout, "The 'Build Your Toyota' page was not loaded after ["+String.valueOf(timeout)+"] seconds.");
+			list2 = getDriver().findElements(By.tagName("a"));		
 		}while(list2.size() == list.size());
 	}
 	
 	private void clickLocalSpecials(){
-		//lnkLocalSpecials.highlight(driver);
-		lnkLocalSpecials.click();
-		if(!pageLoaded(txtLocalSpecialsZipCode)){
-			initialize();
-			lnkLocalSpecials.jsClick(driver);
-			Assert.assertEquals(pageLoaded(txtLocalSpecialsZipCode), true, "The 'Build Your Toyota' page was not loaded.");
-		}
+		initializePage(this.getClass());
+		pageLoaded(this.getClass(), lnkLocalSpecials);
+		List<WebElement> list = getDriver().findElements(By.tagName("a")); 		
+		
+		lnkLocalSpecials.jsClick(getDriver());
+		initializePage(this.getClass());
+		//Loop until the number of links changes, thereby indicating that a new page was loaded
+		loopCounter = 0;
+		List<WebElement> list2;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			Assert.assertNotEquals(loopCounter, timeout, "The 'Local Specials' page was not loaded after ["+String.valueOf(timeout)+"] seconds.");
+			list2 = getDriver().findElements(By.tagName("a"));		
+		}while(list2.size() == list.size());
 	}
 }

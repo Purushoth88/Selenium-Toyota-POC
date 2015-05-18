@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="ChangeZipCode" parallel="none">
-	<!-- <suite name="ChangeZipCode" parallel="instances" thread-count="5"> -->
-	<parameter name="browserUnderTest" value="firefox" />
+<suite name="ChangeZipCode" parallel="false">
+	<parameter name="browserUnderTest" value="chrome" />
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="local" />
-	<!-- <parameter name="runLocation" value="remote"</parameter> -->
-	<parameter name="browserVersion" value="31.0" />
+	<parameter name="browserVersion" value="" />
 	<parameter name="operatingSystem" value="windows" />
 	<test name="ChangeZipCode">
 		<classes>

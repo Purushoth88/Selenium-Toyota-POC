@@ -57,6 +57,11 @@ public class TestReporter {
 	if(getPrintToConsole()) System.out.println(getTimestamp() + trimHtml(message));
     }
 
+    public static void log(String message, Boolean stdOut) {
+	Reporter.log(getTimestamp() + " <i><b>" + message + "</b></i><br />", stdOut);
+	if(getPrintToConsole()) System.out.println(getTimestamp() + trimHtml(message));
+    }
+
     public static void assertTrue(boolean condition, String description) {	
 	try{
 	    Assert.assertTrue(condition, description);

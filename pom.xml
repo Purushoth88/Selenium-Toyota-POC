@@ -3,17 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.orasi</groupId>
 	<artifactId>Toyota</artifactId>
-	<version>1.0.1</version>
-	<packaging>jar</packaging>
+	<version>1.0.4</version>
 
 	<properties>
-		<testNGSourceDirectory>src/test/resources/Build</testNGSourceDirectory>
-		<orasiCoreVersion>1.0.2</orasiCoreVersion>
+		<testNGSourceDirectory>src/test/resources</testNGSourceDirectory>
 	</properties>
 
-	<!-- <repositories> <repository> <id>Orasi-Selenium-Java-Core</id> <url>https://github.com/Orasi/Selenium-Java-Core/raw/master/lib/releases</url> 
-		<url>https://github.com/Orasi/Selenium-Java-Core/tree/master/lib/releases/com/orasi/Selenium-Java-Core</url> 
-		</repository> </repositories> -->
 	<repositories>
 		<repository>
 			<id>eviware</id>
@@ -32,7 +27,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
 					<configuration>
-						<source>1.7</source>
+						<source>1.7</source> 
+						
 						<target>1.7</target>
 					</configuration>
 				</plugin>
@@ -58,40 +54,78 @@
 					</execution>
 				</executions>
 				<configuration>
+					<systemPropertyVariables>
+							<jenkinsOperatingSystem></jenkinsOperatingSystem>
+							<jenkinsBrowser></jenkinsBrowser>
+							<jenkinsBrowserVersion></jenkinsBrowserVersion>
+						</systemPropertyVariables> 
 					<suiteXmlFiles>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_10_Safari_8.xml</suiteXmlFile>
- 						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Chrome.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Firefox.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Mac_OS_X_10_9_Safari_7.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win_8_1_Chrome.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win_8_1_Firefox.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win_8_1_IE_11.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_Chrome.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_Firefox.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_IE_11.xml</suiteXmlFile>
-						<suiteXmlFile>${testNGSourceDirectory}/MavenBuild_Win7_IE_8.xml</suiteXmlFile>		
+						<suiteXmlFile>${testNGSourceDirectory}/build_OneXmlForAllBrowserOsCombos/MavenBuild.xml</suiteXmlFile>		
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
-		<!-- <dependency> <groupId>com.orasi</groupId> <artifactId>Selenium-Java-Core</artifactId> 
-			<version>${orasiCoreVersion}</version> <classifier>jar-with-dependencies</classifier> 
-			</dependency> -->
 		<!-- Start Selenium requirements -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>2.43.1</version>
+			<version>2.43.1</version> 
+			<!--  Selenium Versions not to use
+			2.44.0 - Issues with OS Platform Capabilities 
+				https://code.google.com/p/selenium/issues/detail?id=8083  
+				https://code.google.com/p/selenium/issues/detail?id=8333
+			
+			2.45.0 - Issues with Test Execution speed
+				https://code.google.com/p/selenium/issues/detail?id=8551 
+			 -->
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.8.21</version>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
 
 		<!-- End Selenium requirements -->
+
+		<!-- Start Sauce Labs requirements -->
+		<dependency>
+			<groupId>com.saucelabs</groupId>
+			<artifactId>sauce_java_common</artifactId>
+			<version>2.1.18</version>
+		</dependency>
+		<dependency>
+			<groupId>com.saucelabs</groupId>
+			<artifactId>sauce_junit</artifactId>
+			<version>2.1.18</version>
+		</dependency>
+		<dependency>
+			<groupId>com.saucelabs</groupId>
+			<artifactId>sauce_testng</artifactId>
+			<version>2.1.18</version>
+		</dependency>
+		<dependency>
+			<groupId>com.saucelabs.selenium</groupId>
+			<artifactId>sauce-ondemand-driver</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.saucelabs.selenium</groupId>
+			<artifactId>selenium-client-factory</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.saucelabs</groupId>
+			<artifactId>saucerest</artifactId>
+			<version>1.0.22</version>
+		</dependency>
+		<!-- End Sauce Labs requirements -->
 
 		<!-- Start HTML Unit Driver requirements -->
 
@@ -218,37 +252,6 @@
 			<artifactId>jaxen</artifactId>
 			<version>1.1</version>
 		</dependency>
-		<dependency>
-			<groupId>com.saucelabs</groupId>
-			<artifactId>sauce_testng</artifactId>
-			<version>2.1.18</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.saucelabs</groupId>
-			<artifactId>saucerest</artifactId>
-			<version>1.0.22</version>
-			<scope>test</scope>
-		</dependency>		<!-- Start Sauce Labs requirements -->
-		<dependency>
-			<groupId>com.saucelabs</groupId>
-			<artifactId>sauce_java_common</artifactId>
-			<version>2.1.18</version>
-		</dependency>
-		<dependency>
-			<groupId>com.saucelabs</groupId>
-			<artifactId>sauce_junit</artifactId>
-			<version>2.1.18</version>
-		</dependency>
-		<dependency>
-			<groupId>com.saucelabs.selenium</groupId>
-			<artifactId>sauce-ondemand-driver</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.saucelabs.selenium</groupId>
-			<artifactId>selenium-client-factory</artifactId>
-			<version>1.2</version>
-		</dependency>
+		<!-- End Soap Core requirements -->
 	</dependencies>
 </project>

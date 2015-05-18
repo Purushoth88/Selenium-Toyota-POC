@@ -1,7 +1,6 @@
 package apps.toyota.mainNavigation;
 
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -9,37 +8,39 @@ import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Textbox;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
-import com.orasi.utils.PageLoaded;
 import com.orasi.utils.Sleeper;
+import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
-import com.orasi.utils.WebDriverSetup;
-
 
 /**
  * @summary Contains the methods & objects for the Toyota.com Main Navigation Bar
- * @version Created 09/10/2014
+ * @version Created 03/01/2015
  * @author Waightstill W. Avery
  */
-public class MainNavigation {
-	// ******************************
-	// *** Main Navigation Fields ***
-	// ******************************
+public class MainNavigation extends com.orasi.utils.TestEnvironment{
+	// *****************************
+	// *** MainNavigation Fields ***
+	// *****************************
 	String initialZipCode = "";
 	String modifiedZipCode = "";
-	int timeout = WebDriverSetup.getDefaultTestTimeout();
+	int timeout = getDefaultTestTimeout();
 	int loopCounter = 0;
 	
-	// ********************************
-	// *** Main Navigation Elements ***
-	// ********************************
+	// *******************************
+	// *** MainNavigation Elements ***
+	// *******************************
 	
 	//Your Location button
 	@FindBy(xpath = "//*[@id=\"tcom-main-nav\"]/ul/li[3]/button")
 	private Button btnYourLocation;
 	
 	//ZIP Code Popup
-	@FindBy(xpath = "//*[@id=\"tcom-nav-zip-flyout\"]/div")
+	@FindBy(id = "tcom-nav-zip-flyout")
 	private Element eleZipCodePopup;
+	
+	//ZIP Code Popup Body
+	@FindBy(xpath = "//*[@id=\"tcom-nav-zip-flyout\"]/div")
+	private Element eleZipCodePopupBody;
 	
 	//ZIP Code textbox
 	@FindBy(xpath = "//*[@id=\"tcom-nav-zip-flyout\"]/div/div/div[2]/div/input")
@@ -52,38 +53,24 @@ public class MainNavigation {
 	// *********************
 	// ** Build page area **
 	// *********************
-	private WebDriver driver;
-
 	/**
 	 * 
 	 * @summary Constructor to initialize the page
-	 * @version Created 09/10/2014
+	 * @version Created 03/01/2015
 	 * @author Waightstill W Avery
-	 * @param driver
+	 * @param te - TestEnvironment instance containing the WebDriver to be used for the page class
 	 * @throws NA
 	 * @return NA
 	 * 
 	 */
-	public MainNavigation(WebDriver driver){
-		this.driver = driver;	
-		ElementFactory.initElements(driver, this);  
+	public MainNavigation(TestEnvironment te){
+		super(te);
+		ElementFactory.initElements(getDriver(), this);  
 	}
-
-	public boolean pageLoaded() {
-		return new PageLoaded().isDomComplete(driver);
-	}
-
-	public boolean pageLoaded(Element element) {
-		return new PageLoaded().isElementLoaded(this.getClass(), driver, element);
-	}
-
-	public MainNavigation initialize() {
-		return ElementFactory.initElements(driver, this.getClass());
-	}
-
-	// ***********************************************
-	// *** HomePage Interactions ***
-	// ***********************************************
+	
+	// ***********************************
+	// *** MainNavigation Interactions ***
+	// ***********************************
 
 	/**
 	 * @summary: clicks on the locations link to allow a new zipcode to be entered
@@ -94,12 +81,13 @@ public class MainNavigation {
 	private void clickYourLocation(){
 		//Attempt to use the Selenium 'click'
 		btnYourLocation.click();
-		if(!pageLoaded(eleZipCodePopup)){
-			//If the zipcode popup does not load, then try a JavaScript 'click'
-			initialize();
-			btnYourLocation.jsClick(driver);
-			Assert.assertEquals(pageLoaded(eleZipCodePopup), true, "The zip code popup was not displayed.");
-		}
+		
+		loopCounter = 0;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not opened after [" +String.valueOf(timeout)+ "] seconds.");
+		}while(!eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
 	}
 	
 	/**
@@ -109,7 +97,7 @@ public class MainNavigation {
 	 * @return: NA
 	 */
 	public void changeZipCodes(String zipCode){
-		pageLoaded(btnYourLocation);
+		pageLoaded(this.getClass(), btnYourLocation);
 		//Capture the zipcode that currently exists in the UI
 		this.initialZipCode = captureCurrentZipCode();
 		TestReporter.log("Initial zip code: ["+initialZipCode+"].");
@@ -119,15 +107,21 @@ public class MainNavigation {
 			clickYourLocation();
 			pageLoaded();
 			//Safari does not seem to behave the same with safeSet, so it is being handled differently
-			String os = WebDriverSetup.getOperatingSystem().toLowerCase();
-			if(os.contains("mac") || os.contains("os x")){
-				txtZipCode.set(zipCode);
-				txtZipCode.sendKeys(Keys.ENTER);
-			}else{
-				txtZipCode.safeSet(zipCode);
-			}
+			//String os = WebDriverSetup.getOperatingSystem().toLowerCase();
 			
-			initialize();
+			Assert.assertEquals(txtZipCode.syncVisible(driver), true, "The zipcode textbox is not visible.");
+			txtZipCode.highlight(driver);
+			txtZipCode.set(zipCode);
+			txtZipCode.sendKeys(Keys.ENTER);
+			
+			loopCounter = 0;
+			do{
+				Sleeper.sleep(1000);
+				loopCounter++;
+				Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not closed after [" +String.valueOf(timeout)+ "] seconds.");
+			}while(eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
+			
+			initializePage(this.getClass());
 			pageLoaded();
 			loopCounter = 0;
 			do{
@@ -160,7 +154,7 @@ public class MainNavigation {
 	 * @return: NA
 	 */
 	private String captureCurrentZipCode(){
-		pageLoaded(eleZipCode);
+		pageLoaded(this.getClass(), eleZipCode);
 		return eleZipCode.getText().trim();
 	}
 }
