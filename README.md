@@ -1,17 +1,31 @@
-## Orasi Selenium Core Project
+## Toyota Selenium-Java Project
 
-This is the homepage for the Orasi Selenium Core libraries. These libraries contain both original code created by Orasi developers
-and open source code from various other projects which are listed further down. With these libraries, consumers have access to extended 
-functionality for creating testing suites for Web Applications and API Web Services.
+This is the homepage for the Orasi-developed Selenium-Java Toyota project. These libraries contain both original code created by Orasi developers and open source code from various other projects which are listed further down. With these libraries, consumers have access to extended functionality for creating testing suites for Web Applications and API Web Services.
 
 ## Web Application Testing
-*ToDo*
+The core code uses the Java-based Selenium webdriver for GUI testing. It takes the standard Selenium-defined WebElement and divides them into more consumer-friendly Elements, whose names are commonly found in HTML DOMs. The following are Elements, and the prefixes used in the code to identify them, as well as examples using the naming conventions:
 
-##API Web Service Testing
+* Button - btn (ex: btnContinue)
+* Checkbox - chk (ex: chkAgreeToTermsAndConditions))
+* Label - lbl (ex: lblHeader)
+* Link - lnk (ex: lnkCancel)
+* Listbox  - lst (ex: lstStates)
+* Radiogroup - rad (ex: radYesOrNo)
+* Textbox - txt (ex: txtUsername)
+* Webtable - tab (ex: tabMemberNames)
+
+All elements utilize the Orasi-developed [TestReporter](https://github.com/waitsavery/Toyota/blob/master/src/main/java/com/orasi/utils/TestReporter.java) which extends the [TestNG](https://github.com/cbeust/testng) Reporter by concatenating a timestamp and HTML formatting for use in viewing the report in a webbrowser. This allows for a functional audit which can ensure requirements are being met by the automated test, as well as provide steps to reproduce a defect when one occurs.
+
+## API Web Service Testing
 ###Soap Services  
-*ToDo*
+These libraries contain a SOAP API testing solution which leverages Java and W3C functionalities to dynamically build requests at runtime, modify, send and recieve 
+
 ###REST Services  
 *ToDo*
+
+## Jenkins Build Tool
+
+## Sauce Labs Remote VM Farm
 
 ## Third Party Resources
 These resources are being used directly, or have been extended upon.
