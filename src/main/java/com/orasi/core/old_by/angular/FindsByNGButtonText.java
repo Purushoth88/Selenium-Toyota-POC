@@ -1,4 +1,4 @@
-package com.orasi.core.by.angular;
+package com.orasi.core.old_by.angular;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

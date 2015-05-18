@@ -1,4 +1,4 @@
-package com.orasi.core.by.angular;
+package com.orasi.core.old_by.angular;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import com.orasi.core.angular.ByAngular;
+import com.orasi.core.old_angular.ByAngular;
 @SuppressWarnings("unused")
 public class AngularElementLocator implements ElementLocator {
 	  private final WebDriver driver;

@@ -1,4 +1,4 @@
-package com.orasi.core.angular;
+package com.orasi.core.old_angular;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -12,18 +12,18 @@ import org.openqa.selenium.WebElement;
  * Original Code from https://github.com/paul-hammant/ngWebDriver
  */
 
-public class ByAngularController  extends ByAngular.BaseBy {
-    private String controller;
+public class ByAngularModel  extends ByAngular.BaseBy {
+    private String model;
 
-    public ByAngularController(JavascriptExecutor jse, String controller) {
+    public ByAngularModel(JavascriptExecutor jse, String model) {
     	super(jse);
-        this.controller = controller;
+        this.model = model;
     }
 
     private String makeJsBy(String oneOrAll) {    	
         return              
         		 "var using = arguments[0] || document;\n" +
-                 "var controller = '" + controller + "';\n" +
+                 "var repeater = '" + model + "';\n" +
                  "\n" +
                  "var rows = [];\n" +
                  "var prefixes = ['ng-', 'ng_', 'data-ng-', 'x-ng-'];\n" +
@@ -32,7 +32,7 @@ public class ByAngularController  extends ByAngular.BaseBy {
                  "  var repeatElems = using.querySelectorAll('[' + attr + ']');\n" +
                  "  attr = attr.replace(/\\\\/g, '');\n" +
                  "  for (var i = 0; i < repeatElems.length; ++i) {\n" +
-                 "    if (repeatElems[i].getAttribute(attr).indexOf(controller) != -1) {\n" +
+                 "    if (repeatElems[i].getAttribute(attr).indexOf(repeater) != -1) {\n" +
                  "      rows.push(repeatElems[i]);\n" +
                  "    }\n" +
                  "  }\n" +
@@ -53,7 +53,7 @@ public class ByAngularController  extends ByAngular.BaseBy {
         try {
         	privateStringField = o.getClass().getDeclaredField("foundBy");
         	privateStringField.setAccessible(true);
-            privateStringField.set(o, o.toString().replace("unknown locator", "ng-controller: " + controller));
+        	privateStringField.set(o, o.toString().replace("unknown locator", "ng-modal: " + model));
 		} catch (NoSuchFieldException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
