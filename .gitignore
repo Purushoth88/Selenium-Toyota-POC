@@ -120,3 +120,4 @@ nbactions.xml
 nb-configuration.xml
 .nb-gradle/
 /test-output/
+/target/
