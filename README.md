@@ -35,7 +35,11 @@ This project is designed to have a Jenkins CI instance hook into this repository
 The capabilities of the Sauce Labs VM farm are harnessed to test the OS-Browser configurations required by the project. The Jenkins instance uses a local VM to spin up a webdriver for a test and the webdriver sends the commands to the remote VM to be executed.
 
 ## Reporting
-*ToDo*
+* Test NG: Contains results for individual tests using the TestNG-extended Orasi reporter.
+
+* Jenkins CI: Contains results for individual tests using the TestNG-extended Orasi reporter.  Also, keeps a build history to show the relative stability of past builds.
+
+* Sauce Labs: Contains results for individual tests as well as captures videos and screenshots.
 
 ## Third Party Resources
 These resources are being used directly, or have been extended upon.
@@ -43,4 +47,4 @@ These resources are being used directly, or have been extended upon.
 * [TestNG 6.8.21](https://github.com/cbeust/testng/): Test execution framework that extends JUnit tests and allows more flexibility for testing.
 * [Smartbear SoapUI 4.5.0](https://github.com/SmartBear/soapui): Allows consumer to build requests files at runtime and sends request through HTTPClient
 * [Sauce Labs 2.1.18](https://github.com/saucelabs/sauce-java): Facilitates the  use of using the Sauce Lab VM farm as a remote Selenium grid on which to execute tests.
-* [Apache HttpClient 4.3.1](https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/index.html)
+* [Apache HttpClient 4.3.1](https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/index.html) Used to transmit and receive SOAP message requests and responses.
