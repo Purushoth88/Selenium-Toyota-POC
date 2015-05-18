@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Win_8_1_Chrome" parallel="classes" thread-count="8">
+	<parameter name="browserUnderTest" value="chrome" />
+	<parameter name="environment" value="" />
+	<parameter name="runLocation" value="remote" />
+	<parameter name="browserVersion" value="" />
+	<parameter name="operatingSystem" value="Windows 8.1" />
+	<test name="Win_8_1_Chrome">
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+
+	</test> <!-- Win_8_1_Chrome -->
+</suite> <!-- Win_8_1_Chrome -->
