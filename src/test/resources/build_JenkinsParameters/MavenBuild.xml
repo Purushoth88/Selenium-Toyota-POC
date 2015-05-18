@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Toyota" parallel="tests" thread-count="8">
@@ -17,4 +18,25 @@
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_10_Safari_8 -->
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Toyota" parallel="tests" thread-count="8">
+	<test name="Mac_OS_X_10_10_Safari_8">
+		<parameter name="browserUnderTest" value="jenkinsParameter" />
+		<parameter name="environment" value="" />
+		<parameter name="runLocation" value="remote" />
+		<parameter name="browserVersion" value="jenkinsParameter" />
+		<parameter name="operatingSystem" value="jenkinsParameter" />
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<packages>
+			<package name="toyota">
+			</package>
+		</packages>
+	</test> <!-- Mac_OS_X_10_10_Safari_8 -->
+>>>>>>> 958796b5b6de7bc4ab692d8be1335a280015c5bc
 </suite> <!-- Toyota -->

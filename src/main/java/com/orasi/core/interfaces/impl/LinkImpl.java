@@ -1,7 +1,6 @@
 package com.orasi.core.interfaces.impl;
 
 import com.orasi.core.interfaces.Link;
-import com.orasi.reporting.OrasiReporter;
 import com.orasi.utils.TestReporter;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -32,6 +31,7 @@ public class LinkImpl extends ElementImpl implements Link {
     	    throw rte;
     	}
     	TestReporter.interfaceLog(" Click Link [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
+        
     }
     
     @Override
@@ -43,5 +43,6 @@ public class LinkImpl extends ElementImpl implements Link {
             throw rte;
         }
     	TestReporter.interfaceLog(" Click Link [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
+    	
     }
 }
