@@ -1,4 +1,4 @@
-package com.orasi.core.by.angular;
+package com.orasi.core.old_by.angular;
 /*
 Copyright 2007-2011 Selenium committers
 
