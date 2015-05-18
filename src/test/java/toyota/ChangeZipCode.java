@@ -55,8 +55,6 @@ public class ChangeZipCode extends TestClassTemplate_SauceLabs{
 				runLocation, environment);
 		this.test = new TestNgTestClassMethods(application, this.te);
 	}
-	
-	// *****
 	// TEST
 	// *****
 	/**
@@ -68,6 +66,7 @@ public class ChangeZipCode extends TestClassTemplate_SauceLabs{
 	 * @Version: 03/10/2015
 	 * @Return: N/A
 	 */
+
 	@Test(dataProvider = "dataScenario", groups = { "regression" }, singleThreaded=true )
 	public void testChangeZipCode(String testScenario, String zipCode)
 			throws InterruptedException, IOException {
