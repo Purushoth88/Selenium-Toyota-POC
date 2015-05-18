@@ -16,20 +16,19 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.NotConnectedException;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 
-import com.orasi.utils.Base64Coder;
-import com.orasi.utils.Constants;
-import com.orasi.utils.TestReporter;
+import com.saucelabs.common.SauceOnDemandAuthentication;
 
 //public class WebDriverSetup implements SauceOnDemandSessionIdProvider{
 public class WebDriverSetup{
     
 	public static WebDriver driver;
-	private String browserVersion = System.getProperty(Constants.BROWSER_VERSION);
+	//private String browserVersion = System.getProperty(Constants.BROWSER_VERSION);
 	
 	private static ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
 	private String seleniumHubURL = "http://"
@@ -37,6 +36,30 @@ public class WebDriverSetup{
 			+ ":"
 			+ Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY"))
 			+ "@ondemand.saucelabs.com:80/wd/hub";
+	
+	//***********
+	// Sauce Labs
+	//***********
+    /**
+     * Constructs a {@link com.saucelabs.common.SauceOnDemandAuthentication} instance using the supplied user name/access key.  To use the authentication
+     * supplied by environment variables or from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
+     */
+	public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
+			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
+			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+
+    /**
+     * ThreadLocal variable which contains the  {@link WebDriver} instance which is used to perform browser interactions with.
+     */
+    private ThreadLocal<WebDriver> webDriver = new ThreadLocal<WebDriver>();
+
+    /**
+     * ThreadLocal variable which contains the Sauce Job Id.
+     */
+    private ThreadLocal<String> sessionId = new ThreadLocal<String>();
+    
+    
+    
 	
 	//Define a variable to house the Linux OS username
 	private String username = "";
@@ -242,54 +265,29 @@ public class WebDriverSetup{
 		
 		//Code for running on the selenium grid
 		}else if(getRunLocation().equalsIgnoreCase("remote")){
-			//Set the URL for selenium grid
-			try {
-				
-				DesiredCapabilities caps = null;
-				
-				//firefox
-				if (getBrowserUnderTest().equalsIgnoreCase("Firefox")){
-					caps = DesiredCapabilities.firefox();  	
-			    }
-				//internet explorer
-			    else if(getBrowserUnderTest().equalsIgnoreCase("IE")){
-			    	caps = DesiredCapabilities.internetExplorer();
-			    	caps.setCapability("ignoreZoomSetting", true);
-			    }
-				//chrome
-			    else if(getBrowserUnderTest().equalsIgnoreCase("Chrome")){
-			    	caps = DesiredCapabilities.chrome(); 		    	
-			    }
-				//headless - HTML unit driver
-			    else if(getBrowserUnderTest().equalsIgnoreCase("html")){	
-			    	caps = DesiredCapabilities.htmlUnitWithJs();		    	
-			    }
-				//safari
-			    else if(getBrowserUnderTest().equals("safari")){
-			    	caps = DesiredCapabilities.safari();
-			    }
-			    else {
-			    	throw new RuntimeException("Parameter not set for browser type");
-			    }
-					
-				if(!getBrowserUnderTest().equalsIgnoreCase("html")){
-					caps.setVersion(getBrowserVersion());
-				}
-				
-				caps.setPlatform(org.openqa.selenium.Platform.valueOf(getOperatingSystem()));
-				caps.setCapability("name", getTestName());
-		    	driver = new RemoteWebDriver(new URL(getSeleniumHubURL()), caps);
-			} catch (MalformedURLException e) {
-				throw new RuntimeException("Selenium Hub URL set is not a valid URL: " + seleniumHubURL);
-			}
-				
+	        DesiredCapabilities capabilities = new DesiredCapabilities();
+	        capabilities.setCapability(CapabilityType.BROWSER_NAME, getBrowserUnderTest());
+	        if (getBrowserVersion() != null) {
+	            capabilities.setCapability(CapabilityType.VERSION, getBrowserVersion());
+	        }
+	        capabilities.setCapability(CapabilityType.PLATFORM, getOperatingSystem());
+	        if(getBrowserUnderTest().toLowerCase().contains("ie") || 
+	        		getBrowserUnderTest().toLowerCase().contains("iexplore")){
+	        	capabilities.setCapability("ignoreZoomSetting", true);
+		    }
+	        capabilities.setCapability("name", getTestName());
+	        webDriver.set(new RemoteWebDriver(
+	                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
+	                capabilities));
+	        sessionId.set(((RemoteWebDriver) getWebDriver()).getSessionId().toString());
+			driver = webDriver.get();
 		}else{
 			throw new RuntimeException("Parameter for run [Location] was not set to 'Local' or 'Remote'");
 		}
 		
 		driver.manage().timeouts().setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS).implicitlyWait(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS);	
 		setDefaultTestTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);
-		//driver.manage().deleteAllCookies();
+		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
 	}
 	
@@ -460,4 +458,12 @@ public class WebDriverSetup{
 		}
 		return proc.exitValue();
 	}
+
+    /**
+     * @return the {@link WebDriver} for the current thread
+     */
+    public WebDriver getWebDriver() {
+        System.out.println("WebDriver" + webDriver.get());
+        return webDriver.get();
+    }
 }

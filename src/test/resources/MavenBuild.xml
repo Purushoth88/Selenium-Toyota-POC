@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="ChangeZipCode" parallel="classes" thread-count="2">
-	<!-- <suite name="ChangeZipCode" parallel="instances" thread-count="5"> -->
-	<parameter name="browserUnderTest" value="firefox" />
+<suite name="Toyota" parallel="tests" thread-count="8">
+	<parameter name="browserUnderTest" value="chrome" />
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="local" />
 	<!-- <parameter name="runLocation" value="remote"</parameter> -->
@@ -11,7 +10,7 @@
 	<test name="ChangeZipCode">
 		<classes>
 			<class name="toyota.ChangeZipCode" />
-			<!-- <class name="toyota.TestAllSecondaryNavigations" /> -->
+			<class name="toyota.TestAllSecondaryNavigations" />
 		</classes>
 	</test> <!-- ChangeZipCode -->
-</suite> <!-- ChangeZipCode -->
+</suite> <!-- Toyota -->

@@ -77,7 +77,6 @@ public class RestService {
 	public String sendGetRequest(String URL) throws ClientProtocolException, IOException{
 		
 		HttpUriRequest request = new HttpGet(URL);
-		
 		HttpResponse  httpResponse = HttpClientBuilder.create().build().execute( request );
 		
 		setStatusCode(httpResponse);		

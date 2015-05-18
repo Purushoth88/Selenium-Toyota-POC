@@ -1,5 +1,6 @@
 package apps.toyota.mainNavigation;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -9,7 +10,9 @@ import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Textbox;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.PageLoaded;
+import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestReporter;
+import com.orasi.utils.WebDriverSetup;
 
 
 /**
@@ -23,6 +26,8 @@ public class MainNavigation {
 	// ******************************
 	String initialZipCode = "";
 	String modifiedZipCode = "";
+	int timeout = WebDriverSetup.getDefaultTestTimeout();
+	int loopCounter = 0;
 	
 	// ********************************
 	// *** Main Navigation Elements ***
@@ -104,7 +109,7 @@ public class MainNavigation {
 	 * @return: NA
 	 */
 	public void changeZipCodes(String zipCode){
-		pageLoaded(txtZipCode);
+		pageLoaded(btnYourLocation);
 		//Capture the zipcode that currently exists in the UI
 		this.initialZipCode = captureCurrentZipCode();
 		TestReporter.log("Initial zip code: ["+initialZipCode+"].");
@@ -113,9 +118,23 @@ public class MainNavigation {
 			//If the zipcode is different, enter the zipcode to be used for the test
 			clickYourLocation();
 			pageLoaded();
-			txtZipCode.safeSet(zipCode);
+			//Safari does not seem to behave the same with safeSet, so it is being handled differently
+			String os = WebDriverSetup.getOperatingSystem().toLowerCase();
+			if(os.contains("mac") || os.contains("os x")){
+				txtZipCode.set(zipCode);
+				txtZipCode.sendKeys(Keys.ENTER);
+			}else{
+				txtZipCode.safeSet(zipCode);
+			}
+			
 			initialize();
 			pageLoaded();
+			loopCounter = 0;
+			do{
+				Sleeper.sleep(1000);
+				loopCounter++;
+				Assert.assertNotEquals(loopCounter, timeout, "The zipcode was found to not have changed within ["+String.valueOf(timeout)+"] seconds.");
+			}while(eleZipCode.getText().equalsIgnoreCase(initialZipCode));
 			//Capture the newly modified zipcode from the UI
 			this.modifiedZipCode = captureCurrentZipCode();
 			TestReporter.log("Modified zip code: ["+modifiedZipCode+"].");
