@@ -39,11 +39,11 @@ The capabilities of the Sauce Labs VM farm are harnessed to test the OS-Browser 
 
 ## Reporting
 
-* Test NG: Contains results for individual tests using the TestNG-extended Orasi reporter.
+* <strong>Test NG:</strong> Contains results for individual tests using the TestNG-extended Orasi reporter.
 
-* Jenkins CI: Contains results for individual tests using the TestNG-extended Orasi reporter.  Also, keeps a build history to show the relative stability of past builds.
+* <strong>Jenkins CI:</strong> Contains results for individual tests using the TestNG-extended Orasi reporter.  Also, keeps a build history to show the relative stability of past builds.
 
-* Sauce Labs: Contains results for individual tests as well as captures videos and screenshots.
+* <strong>Sauce Labs:</strong> Contains results for individual tests as well as captures videos and screenshots.
 
 ## [TestEnvironment.java](https://github.com/waitsavery/Toyota/blob/master/src/main/java/com/orasi/utils/TestEnvironment.java)
 
