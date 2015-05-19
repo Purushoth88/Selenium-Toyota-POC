@@ -80,7 +80,7 @@ Execution of tests is conducted through the TestNG framework which, given our Te
 An example XML follows:
 
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 ## Third Party Resources
 These resources are being used directly, or have been extended upon.
