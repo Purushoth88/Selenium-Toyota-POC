@@ -20,11 +20,11 @@ All elements utilize the Orasi-developed [TestReporter](https://github.com/waits
 
 ## API Web Service Testing
 
-	###Soap Services 
+	Soap Services 
  
 	These libraries contain a SOAP API testing solution which leverages Java and W3C functionalities to dynamically build requests at runtime, modify the requests, transmit and receive SOAP messages, and parse responses for field-level values with which validation can be performed. 
 
-	###REST Services  
+	REST Services  
   
 	These libraries contain a SOAP API testing solution which leverages the Apache HttpClient libraries. Full XML and JSON support is included to parse responses for field-level values with which validation can be performed. 
 
