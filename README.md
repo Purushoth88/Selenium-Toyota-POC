@@ -17,15 +17,6 @@ The core code uses the Java-based Selenium webdriver for GUI testing. It takes t
 |Textbox|txt|txtUsername|
 |Webtable|tab|tabMemberNames|
 |Element (Generic Web Element)|ele|eleImage|
-* Button - btn (ex: btnContinue)
-* Checkbox - chk (ex: chkAgreeToTermsAndConditions))
-* Label - lbl (ex: lblHeader)
-* Link - lnk (ex: lnkCancel)
-* Listbox  - lst (ex: lstStates)
-* Radiogroup - rad (ex: radYesOrNo)
-* Textbox - txt (ex: txtUsername)
-* Webtable - tab (ex: tabMemberNames)
-* Element - ele (ex: eleImage) -> Generic web element
 
 All elements utilize the Orasi-developed [TestReporter](https://github.com/waitsavery/Toyota/blob/master/src/main/java/com/orasi/utils/TestReporter.java) which extends the [TestNG](https://github.com/cbeust/testng) Reporter by concatenating a timestamp and HTML formatting for use in viewing the report in a webbrowser. This allows for a functional audit which can ensure requirements are being met by the automated test, as well as provide steps to reproduce a defect when one occurs.
 
@@ -33,7 +24,7 @@ All elements utilize the Orasi-developed [TestReporter](https://github.com/waits
 
 ###SOAP Services 
  
-These libraries contain a SOAP API testing solution which leverages Java and W3C functionalities to dynamically build requests at runtime, modify the requests, transmit and receive SOAP messages, and parse responses for field-level values with which validation can be performed. 
+These libraries contain a <s>SOAP API<\s> testing solution which leverages Java and W3C functionalities to dynamically build requests at runtime, modify the requests, transmit and receive SOAP messages, and parse responses for field-level values with which validation can be performed. 
 
 ###REST Services  
   
