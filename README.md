@@ -67,6 +67,7 @@ Selenium grabs the actual object to allow the test/user to interact with the ele
 ## Test Class
 
 A flow through an web application is represented by a test class. Each test class is comprised of:
+
 	* TestNG annotated methods (e.g. @BeforeMethod, @Test, @AfterMethod, etc.)
 	* Creation of a DataProvider method to data-drive tests 	
 	* Instantiation of the TestEnvironment class (i.e. create the web driver)
