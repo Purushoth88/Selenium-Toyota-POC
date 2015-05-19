@@ -96,6 +96,13 @@ An example XML follows:
 
 The various parts are described below:
 
+|Attributes|Description|Acceptable Values|
+|-----|-----------|-----------------|
+|name="ChangeZipCode"|Contains the test suite name used to TestNG reporting|Any value that helps uniquely identify the suite|
+|parallel="false"|Determines execution behavior| true or false|
+|parameter name="browserUnderTest" value="chrome"|parameter and value used to create the driver; here, the browser type is defined|Firefox, FF, IE, internetexplorer, Chrome, html, safari|
+|parameter name="environment" value=""|defines a particular environment to test|User-defined in [EnvironmentURLs.properties](https://github.com/Orasi/Selenium-Toyota-POC/blob/waits/src/test/resources/EnvironmentURLs.properties) file|
+|parameter name="runLocation" value="local"|defines the run location|local or remote|
 
 ## Third Party Resources
 These resources are being used directly, or have been extended upon.
