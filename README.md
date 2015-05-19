@@ -24,7 +24,7 @@ All elements utilize the Orasi-developed [TestReporter](https://github.com/waits
 
 ###SOAP Services 
  
-These libraries contain a <strong>SOAP API</strong> testing solution which leverages Java and W3C functionalities to dynamically build requests at runtime, modify the requests, transmit and receive SOAP messages, and parse responses for field-level values with which validation can be performed. 
+These libraries contain a SOAP API testing solution which leverages Java and W3C functionalities to dynamically build requests at runtime, modify the requests, transmit and receive SOAP messages, and parse responses for field-level values with which validation can be performed. 
 
 ###REST Services  
   
@@ -99,7 +99,7 @@ The various parts are described below:
 |Attributes|Description|Acceptable Values|
 |-----|-----------|-----------------|
 |name="ChangeZipCode"|Contains the test suite name used by TestNG reporting|Any value that helps uniquely identify the suite|
-|parallel="false"|Determines execution behavior| true or false|
+|parallel="false"|Determines what, if anything, is to be executed in parallel| false, methods, tests, classes, instances|
 |parameter name="browserUnderTest" value="chrome"|parameter and value used to create the driver; here, the browser type is defined|Sauce Labs: safari, chrome, firefox, iexplore|
 |parameter name="environment" value=""|defines a particular environment to test|User-defined in [EnvironmentURLs.properties](https://github.com/Orasi/Selenium-Toyota-POC/blob/waits/src/test/resources/EnvironmentURLs.properties) file|
 |parameter name="runLocation" value="local"|defines the run location|local or remote|
