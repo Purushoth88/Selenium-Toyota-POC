@@ -18,7 +18,7 @@ The core code uses the Java-based Selenium webdriver for GUI testing. It takes t
 |Webtable|tab|tabMemberNames|
 |Element (Generic Web Element)|ele|eleImage|
 
-All elements utilize the Orasi-developed [TestReporter](https://github.com/waitsavery/Toyota/blob/master/src/main/java/com/orasi/utils/TestReporter.java) which extends the [TestNG](https://github.com/cbeust/testng) Reporter by concatenating a timestamp and HTML formatting for use in viewing the report in a webbrowser. This allows for a functional audit which can ensure requirements are being met by the automated test, as well as provide steps to reproduce a defect when one occurs.
+All elements utilize the Orasi-developed [TestReporter](https://github.com/waitsavery/Toyota/blob/master/src/main/java/com/orasi/utils/TestReporter.java) which extends the [TestNG](https://github.com/cbeust/testng) Reporter by concatenating a timestamp and HTML formatting for use in viewing the report in a web browser. This allows for a functional audit which can ensure requirements are being met by the automated test, as well as provide steps to reproduce a defect when one occurs.
 
 ## API Web Service Testing
 
@@ -98,11 +98,15 @@ The various parts are described below:
 
 |Attributes|Description|Acceptable Values|
 |-----|-----------|-----------------|
-|name="ChangeZipCode"|Contains the test suite name used to TestNG reporting|Any value that helps uniquely identify the suite|
+|name="ChangeZipCode"|Contains the test suite name used by TestNG reporting|Any value that helps uniquely identify the suite|
 |parallel="false"|Determines execution behavior| true or false|
-|parameter name="browserUnderTest" value="chrome"|parameter and value used to create the driver; here, the browser type is defined|Firefox, FF, IE, internetexplorer, Chrome, html, safari|
+|parameter name="browserUnderTest" value="chrome"|parameter and value used to create the driver; here, the browser type is defined|Sauce Labs: safari, chrome, firefox, iexplore|
 |parameter name="environment" value=""|defines a particular environment to test|User-defined in [EnvironmentURLs.properties](https://github.com/Orasi/Selenium-Toyota-POC/blob/waits/src/test/resources/EnvironmentURLs.properties) file|
 |parameter name="runLocation" value="local"|defines the run location|local or remote|
+|parameter name="browserVersion" value=""|defines the browser version to use|Any value available is valid; with Sauce Labs, a blank value will trigger the latest version to be used|
+|parameter name="operatingSystem" value="windows"|defines the operating system to use|Sauce Labs: MAC OS X 10.10, MAC OS X 10.9, Windows 7, Windows 8.1|
+|test name="ChangeZipCode"|Contains the test name used by TestNG reporting|Any value that helps uniquely identify the test and is not used by another test in the same suite.|
+|class name="toyota.ChangeZipCode"|Path of the class to be executed|User-defined and dependent of the build path|
 
 ## Third Party Resources
 These resources are being used directly, or have been extended upon.
