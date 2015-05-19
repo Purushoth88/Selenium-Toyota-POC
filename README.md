@@ -6,17 +6,17 @@ This is the homepage for the Orasi-developed Selenium-Java Toyota project. These
 
 The core code uses the Java-based Selenium webdriver for GUI testing. It takes the standard Selenium-defined WebElement and divides them into more consumer-friendly Elements, whose names are commonly found in HTML DOMs. The following are Elements, and the prefixes used in the code to identify them, as well as examples using the naming conventions:
 
-	|Element|Prefix|Example|
-	|-------|------|-------|
-	|Button|btn|btnContinue|
-	|Checkbox|chk|chkAgreeToTermsAndConditions|
-	|Label|lbl|lblHeader|
-	|Link|lnk|lnkCancel|
-	|Listbox|lst|lstStates|
-	|Radiogroup|rad|radYesOrNo|
-	|Textbox|txt|txtUsername|
-	|Webtable|tab|tabMemberNames|
-	|Element (Generic Web Element)|ele|eleImage|
+|Element|Prefix|Example|
+|-------|------|-------|
+|Button|btn|btnContinue|
+|Checkbox|chk|chkAgreeToTermsAndConditions|
+|Label|lbl|lblHeader|
+|Link|lnk|lnkCancel|
+|Listbox|lst|lstStates|
+|Radiogroup|rad|radYesOrNo|
+|Textbox|txt|txtUsername|
+|Webtable|tab|tabMemberNames|
+|Element (Generic Web Element)|ele|eleImage|
 * Button - btn (ex: btnContinue)
 * Checkbox - chk (ex: chkAgreeToTermsAndConditions))
 * Label - lbl (ex: lblHeader)
