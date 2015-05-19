@@ -128,11 +128,13 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 			Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not closed after [" +String.valueOf(timeout)+ "] seconds.");
 		}while(eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
 		
-		initializePage(this.getClass());
-		pageLoaded();
+//		initializePage(this.getClass());
+//		pageLoaded();
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
+			pageLoaded();
+			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The zipcode was found to not have changed within ["+String.valueOf(timeout)+"] seconds.");
 		}while(eleZipCode.getText().equalsIgnoreCase(initialZipCode));
