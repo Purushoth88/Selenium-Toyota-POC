@@ -165,8 +165,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Shopping Tools dropdown was not closed after ["+String.valueOf(timeout)+"] seconds.");
-			initializePage(this.getClass());
-			pageLoaded(this.getClass(), btnShoppingTools);
+//			initializePage(this.getClass());
+//			pageLoaded(this.getClass(), btnShoppingTools);
 		}while(btnShoppingTools.getAttribute("class").contains("open"));
 	}
 	
