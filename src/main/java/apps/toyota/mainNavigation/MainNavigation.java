@@ -85,6 +85,8 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
+			pageLoaded();
+			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not opened after [" +String.valueOf(timeout)+ "] seconds.");
 		}while(!eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
@@ -102,39 +104,43 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 		this.initialZipCode = captureCurrentZipCode();
 		TestReporter.log("Initial zip code: ["+initialZipCode+"].");
 		//Determine if the existing zipcode in the UI is the same as the zipcode to be used in the test
-		if(!initialZipCode.equalsIgnoreCase(zipCode)){
-			//If the zipcode is different, enter the zipcode to be used for the test
-			clickYourLocation();
-			pageLoaded();
-			//Safari does not seem to behave the same with safeSet, so it is being handled differently
-			//String os = WebDriverSetup.getOperatingSystem().toLowerCase();
-			
-			Assert.assertEquals(txtZipCode.syncVisible(driver), true, "The zipcode textbox is not visible.");
-			txtZipCode.highlight(driver);
-			txtZipCode.set(zipCode);
-			txtZipCode.sendKeys(Keys.ENTER);
-			
-			loopCounter = 0;
-			do{
-				Sleeper.sleep(1000);
-				loopCounter++;
-				Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not closed after [" +String.valueOf(timeout)+ "] seconds.");
-			}while(eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
-			
-			initializePage(this.getClass());
-			pageLoaded();
-			loopCounter = 0;
-			do{
-				Sleeper.sleep(1000);
-				loopCounter++;
-				Assert.assertNotEquals(loopCounter, timeout, "The zipcode was found to not have changed within ["+String.valueOf(timeout)+"] seconds.");
-			}while(eleZipCode.getText().equalsIgnoreCase(initialZipCode));
-			//Capture the newly modified zipcode from the UI
-			this.modifiedZipCode = captureCurrentZipCode();
-			TestReporter.log("Modified zip code: ["+modifiedZipCode+"].");
-			//Ensure the expected and actual zipcdes match
-			verifyZipCodeValue(zipCode);	
+		//If so, increment the zipcode by 1
+		if(initialZipCode.equalsIgnoreCase(zipCode)){
+			int intZipCode = Integer.parseInt(zipCode);
+			intZipCode = intZipCode++;
+			zipCode = String.valueOf(intZipCode);
 		}
+		
+		//If the zipcode is different, enter the zipcode to be used for the test
+		clickYourLocation();
+		
+		Assert.assertEquals(txtZipCode.syncVisible(driver), true, "The zipcode textbox is not visible.");
+		txtZipCode.highlight(driver);
+		txtZipCode.set(zipCode);
+		txtZipCode.sendKeys(Keys.ENTER);
+		
+		loopCounter = 0;
+		do{
+			Sleeper.sleep(1000);
+			pageLoaded();
+			initializePage(this.getClass());
+			loopCounter++;
+			Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not closed after [" +String.valueOf(timeout)+ "] seconds.");
+		}while(eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
+		
+		initializePage(this.getClass());
+		pageLoaded();
+		loopCounter = 0;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			Assert.assertNotEquals(loopCounter, timeout, "The zipcode was found to not have changed within ["+String.valueOf(timeout)+"] seconds.");
+		}while(eleZipCode.getText().equalsIgnoreCase(initialZipCode));
+		//Capture the newly modified zipcode from the UI
+		this.modifiedZipCode = captureCurrentZipCode();
+		TestReporter.log("Modified zip code: ["+modifiedZipCode+"].");
+		//Ensure the expected and actual zipcdes match
+		verifyZipCodeValue(zipCode);
 	}
 	
 	/**

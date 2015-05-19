@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import apps.toyota.secondaryNavigation.SecondaryNavigation;
 
+import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestNgTestClassMethods;
 import com.orasi.utils.TestReporter;
@@ -64,9 +65,10 @@ public class TestAllSecondaryNavigations extends TestClassTemplate_SauceLabs{
 		this.te.setDriver(this.test.testStart(this.testName, this.te));
 		
 		//Ensure the home page is loaded
-		TestReporter.log("Load the Home Page");
-		Assert.assertEquals(this.te.pageLoaded(), true);
-	
+		TestReporter.assertTrue(this.te.pageLoaded(), "Load the Home Page");
+
+		Sleeper.sleep(2000);
+		
 		//Test the secondary navigation bar functionality
 		TestReporter.log("Test the Secondary Navigation Bar Functionality");
 		SecondaryNavigation secNav = new SecondaryNavigation(this.te);
