@@ -45,6 +45,7 @@ public class TestEnvironment {
 	protected String runLocation = "";
 	protected String environment = "";
 	protected String testName = "";
+	protected static int defaultTestTimeout = 0;
 	/*
 	 * WebDriver Fields
 	 */
@@ -203,10 +204,12 @@ public class TestEnvironment {
 	 * Getter and setter for default test timeout
 	 */
 	public void setDefaultTestTimeout(int timeout){
-		System.setProperty(Constants.TEST_DRIVER_TIMEOUT, Integer.toString(timeout));
+		//System.setProperty(Constants.TEST_DRIVER_TIMEOUT, Integer.toString(timeout));
+		defaultTestTimeout = timeout;
 	}
 	public static int getDefaultTestTimeout(){
-		return Integer.parseInt(System.getProperty(Constants.TEST_DRIVER_TIMEOUT));
+		//return Integer.parseInt(System.getProperty(Constants.TEST_DRIVER_TIMEOUT));
+		return defaultTestTimeout;
 	}
 	
 	/*
