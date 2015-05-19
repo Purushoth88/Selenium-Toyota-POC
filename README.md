@@ -24,7 +24,7 @@ All elements utilize the Orasi-developed [TestReporter](https://github.com/waits
 
 ###SOAP Services 
  
-These libraries contain a <s>SOAP API<\s> testing solution which leverages Java and W3C functionalities to dynamically build requests at runtime, modify the requests, transmit and receive SOAP messages, and parse responses for field-level values with which validation can be performed. 
+These libraries contain a <strong>SOAP API</strong> testing solution which leverages Java and W3C functionalities to dynamically build requests at runtime, modify the requests, transmit and receive SOAP messages, and parse responses for field-level values with which validation can be performed. 
 
 ###REST Services  
   
