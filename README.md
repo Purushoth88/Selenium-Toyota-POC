@@ -78,21 +78,9 @@ A flow through an web application is represented by a test class. Each test clas
 
 Execution of tests is conducted through the TestNG framework which, given our Test Class framework, requires a TestNG XML.
 An example XML follows:
-<p>
+
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="ChangeZipCode" parallel="false">
-	<parameter name="browserUnderTest" value="chrome" />
-	<parameter name="environment" value="" />
-	<parameter name="runLocation" value="local" />
-	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="windows" />
-	<test name="ChangeZipCode">
-		<classes>
-			<class name="toyota.ChangeZipCode" />
-		</classes>
-	</test> <!-- ChangeZipCode -->
-</suite> <!-- ChangeZipCode --></p>
+
 
 ## Third Party Resources
 These resources are being used directly, or have been extended upon.
