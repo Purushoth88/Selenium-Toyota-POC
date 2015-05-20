@@ -111,6 +111,7 @@ public class TestEnvironment {
 		setTestName(te.getTestName());
 		setSeleniumHubURL(seleniumHubURL);
 		setDriver(te.getDriver());
+		
 	}
 
 	/*
@@ -256,9 +257,11 @@ public class TestEnvironment {
 	 * @throws InterruptedException 
 	 */
 	public WebDriver initialize() throws InterruptedException, IOException{
+	    	System.setProperty("org.uncommons.reportng.escape-output", "false");
 		driverSetup();
 		launchApplication();
 		return this.driver;
+		
 	}
 	
 	/**

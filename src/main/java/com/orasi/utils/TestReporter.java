@@ -1,5 +1,12 @@
 package com.orasi.utils;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
 
@@ -29,7 +36,6 @@ public class TestReporter {
 		+ "</font></b><br/>");
 	if(getPrintToConsole()) System.out.println(step);
     }
-
     /*
      * public static void logScenario(){
      * Reporter.log("<br/><b><font size = 4>Data Scenario: " +
@@ -60,6 +66,17 @@ public class TestReporter {
     public static void log(String message, Boolean stdOut) {
 	Reporter.log(getTimestamp() + " <i><b>" + message + "</b></i><br />", stdOut);
 	if(getPrintToConsole()) System.out.println(getTimestamp() + trimHtml(message));
+    }
+    
+    public static void logScreenshot(WebDriver driver, String fileLocation) {
+	File file = new File("");
+	file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	try {
+		FileUtils.copyFile(file, new File(fileLocation));
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	Reporter.log("<a href='../../"+ fileLocation+ "'> <img src='../../"+ fileLocation+"' height='200' width='300'/> </a>");	
     }
 
     public static void assertTrue(boolean condition, String description) {	

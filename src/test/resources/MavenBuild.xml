@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Toyota" parallel="tests" thread-count="8">
-	<parameter name="browserUnderTest" value="chrome" />
+	<listeners>
+      <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+      <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+      <listener class-name="com.orasi.utils.NewScreenshot"/>
+ 	</listeners>
+	<parameter name="browserUnderTest" value="firefox" />
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="local" />
 	<!-- <parameter name="runLocation" value="remote"</parameter> -->
-	<parameter name="browserVersion" value="35.0" />
-	<parameter name="operatingSystem" value="VISTA" />
+	<parameter name="browserVersion" value="" />
+	<parameter name="operatingSystem" value="windows" />
 	<test name="ChangeZipCode">
 		<classes>
 			<class name="toyota.ChangeZipCode" />

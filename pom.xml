@@ -27,8 +27,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
 					<configuration>
-						<source>1.7</source> 
-						
+						<source>1.7</source>
+
 						<target>1.7</target>
 					</configuration>
 				</plugin>
@@ -55,12 +55,12 @@
 				</executions>
 				<configuration>
 					<systemPropertyVariables>
-							<jenkinsOperatingSystem></jenkinsOperatingSystem>
-							<jenkinsBrowser></jenkinsBrowser>
-							<jenkinsBrowserVersion></jenkinsBrowserVersion>
-						</systemPropertyVariables> 
+						<jenkinsOperatingSystem></jenkinsOperatingSystem>
+						<jenkinsBrowser></jenkinsBrowser>
+						<jenkinsBrowserVersion></jenkinsBrowserVersion>
+					</systemPropertyVariables>
 					<suiteXmlFiles>
-						<suiteXmlFile>${testNGSourceDirectory}/build_OneXmlForAllBrowserOsCombos/MavenBuild.xml</suiteXmlFile>		
+						<suiteXmlFile>${testNGSourceDirectory}/build_OneXmlForAllBrowserOsCombos/MavenBuild.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
@@ -71,15 +71,10 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>2.43.1</version> 
-			<!--  Selenium Versions not to use
-			2.44.0 - Issues with OS Platform Capabilities 
-				https://code.google.com/p/selenium/issues/detail?id=8083  
-				https://code.google.com/p/selenium/issues/detail?id=8333
-			
-			2.45.0 - Issues with Test Execution speed
-				https://code.google.com/p/selenium/issues/detail?id=8551 
-			 -->
+			<version>2.43.1</version>
+			<!-- Selenium Versions not to use 2.44.0 - Issues with OS Platform Capabilities 
+				https://code.google.com/p/selenium/issues/detail?id=8083 https://code.google.com/p/selenium/issues/detail?id=8333 
+				2.45.0 - Issues with Test Execution speed https://code.google.com/p/selenium/issues/detail?id=8551 -->
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -253,5 +248,23 @@
 			<version>1.1</version>
 		</dependency>
 		<!-- End Soap Core requirements -->
+		<!-- Start ReportNG Libraries -->
+		<dependency>
+			<groupId>org.uncommons</groupId>
+			<artifactId>reportng</artifactId>
+			<version>1.1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>velocity</groupId>
+			<artifactId>velocity-dep</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>4.0</version>
+		</dependency>
+		<!-- End ReportNG Libraries -->
+
 	</dependencies>
 </project>

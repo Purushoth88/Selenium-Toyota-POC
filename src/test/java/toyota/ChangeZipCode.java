@@ -18,6 +18,7 @@ import com.orasi.utils.Constants;
 import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestNgTestClassMethods;
 import com.orasi.utils.TestReporter;
+import com.orasi.utils.TestClassTemplate_SauceLabs;
 import com.orasi.utils.dataProviders.ExcelDataProvider;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
