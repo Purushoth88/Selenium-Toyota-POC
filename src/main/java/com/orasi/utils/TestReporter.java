@@ -47,11 +47,14 @@ public class TestReporter {
     
    public static void logScreenshot(WebDriver driver, String fileLocation) {
 	File file = new File("");
-	file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	
 	try {
+	    file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(file, new File(fileLocation));
 	} catch (IOException e) {
 		e.printStackTrace();
+	} catch (Exception e){
+	    e.printStackTrace();
 	}
 	Reporter.log("<a href='../../"+ fileLocation+ "'> <img src='../../"+ fileLocation+"' height='200' width='300'/> </a>");	
     }

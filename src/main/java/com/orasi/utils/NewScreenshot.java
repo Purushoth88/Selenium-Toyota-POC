@@ -21,8 +21,8 @@ public class NewScreenshot extends TestListenerAdapter {
     public void onTestFailure(ITestResult result) {
 	
 	Object currentClass = result.getInstance();
-	WebDriver driver = ((TestClassTemplate_SauceLabs) currentClass).te.getDriver();
-	String runLocation = ((TestClassTemplate_SauceLabs) currentClass).te.getRunLocation().toLowerCase();
+	WebDriver driver = ((TestEnvironment) currentClass).getDriver();
+	String runLocation = ((TestEnvironment) currentClass).getRunLocation().toLowerCase();
 	if ( runLocation == "remote" ) driver = new Augmenter().augment(driver);
 	Reporter.setCurrentTestResult(result);
 	
