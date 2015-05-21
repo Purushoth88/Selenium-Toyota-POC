@@ -4,6 +4,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import ru.yandex.qatools.allure.annotations.Parameter;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import com.orasi.core.interfaces.Button;
@@ -99,7 +100,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	 * @return: NA
 	 */
 	@Step("Change Zip Code to \"{0}\"")
-	public void changeZipCodes(String zipCode){
+	public void changeZipCodes(@Parameter String zipCode){
 		pageLoaded(this.getClass(), btnYourLocation);
 		//Capture the zipcode that currently exists in the UI
 		this.initialZipCode = captureCurrentZipCode();
@@ -147,7 +148,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	 * @return: NA
 	 */
 	@Step("Verify the Zip Code is \"{0}\"")
-	private void verifyZipCodeValue(String expectedZipCode){
+	private void verifyZipCodeValue(@Parameter String expectedZipCode){
 		Assert.assertEquals(captureCurrentZipCode(), expectedZipCode,  "The actual zipcode ["+captureCurrentZipCode()+"] did not match the expected zip code ["+expectedZipCode+"].");
 	}
 	

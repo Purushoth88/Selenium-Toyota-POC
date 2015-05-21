@@ -13,6 +13,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Parameter;
 import ru.yandex.qatools.allure.annotations.Step;
 import ru.yandex.qatools.allure.annotations.Stories;
 import apps.toyota.mainNavigation.MainNavigation;
@@ -73,7 +74,7 @@ public class ChangeZipCode extends TestClassTemplate_SauceLabs{
 	@Features("Change Zipcode")
 	@Stories("As any user, I can change the zip code on the main page")
 	@Test(dataProvider = "dataScenario", groups = { "regression" }, singleThreaded=true )
-	public void testChangeZipCode(String testScenario, String zipCode)
+	public void testChangeZipCode(@Parameter String testScenario, @Parameter String zipCode)
 			throws InterruptedException, IOException {
 		testName = new Object(){}.getClass().getEnclosingMethod().getName() 
 				+ "_" + te.getOperatingSystem()
