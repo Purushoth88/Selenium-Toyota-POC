@@ -8,6 +8,7 @@ import java.util.Date;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.Augmenter;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
@@ -21,6 +22,8 @@ public class NewScreenshot extends TestListenerAdapter {
 	
 	Object currentClass = result.getInstance();
 	WebDriver driver = ((TestClassTemplate_SauceLabs) currentClass).te.getDriver();
+	String runLocation = ((TestClassTemplate_SauceLabs) currentClass).te.getRunLocation().toLowerCase();
+	if ( runLocation == "remote" ) driver = new Augmenter().augment(driver);
 	Reporter.setCurrentTestResult(result);
 	
 	String destDir = "selenium-reports/html/screenshots";
