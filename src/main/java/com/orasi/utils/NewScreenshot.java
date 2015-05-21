@@ -16,7 +16,7 @@ public class NewScreenshot extends TestListenerAdapter {
     public void onTestFailure(ITestResult result) {
 	
 	Object currentClass = result.getInstance();
-	WebDriver driver = ((toyota.TestClassTemplate_SauceLabs) currentClass).te.getDriver();
+	WebDriver driver = ((TestClassTemplate_SauceLabs) currentClass).te.getDriver();
 	Reporter.setCurrentTestResult(result);
 	
 	String destDir = "selenium-reports/html/screenshots";
