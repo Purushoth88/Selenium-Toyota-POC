@@ -44,8 +44,8 @@ public class TestReporter {
      * Reporter.log("<br/><b><font size = 4>Data Scenario: " +
      * Datatable.getCurrentScenario()+ "</font></b><br/>"); }
      */
-    @Attachment
-    public static void logScreenshot(WebDriver driver, String fileLocation) {
+    
+   public static void logScreenshot(WebDriver driver, String fileLocation) {
 	File file = new File("");
 	file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 	try {
@@ -55,6 +55,7 @@ public class TestReporter {
 	}
 	Reporter.log("<a href='../../"+ fileLocation+ "'> <img src='../../"+ fileLocation+"' height='200' width='300'/> </a>");	
     }
+   
     public static void logScenario(String scenario) {
 	Reporter.log("<br/><b><font size = 4>Data Scenario: " + scenario
 		+ "</font></b><br/>");

@@ -5,10 +5,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
+
+import ru.yandex.qatools.allure.annotations.Attachment;
 
 public class NewScreenshot extends TestListenerAdapter {
 
@@ -26,7 +30,7 @@ public class NewScreenshot extends TestListenerAdapter {
 	String destFile = dateFormat.format(new Date()) + ".png";
 	
 	TestReporter.logScreenshot(driver, destDir + "/" + destFile);
-	
+	AllureScreenshot(driver);
     }
 
     @Override
@@ -37,6 +41,11 @@ public class NewScreenshot extends TestListenerAdapter {
     @Override
     public void onTestSuccess(ITestResult result) {
 	// will be called after test will pass
+    }
+    
+    @Attachment(value = "Failed screenshot", type = "image/png")
+    public static byte[] AllureScreenshot(WebDriver driver) {
+   	return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
     }
 
 }
