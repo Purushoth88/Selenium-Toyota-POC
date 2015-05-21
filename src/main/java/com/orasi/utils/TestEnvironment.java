@@ -19,6 +19,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import ru.yandex.qatools.allure.annotations.Step;
+
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.saucelabs.common.SauceOnDemandAuthentication;
@@ -270,6 +272,7 @@ public class TestEnvironment {
 	 * @author 	Justin Phlegar
 	 * @return 	Nothing
 	 */
+	@Step("Launch browser")
 	public void launchApplication(){
 		if(this.getTestEnvironment().isEmpty()){
 			driver.get(appURLRepository.getString(getApplicationUnderTest().toUpperCase()));

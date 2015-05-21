@@ -1,7 +1,16 @@
 package com.orasi.utils;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
+
+import ru.yandex.qatools.allure.annotations.Attachment;
 
 import com.orasi.utils.date.SimpleDate;
 
@@ -35,7 +44,17 @@ public class TestReporter {
      * Reporter.log("<br/><b><font size = 4>Data Scenario: " +
      * Datatable.getCurrentScenario()+ "</font></b><br/>"); }
      */
-
+    @Attachment
+    public static void logScreenshot(WebDriver driver, String fileLocation) {
+	File file = new File("");
+	file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	try {
+		FileUtils.copyFile(file, new File(fileLocation));
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	Reporter.log("<a href='../../"+ fileLocation+ "'> <img src='../../"+ fileLocation+"' height='200' width='300'/> </a>");	
+    }
     public static void logScenario(String scenario) {
 	Reporter.log("<br/><b><font size = 4>Data Scenario: " + scenario
 		+ "</font></b><br/>");
