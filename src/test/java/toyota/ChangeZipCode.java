@@ -12,6 +12,9 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Step;
+import ru.yandex.qatools.allure.annotations.Stories;
 import apps.toyota.mainNavigation.MainNavigation;
 
 import com.orasi.utils.Constants;
@@ -51,9 +54,9 @@ public class ChangeZipCode extends TestClassTemplate_SauceLabs{
 			"operatingSystem", "environment" })
 	public void setupClass(String runLocation, String browserUnderTest,
 			String browserVersion, String operatingSystem, String environment) {
-		this.te = new TestEnvironment(application, browserUnderTest, browserVersion, operatingSystem,
+		te = new TestEnvironment(application, browserUnderTest, browserVersion, operatingSystem,
 				runLocation, environment);
-		this.test = new TestNgTestClassMethods(application, this.te);
+		test = new TestNgTestClassMethods(application, te);
 	}
 	// TEST
 	// *****
@@ -67,22 +70,25 @@ public class ChangeZipCode extends TestClassTemplate_SauceLabs{
 	 * @Return: N/A
 	 */
 
+	@Features("Change Zipcode")
+	@Stories("As any user, I can change the zip code on the main page")
 	@Test(dataProvider = "dataScenario", groups = { "regression" }, singleThreaded=true )
 	public void testChangeZipCode(String testScenario, String zipCode)
 			throws InterruptedException, IOException {
-		this.testName = new Object(){}.getClass().getEnclosingMethod().getName() 
-				+ "_" + this.te.getOperatingSystem()
-				+ "_" + this.te.getBrowserUnderTest()
-				+ "_" + this.te.getBrowserVersion();
+		testName = new Object(){}.getClass().getEnclosingMethod().getName() 
+				+ "_" + te.getOperatingSystem()
+				+ "_" + te.getBrowserUnderTest()
+				+ "_" + te.getBrowserVersion();
 
-		this.te.setDriver(this.test.testStart(this.testName, this.te));
+		te.setDriver(test.testStart(testName, te));
 		
 		// Ensure the home page is loaded
 		TestReporter.logScenario(testScenario);
-		Assert.assertEquals(this.te.pageLoaded(), true);
+		TestReporter.assertTrue(te.pageLoaded(), "Verify Homepage is displayed");
 
 		// Change the zipcode
-		MainNavigation mainNav = new MainNavigation(this.te);
+		MainNavigation mainNav = new MainNavigation(te);
+		TestReporter.assertTrue(te.pageLoaded(), "Verify Navigation Bar is loaded");
 		mainNav.changeZipCodes(zipCode);
 	}
 }

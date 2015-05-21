@@ -11,6 +11,8 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
 import apps.toyota.secondaryNavigation.SecondaryNavigation;
 
 import com.orasi.utils.TestEnvironment;
@@ -37,9 +39,9 @@ public class TestAllSecondaryNavigations extends TestClassTemplate_SauceLabs{
 			"operatingSystem", "environment" })
 	public void setupClass(String runLocation, String browserUnderTest,
 			String browserVersion, String operatingSystem, String environment) {
-		this.te = new TestEnvironment(application, browserUnderTest, browserVersion, operatingSystem,
+		te = new TestEnvironment(application, browserUnderTest, browserVersion, operatingSystem,
 				runLocation, environment);
-		this.test = new TestNgTestClassMethods(application, this.te);
+		test = new TestNgTestClassMethods(application, te);
 	}
 	
 	//*****
@@ -54,22 +56,24 @@ public class TestAllSecondaryNavigations extends TestClassTemplate_SauceLabs{
 	 * @Version: 03/10/2015
 	 * @Return: N/A
 	 */
+	@Features("Navigation")
+	@Stories("As any user, I use all navigation items on the Navigation Bar")
 	@Test(groups = { "regression" }, singleThreaded=true)
 	public void testAllSecondaryNavigations() throws InterruptedException, IOException {
-		this.testName = new Object(){}.getClass().getEnclosingMethod().getName() 
-				+ "_" + this.te.getOperatingSystem()
-				+ "_" + this.te.getBrowserUnderTest()
-				+ "_" + this.te.getBrowserVersion();
+		testName = new Object(){}.getClass().getEnclosingMethod().getName() 
+				+ "_" + te.getOperatingSystem()
+				+ "_" + te.getBrowserUnderTest()
+				+ "_" + te.getBrowserVersion();
 
-		this.te.setDriver(this.test.testStart(this.testName, this.te));
+		te.setDriver(test.testStart(testName, te));
 		
 		//Ensure the home page is loaded
 		TestReporter.log("Load the Home Page");
-		Assert.assertEquals(this.te.pageLoaded(), true);
+		Assert.assertEquals(te.pageLoaded(), true);
 	
 		//Test the secondary navigation bar functionality
 		TestReporter.log("Test the Secondary Navigation Bar Functionality");
-		SecondaryNavigation secNav = new SecondaryNavigation(this.te);
+		SecondaryNavigation secNav = new SecondaryNavigation(te);
 		secNav.navigateAllSecondaryNavigationTabs();
 	}
 }
