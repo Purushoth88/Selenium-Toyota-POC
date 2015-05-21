@@ -6,6 +6,7 @@ import org.testng.Assert;
 
 import ru.yandex.qatools.allure.annotations.Parameter;
 import ru.yandex.qatools.allure.annotations.Step;
+import ru.yandex.qatools.allure.model.SeverityLevel;
 
 import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;

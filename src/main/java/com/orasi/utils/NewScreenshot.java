@@ -30,7 +30,7 @@ public class NewScreenshot extends TestListenerAdapter {
 	String destFile = dateFormat.format(new Date()) + ".png";
 	
 	TestReporter.logScreenshot(driver, destDir + "/" + destFile);
-	AllureScreenshot(driver);
+	FailedScreenshot(driver);
     }
 
     @Override
@@ -43,8 +43,8 @@ public class NewScreenshot extends TestListenerAdapter {
 	// will be called after test will pass
     }
     
-    @Attachment(value = "Failed screenshot", type = "image/png")
-    public static byte[] AllureScreenshot(WebDriver driver) {
+    @Attachment(type = "image/png")
+    public static byte[] FailedScreenshot(WebDriver driver) {
    	return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
     }
 
