@@ -62,9 +62,11 @@ public class TestReporter {
 	if(getPrintToConsole()) System.out.println(getTimestamp() + trimHtml(scenario));
     }
 
-    public static void interfaceLog(String message) {
+    @Attachment
+    public static String interfaceLog(String message) {
 	Reporter.log(getTimestamp() + message + "<br />");
 	if(getPrintToConsole()) System.out.println(getTimestamp() + trimHtml(message.trim()));
+	return getTimestamp() + message + "<br />";
     }
     
     public static void interfaceLog(String message, boolean failed) {
