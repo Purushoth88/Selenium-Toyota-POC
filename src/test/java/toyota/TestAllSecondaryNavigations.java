@@ -56,8 +56,8 @@ public class TestAllSecondaryNavigations extends TestClassTemplate_SauceLabs{
 	 * @Version: 03/10/2015
 	 * @Return: N/A
 	 */
-	@Features("Navigation")
-	@Stories("As any user, I use all navigation items on the Navigation Bar")
+	@Features("General Usage")
+	@Stories("As any user, I can use all navigation items on the Navigation Bar")
 	@Test(groups = { "regression" }, singleThreaded=true)
 	public void testAllSecondaryNavigations() throws InterruptedException, IOException {
 		testName = new Object(){}.getClass().getEnclosingMethod().getName() 

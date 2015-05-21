@@ -71,7 +71,7 @@ public class ChangeZipCode extends TestClassTemplate_SauceLabs{
 	 * @Return: N/A
 	 */
 
-	@Features("Change Zipcode")
+	@Features("General Usage")
 	@Stories("As any user, I can change the zip code on the main page")
 	@Test(dataProvider = "dataScenario", groups = { "regression" }, singleThreaded=true )
 	public void testChangeZipCode(@Parameter String testScenario, @Parameter String zipCode)
