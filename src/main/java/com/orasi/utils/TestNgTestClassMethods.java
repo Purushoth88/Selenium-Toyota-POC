@@ -94,7 +94,7 @@ public class TestNgTestClassMethods extends TestEnvironment{
 
 		WebDriver driver = initialize();
 
-		System.out.println(testName);
+		//System.out.println(testName);
 		this.drivers.put(testName, driver);
 
 		return this.drivers.get(testName);
