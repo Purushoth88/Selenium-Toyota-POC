@@ -49,12 +49,10 @@ public class ElementImpl implements Element {
 	    	try{
 	    	    element.click();
 	    	}catch(RuntimeException rte){
-	    	    TestReporter.interfaceLog(SimpleDate.getTimestamp()
-        		+ " :: Clicked [ <font size = 2 color=\"red\"><b>@FindBy: " + getElementLocatorInfo()
+	    	    TestReporter.interfaceLog(" :: Clicked [ <font size = 2 color=\"red\"><b>@FindBy: " + getElementLocatorInfo()
         		+ " </font></b>]");
 	    	}
-		TestReporter.interfaceLog(SimpleDate.getTimestamp()
-				+ " :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
+		TestReporter.interfaceLog(" :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
 				+ " </b>]");
 	}
 
@@ -64,8 +62,7 @@ public class ElementImpl implements Element {
 		executor.executeScript(
 				"arguments[0].scrollIntoView(true);arguments[0].click();",
 				element);
-		TestReporter.interfaceLog(SimpleDate.getTimestamp()
-				+ " :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
+		TestReporter.interfaceLog(" :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
 				+ " </b>]");
 	}
 
@@ -77,8 +74,7 @@ public class ElementImpl implements Element {
 	@Override
 	public void focusClick(WebDriver driver) {
 		new Actions(driver).moveToElement(element).click().perform();
-		TestReporter.interfaceLog(SimpleDate.getTimestamp()
-				+ " :: Focus Clicked [ <b>@FindBy: " + getElementLocatorInfo()
+		TestReporter.interfaceLog(" :: Focus Clicked [ <b>@FindBy: " + getElementLocatorInfo()
 				+ " </b>]");
 	}
 
@@ -193,7 +189,7 @@ public class ElementImpl implements Element {
 	public void sendKeys(CharSequence... keysToSend) {
 		if (keysToSend.toString() != "") {
 			element.sendKeys(keysToSend);
-			TestReporter.interfaceLog(SimpleDate.getTimestamp() + " :: Send Keys [ <b>"
+			TestReporter.interfaceLog(" :: Send Keys [ <b>"
 					+ keysToSend.toString()
 					+ "</b> ] to Textbox [ <b>@FindBy: "
 					+ getElementLocatorInfo() + " </b> ]");
