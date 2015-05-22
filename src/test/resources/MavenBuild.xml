@@ -5,8 +5,8 @@
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="local" />
 	<!-- <parameter name="runLocation" value="remote"</parameter> -->
-	<parameter name="browserVersion" value="35.0" />
-	<parameter name="operatingSystem" value="VISTA" />
+	<parameter name="browserVersion" value="" />
+	<parameter name="operatingSystem" value="Windows" />
 	<test name="ChangeZipCode">
 		<classes>
 			<class name="toyota.ChangeZipCode" />

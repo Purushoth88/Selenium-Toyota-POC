@@ -86,17 +86,5 @@ public class TestNgTestClassMethods extends TestEnvironment{
 		}
 	}
 
-	public WebDriver testStart(String testName, TestEnvironment te) throws InterruptedException,
-			IOException {
-		// Uncomment the following line to have TestReporter outputs output to
-		// the console
-		TestReporter.setPrintToConsole(true);
 
-		WebDriver driver = initialize();
-
-		//System.out.println(testName);
-		this.drivers.put(testName, driver);
-
-		return this.drivers.get(testName);
-	}
 }

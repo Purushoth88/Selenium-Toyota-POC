@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
@@ -21,7 +22,7 @@ import com.orasi.utils.TestReporter;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
 @Listeners({SauceOnDemandTestListener.class})
-public class TestAllSecondaryNavigations extends TestClassTemplate_SauceLabs{
+public class TestAllSecondaryNavigations extends TestEnvironment{
 	private String application = "Toyota";
 	/*
 	 * Define a collection of webdrivers and test names inside a Map.
@@ -39,9 +40,12 @@ public class TestAllSecondaryNavigations extends TestClassTemplate_SauceLabs{
 			"operatingSystem", "environment" })
 	public void setupClass(String runLocation, String browserUnderTest,
 			String browserVersion, String operatingSystem, String environment) {
-		te = new TestEnvironment(application, browserUnderTest, browserVersion, operatingSystem,
-				runLocation, environment);
-		test = new TestNgTestClassMethods(application, te);
+	    	setApplicationUnderTest(application);
+		setBrowserUnderTest(browserUnderTest);
+		setBrowserVersion(browserVersion);
+		setOperatingSystem(operatingSystem);
+		setRunLocation(runLocation);
+		setTestEnvironment(environment);
 	}
 	
 	//*****
@@ -59,21 +63,28 @@ public class TestAllSecondaryNavigations extends TestClassTemplate_SauceLabs{
 	@Features("General Usage")
 	@Stories("As any user, I can use all navigation items on the Navigation Bar")
 	@Test(groups = { "regression" }, singleThreaded=true)
-	public void testAllSecondaryNavigations() throws InterruptedException, IOException {
+	public void testAllSecondaryNavigations() {
 		testName = new Object(){}.getClass().getEnclosingMethod().getName() 
-				+ "_" + te.getOperatingSystem()
-				+ "_" + te.getBrowserUnderTest()
-				+ "_" + te.getBrowserVersion();
+				+ "_" + getOperatingSystem()
+				+ "_" + getBrowserUnderTest()
+				+ "_" + getBrowserVersion();
 
-		te.setDriver(test.testStart(testName, te));
+		//Start the test and generate a driver
+		testStart(testName);
 		
 		//Ensure the home page is loaded
 		TestReporter.log("Load the Home Page");
-		Assert.assertEquals(te.pageLoaded(), true);
+		Assert.assertEquals(pageLoaded(), true);
 	
 		//Test the secondary navigation bar functionality
 		TestReporter.log("Test the Secondary Navigation Bar Functionality");
-		SecondaryNavigation secNav = new SecondaryNavigation(te);
+		SecondaryNavigation secNav = new SecondaryNavigation(this);
 		secNav.navigateAllSecondaryNavigationTabs();
 	}
+	
+	    
+	    @AfterTest
+	    public void afterTest(){
+		endTest(testName);
+	    }
 }
