@@ -7,8 +7,8 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
-import com.orasi.core.old_by.angular.AngularElementLocator;
-import com.orasi.core.old_by.angular.FindByNG;
+import com.orasi.core.by.angular.AngularElementLocator;
+import com.orasi.core.by.angular.FindByNG;
 
 public class CustomElementLocatorFactory implements ElementLocatorFactory {
 	  private final WebDriver driver;
