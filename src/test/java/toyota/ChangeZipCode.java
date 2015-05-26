@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -98,7 +99,7 @@ public class ChangeZipCode extends TestEnvironment {
 		mainNav.changeZipCodes(zipCode);
 	}
 
-	@AfterTest
+	@AfterMethod(groups = { "regression" })
 	public void afterTest(ITestResult test) {
 		endSauceTest(test);
 	}

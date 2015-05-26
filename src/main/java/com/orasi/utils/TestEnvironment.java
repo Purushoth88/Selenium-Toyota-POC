@@ -326,6 +326,7 @@ public class TestEnvironment {
 	// Uncomment the following line to have TestReporter outputs output to
 	// the console
 	TestReporter.setPrintToConsole(true);
+	setTestName(testName);
 	driverSetup();
 	launchApplication();
 	drivers.put(testName, driver);
@@ -340,12 +341,13 @@ public class TestEnvironment {
 	}
 	
 	protected void endSauceTest(ITestResult test) {
+			TestReporter.log("endSauceTest");
 			Map<String, Object> updates = new HashMap<String, Object>();
-			updates.put("name", test.getMethod().getMethodName());
+			updates.put("name", getTestName());
 
 			// if is a failure, then take a screenshot
 			if (test.getStatus() == ITestResult.FAILURE) {
-				new Screenshot().takeScreenShot(test, driver);
+//				new Screenshot().takeScreenShot(test, driver);
 				updates.put("passed", false);
 			} else {
 				updates.put("passed", true);
@@ -366,8 +368,13 @@ public class TestEnvironment {
 				//System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));
 			}
 
+			WebDriver driver = drivers.get(getTestName());
 			if (driver != null && driver.getWindowHandles().size() > 0) {
+				TestReporter.log("Quitting Driver");
 				driver.quit();
+				TestReporter.log("Driver Quit");
+			}else{
+				TestReporter.log("No Driver");
 			}
 	}
     
