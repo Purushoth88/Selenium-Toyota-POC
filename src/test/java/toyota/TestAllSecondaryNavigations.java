@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
@@ -78,7 +79,7 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 	}
 
 	@AfterTest
-	public void afterTest() {
-	endTest(testName);
+	public void afterTest(ITestResult test) {
+		endSauceTest(test);
 	}
 }

@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,12 +20,14 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.testng.ITestResult;
 
 import ru.yandex.qatools.allure.annotations.Step;
 
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.saucelabs.common.SauceOnDemandAuthentication;
+import com.saucelabs.saucerest.SauceREST;
 
 /**
  * 
@@ -329,12 +332,44 @@ public class TestEnvironment {
 	setDriver(drivers.get(testName));
     }
 
-    protected void endTest(String testName){
-	WebDriver driver = drivers.get(testName);
-	if (driver != null && driver.getWindowHandles().size() > 0) {
-		driver.quit();
+	protected void endTest(String testName) {
+		WebDriver driver = drivers.get(testName);
+		if (driver != null && driver.getWindowHandles().size() > 0) {
+			driver.quit();
+		}
 	}
-    }
+	
+	protected void endSauceTest(ITestResult test) {
+			Map<String, Object> updates = new HashMap<String, Object>();
+			updates.put("name", test.getMethod().getMethodName());
+
+			// if is a failure, then take a screenshot
+			if (test.getStatus() == ITestResult.FAILURE) {
+				new Screenshot().takeScreenShot(test, driver);
+				updates.put("passed", false);
+			} else {
+				updates.put("passed", true);
+			}
+
+			JSONArray tags = new JSONArray();
+			String[] groups = test.getMethod().getGroups();
+			for (int x = 0; x < groups.length; x++) {
+				tags.add(groups[x]);
+			}
+			updates.put("tags", tags);
+
+			if (runLocation.equalsIgnoreCase("remote")) {
+				SauceREST client = new SauceREST(
+						Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
+						Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+				client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
+				//System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));
+			}
+
+			if (driver != null && driver.getWindowHandles().size() > 0) {
+				driver.quit();
+			}
+	}
     
     /**
      * Sets up the driver type, location, browser under test, os
