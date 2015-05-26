@@ -118,6 +118,8 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 		
 		//If the zipcode is different, enter the zipcode to be used for the test
 		clickYourLocation();
+		pageLoaded(this.getClass(), txtZipCode);
+		initializePage(this.getClass());
 		
 		Assert.assertEquals(txtZipCode.syncVisible(driver), true, "The zipcode textbox is not visible.");
 		txtZipCode.highlight(driver);
