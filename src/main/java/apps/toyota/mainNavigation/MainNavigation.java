@@ -170,6 +170,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	private String captureCurrentZipCode(){
 		pageLoaded(this.getClass(), eleZipCode);
 		return eleZipCode.getText().trim();
+		
 	}
 }
 
