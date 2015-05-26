@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -15,6 +14,7 @@ import org.testng.annotations.Test;
 import apps.toyota.mainNavigation.MainNavigation;
 
 import com.orasi.utils.Constants;
+import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestNgTestClassMethods;
 import com.orasi.utils.TestReporter;
@@ -33,9 +33,9 @@ public class ChangeZipCode extends TestClassTemplate_SauceLabs{
 	 */
 	private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
 	
-	// **************
+	// *************
 	// Data Provider
-	// **************
+	// *************
 	@DataProvider(name = "dataScenario")
 	public Object[][] scenarios() {
 		Object[][] excelData = new ExcelDataProvider(
@@ -43,9 +43,9 @@ public class ChangeZipCode extends TestClassTemplate_SauceLabs{
 		return excelData;
 	}
 
-	// *********************
+	// ********************
 	// Before-Test Behavior
-	// *********************
+	// ********************
 	@BeforeTest(groups = { "regression" })
 	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 			"operatingSystem", "environment" })
@@ -55,8 +55,9 @@ public class ChangeZipCode extends TestClassTemplate_SauceLabs{
 				runLocation, environment);
 		this.test = new TestNgTestClassMethods(application, this.te);
 	}
+	// ****
 	// TEST
-	// *****
+	// ****
 	/**
 	 * @throws IOException
 	 * @throws InterruptedException
@@ -78,9 +79,10 @@ public class ChangeZipCode extends TestClassTemplate_SauceLabs{
 		this.te.setDriver(this.test.testStart(this.testName, this.te));
 		
 		// Ensure the home page is loaded
-		TestReporter.logScenario(testScenario);
-		Assert.assertEquals(this.te.pageLoaded(), true);
+		TestReporter.assertTrue(this.te.pageLoaded(), "Load the Home Page");
 
+		Sleeper.sleep(2000);
+		
 		// Change the zipcode
 		MainNavigation mainNav = new MainNavigation(this.te);
 		mainNav.changeZipCodes(zipCode);

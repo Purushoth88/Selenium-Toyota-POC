@@ -125,6 +125,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
+			pageLoaded();
+			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Select Vehicle dropdown did not open after ["+String.valueOf(timeout)+"] seconds.");
 		}while(!btnSelectVehicle.getAttribute("class").contains("open"));
@@ -137,6 +139,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
+			pageLoaded();
+			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Select Vehicle dropdown was not closed after ["+String.valueOf(timeout)+"] seconds.");
 		}while(btnSelectVehicle.getAttribute("class").contains("open"));
@@ -149,6 +153,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
+			pageLoaded();
+			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Shopping Tools dropdown did not open after ["+String.valueOf(timeout)+"] seconds.");
 		}while(!btnShoppingTools.getAttribute("class").contains("open"));
@@ -160,10 +166,12 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
+			pageLoaded();
+			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Shopping Tools dropdown was not closed after ["+String.valueOf(timeout)+"] seconds.");
-			initializePage(this.getClass());
-			pageLoaded(this.getClass(), btnShoppingTools);
+//			initializePage(this.getClass());
+//			pageLoaded(this.getClass(), btnShoppingTools);
 		}while(btnShoppingTools.getAttribute("class").contains("open"));
 	}
 	
@@ -172,12 +180,13 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		//Grab the number of links on the current page
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
 		lnkFindADealer.jsClick(getDriver());
-		initializePage(this.getClass());
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
 		List<WebElement> list2;
 		do{
 			Sleeper.sleep(1000);
+			pageLoaded();
+			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The 'Find Your Toyota Dealer' page was not loaded after ["+String.valueOf(timeout)+"] seconds.");
 			list2 = getDriver().findElements(By.tagName("a"));		
@@ -190,6 +199,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
 		//Click the link
 		lnkBuildAndPrice.jsClick(getDriver());
+		pageLoaded();
 		initializePage(this.getClass());
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
@@ -209,12 +219,13 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 		
 		
 		lnkLocalSpecials.jsClick(getDriver());
-		initializePage(this.getClass());
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
 		List<WebElement> list2;
 		do{
 			Sleeper.sleep(1000);
+			pageLoaded();
+			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The 'Local Specials' page was not loaded after ["+String.valueOf(timeout)+"] seconds.");
 			list2 = getDriver().findElements(By.tagName("a"));		

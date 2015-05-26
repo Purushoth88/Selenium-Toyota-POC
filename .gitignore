@@ -120,7 +120,4 @@ nbactions.xml
 nb-configuration.xml
 .nb-gradle/
 /test-output/
-<<<<<<< HEAD
-=======
 /target/
->>>>>>> 772495cfcd11fe2cbaeadd1dd2d2c261628960a1
