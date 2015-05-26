@@ -18,7 +18,7 @@ The core code uses the Java-based Selenium webdriver for GUI testing. It takes t
 |Webtable|tab|tabMemberNames|
 |Element (Generic Web Element)|ele|eleImage|
 
-All elements utilize the Orasi-developed [TestReporter](https://github.com/waitsavery/Toyota/blob/master/src/main/java/com/orasi/utils/TestReporter.java) which extends the [TestNG](https://github.com/cbeust/testng) Reporter by concatenating a timestamp and HTML formatting for use in viewing the report in a web browser. This allows for a functional audit which can ensure requirements are being met by the automated test, as well as provide steps to reproduce a defect when one occurs.
+All elements utilize the Orasi-developed [TestReporter](https://github.com/Orasi/Selenium-Toyota-POC/blob/master/src/main/java/com/orasi/utils/TestReporter.java) which extends the [TestNG](https://github.com/cbeust/testng) Reporter by concatenating a timestamp and HTML formatting for use in viewing the report in a web browser. This allows for a functional audit which can ensure requirements are being met by the automated test, as well as provide steps to reproduce a defect when one occurs.
 
 ## API Web Service Testing
 
@@ -45,7 +45,7 @@ The capabilities of the Sauce Labs VM farm are harnessed to test the OS-Browser 
 
 * <strong>Sauce Labs:</strong> Contains results for individual tests as well as captures videos and screenshots.
 
-## [TestEnvironment.java](https://github.com/waitsavery/Toyota/blob/master/src/main/java/com/orasi/utils/TestEnvironment.java)
+## [TestEnvironment.java](https://github.com/Orasi/Selenium-Toyota-POC/blob/master/src/main/java/com/orasi/utils/TestEnvironment.java)
 
 This is a crucial class for this framework. This class is designed to be extended by page classes and implemented by test classes. It houses test environment data and remote WebDrivers as well as page class methods used to sync page behavior.  The need for this arose due to the parallel behavior that indicated that WebDriver instances were crossing threads and testing on the wrong os/browser configurations.
 
