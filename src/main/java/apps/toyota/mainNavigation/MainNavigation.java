@@ -84,7 +84,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	 */
 	private void clickYourLocation(){
 		//Attempt to use the Selenium 'click'
-		btnYourLocation.click();
+		btnYourLocation.jsClick(driver);
 		
 		loopCounter = 0;
 		do{
