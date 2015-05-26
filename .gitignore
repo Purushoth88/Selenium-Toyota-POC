@@ -120,4 +120,12 @@ nbactions.xml
 nb-configuration.xml
 .nb-gradle/
 /test-output/
+<<<<<<< HEAD
 /target/
+=======
+<<<<<<< HEAD
+=======
+/target/
+>>>>>>> 772495cfcd11fe2cbaeadd1dd2d2c261628960a1
+/selenium-reports/
+>>>>>>> 65ec702fc80d7c8c45c553321c0d288e7b928714

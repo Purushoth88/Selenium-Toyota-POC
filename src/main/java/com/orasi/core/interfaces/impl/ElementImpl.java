@@ -23,6 +23,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.orasi.core.interfaces.Element;
 import com.orasi.utils.Constants;
+import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
 import com.orasi.utils.date.SimpleDate;
 
@@ -49,10 +50,12 @@ public class ElementImpl implements Element {
 	    	try{
 	    	    element.click();
 	    	}catch(RuntimeException rte){
-	    	    TestReporter.interfaceLog(" :: Clicked [ <font size = 2 color=\"red\"><b>@FindBy: " + getElementLocatorInfo()
+	    	    TestReporter.interfaceLog(SimpleDate.getTimestamp()
+        		+ " :: Clicked [ <font size = 2 color=\"red\"><b>@FindBy: " + getElementLocatorInfo()
         		+ " </font></b>]");
 	    	}
-		TestReporter.interfaceLog(" :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
+		TestReporter.interfaceLog(SimpleDate.getTimestamp()
+				+ " :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
 				+ " </b>]");
 	}
 
@@ -62,7 +65,8 @@ public class ElementImpl implements Element {
 		executor.executeScript(
 				"arguments[0].scrollIntoView(true);arguments[0].click();",
 				element);
-		TestReporter.interfaceLog(" :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
+		TestReporter.interfaceLog(SimpleDate.getTimestamp()
+				+ " :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
 				+ " </b>]");
 	}
 
@@ -74,7 +78,8 @@ public class ElementImpl implements Element {
 	@Override
 	public void focusClick(WebDriver driver) {
 		new Actions(driver).moveToElement(element).click().perform();
-		TestReporter.interfaceLog(" :: Focus Clicked [ <b>@FindBy: " + getElementLocatorInfo()
+		TestReporter.interfaceLog(SimpleDate.getTimestamp()
+				+ " :: Focus Clicked [ <b>@FindBy: " + getElementLocatorInfo()
 				+ " </b>]");
 	}
 

@@ -1,5 +1,12 @@
 package com.orasi.utils;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
 
@@ -152,4 +159,18 @@ public class TestReporter {
    	Reporter.log(getTimestamp() + "<font size = 2 color=\"green\"><b><u>Assert Not Null - " + description + "</font></u></b><br />");
    	if(getPrintToConsole()) System.out.println(getTimestamp() + "Assert Not Null - " + trimHtml(description));
        }
+
+    public static void logScreenshot(WebDriver driver, String fileLocation) {
+	File file = new File("");
+	
+	try {
+	    file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(file, new File(fileLocation));
+	} catch (IOException e) {
+		e.printStackTrace();
+	} catch (Exception e){
+	    e.printStackTrace();
+	}
+	Reporter.log("<a href='../../"+ fileLocation+ "'> <img src='../../"+ fileLocation+"' height='200' width='300'/> </a>");	
+    }
 }

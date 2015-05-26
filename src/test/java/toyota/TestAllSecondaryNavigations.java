@@ -6,11 +6,14 @@ import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
 import apps.toyota.secondaryNavigation.SecondaryNavigation;
 
 import com.orasi.utils.Sleeper;
@@ -20,7 +23,7 @@ import com.orasi.utils.TestReporter;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
 @Listeners({SauceOnDemandTestListener.class})
-public class TestAllSecondaryNavigations extends TestClassTemplate_SauceLabs{
+public class TestAllSecondaryNavigations extends TestEnvironment{
 	private String application = "Toyota";
 	/*
 	 * Define a collection of webdrivers and test names inside a Map.
@@ -38,9 +41,12 @@ public class TestAllSecondaryNavigations extends TestClassTemplate_SauceLabs{
 			"operatingSystem", "environment" })
 	public void setupClass(String runLocation, String browserUnderTest,
 			String browserVersion, String operatingSystem, String environment) {
-		this.te = new TestEnvironment(application, browserUnderTest, browserVersion, operatingSystem,
-				runLocation, environment);
-		this.test = new TestNgTestClassMethods(application, this.te);
+	    	setApplicationUnderTest(application);
+		setBrowserUnderTest(browserUnderTest);
+		setBrowserVersion(browserVersion);
+		setOperatingSystem(operatingSystem);
+		setRunLocation(runLocation);
+		setTestEnvironment(environment);
 	}
 	
 	//*****
@@ -55,23 +61,31 @@ public class TestAllSecondaryNavigations extends TestClassTemplate_SauceLabs{
 	 * @Version: 03/10/2015
 	 * @Return: N/A
 	 */
+	@Features("General Usage")
+	@Stories("As any user, I can use all navigation items on the Navigation Bar")
 	@Test(groups = { "regression" }, singleThreaded=true)
-	public void testAllSecondaryNavigations() throws InterruptedException, IOException {
-		this.testName = new Object(){}.getClass().getEnclosingMethod().getName() 
-				+ "_" + this.te.getOperatingSystem()
-				+ "_" + this.te.getBrowserUnderTest()
-				+ "_" + this.te.getBrowserVersion();
+	public void testAllSecondaryNavigations() {
+		testName = new Object(){}.getClass().getEnclosingMethod().getName() 
+				+ "_" + getOperatingSystem()
+				+ "_" + getBrowserUnderTest()
+				+ "_" + getBrowserVersion();
 
-		this.te.setDriver(this.test.testStart(this.testName, this.te));
+		//Start the test and generate a driver
+		testStart(testName);
 		
 		//Ensure the home page is loaded
-		TestReporter.assertTrue(this.te.pageLoaded(), "Load the Home Page");
+		TestReporter.assertTrue(pageLoaded(), "Load the Home Page");
 
 		Sleeper.sleep(2000);
-		
+
 		//Test the secondary navigation bar functionality
 		TestReporter.log("Test the Secondary Navigation Bar Functionality");
-		SecondaryNavigation secNav = new SecondaryNavigation(this.te);
+		SecondaryNavigation secNav = new SecondaryNavigation(this);
 		secNav.navigateAllSecondaryNavigationTabs();
 	}
+
+	    @AfterTest
+	    public void afterTest(){
+		endTest(testName);
+	    }
 }

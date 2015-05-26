@@ -61,7 +61,7 @@ public class TestNgTestClassMethods extends TestEnvironment{
 					Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
 					Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
 			client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
-			System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));
+			//System.out.println(client.getJobInfo(((RemoteWebDriver) driver).getSessionId().toString()));
 		}
 
 		if (driver != null && driver.getWindowHandles().size() > 0) {
@@ -86,17 +86,5 @@ public class TestNgTestClassMethods extends TestEnvironment{
 		}
 	}
 
-	public WebDriver testStart(String testName, TestEnvironment te) throws InterruptedException,
-			IOException {
-		// Uncomment the following line to have TestReporter outputs output to
-		// the console
-		TestReporter.setPrintToConsole(true);
 
-		WebDriver driver = initialize();
-
-		System.out.println(testName);
-		this.drivers.put(testName, driver);
-
-		return this.drivers.get(testName);
-	}
 }

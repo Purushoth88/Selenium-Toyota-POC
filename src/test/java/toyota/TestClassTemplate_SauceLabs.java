@@ -11,7 +11,7 @@ import com.saucelabs.testng.SauceOnDemandTestListener;
 @Listeners({SauceOnDemandTestListener.class})
 public class TestClassTemplate_SauceLabs {
 	String testName = null;
-	protected TestEnvironment te = null;
+	public TestEnvironment te = null;
 	protected TestNgTestClassMethods test = null;
 
 	// **********************
