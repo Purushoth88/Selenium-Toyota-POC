@@ -79,6 +79,6 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 
 	@AfterTest
 	public void afterTest() {
-		endTest(testName);
+	endTest(testName);
 	}
 }
