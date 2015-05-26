@@ -4,6 +4,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import ru.yandex.qatools.allure.annotations.Parameter;
+import ru.yandex.qatools.allure.annotations.Step;
+import ru.yandex.qatools.allure.model.SeverityLevel;
+
 import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Textbox;
@@ -98,7 +102,8 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	 * @param: zipCode - String, value to be entered as the new zipcode to use
 	 * @return: NA
 	 */
-	public void changeZipCodes(String zipCode){
+	@Step("Change Zip Code to \"{0}\"")
+	public void changeZipCodes(@Parameter String zipCode){
 		pageLoaded(this.getClass(), btnYourLocation);
 		//Capture the zipcode that currently exists in the UI
 		this.initialZipCode = captureCurrentZipCode();
@@ -128,11 +133,13 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 			Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not closed after [" +String.valueOf(timeout)+ "] seconds.");
 		}while(eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
 		
-		initializePage(this.getClass());
-		pageLoaded();
+//		initializePage(this.getClass());
+//		pageLoaded();
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
+			pageLoaded();
+			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The zipcode was found to not have changed within ["+String.valueOf(timeout)+"] seconds.");
 		}while(eleZipCode.getText().equalsIgnoreCase(initialZipCode));
@@ -149,7 +156,8 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	 * @param: expectedZipCode - String, value of the zipcode that is expected to be reflected in the UI
 	 * @return: NA
 	 */
-	private void verifyZipCodeValue(String expectedZipCode){
+	@Step("Verify the Zip Code is \"{0}\"")
+	private void verifyZipCodeValue(@Parameter String expectedZipCode){
 		Assert.assertEquals(captureCurrentZipCode(), expectedZipCode,  "The actual zipcode ["+captureCurrentZipCode()+"] did not match the expected zip code ["+expectedZipCode+"].");
 	}
 	

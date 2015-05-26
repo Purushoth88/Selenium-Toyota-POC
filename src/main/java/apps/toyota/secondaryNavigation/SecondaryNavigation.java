@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import ru.yandex.qatools.allure.annotations.Step;
+
 import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Link;
@@ -116,6 +118,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		clickLocalSpecials();
 	}
 
+	@Step("Click Select Vehicle Dropdown")
 	private void openSelectVehicleDropdown(){
 		//btnSelectVehicle.highlight(driver);
 		btnSelectVehicle.jsClick(getDriver());
@@ -128,6 +131,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 			Assert.assertEquals(loopCounter != timeout, true, "The Select Vehicle dropdown did not open after ["+String.valueOf(timeout)+"] seconds.");
 		}while(!btnSelectVehicle.getAttribute("class").contains("open"));
 	}
+	
 	
 	private void closeSelectVehicleDropdown(){
 		//btnSelectVehicle.highlight(driver);
@@ -142,6 +146,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		}while(btnSelectVehicle.getAttribute("class").contains("open"));
 	}
 	
+	@Step("Click Shopping Tools Dropdown")
 	private void openShoppingToolsDropdown(){
 		//btnShoppingTools.highlight(driver);
 		btnShoppingTools.jsClick(getDriver());
@@ -165,11 +170,12 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Shopping Tools dropdown was not closed after ["+String.valueOf(timeout)+"] seconds.");
-			initializePage(this.getClass());
-			pageLoaded(this.getClass(), btnShoppingTools);
+//			initializePage(this.getClass());
+//			pageLoaded(this.getClass(), btnShoppingTools);
 		}while(btnShoppingTools.getAttribute("class").contains("open"));
 	}
 	
+	@Step("Click Find a Dealer")
 	private void clickFindADealer(){
 		//Grab the number of links on the current page
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
@@ -187,6 +193,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		}while(list2.size() == list.size());
 	}
 	
+	@Step("Click Build and Price")
 	private void clickBuildAndPrice(){
 		//Grab the number of links on the current page
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
@@ -205,6 +212,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		}while(list2.size() == list.size());
 	}
 	
+	@Step("Click Local Specials")
 	private void clickLocalSpecials(){
 		initializePage(this.getClass());
 		pageLoaded(this.getClass(), lnkLocalSpecials);
