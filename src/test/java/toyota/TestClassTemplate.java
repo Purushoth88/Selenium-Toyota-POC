@@ -8,7 +8,7 @@ import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestNgTestClassMethods;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
-@Listeners({SauceOnDemandTestListener.class})
+@Listeners({ SauceOnDemandTestListener.class })
 public class TestClassTemplate {
 	String testName = null;
 	protected TestEnvironment te = null;
@@ -16,7 +16,7 @@ public class TestClassTemplate {
 
 	// **********************
 	// After Method Behavior
-	// **********************	
+	// **********************
 	@AfterMethod(groups = { "regression" })
 	public synchronized void tearDownClass(ITestResult results) {
 		test.after(results, te.getDriver());
