@@ -125,7 +125,8 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 		loopCounter = 0;
 		do{
 			System.out.println("");
-			txtZipCode.set(zipCode);
+//			txtZipCode.set(zipCode);
+			txtZipCode.safeSet(zipCode);
 			Sleeper.sleep(1000);
 			pageLoaded();
 			initializePage(this.getClass());
