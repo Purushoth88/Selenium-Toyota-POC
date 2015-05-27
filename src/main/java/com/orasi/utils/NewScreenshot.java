@@ -1,6 +1,7 @@
 package com.orasi.utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,14 +20,20 @@ public class NewScreenshot extends TestListenerAdapter {
 
     @Override
     public void onTestFailure(ITestResult result) {
-	
+    	File directory = new File (".");
 	Object currentClass = result.getInstance();
 	WebDriver driver = ((TestEnvironment) currentClass).getDriver();
 	String runLocation = ((TestEnvironment) currentClass).getRunLocation().toLowerCase();
 	if ( runLocation == "remote" ) driver = new Augmenter().augment(driver);
 	Reporter.setCurrentTestResult(result);
 	
-	String destDir = "selenium-reports/html/screenshots";
+	String destDir = null;
+	try {
+		destDir = directory.getCanonicalPath()+"/../../selenium-reports/html/screenshots";
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	new File(destDir).mkdirs();	
 	DateFormat dateFormat = new SimpleDateFormat("dd_MMM_yyyy__hh_mm_ssaa");
 	

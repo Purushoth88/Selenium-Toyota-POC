@@ -59,7 +59,7 @@ public class Constants {
     /** The timeout (seconds) for the SauceLabs waiting on a command from the Selenium script
      * https://docs.saucelabs.com/reference/troubleshooting-common-error-messages/#test-did-not-see-a-new-command-for-90-seconds-timing-out
      */
-    final static public int IDLE_TIMEOUT = 20;
+    final static public int IDLE_TIMEOUT = 30;
     
     /** System properties */
 
