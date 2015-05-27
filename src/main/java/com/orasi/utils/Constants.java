@@ -47,6 +47,20 @@ public class Constants {
     
     /** The timeout (seconds) for page/DOM/transitions, should also be a generous */
     final static public int PAGE_TIMEOUT = 60;
+    
+    /**************************
+    /**************************
+    /   SAUCE LABS CONSTANTS
+    /**************************
+    /**************************
+    /** The timeout (seconds) for the Selenium server to execute a command; default is 300 seconds*/
+    final static public int COMMAND_TIMEOUT = 120;
+    
+    /** The timeout (seconds) for the SauceLabs waiting on a command from the Selenium script
+     * https://docs.saucelabs.com/reference/troubleshooting-common-error-messages/#test-did-not-see-a-new-command-for-90-seconds-timing-out
+     */
+    final static public int IDLE_TIMEOUT = 20;
+    
     /** System properties */
 
     public static final String APPLICATION_UNDER_TEST = "selenium.applicationUnderTest";
