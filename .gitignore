@@ -121,4 +121,3 @@ nb-configuration.xml
 .nb-gradle/
 /test-output/
 /target/
-/selenium-reports/
