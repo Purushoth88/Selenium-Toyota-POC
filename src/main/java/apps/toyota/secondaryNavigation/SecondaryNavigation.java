@@ -16,6 +16,7 @@ import com.orasi.core.interfaces.Textbox;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestEnvironment;
+import com.orasi.utils.TestReporter;
 
 
 /**
@@ -120,7 +121,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 
 	@Step("Click Select Vehicle Dropdown")
 	private void openSelectVehicleDropdown(){
-		System.out.println("Click open 'Select Vehicle'");
+		TestReporter.log("Click open 'Select Vehicle'");
 		btnSelectVehicle.jsClick(getDriver());
 		loopCounter = 0;
 		do{
@@ -134,7 +135,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 	
 	
 	private void closeSelectVehicleDropdown(){
-		System.out.println("Click closed 'Select Vehicle'");
+		TestReporter.log("Click closed 'Select Vehicle'");
 		btnSelectVehicle.jsClick(getDriver());
 		loopCounter = 0;
 		do{
@@ -148,7 +149,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 	
 	@Step("Click Shopping Tools Dropdown")
 	private void openShoppingToolsDropdown(){
-		System.out.println("Click open 'Shopping Tools'");
+		TestReporter.log("Click open 'Shopping Tools'");
 		btnShoppingTools.jsClick(getDriver());
 		loopCounter = 0;
 		do{
@@ -161,7 +162,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 	}
 	
 	private void closeShoppingToolsDropdown(){
-		System.out.println("Click closed 'Shopping Tools'");
+		TestReporter.log("Click closed 'Shopping Tools'");
 		btnShoppingTools.jsClick(getDriver());
 		loopCounter = 0;
 		do{
@@ -177,7 +178,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 	
 	@Step("Click Find a Dealer")
 	private void clickFindADealer(){
-		System.out.println("Click 'Find A Dealer'");
+		TestReporter.log("Click 'Find A Dealer'");
 		//Grab the number of links on the current page
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
 		lnkFindADealer.jsClick(getDriver());
@@ -196,7 +197,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 	
 	@Step("Click Build and Price")
 	private void clickBuildAndPrice(){
-		System.out.println("Click 'Build & Price'");
+		TestReporter.log("Click 'Build & Price'");
 		//Grab the number of links on the current page
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
 		//Click the link
@@ -216,7 +217,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 	
 	@Step("Click Local Specials")
 	private void clickLocalSpecials(){
-		System.out.println("Click 'Local Specials'");
+		TestReporter.log("Click 'Local Specials'");
 		initializePage(this.getClass());
 		pageLoaded(this.getClass(), lnkLocalSpecials);
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 		
