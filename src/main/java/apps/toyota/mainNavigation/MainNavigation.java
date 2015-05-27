@@ -118,8 +118,6 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 		
 		//If the zipcode is different, enter the zipcode to be used for the test
 		clickYourLocation();
-		pageLoaded(this.getClass(), txtZipCode);
-		initializePage(this.getClass());
 		
 		Assert.assertEquals(txtZipCode.syncVisible(driver), true, "The zipcode textbox is not visible.");
 		txtZipCode.highlight(driver);
@@ -135,8 +133,6 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 			Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not closed after [" +String.valueOf(timeout)+ "] seconds.");
 		}while(eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
 		
-//		initializePage(this.getClass());
-//		pageLoaded();
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
