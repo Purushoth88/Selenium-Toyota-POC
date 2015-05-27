@@ -121,7 +121,17 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 		
 		Assert.assertEquals(txtZipCode.syncVisible(driver), true, "The zipcode textbox is not visible.");
 		txtZipCode.highlight(driver);
-		txtZipCode.set(zipCode);
+		
+		loopCounter = 0;
+		do{
+			txtZipCode.set(zipCode);
+			Sleeper.sleep(1000);
+			pageLoaded();
+			initializePage(this.getClass());
+			loopCounter++;
+			Assert.assertNotEquals(loopCounter, timeout, "The zipcode was not entered after [" +String.valueOf(timeout)+ "] seconds.");
+		}while(!txtZipCode.getText().equalsIgnoreCase(zipCode));
+		
 		txtZipCode.sendKeys(Keys.ENTER);
 		
 		loopCounter = 0;
