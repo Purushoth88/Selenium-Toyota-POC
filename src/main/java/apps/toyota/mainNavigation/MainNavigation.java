@@ -124,7 +124,6 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 		
 		loopCounter = 0;
 		do{
-			System.out.println("");
 //			txtZipCode.set(zipCode);
 			txtZipCode.safeSet(zipCode);
 			Sleeper.sleep(1000);
@@ -134,7 +133,10 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 			Assert.assertNotEquals(loopCounter, timeout, "The zipcode was not entered after [" +String.valueOf(timeout)+ "] seconds.");
 		}while(!txtZipCode.getText().equalsIgnoreCase(zipCode));
 		
-		txtZipCode.sendKeys(Keys.ENTER);
+		if(txtZipCode.syncVisible(getDriver(), timeout, false)){
+			System.out.println("Zipcode textbox still visible");
+			txtZipCode.sendKeys(Keys.ENTER);	
+		}
 		
 		loopCounter = 0;
 		do{
