@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="ChangeZipCode" parallel="false">
-	<parameter name="browserUnderTest" value="chrome" />
+	<parameter name="browserUnderTest" value="iexplore" />
 	<parameter name="environment" value="" />
-	<parameter name="runLocation" value="local" />
-	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="windows" />
+	<parameter name="runLocation" value="remote" />
+	<parameter name="browserVersion" value="8" />
+	<parameter name="operatingSystem" value="Windows 7" />
 	<test name="TestAllSecondaryNavigations">
 		<classes>
 			<class name="toyota.TestAllSecondaryNavigations" />

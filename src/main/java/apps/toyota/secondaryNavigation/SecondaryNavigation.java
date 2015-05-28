@@ -181,7 +181,9 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		TestReporter.log("Click 'Find A Dealer'");
 		//Grab the number of links on the current page
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
+		
 		lnkFindADealer.jsClick(getDriver());
+		
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
 		List<WebElement> list2;
