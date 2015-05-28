@@ -20,8 +20,9 @@ import apps.toyota.secondaryNavigation.SecondaryNavigation;
 import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
 import com.saucelabs.testng.SauceOnDemandTestListener;
+import com.orasi.utils.NewScreenshot;
 
-@Listeners({ SauceOnDemandTestListener.class })
+@Listeners({ SauceOnDemandTestListener.class, NewScreenshot.class })
 public class TestAllSecondaryNavigations extends TestEnvironment {
 	private String application = "Toyota";
 	/*
