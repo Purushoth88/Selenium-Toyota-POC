@@ -20,6 +20,7 @@ public class NewScreenshot extends TestListenerAdapter {
 
 	@Override
 	public void onTestFailure(ITestResult result) {
+		String slash = Constants.LINE_SEPARATOR;
 		File directory = new File(".");
 		Object currentClass = result.getInstance();
 		WebDriver driver = ((TestEnvironment) currentClass).getDriver();
@@ -32,7 +33,7 @@ public class NewScreenshot extends TestListenerAdapter {
 		String destDir = null;
 		try {
 			destDir = directory.getCanonicalPath()
-					+ "\\selenium-reports\\html\\screenshots";
+					+ slash + "selenium-reports" + slash + "html" + slash + "screenshots";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,7 +43,7 @@ public class NewScreenshot extends TestListenerAdapter {
 
 		String destFile = dateFormat.format(new Date()) + ".png";
 
-		TestReporter.logScreenshot(driver, destDir + "\\" + destFile);
+		TestReporter.logScreenshot(driver, destDir + slash + destFile);
 		FailedScreenshot(driver);
 	}
 

@@ -77,6 +77,7 @@ public class TestReporter {
 	}
 
 	public static void logScreenshot(WebDriver driver, String fileLocation) {
+		String slash = Constants.LINE_SEPARATOR;
 		TestReporter.log("Screenshot file location: " + fileLocation);
 		File file = new File("");
 
@@ -90,8 +91,7 @@ public class TestReporter {
 		}
 		/*Reporter.log("<a href='..\\..\\" + fileLocation + "'> <img src='..\\..\\"
 				+ fileLocation + "' height='200' width='300'/> </a>");*/
-		Reporter.log("<a href='" + fileLocation + "'> <img src='..\\..\\"
-				+ fileLocation + "' height='200' width='300'/> </a>");
+		Reporter.log("<a href='" + fileLocation + "'> <img src='.."+slash+".."+slash + fileLocation + "' height='200' width='300'/> </a>");
 	}
 
 	public static void assertTrue(boolean condition, String description) {
