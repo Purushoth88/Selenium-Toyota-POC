@@ -766,5 +766,4 @@ public abstract class SoapService{
 
 		return XMLTools.validateXMLSchema(uri, doc);
 	}
-	
 }
