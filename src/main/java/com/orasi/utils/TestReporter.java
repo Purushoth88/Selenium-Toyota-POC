@@ -76,9 +76,9 @@ public class TestReporter {
 				+ "</font></u></b><br />");
 	}
 
-	public static void logScreenshot(WebDriver driver, String fileLocation) {
-		String slash = Constants.LINE_SEPARATOR;
+	public static void logScreenshot(WebDriver driver, String fileLocation, String slash) {
 		TestReporter.log("Screenshot file location: " + fileLocation);
+		TestReporter.log("DIR_SEPERATOR: " + slash);
 		File file = new File("");
 
 		try {

@@ -20,7 +20,8 @@ public class NewScreenshot extends TestListenerAdapter {
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		String slash = Constants.LINE_SEPARATOR;
+		String slash = Constants.DIR_SEPARATOR;
+		TestReporter.log("DIR_SEPERATOR: " + slash);
 		File directory = new File(".");
 		Object currentClass = result.getInstance();
 		WebDriver driver = ((TestEnvironment) currentClass).getDriver();
@@ -43,7 +44,7 @@ public class NewScreenshot extends TestListenerAdapter {
 
 		String destFile = dateFormat.format(new Date()) + ".png";
 
-		TestReporter.logScreenshot(driver, destDir + slash + destFile);
+		TestReporter.logScreenshot(driver, destDir + slash + destFile, slash);
 		FailedScreenshot(driver);
 	}
 
