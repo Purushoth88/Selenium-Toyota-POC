@@ -27,10 +27,8 @@ public class NewScreenshot extends TestListenerAdapter {
 		WebDriver driver = ((TestEnvironment) currentClass).getDriver();
 		String runLocation = ((TestEnvironment) currentClass).getRunLocation()
 				.toLowerCase();
-		if (runLocation == "remote")
-			driver = new Augmenter().augment(driver);
-		Reporter.setCurrentTestResult(result);
-
+		
+		
 		String destDir = null;
 		try {
 			destDir = directory.getCanonicalPath()
@@ -39,6 +37,20 @@ public class NewScreenshot extends TestListenerAdapter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if (runLocation == "remote"){
+			driver = new Augmenter().augment(driver);
+			destDir = ".."+slash+".."+slash+"selenium-reports" + slash + "html" + slash + "screenshots";
+		}
+		Reporter.setCurrentTestResult(result);
+
+		/*String destDir = null;
+		try {
+			destDir = directory.getCanonicalPath()
+					+ slash + "selenium-reports" + slash + "html" + slash + "screenshots";
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		new File(destDir).mkdirs();
 		DateFormat dateFormat = new SimpleDateFormat("dd_MMM_yyyy__hh_mm_ssaa");
 
