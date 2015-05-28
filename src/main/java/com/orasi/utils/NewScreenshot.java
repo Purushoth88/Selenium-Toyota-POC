@@ -25,8 +25,7 @@ public class NewScreenshot extends TestListenerAdapter {
 		Object currentClass = result.getInstance();
 		WebDriver driver = ((TestEnvironment) currentClass).getDriver();
 		String runLocation = ((TestEnvironment) currentClass).getRunLocation()
-				.toLowerCase();
-		
+				.toLowerCase();		
 		
 		String destDir = null;
 		try {
@@ -38,26 +37,18 @@ public class NewScreenshot extends TestListenerAdapter {
 		}
 		if (runLocation == "remote"){
 			driver = new Augmenter().augment(driver);
-//			destDir = ".."+slash+".."+slash+"selenium-reports" + slash + "html" + slash + "screenshots";
 		}
 		Reporter.setCurrentTestResult(result);
 
-		/*String destDir = null;
-		try {
-			destDir = directory.getCanonicalPath()
-					+ slash + "selenium-reports" + slash + "html" + slash + "screenshots";
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		new File(destDir).mkdirs();
 		DateFormat dateFormat = new SimpleDateFormat("dd_MMM_yyyy__hh_mm_ssaa");
 
 		String destFile = dateFormat.format(new Date()) + ".png";
 
-		TestReporter.logScreenshot(driver, destDir + slash + destFile, slash);
-		TestReporter.log("destDir: " + destDir);
-		TestReporter.log("DestFile: " + destFile);
+		//Capture a screenshot for TestNG reporting
+		TestReporter.logScreenshot(driver, destDir + slash + destFile, slash, runLocation);
+		
+		//Capture a screenshot for Allure reporting
 		FailedScreenshot(driver);
 	}
 

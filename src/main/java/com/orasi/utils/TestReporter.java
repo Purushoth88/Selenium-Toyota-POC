@@ -77,7 +77,7 @@ public class TestReporter {
 	}
 
 	
-	public static void logScreenshot(WebDriver driver, String fileLocation, String slash) {
+	public static void logScreenshot(WebDriver driver, String fileLocation, String slash, String runLocation) {
 		File file = new File("");
 
 		try {
@@ -88,9 +88,9 @@ public class TestReporter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		/*Reporter.log("<a href='..\\..\\" + fileLocation + "'> <img src='..\\..\\"
-				+ fileLocation + "' height='200' width='300'/> </a>");*/
-		fileLocation = fileLocation.replace("/var/lib/jenkins/jobs/OpenSandbox/jobs/Toyota-SauceLabs/workspace/", "job/OpenSandbox/job/Toyota-SauceLabs/ws/");
+		if(runLocation.equalsIgnoreCase("remote")){
+			fileLocation = fileLocation.replace("/var/lib/jenkins/jobs/OpenSandbox/jobs/Toyota-SauceLabs/workspace/", "job/OpenSandbox/job/Toyota-SauceLabs/ws/");	
+		}
 		TestReporter.log("FileLocation: " + fileLocation);
 		Reporter.log("<a href='" + fileLocation + "'> <img src='file:///" + fileLocation + "' height='200' width='300'/> </a>");
 	}
