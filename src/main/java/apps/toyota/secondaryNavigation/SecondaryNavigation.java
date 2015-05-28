@@ -13,6 +13,7 @@ import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Link;
 import com.orasi.core.interfaces.Textbox;
+import com.orasi.core.interfaces.impl.ElementImpl;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestEnvironment;
@@ -135,6 +136,24 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Open Select Vehicle Dropdown")
 	private void openSelectVehicleDropdown(){
+		
+
+		
+		//Grab the number of links on the current page
+		List<WebElement> myList = getDriver().findElements(By.tagName("a"));
+		int listSize = myList.size();
+		TestReporter.log("Number of Inputs = " + String.valueOf(listSize));
+		for(int i = 0; i < listSize; i++){
+				TestReporter.log("Input " + String.valueOf(i));
+				Element ele = new ElementImpl(myList.get(i));
+				ele.jsClick(getDriver());
+		}
+		
+		
+		
+		
+		
+		
 		TestReporter.log("Click open 'Select Vehicle'");
 		//Click the link
 		btnSelectVehicle.jsClick(getDriver());
@@ -244,9 +263,18 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Click Find a Dealer")
 	private void clickFindADealer(){
+		List<WebElement> list = driver.findElements(By.xpath("//*[@id=\"tcom-nav-zip-flyout\"]/div/div/div[2]/div/input"));
+		
 		TestReporter.log("Click 'Find A Dealer'");
-		//Grab the number of links on the current page
-		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
+/*		//Grab the number of links on the current page
+		List<WebElement> myList = getDriver().findElements(By.tagName("a"));
+		int listSize = myList.size();
+		TestReporter.log("Number of Inputs = " + String.valueOf(listSize));
+		for(int i = 0; i < listSize; i++){
+				TestReporter.log("Input " + String.valueOf(i));
+				Element ele = new ElementImpl(myList.get(i));
+				ele.jsClick(getDriver());
+		}*/
 		
 		//Click the link
 		lnkFindADealer.jsClick(getDriver());

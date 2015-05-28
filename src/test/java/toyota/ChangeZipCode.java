@@ -24,7 +24,7 @@ import com.orasi.utils.TestReporter;
 import com.orasi.utils.dataProviders.ExcelDataProvider;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
-@Listeners({ SauceOnDemandTestListener.class })
+@Listeners({ SauceOnDemandTestListener.class, com.orasi.utils.NewScreenshot.class })
 public class ChangeZipCode extends TestEnvironment {
 	private String application = "Toyota";
 
