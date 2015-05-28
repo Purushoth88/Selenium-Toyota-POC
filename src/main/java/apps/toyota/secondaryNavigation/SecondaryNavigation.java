@@ -223,6 +223,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 		List<WebElement> list = getDriver().findElements(By.tagName("a")); 		
 		
 		lnkLocalSpecials.jsClick(getDriver());
+		
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
 		List<WebElement> list2;
