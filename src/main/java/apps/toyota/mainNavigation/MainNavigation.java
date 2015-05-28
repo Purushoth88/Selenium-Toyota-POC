@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import ru.yandex.qatools.allure.annotations.Parameter;
+import ru.yandex.qatools.allure.annotations.Severity;
 import ru.yandex.qatools.allure.annotations.Step;
 import ru.yandex.qatools.allure.model.SeverityLevel;
 
