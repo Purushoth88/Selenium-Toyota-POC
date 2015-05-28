@@ -56,6 +56,8 @@ public class NewScreenshot extends TestListenerAdapter {
 		String destFile = dateFormat.format(new Date()) + ".png";
 
 		TestReporter.logScreenshot(driver, destDir + slash + destFile, slash);
+		TestReporter.log("destDir: " + destDir);
+		TestReporter.log("DestFile: " + destFile);
 		FailedScreenshot(driver);
 	}
 
