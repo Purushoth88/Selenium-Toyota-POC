@@ -38,7 +38,7 @@ public class NewScreenshot extends TestListenerAdapter {
 		}
 		if (runLocation == "remote"){
 			driver = new Augmenter().augment(driver);
-			destDir = ".."+slash+".."+slash+"selenium-reports" + slash + "html" + slash + "screenshots";
+//			destDir = ".."+slash+".."+slash+"selenium-reports" + slash + "html" + slash + "screenshots";
 		}
 		Reporter.setCurrentTestResult(result);
 

@@ -76,6 +76,7 @@ public class TestReporter {
 				+ "</font></u></b><br />");
 	}
 
+	
 	public static void logScreenshot(WebDriver driver, String fileLocation, String slash) {
 		File file = new File("");
 
@@ -91,7 +92,7 @@ public class TestReporter {
 				+ fileLocation + "' height='200' width='300'/> </a>");*/
 		fileLocation = fileLocation.replace("/var/lib/jenkins/jobs/OpenSandbox/jobs/Toyota-SauceLabs/workspace/", "job/OpenSandbox/job/Toyota-SauceLabs/ws/");
 		TestReporter.log("FileLocation: " + fileLocation);
-		Reporter.log("<a href='" + fileLocation + "'> <img src='" + fileLocation + "' height='200' width='300'/> </a>");
+		Reporter.log("<a href='" + fileLocation + "'> <img src='file:///" + fileLocation + "' height='200' width='300'/> </a>");
 	}
 	
 	public static void assertTrue(boolean condition, String description) {
