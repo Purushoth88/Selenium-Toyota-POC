@@ -91,9 +91,10 @@ public class TestReporter {
 		}
 		/*Reporter.log("<a href='..\\..\\" + fileLocation + "'> <img src='..\\..\\"
 				+ fileLocation + "' height='200' width='300'/> </a>");*/
-		Reporter.log("<a href='" + fileLocation + "'> <img src='.."+slash+".."+slash + fileLocation + "' height='200' width='300'/> </a>");
+		fileLocation = fileLocation.replace("/var/lib/jenkins/jobs/OpenSandbox/jobs/Toyota-SauceLabs/workspace/", "job/OpenSandbox/job/Toyota-SauceLabs/ws/");
+		Reporter.log("<a href='" + fileLocation + "'> <img src='" + fileLocation + "' height='200' width='300'/> </a>");
 	}
-
+	
 	public static void assertTrue(boolean condition, String description) {
 		try {
 			Assert.assertTrue(condition, description);
