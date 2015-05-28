@@ -77,6 +77,7 @@ public class TestReporter {
 	}
 
 	public static void logScreenshot(WebDriver driver, String fileLocation) {
+		TestReporter.log("Screenshot file location: " + fileLocation);
 		File file = new File("");
 
 		try {
