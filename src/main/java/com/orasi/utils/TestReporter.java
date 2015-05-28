@@ -77,8 +77,6 @@ public class TestReporter {
 	}
 
 	public static void logScreenshot(WebDriver driver, String fileLocation, String slash) {
-		TestReporter.log("Screenshot file location: " + fileLocation);
-		TestReporter.log("DIR_SEPERATOR: " + slash);
 		File file = new File("");
 
 		try {
@@ -92,6 +90,7 @@ public class TestReporter {
 		/*Reporter.log("<a href='..\\..\\" + fileLocation + "'> <img src='..\\..\\"
 				+ fileLocation + "' height='200' width='300'/> </a>");*/
 		fileLocation = fileLocation.replace("/var/lib/jenkins/jobs/OpenSandbox/jobs/Toyota-SauceLabs/workspace/", "job/OpenSandbox/job/Toyota-SauceLabs/ws/");
+		TestReporter.log(fileLocation);
 		Reporter.log("<a href='" + fileLocation + "'> <img src='" + fileLocation + "' height='200' width='300'/> </a>");
 	}
 	

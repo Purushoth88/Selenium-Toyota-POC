@@ -21,7 +21,6 @@ public class NewScreenshot extends TestListenerAdapter {
 	@Override
 	public void onTestFailure(ITestResult result) {
 		String slash = Constants.DIR_SEPARATOR;
-		TestReporter.log("DIR_SEPERATOR: " + slash);
 		File directory = new File(".");
 		Object currentClass = result.getInstance();
 		WebDriver driver = ((TestEnvironment) currentClass).getDriver();
