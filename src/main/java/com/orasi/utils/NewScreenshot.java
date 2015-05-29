@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.http.client.ClientProtocolException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,8 @@ import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
 import org.testng.xml.XmlSuite;
+
+import com.orasi.api.restServices.SeleniumJobInfo;
 
 import ru.yandex.qatools.allure.annotations.Attachment;
 
@@ -57,6 +60,16 @@ public class NewScreenshot extends TestListenerAdapter implements IReporter{
 		
 		String testInstanceName = result.getInstanceName();
 		String testName = result.getName();
+		try {
+			String buildNumber = SeleniumJobInfo.getLastJenkinsBuildNumber();
+			TestReporter.log("BUILD NUMBER:" + buildNumber);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 		TestReporter.log("INSTANCE NAME: " + testInstanceName);
 		TestReporter.log("NAME: " + testName);
 		TestReporter.log("JENKINS PATH: " + destDir + slash + testInstanceName + slash + testName);
