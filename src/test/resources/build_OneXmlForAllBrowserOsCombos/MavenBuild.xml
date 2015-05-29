@@ -27,6 +27,7 @@
 	<!-- 
 		MAC OS X 10.9 
 	-->
+<!--
 	<test name="Mac_OS_X_10_9_Safari_7">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="" />
@@ -42,8 +43,9 @@
 			<package name="toyota">
 			</package>
 		</packages>
-	</test> <!-- Mac_OS_X_10_9_Safari_7 -->
-	<test name="Mac_OS_X_10_9_Chrome">
+	</test> 
+	<!-- Mac_OS_X_10_9_Safari_7 -->
+<!-- 	<test name="Mac_OS_X_10_9_Chrome">
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -59,7 +61,7 @@
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Chrome -->
-	<test name="Mac_OS_X_10_9_Firefox">
+<!--	<test name="Mac_OS_X_10_9_Firefox">
 		<parameter name="browserUnderTest" value="firefox" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -75,11 +77,10 @@
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Firefox -->
-
 	<!-- 
 		Windows 7 
 	-->
-	<test name="Windows_7_Chrome">
+<!--	<test name="Windows_7_Chrome">
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -95,7 +96,7 @@
 			</package>
 		</packages>
 	</test> <!-- Windows_7_Chrome -->
-	<test name="Windows_7_Firefox">
+<!--	<test name="Windows_7_Firefox">
 		<parameter name="browserUnderTest" value="firefox" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -111,7 +112,7 @@
 			</package>
 		</packages>
 	</test> <!-- Windows_7_Firefox -->
-	<test name="Windows_7_IE_8">
+<!--	<test name="Windows_7_IE_8">
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -127,7 +128,7 @@
 			</package>
 		</packages>
 	</test> <!-- Windows_7_Firefox -->
-	<test name="Windows_7_IE_11">
+<!--	<test name="Windows_7_IE_11">
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -147,7 +148,7 @@
 	<!-- 
 		Windows 8.1 
 	-->
-	<test name="Windows_8_1_Chrome">
+<!--	<test name="Windows_8_1_Chrome">
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -163,7 +164,7 @@
 			</package>
 		</packages>
 	</test> <!-- Windows_8_1_Chrome -->
-	<test name="Windows_8_1_Firefox">
+<!--	<test name="Windows_8_1_Firefox">
 		<parameter name="browserUnderTest" value="firefox" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -179,7 +180,7 @@
 			</package>
 		</packages>
 	</test> <!-- Windows_8_1_Firefox -->
-	<test name="Windows_8_1_IE_11">
+<!--	<test name="Windows_8_1_IE_11">
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
