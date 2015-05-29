@@ -55,13 +55,11 @@ public class NewScreenshot extends TestListenerAdapter implements IReporter{
 		//Capture a screenshot for Allure reporting
 		FailedScreenshot(driver);
 		
-		TestReporter.log("HOST:" + result.getHost());
-		TestReporter.log("" + result.getInstanceName());
-		TestReporter.log("" + result.getName());
-		TestReporter.log("" + result.getTestName());
-		TestReporter.log("" + result.getStatus());
-		TestReporter.log("" + result.getAttributeNames());
-		TestReporter.log("" + result.getAttributeNames().toString());
+		String testInstanceName = result.getInstanceName();
+		String testName = result.getName();
+		TestReporter.log("INSTANCE NAME: " + testInstanceName);
+		TestReporter.log("NAME: " + testName);
+		TestReporter.log("JENKINS PATH: " + destDir + slash + testInstanceName + slash + testName);
 	}
 
 	@Override
