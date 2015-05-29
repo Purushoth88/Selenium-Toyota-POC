@@ -39,7 +39,6 @@ public class NewScreenshot extends TestListenerAdapter implements IReporter{
 			destDir = directory.getCanonicalPath()
 					+ slash + "selenium-reports" + slash + "html" + slash + "screenshots";
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (runLocation == "remote"){
@@ -57,25 +56,6 @@ public class NewScreenshot extends TestListenerAdapter implements IReporter{
 		
 		//Capture a screenshot for Allure reporting
 		FailedScreenshot(driver);
-		
-/*		String testInstanceName = result.getInstanceName();
-		String testName = result.getName();
-		try {
-			TestReporter.log("Getting Build Number");
-			String buildNumber = SeleniumJobInfo.getLastJenkinsBuildNumber();
-			TestReporter.log("BUILD NUMBER:" + buildNumber);
-		} catch (ClientProtocolException e) {
-			TestReporter.log("EXCEPTION: ClientProtocolException");
-			e.printStackTrace();
-		} catch (IOException e) {
-			TestReporter.log("EXCEPTION: IOException");
-			e.printStackTrace();
-		} catch (RuntimeException re){
-			TestReporter.log("EXCEPTION: RuntimeException");
-		};
-		TestReporter.log("INSTANCE NAME: " + testInstanceName);
-		TestReporter.log("NAME: " + testName);
-		TestReporter.log("JENKINS PATH: " + destDir + slash + testInstanceName + slash + testName);*/
 	}
 
 	@Override
