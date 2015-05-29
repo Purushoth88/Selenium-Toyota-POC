@@ -5,18 +5,22 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
+import org.testng.IReporter;
+import org.testng.ISuite;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
+import org.testng.xml.XmlSuite;
 
 import ru.yandex.qatools.allure.annotations.Attachment;
 
-public class NewScreenshot extends TestListenerAdapter {
+public class NewScreenshot extends TestListenerAdapter implements IReporter{
 
 	@Override
 	public void onTestFailure(ITestResult result) {
@@ -65,6 +69,13 @@ public class NewScreenshot extends TestListenerAdapter {
 	@Attachment(type = "image/png")
 	public static byte[] FailedScreenshot(WebDriver driver) {
 		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+	}
+
+	@Override
+	public void generateReport(List<XmlSuite> arg0, List<ISuite> arg1,
+			String arg2) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
