@@ -25,6 +25,10 @@ public class SeleniumJobInfo {
 	private static RestService rest = new RestService();
 	private String restResponse = "";
 	
+	public SeleniumJobInfo(){
+		
+	}
+	
 	public static String getLastJenkinsBuildNumber() throws ClientProtocolException, IOException{
 		String buildNumber = rest.sendGetRequest(lastBuildNumber);
 		return buildNumber;

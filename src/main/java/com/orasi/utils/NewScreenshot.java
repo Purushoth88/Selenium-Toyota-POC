@@ -58,7 +58,7 @@ public class NewScreenshot extends TestListenerAdapter implements IReporter{
 		//Capture a screenshot for Allure reporting
 		FailedScreenshot(driver);
 		
-		String testInstanceName = result.getInstanceName();
+/*		String testInstanceName = result.getInstanceName();
 		String testName = result.getName();
 		try {
 			TestReporter.log("Getting Build Number");
@@ -75,7 +75,7 @@ public class NewScreenshot extends TestListenerAdapter implements IReporter{
 		};
 		TestReporter.log("INSTANCE NAME: " + testInstanceName);
 		TestReporter.log("NAME: " + testName);
-		TestReporter.log("JENKINS PATH: " + destDir + slash + testInstanceName + slash + testName);
+		TestReporter.log("JENKINS PATH: " + destDir + slash + testInstanceName + slash + testName);*/
 	}
 
 	@Override

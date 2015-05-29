@@ -94,7 +94,8 @@ public class TestReporter {
 
 		}
 		TestReporter.log("FileLocation: " + fileLocation);
-		Reporter.log("<a href='" + fileLocation + "'> <img src='file:///" + fileLocation + "' height='200' width='300'/> </a>");
+//		Reporter.log("<a href='" + fileLocation + "'> <img src='file:///" + fileLocation + "' height='200' width='300'/> </a>");
+		Reporter.log("<a href='" + fileLocation + "'/>");
 	}
 	
 	public static void assertTrue(boolean condition, String description) {
