@@ -95,7 +95,8 @@ public class TestReporter {
 		}
 		TestReporter.log("FileLocation: " + fileLocation);
 //		Reporter.log("<a href='" + fileLocation + "'> <img src='file:///" + fileLocation + "' height='200' width='300'/> </a>");
-		Reporter.log("<a href='" + fileLocation + "'/>");
+		Reporter.log("<a href='https://jenkins.orasi.com/" + fileLocation + "'>SCREENSHOT</a>");
+//		https://jenkins.orasi.com/job/OpenSandbox/job/Toyota-SauceLabs/ws/selenium-reports/html/screenshots/29_May_2015__09_55_56AM.png
 	}
 	
 	public static void assertTrue(boolean condition, String description) {
