@@ -429,7 +429,9 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Validate That The Zip Code Prompt Is Hidden At Startup")
 	private void ensureZipCodePromptHiddenOnStartup(){
-		Sleeper.sleep(5000);
+		boolean isHidden = true;
+		String attributeText = "";
+		
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
@@ -438,12 +440,25 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The zip code prompt was not hidden after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
-		}while(isZipCodePromptDisplayed());
+			
+			try{
+				attributeText = eleZipModalPrompt.getAttribute("aria-hidden");
+				if(attributeText.equalsIgnoreCase("false")){
+					isHidden = false;
+				}
+			}catch(NullPointerException npe){
+				TestReporter.log("Modal Not Found.");
+			}
+		}while(isHidden);
+		
+		closeZipCodePrompt();
 	}
 	
 	private void clickFindOffer(){
 		initializePage(this.getClass());
-		pageLoaded(this.getClass(), lnkFindOffer);
+		pageLoaded(this.getClass(), lnkFindOffer);	
+		lnkFindOffer.focus(getDriver());
+		lnkFindOffer.highlight(getDriver());
 		lnkFindOffer.jsClick(getDriver());
 		
 		loopCounter = 0;
@@ -460,7 +475,9 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	private void clickFindADealer(){
 		initializePage(this.getClass());
 		pageLoaded();
-		lnkFindADealer = new LinkImpl(driver.findElement(By.id("nav-find-a-dealer")).findElement(By.tagName("a")));
+		lnkFindADealer = new LinkImpl(driver.findElement(By.id("nav-find-a-dealer")).findElement(By.tagName("a")));	
+		lnkFindADealer.focus(getDriver());
+		lnkFindADealer.highlight(getDriver());
 		lnkFindADealer.jsClick(getDriver());
 		
 		loopCounter = 0;
@@ -478,7 +495,10 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		initializePage(this.getClass());
 		pageLoaded();
 		lnkFindVehicles = new LinkImpl(driver.findElement(By.id("nav-find-vehicles")).findElement(By.tagName("a")));	
+		lnkFindVehicles.focus(getDriver());
+		lnkFindVehicles.highlight(getDriver());
 		lnkFindVehicles.jsClick(getDriver());
+//		lnkFindVehicles.click();
 
 		loopCounter = 0;
 		do{
@@ -495,6 +515,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		initializePage(this.getClass());
 		pageLoaded();
 		lnkTools = new LinkImpl(driver.findElement(By.id("nav-tools")).findElement(By.tagName("a")));
+		lnkTools.focus(getDriver());
+		lnkTools.highlight(getDriver());
 		lnkTools.jsClick(getDriver());
 		
 		loopCounter = 0;
@@ -512,6 +534,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		initializePage(this.getClass());
 		pageLoaded();
 		lnkInventory = new LinkImpl(driver.findElement(By.id("nav-inventory")).findElement(By.tagName("a")));
+		lnkInventory.focus(getDriver());
+		lnkInventory.highlight(getDriver());
 		lnkInventory.jsClick(getDriver());
 		
 		loopCounter = 0;

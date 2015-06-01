@@ -2,25 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="ChangeZipCode" parallel="false">
 	<listeners>
-		<listener class-name="com.orasi.utils.NewScreenshot"/>
+		<listener class-name="com.orasi.utils.NewScreenshot" />
 	</listeners>
-<!-- 	<parameter name="browserUnderTest" value="iexplore" />
-	<parameter name="environment" value="" />
-	<parameter name="runLocation" value="remote" />
-	<parameter name="browserVersion" value="8" />
-	<parameter name="operatingSystem" value="Windows 7" /> -->
-	
-	<parameter name="browserUnderTest" value="chrome" />
+	<parameter name="browserUnderTest" value="firefox" />
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="remote" />
 	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="Windows 7" />
-
-<!-- 	<parameter name="browserUnderTest" value="chrome" />
-	<parameter name="environment" value="" />
-	<parameter name="runLocation" value="local" />
-	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="windows" /> -->
+	<parameter name="operatingSystem" value="MAC OS X 10.9" />
 
 	<test name="TestAllSecondaryNavigations">
 		<classes>
