@@ -432,7 +432,6 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		boolean isHidden = true;
 		String attributeText = "";
 		
-		
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
