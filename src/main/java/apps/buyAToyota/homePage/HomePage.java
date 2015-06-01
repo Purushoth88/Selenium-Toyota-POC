@@ -3,6 +3,7 @@ package apps.buyAToyota.homePage;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -302,7 +303,10 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			iNewZipCode = 92055;
 			sNewZipCode = String.valueOf(iNewZipCode);
 		}
-		txtZipInput.safeSet(sNewZipCode);
+		//txtZipInput.safeSet(sNewZipCode);
+		txtZipInput.click();
+		txtZipInput.set(sNewZipCode);
+		txtZipInput.sendKeys(Keys.ENTER);
 		
 		loopCounter = 0;
 		do{
