@@ -1,6 +1,11 @@
 package apps.buyAToyota.homePage;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -8,7 +13,10 @@ import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Link;
 import com.orasi.core.interfaces.Textbox;
+import com.orasi.core.interfaces.impl.ElementImpl;
+import com.orasi.core.interfaces.impl.LinkImpl;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
+import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
 
@@ -78,9 +86,21 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			/*
 			 * Zip Input Confirmation Modal Elements
 			 */
+			//
+			@FindBy(id = "zip-modal-confirm")
+			private Element eleZipInputConfirmationModal;
+		
 			//Zip Input Confirmation Modal Zip Code element
 			@FindBy(xpath = "//*[@id=\"zip-modal-confirm\"]/div/div/div[1]/h5/strong")
 			private Element eleZipInputConfirmationModalZipCode;
+			
+			//Zip Input COnfirmation Modal Continue
+			@FindBy(xpath = "//*[@id=\"zip-modal-confirm\"]/div/div/div[2]/div[1]/button")
+			private Button btnZipInputConfirmationModalCancel;
+			
+			//Zip Input COnfirmation Modal Continue
+			@FindBy(xpath = "//*[@id=\"zip-modal-confirm\"]/div/div/div[2]/div[2]/button")
+			private Button btnZipInputConfirmationModalContinue;
 		
 		//Edit And Submit button
 		@FindBy(id = "edit-and-submit-zip-button")
@@ -93,7 +113,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		@FindBy(id = "zip-modal-prompt")
 		private Element eleZipModalPrompt;
 		
-		//Zip Code Header element
+		//Zip Code Prompt Header element
 		@FindBy(xpath = "//*[@id=\"zip-modal-prompt\"]/div/div/div[1]/h5")
 		private Element eleZipModalPromptHeader;
 	
@@ -183,6 +203,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	// *****************************
 	
 	public void testNavBarNavigation(){
+		ensureZipCodePromptHiddenOnStartup();
 		testFindOffersLink();
 		testFindADealerLink();
 		testFindVehiclesLink();
@@ -199,15 +220,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Open Zip Code Prompt Using Find Offers")
 	public void testFindOffersLink(){
-		lnkFindOffer.click();
-		pageLoaded();
-		initializePage(this.getClass());
-		TestReporter.assertTrue(isZipCodePromptDisplayed(), "The zipcode prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Find Offers link.");
-		
-		btnZipModalPromptCancel.click();
-		TestReporter.assertTrue(isZipCodePromptHidden(), "The zipcode prompt was not hidden after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Zip Code Prompt Cancel button.");
-		pageLoaded();
-		initializePage(this.getClass());
+		clickFindOffer();
+		closeZipCodePrompt();
 	}
 	
 	/**
@@ -218,15 +232,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Open Zip Code Prompt Using Find A Dealer")
 	public void testFindADealerLink(){
-		lnkFindADealer.click();
-		pageLoaded();
-		initializePage(this.getClass());
-		TestReporter.assertTrue(isZipCodePromptDisplayed(), "The Zip Code Prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Find A Dealer link.");
-		
-		btnZipModalPromptCancel.click();
-		TestReporter.assertTrue(isZipCodePromptHidden(), "The Zip Code Prompt was not hidden after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Zip Code Prompt Cancel button.");
-		pageLoaded();
-		initializePage(this.getClass());
+		clickFindADealer();
+		closeZipCodePrompt();
 	}
 	
 	/**
@@ -237,10 +244,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Open Find Vehicles Dropdown")
 	public void testFindVehiclesLink(){
-		lnkFindVehicles.click();
-		pageLoaded();
-		initializePage(this.getClass());
-		TestReporter.assertTrue(isFindVehiclesDropdownVisible(), "The Find Vehicles Dropdown was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Find Vehicles link.");
+		clickFindVehicles();
 	}
 	
 	/**
@@ -251,10 +255,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Open Tools Dropdown")
 	public void testToolsLink(){
-		lnkTools.click();
-		pageLoaded();
-		initializePage(this.getClass());
-		TestReporter.assertTrue(isToolsDropdownVisible(), "The Tools Dropdown was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Tools link.");
+		clickTools();
 	}
 	
 	/**
@@ -265,15 +266,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Open Zip Code Prompt Using Inventory")
 	public void testInventoryLink(){
-		lnkInventory.click();
-		pageLoaded();
-		initializePage(this.getClass());
-		TestReporter.assertTrue(isZipCodePromptDisplayed(), "The Zip Code Prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Inventory link.");
-		
-		btnZipModalPromptCancel.click();
-		TestReporter.assertTrue(isZipCodePromptHidden(), "The Zip Code Prompt was not hidden after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Zip Code Prompt Cancel button.");
-		pageLoaded();
-		initializePage(this.getClass());
+		clickInventory();
+		closeZipCodePrompt();
 	}
 	
 	/**
@@ -287,26 +281,45 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		String previousZipCode = txtZipInput.getText();
 		
 		String newZipCode = changeZipCode(previousZipCode);
-		TestReporter.assertTrue(validateChangedZipCode(newZipCode), "The zip code ["+previousZipCode+"] was not changed to ["+newZipCode+"].");
+		TestReporter.assertTrue(validateChangedZipCode(newZipCode), "The zip code ["+previousZipCode+"] was changed to ["+newZipCode+"].");
 	}
 	
 	/**
 	 * @param - N/A
-	 * @return - N/A
+	 * @return - String - the new zip code as seen in the app
 	 * @author - Waightstill W Avery
 	 * @summary - Click the textbox and enter the zip code.
 	 */
 	@Step("Change The Zip Code")
 	private String changeZipCode(String previousZipCode){
-		String newZipCode = String.valueOf(Integer.parseInt(previousZipCode) + 1);
-		txtZipInput.safeSet(newZipCode);
+		int iNewZipCode;
+		String sNewZipCode = "";
 		
-		return newZipCode;
+		try{
+			iNewZipCode = Integer.parseInt(previousZipCode) + 1;
+			sNewZipCode = String.valueOf(iNewZipCode);
+		}catch(NumberFormatException nfe){
+			iNewZipCode = 92055;
+			sNewZipCode = String.valueOf(iNewZipCode);
+		}
+		txtZipInput.safeSet(sNewZipCode);
+		
+		loopCounter = 0;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			initializePage(this.getClass());
+			pageLoaded();
+		}while(eleZipInputConfirmationModal.getAttribute("aria-hidden").equalsIgnoreCase("true"));
+		
+		btnZipInputConfirmationModalContinue.click();
+		
+		return sNewZipCode;
 	}
 	
 	/**
-	 * @param - N/A
-	 * @return - N/A
+	 * @param - newZipCode - the new zip code with which to enter into the app
+	 * @return - boolean - true if the zip code is changed in the app, false otherwise
 	 * @author - Waightstill W Avery
 	 * @summary - Validate the new zip code
 	 */
@@ -323,40 +336,187 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		return isChanged;
 	}
 	
+	/**
+	 * @param - N/A
+	 * @return - boolean - true if the prompt is displayed, false otherwise
+	 * @author - Waightstill W Avery
+	 * @summary - Verify the zip code prompt is displayed
+	 */
 	@Step("Verify Zip Code Prompt Is Displayed")
 	private boolean isZipCodePromptDisplayed(){
 		boolean isDisplayed = false;
-		if(eleZipModalPrompt.syncVisible(getDriver(), getDefaultTestTimeout(), false)){
+		if(eleZipModalPrompt.getAttribute("aria-hidden").equalsIgnoreCase("false")){
 			isDisplayed = true;
 		}
 		return isDisplayed;
 	}
 	
+	/**
+	 * @param - N/A
+	 * @return - boolean - true if the prompt is hidden, false otherwise
+	 * @author - Waightstill W Avery
+	 * @summary - Verify the zip code prompt is hidden
+	 */
 	@Step("Verify Zip Code Prompt Is Hidden")
 	private boolean isZipCodePromptHidden(){
 		boolean isHidden = false;
-		if(eleZipModalPrompt.syncHidden(getDriver(), getDefaultTestTimeout(), false)){
+		if(eleZipModalPrompt.getAttribute("aria-hidden").equalsIgnoreCase("true")){
 			isHidden = true;
 		}
 		return isHidden;
 	}
 	
+	/**
+	 * @param - N/A
+	 * @return - boolean - true is the prompt is displayed, false otherwise
+	 * @author - Waightstill W Avery
+	 * @summary - Verify the Find Vehicles dropdown is displayed
+	 */
 	@Step("Verify Find Vehicles Dropdown Is Displayed")
 	private boolean isFindVehiclesDropdownVisible(){
-		boolean isHidden = false;
+		boolean isHidden = true;
 		if(eleFindVehiclesDropdown.syncVisible(getDriver(), getDefaultTestTimeout(), false)){
-			isHidden = true;
+			isHidden = false;
 		}
 		return isHidden;
 	}
 	
+	/**
+	 * @param - N/A
+	 * @return - true is the dropdown is displayed, false otherwise
+	 * @author - Waightstill W Avery
+	 * @summary - Verify the Find Vehicles dropdown is hidden
+	 */
 	@Step("Verify Tools Dropdown Is Displayed")
 	private boolean isToolsDropdownVisible(){
-		boolean isHidden = false;
+		boolean isHidden = true;
 		if(eleToolsDropdown.syncVisible(getDriver(), getDefaultTestTimeout(), false)){
-			isHidden = true;
+			isHidden = false;
 		}
 		return isHidden;
 	}
 	
+	/**
+	 * @param - N/A
+	 * @return - N/A
+	 * @author - Waightstill W Avery
+	 * @summary - Close the zip code prompt
+	 */
+	@Step("Close Zip Code Prompt")
+	private void closeZipCodePrompt(){
+		btnZipModalPromptCancel.click();
+		
+		loopCounter = 0;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			pageLoaded();
+			initializePage(this.getClass());
+			Assert.assertNotEquals(loopCounter, timeout, "The zipcode prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Find Offers link.");
+		}while(isZipCodePromptDisplayed());
+	}
+	
+	/**
+	 * @param - N/A
+	 * @return - N/A
+	 * @author - Waightstill W Avery
+	 * @summary - The zip code prompt is displayed when the app is launched. Wait until the prompt is hidden.
+	 */
+	@Step("Validate That The Zip Code Prompt Is Hidden At Startup")
+	private void ensureZipCodePromptHiddenOnStartup(){
+		Sleeper.sleep(5000);
+		loopCounter = 0;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			pageLoaded();
+			initializePage(this.getClass());
+			loopCounter++;
+			Assert.assertNotEquals(loopCounter, timeout, "The zip code prompt was not hidden after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
+		}while(isZipCodePromptDisplayed());
+	}
+	
+	private void clickFindOffer(){
+		initializePage(this.getClass());
+		pageLoaded(this.getClass(), lnkFindOffer);
+		lnkFindOffer.click();
+		
+		loopCounter = 0;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			pageLoaded();
+			initializePage(this.getClass());
+			Assert.assertNotEquals(loopCounter, timeout, "The zipcode prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Find Offers link.");
+		}while(isZipCodePromptHidden());
+		TestReporter.assertTrue(true, "The Find Offer link was clicked successfully.");
+	}
+	
+	private void clickFindADealer(){
+		initializePage(this.getClass());
+		pageLoaded();
+		lnkFindADealer = new LinkImpl(driver.findElement(By.id("nav-find-a-dealer")).findElement(By.tagName("a")));
+		lnkFindADealer.click();
+		
+		loopCounter = 0;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			pageLoaded();
+			initializePage(this.getClass());
+			Assert.assertNotEquals(loopCounter, timeout, "The zipcode prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Find Offers link.");
+		}while(isZipCodePromptHidden());
+		TestReporter.assertTrue(true, "The Find A Dealer link was clicked successfully.");
+	}
+	
+	private void clickFindVehicles(){
+		initializePage(this.getClass());
+		pageLoaded();
+		lnkFindVehicles = new LinkImpl(driver.findElement(By.id("nav-find-vehicles")).findElement(By.tagName("a")));	
+		lnkFindVehicles.click();
+
+		loopCounter = 0;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			pageLoaded();
+			initializePage(this.getClass());
+			Assert.assertNotEquals(loopCounter, timeout, "The Find Vehicles dropdown was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Find Vehicles link.");
+		}while(isFindVehiclesDropdownVisible());
+		TestReporter.assertTrue(true, "The Find Vehicles link was clicked successfully.");
+	}
+	
+	private void clickTools(){
+		initializePage(this.getClass());
+		pageLoaded();
+		lnkTools = new LinkImpl(driver.findElement(By.id("nav-tools")).findElement(By.tagName("a")));
+		lnkTools.click();
+		
+		loopCounter = 0;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			pageLoaded();
+			initializePage(this.getClass());
+			Assert.assertNotEquals(loopCounter, timeout, "The Tools Dropdown was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Tools link.");
+		}while(isToolsDropdownVisible());
+		TestReporter.assertTrue(true, "The Tools link was clicked successfully.");
+	}
+	
+	private void clickInventory(){
+		initializePage(this.getClass());
+		pageLoaded();
+		lnkInventory = new LinkImpl(driver.findElement(By.id("nav-inventory")).findElement(By.tagName("a")));
+		lnkInventory.click();
+		
+		loopCounter = 0;
+		do{
+			Sleeper.sleep(1000);
+			loopCounter++;
+			pageLoaded();
+			initializePage(this.getClass());
+			Assert.assertNotEquals(loopCounter, timeout, "The zipcode prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Inventory link");
+		}while(isZipCodePromptHidden());
+		TestReporter.assertTrue(true, "The Inventory link was clicked successfully.");
+	}
 }

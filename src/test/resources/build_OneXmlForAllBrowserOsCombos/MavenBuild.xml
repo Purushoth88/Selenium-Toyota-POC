@@ -19,6 +19,8 @@
 		<packages>
 			<package name="toyota">
 			</package>
+			<package name="buyAToyota">
+			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_10_Safari_8 -->
 
@@ -37,6 +39,8 @@
 		<packages>
 			<package name="toyota">
 			</package>
+			<package name="buyAToyota">
+			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Safari_7 -->
 	<test name="Mac_OS_X_10_9_Chrome">
@@ -53,6 +57,8 @@
 		<packages>
 			<package name="toyota">
 			</package>
+			<package name="buyAToyota">
+			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Chrome -->
 	<test name="Mac_OS_X_10_9_Firefox">
@@ -68,6 +74,8 @@
 		</groups>
 		<packages>
 			<package name="toyota">
+			</package>
+			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Firefox -->
@@ -87,6 +95,8 @@
 		<packages>
 			<package name="toyota">
 			</package>
+			<package name="buyAToyota">
+			</package>
 		</packages>
 	</test> <!-- Windows_7_Chrome -->
 	<test name="Windows_7_Firefox">
@@ -102,6 +112,8 @@
 		</groups>
 		<packages>
 			<package name="toyota">
+			</package>
+			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Windows_7_Firefox -->
@@ -119,6 +131,8 @@
 		<packages>
 			<package name="toyota">
 			</package>
+			<package name="buyAToyota">
+			</package>
 		</packages>
 	</test> <!-- Windows_7_Firefox -->
 	<test name="Windows_7_IE_11">
@@ -134,6 +148,8 @@
 		</groups>
 		<packages>
 			<package name="toyota">
+			</package>
+			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Windows_7_IE_11 -->
@@ -153,6 +169,8 @@
 		<packages>
 			<package name="toyota">
 			</package>
+			<package name="buyAToyota">
+			</package>
 		</packages>
 	</test> <!-- Windows_8_1_Chrome -->
 	<test name="Windows_8_1_Firefox">
@@ -169,6 +187,8 @@
 		<packages>
 			<package name="toyota">
 			</package>
+			<package name="buyAToyota">
+			</package>
 		</packages>
 	</test> <!-- Windows_8_1_Firefox -->
 	<test name="Windows_8_1_IE_11">
@@ -184,6 +204,8 @@
 		</groups>
 		<packages>
 			<package name="toyota">
+			</package>
+			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Windows_8_1_IE_11 -->
