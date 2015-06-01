@@ -306,7 +306,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		//txtZipInput.safeSet(sNewZipCode);
 		txtZipInput.jsClick(getDriver());
 		txtZipInput.set(sNewZipCode);
-		txtZipInput.sendKeys(Keys.ENTER);
+//		txtZipInput.sendKeys(Keys.ENTER);
+		btnEditAndSubmitZip.jsClick(getDriver());
 		
 		loopCounter = 0;
 		do{
