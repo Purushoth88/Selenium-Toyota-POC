@@ -419,6 +419,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			initializePage(this.getClass());
 			Assert.assertNotEquals(loopCounter, timeout, "The zipcode prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Find Offers link.");
 		}while(isZipCodePromptDisplayed());
+		
+		Sleeper.sleep(2000);
 	}
 	
 	/**
@@ -498,7 +500,6 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		lnkFindVehicles.focus(getDriver());
 		lnkFindVehicles.highlight(getDriver());
 		lnkFindVehicles.jsClick(getDriver());
-//		lnkFindVehicles.click();
 
 		loopCounter = 0;
 		do{
