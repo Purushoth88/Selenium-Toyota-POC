@@ -4,11 +4,11 @@
 	<listeners>
 		<listener class-name="com.orasi.utils.NewScreenshot" />
 	</listeners>
-	<parameter name="browserUnderTest" value="firefox" />
+	<parameter name="browserUnderTest" value="iexplore" />
 	<parameter name="environment" value="" />
 	<parameter name="runLocation" value="remote" />
-	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="MAC OS X 10.9" />
+	<parameter name="browserVersion" value="8" />
+	<parameter name="operatingSystem" value="Windows 7" />
 
 	<test name="TestAllSecondaryNavigations">
 		<classes>

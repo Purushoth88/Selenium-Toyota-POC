@@ -432,6 +432,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		boolean isHidden = true;
 		String attributeText = "";
 		
+		
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
@@ -439,7 +440,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			pageLoaded();
 			initializePage(this.getClass());
 			loopCounter++;
-			Assert.assertNotEquals(loopCounter, timeout, "The zip code prompt was not hidden after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
+			Assert.assertNotEquals(loopCounter, timeout, "The zip code prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
 			
 			try{
 				attributeText = eleZipModalPrompt.getAttribute("aria-hidden");

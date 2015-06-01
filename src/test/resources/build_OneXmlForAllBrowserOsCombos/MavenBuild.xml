@@ -131,8 +131,12 @@
 		<packages>
 			<package name="toyota">
 			</package>
-			<package name="buyAToyota">
-			</package>
+
+	<!-- Removing from test suite as modals do not seem to work with this app 
+		and IE8 -->
+			<!-- <package name="buyAToyota">
+			</package> -->
+			
 		</packages>
 	</test> <!-- Windows_7_Firefox -->
 	<test name="Windows_7_IE_11">
