@@ -136,24 +136,6 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Open Select Vehicle Dropdown")
 	private void openSelectVehicleDropdown(){
-		
-
-		
-		//Grab the number of links on the current page
-		List<WebElement> myList = getDriver().findElements(By.tagName("a"));
-		int listSize = myList.size();
-		TestReporter.log("Number of Inputs = " + String.valueOf(listSize));
-		for(int i = 0; i < listSize; i++){
-				TestReporter.log("Input " + String.valueOf(i));
-				Element ele = new ElementImpl(myList.get(i));
-				ele.jsClick(getDriver());
-		}
-		
-		
-		
-		
-		
-		
 		TestReporter.log("Click open 'Select Vehicle'");
 		//Click the link
 		btnSelectVehicle.jsClick(getDriver());

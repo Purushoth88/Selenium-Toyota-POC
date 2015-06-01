@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Toyota" parallel="tests" thread-count="8">
-<listeners>      
-      <listener class-name="com.orasi.utils.NewScreenshot"/>
-  </listeners>
-	<!-- 
-		MAC OS X 10.10 
-	-->
+	<listeners>
+		<listener class-name="com.orasi.utils.NewScreenshot" />
+	</listeners>
+	<!-- MAC OS X 10.10 -->
 	<test name="Mac_OS_X_10_10_Safari_8">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="" />
@@ -24,9 +22,7 @@
 		</packages>
 	</test> <!-- Mac_OS_X_10_10_Safari_8 -->
 
-	<!-- 
-		MAC OS X 10.9 
-	-->
+	<!-- MAC OS X 10.9 -->
 	<test name="Mac_OS_X_10_9_Safari_7">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="" />
@@ -76,9 +72,7 @@
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Firefox -->
 
-	<!-- 
-		Windows 7 
-	-->
+	<!-- Windows 7 -->
 	<test name="Windows_7_Chrome">
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
@@ -144,9 +138,7 @@
 		</packages>
 	</test> <!-- Windows_7_IE_11 -->
 
-	<!-- 
-		Windows 8.1 
-	-->
+	<!-- Windows 8.1 -->
 	<test name="Windows_8_1_Chrome">
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
@@ -195,5 +187,5 @@
 			</package>
 		</packages>
 	</test> <!-- Windows_8_1_IE_11 -->
-	
+
 </suite> <!-- Toyota -->

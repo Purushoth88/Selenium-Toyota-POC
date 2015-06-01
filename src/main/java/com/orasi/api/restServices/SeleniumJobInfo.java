@@ -1,5 +1,9 @@
 package com.orasi.api.restServices;
 
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
+
 public class SeleniumJobInfo {
 	private String description;
 	private String displayName;
@@ -16,6 +20,17 @@ public class SeleniumJobInfo {
 	public String getNextBuildNumber() {return nextBuildNumber;}
 	
 	public static String lastBuildURL = "http://jenkins.orasi.com/job/OpenSandbox/job/Toyota-SauceLabs/lastBuild/api/json";
+	public static String lastBuildNumber = "https://jenkins.orasi.com/job/OpenSandbox/job/Toyota-SauceLabs/api/json?tree=builds[number]";
 	
+	private static RestService rest = new RestService();
+	private String restResponse = "";
 	
+	public SeleniumJobInfo(){
+		
+	}
+	
+	public static String getLastJenkinsBuildNumber() throws ClientProtocolException, IOException{
+		String buildNumber = rest.sendGetRequest(lastBuildNumber);
+		return buildNumber;
+	}
 }
