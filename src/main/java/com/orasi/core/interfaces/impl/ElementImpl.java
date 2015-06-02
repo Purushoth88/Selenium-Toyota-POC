@@ -69,6 +69,17 @@ public class ElementImpl implements Element {
 				+ " :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
 				+ " </b>]");
 	}
+	
+	@Override
+	public void jsClick2(WebDriver driver) {
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript(
+				"arguments[0].scrollIntoView(true);arguments[0].click();",
+				this);
+		TestReporter.interfaceLog(SimpleDate.getTimestamp()
+				+ " :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
+				+ " </b>]");
+	}
 
 	@Override
 	public void focus(WebDriver driver) {

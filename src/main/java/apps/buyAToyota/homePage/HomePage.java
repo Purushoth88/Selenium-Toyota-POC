@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -221,6 +222,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Open Zip Code Prompt Using Find Offers")
 	public void testFindOffersLink(){
+		TestReporter.logStep("Click Find Offers");
 		clickFindOffer();
 		closeZipCodePrompt();
 	}
@@ -233,6 +235,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Open Zip Code Prompt Using Find A Dealer")
 	public void testFindADealerLink(){
+		TestReporter.logStep("Click Find A Dealer");
 		clickFindADealer();
 		closeZipCodePrompt();
 	}
@@ -245,6 +248,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Open Find Vehicles Dropdown")
 	public void testFindVehiclesLink(){
+		TestReporter.logStep("Click Find Vehicles");
 		clickFindVehicles();
 	}
 	
@@ -256,6 +260,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Open Tools Dropdown")
 	public void testToolsLink(){
+		TestReporter.logStep("Click Tools");
 		clickTools();
 	}
 	
@@ -267,6 +272,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Open Zip Code Prompt Using Inventory")
 	public void testInventoryLink(){
+		TestReporter.logStep("Click Inventory");
 		clickInventory();
 		closeZipCodePrompt();
 	}
@@ -279,6 +285,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Change Zip Code And Validate The New Value")
 	public void testChangeZipCode(){
+		TestReporter.logStep("Change Zip Code");
 		String previousZipCode = txtZipInput.getText();
 		
 		String newZipCode = changeZipCode(previousZipCode);
@@ -303,10 +310,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			iNewZipCode = 92055;
 			sNewZipCode = String.valueOf(iNewZipCode);
 		}
-		//txtZipInput.safeSet(sNewZipCode);
 		txtZipInput.jsClick(getDriver());
 		txtZipInput.set(sNewZipCode);
-//		txtZipInput.sendKeys(Keys.ENTER);
 		btnEditAndSubmitZip.jsClick(getDriver());
 		
 		loopCounter = 0;
@@ -378,24 +383,9 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 * @summary - Verify the Find Vehicles dropdown is displayed
 	 */
 	@Step("Verify Find Vehicles Dropdown Is Displayed")
-	private boolean isFindVehiclesDropdownVisible(){
+	private boolean isDropdownVisible(Element dropdown){
 		boolean isHidden = true;
-		if(eleFindVehiclesDropdown.syncVisible(getDriver(), getDefaultTestTimeout(), false)){
-			isHidden = false;
-		}
-		return isHidden;
-	}
-	
-	/**
-	 * @param - N/A
-	 * @return - true is the dropdown is displayed, false otherwise
-	 * @author - Waightstill W Avery
-	 * @summary - Verify the Find Vehicles dropdown is hidden
-	 */
-	@Step("Verify Tools Dropdown Is Displayed")
-	private boolean isToolsDropdownVisible(){
-		boolean isHidden = true;
-		if(eleToolsDropdown.syncVisible(getDriver(), getDefaultTestTimeout(), false)){
+		if(dropdown.getCoordinates().onPage().x > 0 && dropdown.getCoordinates().onPage().y > 0){
 			isHidden = false;
 		}
 		return isHidden;
@@ -409,6 +399,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Close Zip Code Prompt")
 	private void closeZipCodePrompt(){
+		TestReporter.log("Closing Zip Code Prompt");
 		btnZipModalPromptCancel.jsClick(getDriver());
 		
 		loopCounter = 0;
@@ -457,96 +448,93 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	private void clickFindOffer(){
+		String linkName = "Find Offers";
 		initializePage(this.getClass());
 		pageLoaded(this.getClass(), lnkFindOffer);	
-//		lnkFindOffer.focus(getDriver());
-		lnkFindOffer.highlight(getDriver());
-		lnkFindOffer.jsClick(getDriver());
-		
-		loopCounter = 0;
-		do{
-			Sleeper.sleep(1000);
-			loopCounter++;
-			pageLoaded();
-			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, timeout, "The zipcode prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Find Offers link.");
-		}while(isZipCodePromptHidden());
-		TestReporter.assertTrue(true, "The Find Offer link was clicked successfully.");
+		ensureLinkLoadsZipCodePrompt(lnkFindOffer, linkName);
+		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
 	}
 	
 	private void clickFindADealer(){
+		String linkName = "Find A Dealer";
 		initializePage(this.getClass());
 		pageLoaded();
 		lnkFindADealer = new LinkImpl(driver.findElement(By.id("nav-find-a-dealer")).findElement(By.tagName("a")));	
-//		lnkFindADealer.focus(getDriver());
-		lnkFindADealer.highlight(getDriver());
-		lnkFindADealer.jsClick(getDriver());
-		
-		loopCounter = 0;
-		do{
-			Sleeper.sleep(1000);
-			loopCounter++;
-			pageLoaded();
-			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, timeout, "The zipcode prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Find Offers link.");
-		}while(isZipCodePromptHidden());
-		TestReporter.assertTrue(true, "The Find A Dealer link was clicked successfully.");
+		ensureLinkLoadsZipCodePrompt(lnkFindADealer, linkName);
+		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
 	}
 	
 	private void clickFindVehicles(){
+		String linkName = "Find Vehicles";
 		initializePage(this.getClass());
 		pageLoaded();
-		lnkFindVehicles = new LinkImpl(driver.findElement(By.id("nav-find-vehicles")).findElement(By.tagName("a")));	
-//		lnkFindVehicles.focus(getDriver());
-		lnkFindVehicles.highlight(getDriver());
-		lnkFindVehicles.jsClick(getDriver());
-
-		loopCounter = 0;
-		do{
-			Sleeper.sleep(1000);
-			loopCounter++;
-			pageLoaded();
-			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, timeout, "The Find Vehicles dropdown was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Find Vehicles link.");
-		}while(isFindVehiclesDropdownVisible());
+		lnkFindVehicles = new LinkImpl(driver.findElement(By.id("nav-find-vehicles")).findElement(By.tagName("a")));
+		ensureLinkLoadsDropdown(lnkFindVehicles, linkName, eleFindVehiclesDropdown);
 		TestReporter.assertTrue(true, "The Find Vehicles link was clicked successfully.");
 	}
 	
 	private void clickTools(){
+		String linkName = "Tools";
 		initializePage(this.getClass());
 		pageLoaded();
 		lnkTools = new LinkImpl(driver.findElement(By.id("nav-tools")).findElement(By.tagName("a")));
-//		lnkTools.focus(getDriver());
-		lnkTools.highlight(getDriver());
-		lnkTools.jsClick(getDriver());
-		
-		loopCounter = 0;
-		do{
-			Sleeper.sleep(1000);
-			loopCounter++;
-			pageLoaded();
-			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, timeout, "The Tools Dropdown was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Tools link.");
-		}while(isToolsDropdownVisible());
+		ensureLinkLoadsDropdown(lnkTools, linkName, eleToolsDropdown);
 		TestReporter.assertTrue(true, "The Tools link was clicked successfully.");
 	}
 	
 	private void clickInventory(){
+		String linkName = "Inventory";
 		initializePage(this.getClass());
 		pageLoaded();
 		lnkInventory = new LinkImpl(driver.findElement(By.id("nav-inventory")).findElement(By.tagName("a")));
-//		lnkInventory.focus(getDriver());
-		lnkInventory.highlight(getDriver());
-		lnkInventory.jsClick(getDriver());
+		ensureLinkLoadsZipCodePrompt(lnkInventory, linkName);
+		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
+	}
+	
+	private void ensureLinkLoadsZipCodePrompt(Element link, String linkName){
+		loopCounter = 0;
+		link.highlight(getDriver());
+		Sleeper.sleep(1000);
+		do{
+			if(loopCounter%2 == 0){
+				link.jsClick(getDriver());
+			}else{
+				link.click();
+			}
+			Sleeper.sleep(2000);
+			loopCounter++;
+			pageLoaded();
+			initializePage(this.getClass());
+			Assert.assertNotEquals(loopCounter, timeout, "The Zip Code Prompt was not displayed after ["+String.valueOf(timeout)+"] seconds after clicking the "+linkName+" link");
+		}while(isZipCodePromptHidden());
+	}
+	
+	private void ensureLinkLoadsDropdown(Element element, String linkName, Element dropdown){
+		element.highlight(getDriver());	
+		Sleeper.sleep(1000);
 		
 		loopCounter = 0;
 		do{
+//			new Actions(driver).moveToElement(element).build().perform();
+			element.focus(getDriver());
+//			element.jsClick(getDriver());
+//			element.sendKeys(Keys.ENTER);
+//			if(loopCounter%2 == 0){
+//				TestReporter.log("TRYING CLICK");
+//				element.click();
+//			}else if(loopCounter%3 == 0){
+//				TestReporter.log("TRYING JSCLICK");
+//				element.jsClick(getDriver());
+//			}
+//			else{
+//				TestReporter.log("TRYING JSCLICK2");
+//				element.jsClick2(getDriver());	
+//			}
 			Sleeper.sleep(1000);
 			loopCounter++;
 			pageLoaded();
 			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, timeout, "The zipcode prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Inventory link");
-		}while(isZipCodePromptHidden());
-		TestReporter.assertTrue(true, "The Inventory link was clicked successfully.");
+			Assert.assertNotEquals(loopCounter, timeout, "The " + linkName + " dropdown was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the " + linkName + " link.");
+		}while(isDropdownVisible(dropdown));
 	}
 }
