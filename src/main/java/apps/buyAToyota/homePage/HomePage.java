@@ -408,7 +408,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			loopCounter++;
 			pageLoaded();
 			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, timeout, "The zipcode prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the Find Offers link.");
+			Assert.assertNotEquals(loopCounter, timeout, "The zipcode prompt was displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
 		}while(isZipCodePromptDisplayed());
 		
 		Sleeper.sleep(2000);
