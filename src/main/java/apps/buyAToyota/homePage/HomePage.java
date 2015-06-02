@@ -206,8 +206,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	
 	public void testNavBarNavigation(){
 		ensureZipCodePromptHiddenOnStartup();
-		testFindOffersLink();
-		testFindADealerLink();
+//		testFindOffersLink();
+//		testFindADealerLink();
 		testFindVehiclesLink();
 		testToolsLink();
 		testInventoryLink();
@@ -515,15 +515,16 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		TestReporter.log("Element Highlighted");
 		Sleeper.sleep(1000);
 		
-		
-		
 		loopCounter = 0;
 		do{
 			TestReporter.log("BEFORE FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
 			if(getOperatingSystem().equalsIgnoreCase("Windows 8.1") && getBrowserUnderTest().equalsIgnoreCase("iexplore")){
 				element.click();
+			}else if(getOperatingSystem().equalsIgnoreCase("MAC OS X 10.9") && getBrowserUnderTest().equalsIgnoreCase("safari") && getBrowserVersion().equalsIgnoreCase("7")){
+				element.jsHover(getDriver());
 			}else{
-				element.focus(getDriver());	
+				element.jsHover(getDriver());
+				element.focus(getDriver());
 			}
 			TestReporter.log("AFTER FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
 			Sleeper.sleep(1000);

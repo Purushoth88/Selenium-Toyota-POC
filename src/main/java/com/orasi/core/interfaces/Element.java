@@ -49,7 +49,6 @@ public interface Element extends WebElement, WrapsElement, Locatable {
      * @param driver - Current active WebDriver object
      */
     void jsClick(WebDriver driver);
-    void jsClick2(WebDriver driver);
     /**
      * @author Justin
      * @see org.openqa.selenium.WebElement#click()
@@ -399,4 +398,9 @@ boolean isDisplayed();
      * @param driver - Current active WebDriver object
      */
 	public void scrollIntoView(WebDriver driver);
+	
+	/**
+	 * 
+	 */
+	public void jsHover(WebDriver driver);
 }

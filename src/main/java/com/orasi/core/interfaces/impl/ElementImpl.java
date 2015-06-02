@@ -71,17 +71,6 @@ public class ElementImpl implements Element {
 	}
 	
 	@Override
-	public void jsClick2(WebDriver driver) {
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript(
-				"arguments[0].scrollIntoView(true);arguments[0].click();",
-				this);
-		TestReporter.interfaceLog(SimpleDate.getTimestamp()
-				+ " :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
-				+ " </b>]");
-	}
-
-	@Override
 	public void focus(WebDriver driver) {
 		new Actions(driver).moveToElement(element).perform();
 	}
@@ -900,5 +889,34 @@ public class ElementImpl implements Element {
 	public void scrollIntoView(WebDriver driver) {
 		((JavascriptExecutor) driver).executeScript(
 				"arguments[0].scrollIntoView(true);", element);
+	}
+	
+	@Override
+	public void jsHover(WebDriver driver) {
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+	
+		String javaScript = "var evObj = document.createEvent('MouseEvents');"
+				+ "evObj.initMouseEvent(\"mouseover\",true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);"
+				+ "arguments[0].dispatchEvent(evObj);";
+		executor.executeScript(javaScript, element);
+		
+
+//		((JavascriptExecutor) driver).executeScript(
+//				"arguments[0].scrollIntoView(true);", element);
+		
+		
+//		((JavascriptExecutor) driver).executeScript(
+//				"arguments[0].style.border='3px solid red'", this);
+		
+
+//		JavascriptExecutor executor = (JavascriptExecutor) driver;
+//		executor.executeScript(
+//				"arguments[0].scrollIntoView(true);arguments[0].click();",
+//				element);
+				
+		
+		TestReporter.interfaceLog(SimpleDate.getTimestamp()
+				+ " :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
+				+ " </b>]");
 	}
 }
