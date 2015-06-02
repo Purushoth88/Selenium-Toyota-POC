@@ -517,23 +517,9 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		
 		loopCounter = 0;
 		do{
-//			new Actions(driver).moveToElement(element).build().perform();
 			TestReporter.log("BEFORE FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
 			element.focus(getDriver());
 			TestReporter.log("AFTER FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
-//			element.jsClick(getDriver());
-//			element.sendKeys(Keys.ENTER);
-//			if(loopCounter%2 == 0){
-//				TestReporter.log("TRYING CLICK");
-//				element.click();
-//			}else if(loopCounter%3 == 0){
-//				TestReporter.log("TRYING JSCLICK");
-//				element.jsClick(getDriver());
-//			}
-//			else{
-//				TestReporter.log("TRYING JSCLICK2");
-//				element.jsClick2(getDriver());	
-//			}
 			Sleeper.sleep(1000);
 			loopCounter++;
 			pageLoaded();
