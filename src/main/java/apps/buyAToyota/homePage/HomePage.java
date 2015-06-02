@@ -385,7 +385,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	@Step("Verify Find Vehicles Dropdown Is Displayed")
 	private boolean isDropdownVisible(Element dropdown){
 		boolean isHidden = true;
-		if(dropdown.getCoordinates().onPage().x > 0 && dropdown.getCoordinates().onPage().y > 0){
+		if(dropdown.getCoordinates().onPage().x != 0 && dropdown.getCoordinates().onPage().y != 0){
 			isHidden = false;
 		}
 		return isHidden;
@@ -510,13 +510,17 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	private void ensureLinkLoadsDropdown(Element element, String linkName, Element dropdown){
-		element.highlight(getDriver());	
+		TestReporter.log("Highlight Element");
+		element.highlight(getDriver());
+		TestReporter.log("Element Highlighted");
 		Sleeper.sleep(1000);
 		
 		loopCounter = 0;
 		do{
 //			new Actions(driver).moveToElement(element).build().perform();
+			TestReporter.log("BEFORE FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
 			element.focus(getDriver());
+			TestReporter.log("AFTER FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
 //			element.jsClick(getDriver());
 //			element.sendKeys(Keys.ENTER);
 //			if(loopCounter%2 == 0){
