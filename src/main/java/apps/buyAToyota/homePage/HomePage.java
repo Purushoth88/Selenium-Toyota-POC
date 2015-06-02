@@ -367,7 +367,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 * @author - Waightstill W Avery
 	 * @summary - Verify the zip code prompt is hidden
 	 */
-	@Step("Verify Zip Code Prompt Is Hidden")
+	@Step("Determine If Zip Code Prompt Is Hidden")
 	private boolean isZipCodePromptHidden(){
 		boolean isHidden = false;
 		if(eleZipModalPrompt.getAttribute("aria-hidden").equalsIgnoreCase("true")){
@@ -382,7 +382,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 * @author - Waightstill W Avery
 	 * @summary - Verify the Find Vehicles dropdown is displayed
 	 */
-	@Step("Verify Find Vehicles Dropdown Is Displayed")
+	@Step("Verify Dropdown Is Displayed")
 	private boolean isDropdownVisible(Element dropdown){
 		boolean isHidden = true;
 		if(dropdown.getCoordinates().onPage().x != 0 && dropdown.getCoordinates().onPage().y != 0){
