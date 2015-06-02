@@ -515,10 +515,16 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		TestReporter.log("Element Highlighted");
 		Sleeper.sleep(1000);
 		
+		
+		
 		loopCounter = 0;
 		do{
 			TestReporter.log("BEFORE FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
-			element.focus(getDriver());
+			if(getOperatingSystem().equalsIgnoreCase("Windows 8.1") && getBrowserUnderTest().equalsIgnoreCase("iexplore")){
+				element.click();
+			}else{
+				element.focus(getDriver());	
+			}
 			TestReporter.log("AFTER FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
 			Sleeper.sleep(1000);
 			loopCounter++;
