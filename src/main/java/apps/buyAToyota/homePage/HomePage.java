@@ -459,7 +459,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	private void clickFindOffer(){
 		initializePage(this.getClass());
 		pageLoaded(this.getClass(), lnkFindOffer);	
-		lnkFindOffer.focus(getDriver());
+//		lnkFindOffer.focus(getDriver());
 		lnkFindOffer.highlight(getDriver());
 		lnkFindOffer.jsClick(getDriver());
 		
@@ -478,7 +478,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		initializePage(this.getClass());
 		pageLoaded();
 		lnkFindADealer = new LinkImpl(driver.findElement(By.id("nav-find-a-dealer")).findElement(By.tagName("a")));	
-		lnkFindADealer.focus(getDriver());
+//		lnkFindADealer.focus(getDriver());
 		lnkFindADealer.highlight(getDriver());
 		lnkFindADealer.jsClick(getDriver());
 		
@@ -497,7 +497,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		initializePage(this.getClass());
 		pageLoaded();
 		lnkFindVehicles = new LinkImpl(driver.findElement(By.id("nav-find-vehicles")).findElement(By.tagName("a")));	
-		lnkFindVehicles.focus(getDriver());
+//		lnkFindVehicles.focus(getDriver());
 		lnkFindVehicles.highlight(getDriver());
 		lnkFindVehicles.jsClick(getDriver());
 
@@ -516,7 +516,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		initializePage(this.getClass());
 		pageLoaded();
 		lnkTools = new LinkImpl(driver.findElement(By.id("nav-tools")).findElement(By.tagName("a")));
-		lnkTools.focus(getDriver());
+//		lnkTools.focus(getDriver());
 		lnkTools.highlight(getDriver());
 		lnkTools.jsClick(getDriver());
 		
@@ -535,7 +535,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		initializePage(this.getClass());
 		pageLoaded();
 		lnkInventory = new LinkImpl(driver.findElement(By.id("nav-inventory")).findElement(By.tagName("a")));
-		lnkInventory.focus(getDriver());
+//		lnkInventory.focus(getDriver());
 		lnkInventory.highlight(getDriver());
 		lnkInventory.jsClick(getDriver());
 		
