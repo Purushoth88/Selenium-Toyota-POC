@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
 
+
 import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -532,8 +533,11 @@ public class TestEnvironment {
 
 	public void initializePage(Class<?> clazz) {
 		try {
-			ElementFactory.initElements(driver, clazz);
+			ElementFactory.initElements(driver, clazz.getConstructor(TestEnvironment.class));
 		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

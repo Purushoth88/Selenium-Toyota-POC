@@ -93,7 +93,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 		do{
 			Sleeper.sleep(1000);
 			//Ensure the DOM is loaded
-			pageLoaded();
+			pageLoaded().isDomComplete();
 			//Initialize all elements
 			initializePage(this.getClass());
 			//Iterate the counter
