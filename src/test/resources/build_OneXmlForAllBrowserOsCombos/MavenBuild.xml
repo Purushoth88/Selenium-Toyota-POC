@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Toyota" parallel="tests" thread-count="8">
+<suite name="Toyota" parallel="tests" thread-count="11">
 	<listeners>
 		<listener class-name="com.orasi.utils.NewScreenshot" />
 	</listeners>
-	<!-- MAC OS X 10.10 -->
-	<test name="Mac_OS_X_10_10_Safari_8">
+	
+	<!-- 
+	MAC OS X 10.10 
+	-->
+	<test name="Mac_OS_X_10_10_Safari_8"><!-- MAC OS X 10.10 -->
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -24,8 +27,11 @@
 		</packages>
 	</test> <!-- Mac_OS_X_10_10_Safari_8 -->
 
-	<!-- MAC OS X 10.9 -->
-	<test name="Mac_OS_X_10_9_Safari_7">
+	
+	<!-- 
+	MAC OS X 10.9 
+	-->
+	<test name="Mac_OS_X_10_9_Safari_7"><!-- MAC OS X 10.9 -->
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -43,7 +49,8 @@
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Safari_7 -->
-	<test name="Mac_OS_X_10_9_Chrome">
+	
+	<test name="Mac_OS_X_10_9_Chrome"><!-- Mac_OS_X_10_9_Chrome -->
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -61,7 +68,8 @@
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Chrome -->
-	<test name="Mac_OS_X_10_9_Firefox">
+	
+	<test name="Mac_OS_X_10_9_Firefox"><!-- Mac_OS_X_10_9_Firefox -->
 		<parameter name="browserUnderTest" value="firefox" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -80,8 +88,10 @@
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Firefox -->
 
-	<!-- Windows 7 -->
-	<test name="Windows_7_Chrome">
+	<!-- 
+	Windows 7 
+	-->
+	<test name="Windows_7_Chrome"><!-- Windows_7_Chrome -->
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -99,7 +109,8 @@
 			</package>
 		</packages>
 	</test> <!-- Windows_7_Chrome -->
-	<test name="Windows_7_Firefox">
+	
+	<test name="Windows_7_Firefox"><!-- Windows_7_Firefox -->
 		<parameter name="browserUnderTest" value="firefox" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -117,7 +128,8 @@
 			</package>
 		</packages>
 	</test> <!-- Windows_7_Firefox -->
-	<test name="Windows_7_IE_8">
+	
+	<test name="Windows_7_IE_8"><!-- Windows_7_Firefox -->
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -139,7 +151,8 @@
 			
 		</packages>
 	</test> <!-- Windows_7_Firefox -->
-	<test name="Windows_7_IE_11">
+	
+	<test name="Windows_7_IE_11"><!-- Windows_7_IE_11 -->
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -158,8 +171,10 @@
 		</packages>
 	</test> <!-- Windows_7_IE_11 -->
 
-	<!-- Windows 8.1 -->
-	<test name="Windows_8_1_Chrome">
+	<!-- 
+	Windows 8.1 
+	-->
+	<test name="Windows_8_1_Chrome"><!-- Windows_8_1_Chrome -->
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -177,7 +192,8 @@
 			</package>
 		</packages>
 	</test> <!-- Windows_8_1_Chrome -->
-	<test name="Windows_8_1_Firefox">
+	
+	<test name="Windows_8_1_Firefox"><!-- Windows_8_1_Firefox -->
 		<parameter name="browserUnderTest" value="firefox" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -195,7 +211,8 @@
 			</package>
 		</packages>
 	</test> <!-- Windows_8_1_Firefox -->
-	<test name="Windows_8_1_IE_11">
+	
+	<test name="Windows_8_1_IE_11"><!-- Windows_8_1_IE_11 -->
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
