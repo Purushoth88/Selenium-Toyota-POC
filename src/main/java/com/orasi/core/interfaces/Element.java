@@ -403,4 +403,7 @@ boolean isDisplayed();
 	 * 
 	 */
 	public void jsHover(WebDriver driver);
+	public boolean onMouseOver(WebDriver driver, WebElement element);
+	public void moveToElement(WebDriver driver, WebElement element, By locator);
+	public void coordinateClick(WebDriver driver, Float x, Float y);
 }

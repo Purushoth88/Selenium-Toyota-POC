@@ -66,19 +66,19 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		private Link lnkFindOffer;
 			
 		//Find A Dealer link
-		@FindBy(xpath = "//*[@id=\"nav-find-a-dealer\"/a")
+		@FindBy(xpath = "//*[@id=\"nav-find-a-dealer\"]/a")
 		private Link lnkFindADealer;
 		
 		//Find Vehicles link
-		@FindBy(xpath = "//*[@id=\"nav-find-vehicles\"/a")
+		@FindBy(xpath = "//*[@id=\"nav-find-vehicles\"]/a/span")
 		private Link lnkFindVehicles;
 		
 		//Tools link
-		@FindBy(xpath = "//*[@id=\"nav-tools\"/a")
+		@FindBy(xpath = "//*[@id=\"nav-tools\"]/a")
 		private Link lnkTools;
 		
 		//Inventory link
-		@FindBy(xpath = "//*[@id=\"nav-inventory\"/a")
+		@FindBy(xpath = "//*[@id=\"nav-inventory\"]/a")
 		private Link lnkInventory;
 		
 		//Zip Input textbox
@@ -459,7 +459,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		String linkName = "Find A Dealer";
 		initializePage(this.getClass());
 		pageLoaded();
-		lnkFindADealer = new LinkImpl(driver.findElement(By.id("nav-find-a-dealer")).findElement(By.tagName("a")));	
+//		lnkFindADealer = new LinkImpl(driver.findElement(By.id("nav-find-a-dealer")).findElement(By.tagName("a")));	
 		ensureLinkLoadsZipCodePrompt(lnkFindADealer, linkName);
 		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
 	}
@@ -468,7 +468,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		String linkName = "Find Vehicles";
 		initializePage(this.getClass());
 		pageLoaded();
-		lnkFindVehicles = new LinkImpl(driver.findElement(By.id("nav-find-vehicles")).findElement(By.tagName("a")));
+//		lnkFindVehicles = new LinkImpl(driver.findElement(By.id("nav-find-vehicles")).findElement(By.tagName("a")));
 		ensureLinkLoadsDropdown(lnkFindVehicles, linkName, eleFindVehiclesDropdown);
 		TestReporter.assertTrue(true, "The Find Vehicles link was clicked successfully.");
 	}
@@ -477,7 +477,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		String linkName = "Tools";
 		initializePage(this.getClass());
 		pageLoaded();
-		lnkTools = new LinkImpl(driver.findElement(By.id("nav-tools")).findElement(By.tagName("a")));
+//		lnkTools = new LinkImpl(driver.findElement(By.id("nav-tools")).findElement(By.tagName("a")));
 		ensureLinkLoadsDropdown(lnkTools, linkName, eleToolsDropdown);
 		TestReporter.assertTrue(true, "The Tools link was clicked successfully.");
 	}
@@ -486,7 +486,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		String linkName = "Inventory";
 		initializePage(this.getClass());
 		pageLoaded();
-		lnkInventory = new LinkImpl(driver.findElement(By.id("nav-inventory")).findElement(By.tagName("a")));
+//		lnkInventory = new LinkImpl(driver.findElement(By.id("nav-inventory")).findElement(By.tagName("a")));
 		ensureLinkLoadsZipCodePrompt(lnkInventory, linkName);
 		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
 	}
@@ -509,7 +509,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		}while(isZipCodePromptHidden());
 	}
 	
-	private void ensureLinkLoadsDropdown(Element element, String linkName, Element dropdown){
+	private void ensureLinkLoadsDropdown(Element element, String linkName, Element dropdown){		
 		TestReporter.log("Highlight Element");
 		element.highlight(getDriver());
 		TestReporter.log("Element Highlighted");
@@ -521,9 +521,24 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			if(getOperatingSystem().equalsIgnoreCase("Windows 8.1") && getBrowserUnderTest().equalsIgnoreCase("iexplore")){
 				element.click();
 			}else if(getOperatingSystem().equalsIgnoreCase("MAC OS X 10.9") && getBrowserUnderTest().equalsIgnoreCase("safari") && getBrowserVersion().equalsIgnoreCase("7")){
+				element.scrollIntoView(getDriver());
+				element.jsClick(getDriver());
 				element.jsHover(getDriver());
+				element.onMouseOver(getDriver(), element);
+				element.sendKeys(Keys.ENTER);
+				element.sendKeys(Keys.TAB);
+				element.moveToElement(getDriver(), element, By.id("nav-find-vehicles"));
+				int xPos = element.getCoordinates().onPage().x;
+				int yPos = element.getCoordinates().onPage().y;
+				int width = element.getSize().width;
+				int height = element.getSize().height;
+				float xMidpoint = (float)xPos + width/2;
+				float yMidpoint = (float)yPos + height/2;
+				element.coordinateClick(getDriver(), xMidpoint, yMidpoint);
+				element.click();				
+				
+				
 			}else{
-				element.jsHover(getDriver());
 				element.focus(getDriver());
 			}
 			TestReporter.log("AFTER FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
