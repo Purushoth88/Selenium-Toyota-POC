@@ -4,11 +4,9 @@
 	<listeners>
 		<listener class-name="com.orasi.utils.NewScreenshot" />
 	</listeners>
-	
-	<!-- 
-	MAC OS X 10.10 
-	-->
-	<test name="Mac_OS_X_10_10_Safari_8"><!-- MAC OS X 10.10 -->
+
+	<!-- MAC OS X 10.10 -->
+	<test name="Mac_OS_X_10_10_Safari_8_toyota"><!-- MAC OS X 10.10 -->
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -22,11 +20,10 @@
 		<packages>
 			<package name="toyota">
 			</package>
-			<!-- <package name="buyAToyota">
-			</package> -->
+			<!-- <package name="buyAToyota"> </package> -->
 		</packages>
 	</test> <!-- Mac_OS_X_10_10_Safari_8 -->
-	<test name="Mac_OS_X_10_10_Safari_8"><!-- MAC OS X 10.10 -->
+	<test name="Mac_OS_X_10_10_Safari_8_buyAToyota"><!-- MAC OS X 10.10 -->
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -38,18 +35,15 @@
 			</run>
 		</groups>
 		<packages>
-			<!-- <package name="toyota">
-			</package> -->
+			<!-- <package name="toyota"> </package> -->
 			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_10_Safari_8 -->
 
-	
-	<!-- 
-	MAC OS X 10.9 
-	-->
-	<test name="Mac_OS_X_10_9_Safari_7"><!-- MAC OS X 10.9 -->
+
+	<!-- MAC OS X 10.9 -->
+	<test name="Mac_OS_X_10_9_Safari_7_toyota"><!-- MAC OS X 10.9 -->
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -63,11 +57,10 @@
 		<packages>
 			<package name="toyota">
 			</package>
-			<!-- <package name="buyAToyota">
-			</package> -->
+			<!-- <package name="buyAToyota"> </package> -->
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Safari_7 -->
-	<test name="Mac_OS_X_10_9_Safari_7"><!-- MAC OS X 10.9 -->
+	<test name="Mac_OS_X_10_9_Safari_7_buyAToyota"><!-- MAC OS X 10.9 -->
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -79,14 +72,13 @@
 			</run>
 		</groups>
 		<packages>
-			<!-- <package name="toyota">
-			</package> -->
+			<!-- <package name="toyota"> </package> -->
 			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Safari_7 -->
-	
-	<test name="Mac_OS_X_10_9_Chrome"><!-- Mac_OS_X_10_9_Chrome -->
+
+	<test name="Mac_OS_X_10_9_Chrome_toyota"><!-- Mac_OS_X_10_9_Chrome -->
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -100,11 +92,10 @@
 		<packages>
 			<package name="toyota">
 			</package>
-			<!-- <package name="buyAToyota">
-			</package> -->
+			<!-- <package name="buyAToyota"> </package> -->
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Chrome -->
-	<test name="Mac_OS_X_10_9_Chrome"><!-- Mac_OS_X_10_9_Chrome -->
+	<test name="Mac_OS_X_10_9_Chrome_buyAToyota"><!-- Mac_OS_X_10_9_Chrome -->
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -116,14 +107,13 @@
 			</run>
 		</groups>
 		<packages>
-			<!-- <package name="toyota">
-			</package> -->
+			<!-- <package name="toyota"> </package> -->
 			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Chrome -->
-	
-	<test name="Mac_OS_X_10_9_Firefox"><!-- Mac_OS_X_10_9_Firefox -->
+
+	<test name="Mac_OS_X_10_9_Firefox_toyota"><!-- Mac_OS_X_10_9_Firefox -->
 		<parameter name="browserUnderTest" value="firefox" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -137,11 +127,10 @@
 		<packages>
 			<package name="toyota">
 			</package>
-			<!-- <package name="buyAToyota">
-			</package> -->
+			<!-- <package name="buyAToyota"> </package> -->
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Firefox -->
-	<test name="Mac_OS_X_10_9_Firefox"><!-- Mac_OS_X_10_9_Firefox -->
+	<test name="Mac_OS_X_10_9_Firefox_buyAToyota"><!-- Mac_OS_X_10_9_Firefox -->
 		<parameter name="browserUnderTest" value="firefox" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -153,17 +142,14 @@
 			</run>
 		</groups>
 		<packages>
-			<!-- <package name="toyota">
-			</package> -->
+			<!-- <package name="toyota"> </package> -->
 			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Mac_OS_X_10_9_Firefox -->
 
-	<!-- 
-	Windows 7 
-	-->
-	<test name="Windows_7_Chrome"><!-- Windows_7_Chrome -->
+	<!-- Windows 7 -->
+	<test name="Windows_7_Chrome_toyota"><!-- Windows_7_Chrome -->
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -177,11 +163,10 @@
 		<packages>
 			<package name="toyota">
 			</package>
-			<!-- <package name="buyAToyota">
-			</package> -->
+			<!-- <package name="buyAToyota"> </package> -->
 		</packages>
 	</test> <!-- Windows_7_Chrome -->
-	<test name="Windows_7_Chrome"><!-- Windows_7_Chrome -->
+	<test name="Windows_7_Chrome_buyAToyota"><!-- Windows_7_Chrome -->
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -193,14 +178,13 @@
 			</run>
 		</groups>
 		<packages>
-			<!-- <package name="toyota">
-			</package> -->
+			<!-- <package name="toyota"> </package> -->
 			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Windows_7_Chrome -->
-	
-	<test name="Windows_7_Firefox"><!-- Windows_7_Firefox -->
+
+	<test name="Windows_7_Firefox_toyota"><!-- Windows_7_Firefox -->
 		<parameter name="browserUnderTest" value="firefox" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -214,11 +198,10 @@
 		<packages>
 			<package name="toyota">
 			</package>
-			<!-- <package name="buyAToyota">
-			</package> -->
+			<!-- <package name="buyAToyota"> </package> -->
 		</packages>
 	</test> <!-- Windows_7_Firefox -->
-	<test name="Windows_7_Firefox"><!-- Windows_7_Firefox -->
+	<test name="Windows_7_Firefox_buyAToyota"><!-- Windows_7_Firefox -->
 		<parameter name="browserUnderTest" value="firefox" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -230,14 +213,13 @@
 			</run>
 		</groups>
 		<packages>
-			<!-- <package name="toyota">
-			</package> -->
+			<!-- <package name="toyota"> </package> -->
 			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Windows_7_Firefox -->
-	
-	<test name="Windows_7_IE_8"><!-- Windows_7_Firefox -->
+
+	<test name="Windows_7_IE_8_toyota"><!-- Windows_7_Firefox -->
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -252,16 +234,15 @@
 			<package name="toyota">
 			</package>
 
-	<!-- Removing from test suite as modals do not seem to work with this app 
-		and IE8 -->
-			<!-- <package name="buyAToyota">
-			</package> -->
-			
+			<!-- Removing from test suite as modals do not seem to work with this 
+				app and IE8 -->
+			<!-- <package name="buyAToyota"> </package> -->
+
 		</packages>
 	</test> <!-- Windows_7_Firefox -->
-	
-	
-	<test name="Windows_7_IE_11"><!-- Windows_7_IE_11 -->
+
+
+	<test name="Windows_7_IE_11_toyota"><!-- Windows_7_IE_11 -->
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -275,11 +256,10 @@
 		<packages>
 			<package name="toyota">
 			</package>
-			<!-- <package name="buyAToyota">
-			</package> -->
+			<!-- <package name="buyAToyota"> </package> -->
 		</packages>
 	</test> <!-- Windows_7_IE_11 -->
-	<test name="Windows_7_IE_11"><!-- Windows_7_IE_11 -->
+	<test name="Windows_7_IE_11_buyAToyota"><!-- Windows_7_IE_11 -->
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -291,17 +271,14 @@
 			</run>
 		</groups>
 		<packages>
-			<!-- <package name="toyota">
-			</package> -->
+			<!-- <package name="toyota"> </package> -->
 			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Windows_7_IE_11 -->
 
-	<!-- 
-	Windows 8.1 
-	-->
-	<test name="Windows_8_1_Chrome"><!-- Windows_8_1_Chrome -->
+	<!-- Windows 8.1 -->
+	<test name="Windows_8_1_Chrome_toyota"><!-- Windows_8_1_Chrome -->
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -315,11 +292,10 @@
 		<packages>
 			<package name="toyota">
 			</package>
-			<!-- <package name="buyAToyota">
-			</package> -->
+			<!-- <package name="buyAToyota"> </package> -->
 		</packages>
 	</test> <!-- Windows_8_1_Chrome -->
-	<test name="Windows_8_1_Chrome"><!-- Windows_8_1_Chrome -->
+	<test name="Windows_8_1_Chrome_buyAToyota"><!-- Windows_8_1_Chrome -->
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -331,14 +307,13 @@
 			</run>
 		</groups>
 		<packages>
-			<!-- <package name="toyota">
-			</package> -->
+			<!-- <package name="toyota"> </package> -->
 			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Windows_8_1_Chrome -->
-	
-	<test name="Windows_8_1_Firefox"><!-- Windows_8_1_Firefox -->
+
+	<test name="Windows_8_1_Firefox_toyota"><!-- Windows_8_1_Firefox -->
 		<parameter name="browserUnderTest" value="firefox" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -352,11 +327,10 @@
 		<packages>
 			<package name="toyota">
 			</package>
-			<!-- <package name="buyAToyota">
-			</package> -->
+			<!-- <package name="buyAToyota"> </package> -->
 		</packages>
 	</test> <!-- Windows_8_1_Firefox -->
-	<test name="Windows_8_1_Firefox"><!-- Windows_8_1_Firefox -->
+	<test name="Windows_8_1_Firefox_buyAToyota"><!-- Windows_8_1_Firefox -->
 		<parameter name="browserUnderTest" value="firefox" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -368,14 +342,13 @@
 			</run>
 		</groups>
 		<packages>
-			<!-- <package name="toyota">
-			</package> -->
+			<!-- <package name="toyota"> </package> -->
 			<package name="buyAToyota">
 			</package>
 		</packages>
 	</test> <!-- Windows_8_1_Firefox -->
-	
-	<test name="Windows_8_1_IE_11"><!-- Windows_8_1_IE_11 -->
+
+	<test name="Windows_8_1_IE_11_toyota"><!-- Windows_8_1_IE_11 -->
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -389,11 +362,10 @@
 		<packages>
 			<package name="toyota">
 			</package>
-			<!-- <package name="buyAToyota">
-			</package> -->
+			<!-- <package name="buyAToyota"> </package> -->
 		</packages>
 	</test> <!-- Windows_8_1_IE_11 -->
-	<test name="Windows_8_1_IE_11"><!-- Windows_8_1_IE_11 -->
+	<test name="Windows_8_1_IE_11_buyAToyota"><!-- Windows_8_1_IE_11 -->
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -405,8 +377,7 @@
 			</run>
 		</groups>
 		<packages>
-			<!-- <package name="toyota">
-			</package> -->
+			<!-- <package name="toyota"> </package> -->
 			<package name="buyAToyota">
 			</package>
 		</packages>
