@@ -1,7 +1,6 @@
 package com.orasi.core.interfaces.impl;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByClassName;
@@ -17,16 +16,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
-import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.orasi.core.interfaces.Element;
 import com.orasi.utils.Constants;
-import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
-import com.orasi.utils.date.SimpleDate;
 
 /**
  * An implementation of the Element interface. Delegates its work to an
@@ -51,12 +47,10 @@ public class ElementImpl implements Element {
 	    	try{
 	    	    element.click();
 	    	}catch(RuntimeException rte){
-	    	    TestReporter.interfaceLog(SimpleDate.getTimestamp()
-        		+ " :: Clicked [ <font size = 2 color=\"red\"><b>@FindBy: " + getElementLocatorInfo()
+	    	    TestReporter.interfaceLog("Clicked [ <font size = 2 color=\"red\"><b>@FindBy: " + getElementLocatorInfo()
         		+ " </font></b>]");
 	    	}
-		TestReporter.interfaceLog(SimpleDate.getTimestamp()
-				+ " :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
+		TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo()
 				+ " </b>]");
 	}
 
@@ -66,11 +60,10 @@ public class ElementImpl implements Element {
 		executor.executeScript(
 				"arguments[0].scrollIntoView(true);arguments[0].click();",
 				element);
-		TestReporter.interfaceLog(SimpleDate.getTimestamp()
-				+ " :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
+		TestReporter.interfaceLog("Clicked [ <b>@FindBy: " + getElementLocatorInfo()
 				+ " </b>]");
 	}
-	
+
 	@Override
 	public void focus(WebDriver driver) {
 		new Actions(driver).moveToElement(element).perform();
@@ -79,8 +72,7 @@ public class ElementImpl implements Element {
 	@Override
 	public void focusClick(WebDriver driver) {
 		new Actions(driver).moveToElement(element).click().perform();
-		TestReporter.interfaceLog(SimpleDate.getTimestamp()
-				+ " :: Focus Clicked [ <b>@FindBy: " + getElementLocatorInfo()
+		TestReporter.interfaceLog("Focus Clicked [ <b>@FindBy: " + getElementLocatorInfo()
 				+ " </b>]");
 	}
 
@@ -340,7 +332,7 @@ public class ElementImpl implements Element {
 		loopTimeout = Integer.valueOf(timeout) * 10;
 		TestReporter.interfaceLog("<i>Syncing to element [<b>@FindBy: "
 				+ getElementLocatorInfo()
-				+ "</b> ] to be <b>VISIBLE/<b> within [ " + timeout
+				+ "</b> ] to be <b>VISIBLE<b> within [ " + timeout
 				+ " ] seconds.</i>");
 
 		for (double seconds = 0; seconds < loopTimeout; seconds += 1) {
@@ -890,83 +882,5 @@ public class ElementImpl implements Element {
 	public void scrollIntoView(WebDriver driver) {
 		((JavascriptExecutor) driver).executeScript(
 				"arguments[0].scrollIntoView(true);", element);
-	}
-	
-	@Override
-	public void jsHover(WebDriver driver) {
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-	
-		String javaScript = "var evObj = document.createEvent('MouseEvents');"
-				+ "evObj.initMouseEvent(\"mouseover\",true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);"
-				+ "arguments[0].dispatchEvent(evObj);";
-		executor.executeScript(javaScript, element);
-		
-
-//		((JavascriptExecutor) driver).executeScript(
-//				"arguments[0].scrollIntoView(true);", element);
-		
-		
-//		((JavascriptExecutor) driver).executeScript(
-//				"arguments[0].style.border='3px solid red'", this);
-		
-
-//		JavascriptExecutor executor = (JavascriptExecutor) driver;
-//		executor.executeScript(
-//				"arguments[0].scrollIntoView(true);arguments[0].click();",
-//				element);
-				
-		
-		TestReporter.interfaceLog(SimpleDate.getTimestamp()
-				+ " :: Clicked [ <b>@FindBy: " + getElementLocatorInfo()
-				+ " </b>]");
-	}
-	
-	@Override
-	public boolean onMouseOver(WebDriver driver, WebElement element)
-	{
-		boolean result = false;
-		try
-		{
-			String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript(mouseOverScript, element);
-			result = true;
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			result = false;
-		}
-		return result;
-	}
-	
-	@Override
-	public void moveToElement(WebDriver driver, WebElement element, By locator) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String locatorType = locator.toString().substring(3);
-		String elem = "var elem = document;";
-		if (locatorType.startsWith("id")) {
-			elem = "var elem = document.getElementById(\""
-					+ locatorType.substring(4) + "\");";
-		} else if (locatorType.startsWith("xpath")) {
-			String snippet = "document.getElementByXPath = function(sValue) { var a = this.evaluate(sValue, this, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null); if (a.snapshotLength > 0) { return a.snapshotItem(0); } }; ";
-			js.executeScript(snippet);
-			elem = "var elem = document.getElementByXPath(\""
-					+ locatorType.substring(7) + "\");";
-		} else if (locatorType.startsWith("className")) {
-			elem = "var elem = document.getElementsByClassName(\""
-					+ locatorType.substring(14) + "\")[0];";
-		}
-		String mouseOverScript = elem
-				+ " if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false);"
-				+ " elem.dispatchEvent(evObj);} else if(document.createEventObject) { elem.fireEvent('onmouseover');}";
-		js.executeScript(mouseOverScript);
-	}
-	
-	@Override
-	public void coordinateClick(WebDriver driver, Float x, Float y){
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String s = "(document.elementFromPoint(" + x + " - window.pageXOffset, " + y + " - window.pageYOffset)).click()";
-		js.executeScript(s);
 	}
 }
