@@ -21,7 +21,7 @@ import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
-@Listeners({ SauceOnDemandTestListener.class, com.orasi.utils.NewScreenshot.class })
+@Listeners({ SauceOnDemandTestListener.class, com.orasi.utils.Screenshot.class })
 public class TestAllSecondaryNavigations extends TestEnvironment {
 	private String application = "Toyota";
 	/*
@@ -73,7 +73,7 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 		testStart(testName);
 
 		// Ensure the home page is loaded
-		TestReporter.assertTrue(pageLoaded(), "Load the Home Page");
+		TestReporter.assertTrue(pageLoaded().isDomComplete(), "Load the Home Page");
 		TestReporter.log("Test the Secondary Navigation Bar Functionality");
 		SecondaryNavigation secNav = new SecondaryNavigation(this);
 		secNav.navigateAllSecondaryNavigationTabs();

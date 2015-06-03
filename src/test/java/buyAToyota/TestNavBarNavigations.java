@@ -20,7 +20,7 @@ import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
-@Listeners({ SauceOnDemandTestListener.class, com.orasi.utils.NewScreenshot.class })
+@Listeners({ SauceOnDemandTestListener.class, com.orasi.utils.Screenshot.class })
 public class TestNavBarNavigations extends TestEnvironment {
 	private String application = "BuyAToyota";
 	/*
@@ -72,7 +72,7 @@ public class TestNavBarNavigations extends TestEnvironment {
 		testStart(testName);
 
 		// Ensure the home page is loaded
-		TestReporter.assertTrue(pageLoaded(), "Load the Home Page");
+		TestReporter.assertTrue(pageLoaded().isDomComplete(), "Load the Home Page");
 		TestReporter.logScenario("Test the Navigation Bar Functionality");
 		HomePage homePage = new HomePage(this);
 		homePage.testNavBarNavigation();

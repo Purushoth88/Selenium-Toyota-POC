@@ -319,7 +319,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			Sleeper.sleep(1000);
 			loopCounter++;
 			initializePage(this.getClass());
-			pageLoaded();
+			pageLoaded().isDomComplete();
 		}while(eleZipInputConfirmationModal.getAttribute("aria-hidden").equalsIgnoreCase("true"));
 		
 		btnZipInputConfirmationModalContinue.jsClick(getDriver());
@@ -337,7 +337,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	private boolean validateChangedZipCode(String newZipCode){
 		boolean isChanged = false;
 		
-		pageLoaded();
+		pageLoaded().isDomComplete();
 		initializePage(this.getClass());
 		if(txtZipInput.getText().equalsIgnoreCase(newZipCode)){
 			isChanged = true;
@@ -406,7 +406,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		do{
 			Sleeper.sleep(1000);
 			loopCounter++;
-			pageLoaded();
+			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
 			Assert.assertNotEquals(loopCounter, timeout, "The zipcode prompt was displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
 		}while(isZipCodePromptDisplayed());
@@ -429,7 +429,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		do{
 			Sleeper.sleep(1000);
 			loopCounter++;
-			pageLoaded();
+			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The zip code prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
@@ -450,7 +450,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	private void clickFindOffer(){
 		String linkName = "Find Offers";
 		initializePage(this.getClass());
-		pageLoaded(this.getClass(), lnkFindOffer);	
+		pageLoaded().isElementLoaded(this.getClass(), lnkFindOffer);	
 		ensureLinkLoadsZipCodePrompt(lnkFindOffer, linkName);
 		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
 	}
@@ -458,7 +458,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	private void clickFindADealer(){
 		String linkName = "Find A Dealer";
 		initializePage(this.getClass());
-		pageLoaded();
+		pageLoaded().isDomComplete();
 //		lnkFindADealer = new LinkImpl(driver.findElement(By.id("nav-find-a-dealer")).findElement(By.tagName("a")));	
 		ensureLinkLoadsZipCodePrompt(lnkFindADealer, linkName);
 		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
@@ -467,7 +467,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	private void clickFindVehicles(){
 		String linkName = "Find Vehicles";
 		initializePage(this.getClass());
-		pageLoaded();
+		pageLoaded().isDomComplete();
 //		lnkFindVehicles = new LinkImpl(driver.findElement(By.id("nav-find-vehicles")).findElement(By.tagName("a")));
 		ensureLinkLoadsDropdown(lnkFindVehicles, linkName, eleFindVehiclesDropdown);
 		TestReporter.assertTrue(true, "The Find Vehicles link was clicked successfully.");
@@ -476,7 +476,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	private void clickTools(){
 		String linkName = "Tools";
 		initializePage(this.getClass());
-		pageLoaded();
+		pageLoaded().isDomComplete();
 //		lnkTools = new LinkImpl(driver.findElement(By.id("nav-tools")).findElement(By.tagName("a")));
 		ensureLinkLoadsDropdown(lnkTools, linkName, eleToolsDropdown);
 		TestReporter.assertTrue(true, "The Tools link was clicked successfully.");
@@ -485,7 +485,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	private void clickInventory(){
 		String linkName = "Inventory";
 		initializePage(this.getClass());
-		pageLoaded();
+		pageLoaded().isDomComplete();
 //		lnkInventory = new LinkImpl(driver.findElement(By.id("nav-inventory")).findElement(By.tagName("a")));
 		ensureLinkLoadsZipCodePrompt(lnkInventory, linkName);
 		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
@@ -503,7 +503,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			}
 			Sleeper.sleep(2000);
 			loopCounter++;
-			pageLoaded();
+			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
 			Assert.assertNotEquals(loopCounter, timeout, "The Zip Code Prompt was not displayed after ["+String.valueOf(timeout)+"] seconds after clicking the "+linkName+" link");
 		}while(isZipCodePromptHidden());
@@ -523,18 +523,18 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			}else if(getOperatingSystem().equalsIgnoreCase("MAC OS X 10.9") && getBrowserUnderTest().equalsIgnoreCase("safari")){
 				element.scrollIntoView(getDriver());
 				element.jsClick(getDriver());
-				element.jsHover(getDriver());
-				element.onMouseOver(getDriver(), element);
+				//element.jsHover(getDriver());
+				//element.onMouseOver(getDriver(), element);
 				element.sendKeys(Keys.ENTER);
 				element.sendKeys(Keys.TAB);
-				element.moveToElement(getDriver(), element, By.id("nav-find-vehicles"));
+				//element.moveToElement(getDriver(), element, By.id("nav-find-vehicles"));
 				int xPos = element.getCoordinates().onPage().x;
 				int yPos = element.getCoordinates().onPage().y;
 				int width = element.getSize().width;
 				int height = element.getSize().height;
 				float xMidpoint = (float)xPos + width/2;
 				float yMidpoint = (float)yPos + height/2;
-				element.coordinateClick(getDriver(), xMidpoint, yMidpoint);
+				//element.coordinateClick(getDriver(), xMidpoint, yMidpoint);
 				element.click();				
 				
 				
@@ -544,7 +544,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			TestReporter.log("AFTER FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
 			Sleeper.sleep(1000);
 			loopCounter++;
-			pageLoaded();
+			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
 			Assert.assertNotEquals(loopCounter, timeout, "The " + linkName + " dropdown was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the " + linkName + " link.");
 		}while(isDropdownVisible(dropdown));

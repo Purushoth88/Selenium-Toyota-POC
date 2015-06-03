@@ -24,7 +24,7 @@ import com.orasi.utils.TestReporter;
 import com.orasi.utils.dataProviders.ExcelDataProvider;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 
-@Listeners({ SauceOnDemandTestListener.class, com.orasi.utils.NewScreenshot.class })
+@Listeners({ SauceOnDemandTestListener.class, com.orasi.utils.Screenshot.class })
 public class ChangeZipCode extends TestEnvironment {
 	private String application = "Toyota";
 
@@ -89,12 +89,12 @@ public class ChangeZipCode extends TestEnvironment {
 
 		// Ensure the home page is loaded
 		TestReporter.logScenario(testScenario);
-		TestReporter.assertTrue(pageLoaded(), "Verify Homepage is displayed");
+		TestReporter.assertTrue(pageLoaded().isDomComplete(), "Verify Homepage is displayed");
 
 		// Change the zipcode
 		MainNavigation mainNav = new MainNavigation(this);
 		TestReporter
-				.assertTrue(pageLoaded(), "Verify Navigation Bar is loaded");
+				.assertTrue(pageLoaded().isDomComplete(), "Verify Navigation Bar is loaded");
 		mainNav.changeZipCodes(zipCode);
 	}
 

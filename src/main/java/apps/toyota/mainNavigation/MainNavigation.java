@@ -112,7 +112,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	@Step("Change Zip Code to \"{0}\"")
 	public void changeZipCodes(@Parameter String zipCode){
 		//Ensure the "Your Location" button is loaded
-		pageLoaded(this.getClass(), btnYourLocation);
+		pageLoaded().isElementLoaded(this.getClass(), btnYourLocation);
 		//Capture the zipcode that currently exists in the UI
 		this.initialZipCode = captureCurrentZipCode();
 		TestReporter.log("Initial zip code: ["+initialZipCode+"].");
@@ -204,7 +204,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	@Step("Capture the Current Zip Code")
 	private String captureCurrentZipCode(){
 		//Ensure the element is loaded
-		pageLoaded(this.getClass(), eleZipCode);
+		pageLoaded().isElementLoaded(this.getClass(), eleZipCode);
 		//Grab and return the element text for validation
 		return eleZipCode.getText().trim();
 		

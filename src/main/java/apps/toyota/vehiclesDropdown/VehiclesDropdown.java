@@ -51,14 +51,14 @@ public class VehiclesDropdown extends com.orasi.utils.TestEnvironment{
 		super(te);
 		ElementFactory.initElements(getDriver(), this);  
 	}
-
-	public boolean pageLoaded(Element element) {
-		return this.pageLoaded(this.getClass(), element);
-	}
-
-	public void initializePage() {
-		this.initializePage(this.getClass());	
-	}
+//
+//	public boolean pageLoaded(Element element) {
+//		return this.pageLoaded(this.getClass(), element);
+//	}
+//
+//	public void initializePage() {
+//		this.initializePage(this.getClass());	
+//	}
 
 	// *************************************
 	// *** VehiclesDropdown Interactions ***

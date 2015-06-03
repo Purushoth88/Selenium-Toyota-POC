@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+
 import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,9 +22,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.ITestResult;
 
-import ru.yandex.qatools.allure.annotations.Step;
-
-import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.saucerest.SauceREST;
@@ -35,11 +33,13 @@ import com.saucelabs.saucerest.SauceREST;
  *          implemented by test classes. It houses test environment data and
  *          associated getters and setters, setup for both local and remote
  *          WebDrivers as well as page class methods used to sync page behavior.
+ *          The need for this arose due to the parallel behavior that indicated
+ *          that WebDriver instances were crossing threads and testing on the
+ *          wrong os/browser configurations
  * @date April 5, 2015
  *
  */
 public class TestEnvironment {
-
 	/*
 	 * Test Environment Fields
 	 */
@@ -52,17 +52,17 @@ public class TestEnvironment {
 	protected String testName = "";
 	protected String commandTimeout = "";
 	protected String idleTimeout = "";
-
 	/*
 	 * WebDriver Fields
 	 */
-	protected WebDriver driver; 
-	/*
-	 * Define a collection of webdrivers and test names inside a Map. This
-	 * allows for more than one driver to be used within a test class. This also
-	 * allows for a particular driver to be tied to a specific test based on
-	 * test name.
-	 */
+	protected WebDriver driver; /*
+								 * Define a collection of webdrivers and test
+								 * names inside a Map. This allows for more than
+								 * one driver to be used within a test class.
+								 * This also allows for a particular driver to
+								 * be tied to a specific test based on test
+								 * name.
+								 */
 	protected Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
 	/*
 	 * URL and Credential Repository Field
@@ -107,7 +107,8 @@ public class TestEnvironment {
 	/*
 	 * Constructors for TestEnvironment class
 	 */
-	public TestEnvironment() {};
+	public TestEnvironment() {
+	};
 
 	public TestEnvironment(String application, String browserUnderTest,
 			String browserVersion, String operatingSystem,
@@ -119,8 +120,6 @@ public class TestEnvironment {
 		setRunLocation(setRunLocation);
 		setTestEnvironment(environment);
 		setSeleniumHubURL(seleniumHubURL);
-		setCommandTimeout();
-		setIdleTimeout();
 	}
 
 	public TestEnvironment(TestEnvironment te) {
@@ -133,8 +132,6 @@ public class TestEnvironment {
 		setTestName(te.getTestName());
 		setSeleniumHubURL(seleniumHubURL);
 		setDriver(te.getDriver());
-		setCommandTimeout();
-		setIdleTimeout();
 	}
 
 	/*
@@ -292,8 +289,13 @@ public class TestEnvironment {
 	 * @author Justin Phlegar
 	 * @return Nothing
 	 */
-	@Step("Launch \"{0}\"")
+	// @Step("Launch \"{0}\"")
 	protected void launchApplication(String URL) {
+		String reportInfo = getBrowserUnderTest().toUpperCase();
+		if (!getBrowserVersion().isEmpty())
+			reportInfo += " v." + getBrowserVersion();
+		TestReporter.log("Launch " + reportInfo + " in OS "
+				+ getOperatingSystem().toUpperCase() + " with URL: " + URL);
 		driver.get(URL);
 	}
 
@@ -329,68 +331,14 @@ public class TestEnvironment {
 		// Uncomment the following line to have TestReporter outputs output to
 		// the console
 		TestReporter.setPrintToConsole(true);
-		setTestName(testName);
-		setCommandTimeout();
-		setIdleTimeout();
 		driverSetup();
 		launchApplication();
 		drivers.put(testName, driver);
 		setDriver(drivers.get(testName));
 	}
 
-	/**
-	 * Quits the driver.
-	 * 
-	 * @param testName
-	 *            - Name of the test
-	 * @version 05/27/2015
-	 * @author Justin Phlegar
-	 */
 	protected void endTest(String testName) {
 		WebDriver driver = drivers.get(testName);
-		if (driver != null && driver.getWindowHandles().size() > 0) {
-			driver.quit();
-		}
-	}
-
-	/**
-	 * SauceLabs-specific teardown method. Generates updates for SauceLabs
-	 * reporting and publishes the updates through a SauceLabs REST API call.
-	 * 
-	 * @param test - test results
-	 * @version 05/27/2015
-	 * @author Justin Phlegar
-	 */
-	protected void endSauceTest(ITestResult test) {
-		TestReporter.log("endSauceTest");
-		Map<String, Object> updates = new HashMap<String, Object>();
-		updates.put("name", getTestName());
-
-		if (test.getStatus() == ITestResult.FAILURE) {
-			// new Screenshot().takeScreenShot(test, driver);
-			updates.put("passed", false);
-		} else {
-			updates.put("passed", true);
-		}
-
-		JSONArray tags = new JSONArray();
-		String[] groups = test.getMethod().getGroups();
-		for (int x = 0; x < groups.length; x++) {
-			tags.add(groups[x]);
-		}
-		updates.put("tags", tags);
-
-		if (runLocation.equalsIgnoreCase("remote")) {
-			SauceREST client = new SauceREST(
-					Base64Coder.decodeString(appURLRepository
-							.getString("SAUCELABS_USERNAME")),
-					Base64Coder.decodeString(appURLRepository
-							.getString("SAUCELABS_KEY")));
-			client.updateJobInfo(((RemoteWebDriver) driver).getSessionId()
-					.toString(), updates);
-		}
-
-		WebDriver driver = drivers.get(getTestName());
 		if (driver != null && driver.getWindowHandles().size() > 0) {
 			driver.quit();
 		}
@@ -448,7 +396,6 @@ public class TestEnvironment {
 							file.getAbsolutePath());
 					driver = new ChromeDriver();
 				}
-
 				// Headless - HTML unit driver
 				else if (getBrowserUnderTest().equalsIgnoreCase("html")) {
 					driver = new HtmlUnitDriver(true);
@@ -521,53 +468,36 @@ public class TestEnvironment {
 			// Code for running on the selenium grid
 		} else if (getRunLocation().equalsIgnoreCase("remote")) {
 			DesiredCapabilities capabilities = new DesiredCapabilities();
-			// Set the command timeout. Default SuaceLabs command timeout is 5 minutes.
-			capabilities.setCapability("commandTimeout", getCommandTimeout());
-			//Set the idle timeout. Default SauceLabs idle timeout is 90 seconds
-			capabilities.setCapability("idleTimeout", getIdleTimeout());
-			
-			// Set the browser under test
 			capabilities.setCapability(CapabilityType.BROWSER_NAME,
 					getBrowserUnderTest());
-			// Set the browser version under test. An empty string triggers
-			// SauceLabs to use the latest version
 			if (getBrowserVersion() != null) {
 				capabilities.setCapability(CapabilityType.VERSION,
 						getBrowserVersion());
 			}
-			// Set the operating system under test
 			capabilities.setCapability(CapabilityType.PLATFORM,
 					getOperatingSystem());
-			// If internet explorer is under test, ignore the zoom setting
 			if (getBrowserUnderTest().toLowerCase().contains("ie")
 					|| getBrowserUnderTest().toLowerCase().contains("iexplore")) {
 				capabilities.setCapability("ignoreZoomSetting", true);
 			}
-			// Set the test name in the Desired Capabilities
 			capabilities.setCapability("name", getTestName());
-			// Set the webdriver with the SauceLabs account info and the Desired
-			// Capabilities
 			try {
-				/*webDriver.set(new RemoteWebDriver(new URL("http://"
+				webDriver.set(new RemoteWebDriver(new URL("http://"
 						+ authentication.getUsername() + ":"
 						+ authentication.getAccessKey()
-						+ "@ondemand.saucelabs.com:80/wd/hub"), capabilities));*/
-				webDriver.set(new RemoteWebDriver(new URL(seleniumHubURL), capabilities));
+						+ "@ondemand.saucelabs.com:80/wd/hub"), capabilities));
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// Set the session ID
 			sessionId.set(((RemoteWebDriver) getWebDriver()).getSessionId()
 					.toString());
-			// Generate the remote webdriver
 			driver = webDriver.get();
 		} else {
 			throw new RuntimeException(
 					"Parameter for run [Location] was not set to 'Local' or 'Remote'");
 		}
 
-		// Manage timeouts
 		driver.manage()
 				.timeouts()
 				.setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT,
@@ -575,9 +505,7 @@ public class TestEnvironment {
 				.implicitlyWait(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT,
 						TimeUnit.SECONDS);
 		setDefaultTestTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);
-		// Delete browser cookies
 		driver.manage().deleteAllCookies();
-		// Maximize the browser
 		driver.manage().window().maximize();
 	}
 
@@ -589,6 +517,10 @@ public class TestEnvironment {
 	// ************************************
 	// ************************************
 
+	public PageLoaded pageLoaded() {
+		return new PageLoaded(this);
+	}
+
 	/**
 	 * @summary loops for a predetermined amount of time (defined by
 	 *          WebDriverSetup.getDefaultTestTimeout()) to determine if the DOM
@@ -597,40 +529,11 @@ public class TestEnvironment {
 	 * @param N
 	 *            /A
 	 */
-	public boolean pageLoaded() {
-		return new PageLoaded().isDomComplete(driver);
-	}
 
-	/**
-	 * @summary loops for a predetermined amount of time (defined by
-	 *          WebDriverSetup.getDefaultTestTimeout()) to determine if the
-	 *          Element is not null
-	 * @return boolean: true is the DOM is completely loaded, false otherwise
-	 * @param clazz
-	 *            - page class that is calling this method
-	 * @param element
-	 *            - element with which to determine if a page is loaded
-	 */
-	public boolean pageLoaded(Class<?> clazz, Element element) {
-
-		return new PageLoaded().isElementLoaded(clazz, driver, element);
-	}
-
-	/**
-	 * @summary Used to create all page objects WebElements as proxies (not
-	 *          actual objects, but rather placeholders) or to reinitialize all
-	 *          page object WebElements to allow for the state of a page to
-	 *          change and not fail a test
-	 * @return N/A
-	 * @param clazz
-	 *            - page class that is calling this method for which to
-	 *            initialize elements
-	 */
 	public void initializePage(Class<?> clazz) {
 		try {
-			ElementFactory.initElements(driver,
-					clazz.getConstructor(TestEnvironment.class));
-		} catch (NoSuchMethodException | SecurityException e) {
+			ElementFactory.initElements(driver, clazz);
+		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -656,5 +559,49 @@ public class TestEnvironment {
 
 	public String getIdleTimeout() {
 		return idleTimeout;
+	}
+
+	/**
+	 * SauceLabs-specific teardown method. Generates updates for SauceLabs
+	 * reporting and publishes the updates through a SauceLabs REST API call.
+	 * 
+	 * @param test
+	 *            - test results
+	 * @version 05/27/2015
+	 * @author Justin Phlegar
+	 */
+	protected void endSauceTest(ITestResult test) {
+		TestReporter.log("endSauceTest");
+		Map<String, Object> updates = new HashMap<String, Object>();
+		updates.put("name", getTestName());
+
+		if (test.getStatus() == ITestResult.FAILURE) {
+			// new Screenshot().takeScreenShot(test, driver);
+			updates.put("passed", false);
+		} else {
+			updates.put("passed", true);
+		}
+
+		JSONArray tags = new JSONArray();
+		String[] groups = test.getMethod().getGroups();
+		for (int x = 0; x < groups.length; x++) {
+			tags.add(groups[x]);
+		}
+		updates.put("tags", tags);
+
+		if (runLocation.equalsIgnoreCase("remote")) {
+			SauceREST client = new SauceREST(
+					Base64Coder.decodeString(appURLRepository
+							.getString("SAUCELABS_USERNAME")),
+					Base64Coder.decodeString(appURLRepository
+							.getString("SAUCELABS_KEY")));
+			client.updateJobInfo(((RemoteWebDriver) driver).getSessionId()
+					.toString(), updates);
+		}
+
+		WebDriver driver = drivers.get(getTestName());
+		if (driver != null && driver.getWindowHandles().size() > 0) {
+			driver.quit();
+		}
 	}
 }
