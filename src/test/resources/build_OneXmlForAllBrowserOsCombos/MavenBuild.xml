@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Toyota" parallel="tests" thread-count="20">
 	<listeners>
-		<listener class-name="com.orasi.utils.NewScreenshot" />
+		<listener class-name="com.orasi.utils.Screenshot" />
 	</listeners>
 
 	<!-- MAC OS X 10.10 -->
