@@ -520,7 +520,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			TestReporter.log("BEFORE FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
 			if(getOperatingSystem().equalsIgnoreCase("Windows 8.1") && getBrowserUnderTest().equalsIgnoreCase("iexplore")){
 				element.click();
-			}else if(getOperatingSystem().equalsIgnoreCase("MAC OS X 10.9") && getBrowserUnderTest().equalsIgnoreCase("safari") && getBrowserVersion().equalsIgnoreCase("7")){
+			}else if(getOperatingSystem().equalsIgnoreCase("MAC OS X 10.9") && getBrowserUnderTest().equalsIgnoreCase("safari")){
 				element.scrollIntoView(getDriver());
 				element.jsClick(getDriver());
 				element.jsHover(getDriver());
