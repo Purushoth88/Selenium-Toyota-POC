@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="ChangeZipCode" parallel="false">
 	<listeners>
-		<listener class-name="com.orasi.utils.NewScreenshot" />
+		<listener class-name="com.orasi.utils.Screenshot" />
 	</listeners>
 	<parameter name="browserUnderTest" value="safari" />
 	<parameter name="environment" value="" />

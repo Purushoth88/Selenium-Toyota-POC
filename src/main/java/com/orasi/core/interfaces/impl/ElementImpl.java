@@ -883,4 +883,154 @@ public class ElementImpl implements Element {
 		((JavascriptExecutor) driver).executeScript(
 				"arguments[0].scrollIntoView(true);", element);
 	}
+	
+	@Override
+	public boolean onMouseOver(WebDriver driver)
+	{
+		//Grab the element
+		WebElement element = getWrappedElement();
+		boolean result = false;
+		try
+		{
+			//Create the string that will be used as the JS script
+			String mouseOverScript = 
+					"if(document.createEvent){"
+					+ 	"var evObj = document.createEvent('MouseEvents');"
+					+ 	"evObj.initEvent('mouseover', true, false);"
+					+ 	"arguments[0].dispatchEvent(evObj);}"
+					+ "else if(document.createEventObject) { "
+					+ 	"arguments[0].fireEvent('onmouseover');}";
+			//Create a JS executor
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			//Execute the script
+			js.executeScript(mouseOverScript, element);
+			result = true;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			result = false;
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean onMouseOver(WebElement element, WebDriver driver)
+	{
+		boolean result = false;
+		try
+		{
+			String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript(mouseOverScript, element);
+			result = true;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			result = false;
+		}
+		return result;
+	}
+	
+	@Override
+	public void moveToElement(WebDriver driver) {
+		//Grab the element locator
+		By locator = getElementLocator();
+		//Create a JS executor
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		//Grab the element locator type
+		String locatorType = locator.toString().substring(3);
+		//Define the beginning string that will be used to define the element
+		String elem = "var elem = document;";
+		
+		/*
+		 * Define a JavaScript document method to find elements by certain attributes
+		 */
+		if (locatorType.startsWith("id")) {
+			elem = "var elem = document.getElementById(\""
+					+ locatorType.substring(4) + "\");";
+		} else if (locatorType.startsWith("xpath")) {
+			String snippet = "document.getElementByXPath = function(sValue) { var a = this.evaluate(sValue, this, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null); if (a.snapshotLength > 0) { return a.snapshotItem(0); } }; ";
+			js.executeScript(snippet);
+			elem = "var elem = document.getElementByXPath('"
+					+ locatorType.substring(7) + "');";
+		} else if (locatorType.startsWith("className")) {
+			elem = "var elem = document.getElementsByClassName(\""
+					+ locatorType.substring(14) + "\")[0];";
+		}
+		//Concatenate strings to make the mouse over script to be passed to the JS executor
+		String mouseOverScript = elem
+				+ "if(document.createEvent){"
+				+ 	"var evObj = document.createEvent('MouseEvents');"
+				+ 	"evObj.initEvent('mouseover', true, false);"
+				+ 	"elem.dispatchEvent(evObj);}"
+				+ "else if(document.createEventObject) {"
+				+ 	"elem.fireEvent('onmouseover');}";
+		//Execute the script
+		js.executeScript(mouseOverScript);	
+	}
+	
+	@Override
+	public void moveToElement(WebDriver driver, WebElement element, By locator) {
+		// Create a JS executor
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		//Grab the element locator type
+		String locatorType = locator.toString().substring(3);
+		String elem = "var elem = document;";
+
+		/*
+		 * Define a JavaScript document method to find elements by certain
+		 * attributes
+		 */
+		if (locatorType.startsWith("id")) {
+			elem = "var elem = document.getElementById(\""
+					+ locatorType.substring(4) + "\");";
+		} else if (locatorType.startsWith("xpath")) {
+			String snippet = "document.getElementByXPath = function(sValue) { var a = this.evaluate(sValue, this, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null); if (a.snapshotLength > 0) { return a.snapshotItem(0); } }; ";
+			js.executeScript(snippet);
+			elem = "var elem = document.getElementByXPath(\""
+					+ locatorType.substring(7) + "\");";
+		} else if (locatorType.startsWith("className")) {
+			elem = "var elem = document.getElementsByClassName(\""
+					+ locatorType.substring(14) + "\")[0];";
+		}
+		//Concatenate strings to make the mouse over script to be passed to the JS executor
+		String mouseOverScript = elem
+				+ "if(document.createEvent){"
+				+ 	"var evObj = document.createEvent('MouseEvents');"
+				+ 	"evObj.initEvent('mouseover', true, false);"
+				+ 	"elem.dispatchEvent(evObj);} "
+				+ "else if(document.createEventObject) { "
+				+ 	"elem.fireEvent('onmouseover');}";
+		//Execute the script
+		js.executeScript(mouseOverScript);
+	}
+	
+	public void mouseHoverByJavaScript(WebDriver driver)
+	{
+		WebElement elem = getWrappedElement();
+		String javaScript = "var evObj = document.createEvent('MouseEvents');"
+				+ "evObj.initMouseEvent('mouseover',true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);"
+				+ "arguments[0].dispatchEvent(evObj);";
+		// Create a JS executor
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript(javaScript, elem);
+	}
+	
+	public void coordinateClick(WebDriver driver){
+		Element element = new ElementImpl(getWrappedElement());
+		int xPos = element.getCoordinates().onPage().x;
+		int yPos = element.getCoordinates().onPage().y;
+		int width = element.getSize().width;
+		int height = element.getSize().height;
+		float xMidpoint = (float)xPos + width/2;
+		float yMidpoint = (float)yPos + height/2;
+		
+		String javaScript = "var element = document.elementFromPoint("+xMidpoint+","+yMidpoint+");element.click()";
+		
+		// Create a JS executor
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript(javaScript);
+	}
 }

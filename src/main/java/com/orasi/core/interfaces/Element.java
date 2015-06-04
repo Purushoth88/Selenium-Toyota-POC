@@ -399,4 +399,13 @@ boolean isDisplayed();
      * @param driver - Current active WebDriver object
      */
 	public void scrollIntoView(WebDriver driver);
+	
+	
+	
+	public boolean onMouseOver(WebDriver driver);
+	public boolean onMouseOver(WebElement element, WebDriver driver);
+	public void moveToElement(WebDriver driver);
+	public void moveToElement(WebDriver driver, WebElement element, By locator);
+	public void mouseHoverByJavaScript(WebDriver driver);
+	public void coordinateClick(WebDriver driver);
 }
