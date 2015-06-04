@@ -1,10 +1,19 @@
 package com.orasi.api.soapServices.core;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringBufferInputStream;
 import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPBody;
@@ -21,12 +30,19 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
 import org.apache.xmlbeans.XmlException;
+import org.jaxen.SimpleNamespaceContext;
 import org.testng.Reporter;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -39,7 +55,7 @@ import com.eviware.soapui.support.SoapUIException;
 import com.orasi.utils.XMLTools;
 
 @SuppressWarnings("deprecation")
-public abstract class SoapService{
+public abstract class SoapService {
 
 	private String strEnvironment = null;
 	private String strServiceURL = null;
@@ -362,6 +378,30 @@ public abstract class SoapService{
 		return XMLTools.getValueByXpath(getResponseDocument(), xpath);
 	}
 
+	public String getResponseNodeValueByXPath(String xpath,
+			String[][] namespaces) {
+		SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
+		for (int nsCounter = 0; nsCounter < namespaces.length; nsCounter++) {
+			nsContext.addNamespace(namespaces[nsCounter][0],
+					namespaces[nsCounter][1]);
+		}
+		XPathFactory xPathFactory = XPathFactory.newInstance();
+		XPath xPath = xPathFactory.newXPath();
+		XPathExpression expr;
+		NodeList nList = null;
+		Document doc = getResponseDocument();
+
+		try {
+			expr = xPath.compile(xpath);
+			nList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+		} catch (XPathExpressionException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		return nList.item(0).getTextContent();
+	}
+
 	/**
 	 * @summary Find and open the excel file sent. If successful, look and find
 	 *          the matching scenario name then return its xpath and value data.
@@ -468,7 +508,8 @@ public abstract class SoapService{
 					.newInstance(SOAPConstants.SOAP_1_1_PROTOCOL);
 
 			// Convert XML Request to SoapMessage
-			request = messageFactory.createMessage(new MimeHeaders(), new StringBufferInputStream(getRequest()));
+			request = messageFactory.createMessage(new MimeHeaders(),
+					new StringBufferInputStream(getRequest()));
 			request.writeTo(System.out);
 			System.out.println();
 
@@ -519,8 +560,8 @@ public abstract class SoapService{
 		System.out.println("Response");
 		System.out.println(getResponse());
 		return response;
-	}	
-	
+	}
+
 	/**
 	 * @summary Takes the pre-built Request XML in memory and sends to the
 	 *          service
@@ -548,12 +589,13 @@ public abstract class SoapService{
 					.newInstance(SOAPConstants.SOAP_1_1_PROTOCOL);
 
 			// Convert XML Request to SoapMessage
-			
+
 			MimeHeaders headers = new MimeHeaders();
 			headers.setHeader(headerName[0], headerValue[0]);
-			if(headerName.length > 1){
-				for(int headerCounter = 0; headerCounter < headerName.length; headerCounter++){
-					headers.addHeader(headerName[headerCounter], headerValue[headerCounter]);
+			if (headerName.length > 1) {
+				for (int headerCounter = 0; headerCounter < headerName.length; headerCounter++) {
+					headers.addHeader(headerName[headerCounter],
+							headerValue[headerCounter]);
 				}
 			}
 			request = messageFactory.createMessage(headers,
@@ -611,9 +653,9 @@ public abstract class SoapService{
 	}
 
 	/**
-	 * @summary Update multiple XPath nodes or attributes based on the value. The value
-	 *          is not limited to simple values, but may also call various
-	 *          functions by adding "fx:" as a prefix. Please see
+	 * @summary Update multiple XPath nodes or attributes based on the value.
+	 *          The value is not limited to simple values, but may also call
+	 *          various functions by adding "fx:" as a prefix. Please see
 	 *          {@link #handleValueFunction} for more information
 	 * @author Justin Phlegar
 	 * @version Created: 08/28/2014
@@ -621,21 +663,26 @@ public abstract class SoapService{
 	 *            String: xpath to evaluate
 	 * @param value
 	 *            String: Depending on value given, will update the xpath value,
-	 *            attribute, or call a separate function. 
-	 *            <br><br><b>Value syntax expressions:</b>
-	 *            <br><b>value="abc"</b>  -- Indirectly states that the node value will be set as "abc"
-	 *            <br><b>value="value:abc"</b>  -- Directly states that the node value will be set as "abc"
-	 *            <br><b>value="attribute:attrName,abc"</b>  -- Directly states that the node attribute "attrName" will be set as "abc"
-	 *            <br><b>value="fx:funcName"</b> -- Will call the function "funcName" to be handled in {@link #handleValueFunction}
+	 *            attribute, or call a separate function. <br>
+	 * <br>
+	 *            <b>Value syntax expressions:</b> <br>
+	 *            <b>value="abc"</b> -- Indirectly states that the node value
+	 *            will be set as "abc" <br>
+	 *            <b>value="value:abc"</b> -- Directly states that the node
+	 *            value will be set as "abc" <br>
+	 *            <b>value="attribute:attrName,abc"</b> -- Directly states that
+	 *            the node attribute "attrName" will be set as "abc" <br>
+	 *            <b>value="fx:funcName"</b> -- Will call the function
+	 *            "funcName" to be handled in {@link #handleValueFunction}
 	 */
 	public void setRequestNodeValueByXPath(String xpath, String value) {
-			XMLTools.setRequestNodeValueByXPath(getRequestDocument(),xpath,value);
+		XMLTools.setRequestNodeValueByXPath(getRequestDocument(), xpath, value);
 	}
 
 	/**
-	 * @summary Update multiple XPath nodes or attributes based on the value. The value
-	 *          is not limited to simple values, but may also call various
-	 *          functions by adding "fx:" as a prefix. Please see
+	 * @summary Update multiple XPath nodes or attributes based on the value.
+	 *          The value is not limited to simple values, but may also call
+	 *          various functions by adding "fx:" as a prefix. Please see
 	 *          {@link #handleValueFunction} for more information
 	 * @author Justin Phlegar
 	 * @version Created: 08/28/2014
@@ -643,32 +690,46 @@ public abstract class SoapService{
 	 *            String: xpath to evaluate
 	 * @param value
 	 *            String: Depending on value given, will update the xpath value,
-	 *            attribute, or call a separate function. 
-	 *            <br><br><b>Value syntax expressions:</b>
-	 *            <br><b>value="abc"</b>  -- Indirectly states that the node value will be set as "abc"
-	 *            <br><b>value="value:abc"</b>  -- Directly states that the node value will be set as "abc"
-	 *            <br><b>value="attribute:attrName,abc"</b>  -- Directly states that the node attribute "attrName" will be set as "abc"
-	 *            <br><b>value="fx:funcName"</b> -- Will call the function "funcName" to be handled in {@link #handleValueFunction}
+	 *            attribute, or call a separate function. <br>
+	 * <br>
+	 *            <b>Value syntax expressions:</b> <br>
+	 *            <b>value="abc"</b> -- Indirectly states that the node value
+	 *            will be set as "abc" <br>
+	 *            <b>value="value:abc"</b> -- Directly states that the node
+	 *            value will be set as "abc" <br>
+	 *            <b>value="attribute:attrName,abc"</b> -- Directly states that
+	 *            the node attribute "attrName" will be set as "abc" <br>
+	 *            <b>value="fx:funcName"</b> -- Will call the function
+	 *            "funcName" to be handled in {@link #handleValueFunction}
 	 */
 	public void setRequestNodeValueByXPath(Object[][] scenarios) {
 		for (int x = 0; x < scenarios.length; x++) {
-			XMLTools.setRequestNodeValueByXPath(getRequestDocument(),scenarios[x][0].toString(),
-					scenarios[x][1].toString());
+			XMLTools.setRequestNodeValueByXPath(getRequestDocument(),
+					scenarios[x][0].toString(), scenarios[x][1].toString());
 		}
 	}
 
 	/**
-	 * @summary Validate XML Response and reports findings
+	 * @summary Validate XML Repsonse and reports findings
 	 * @author Justin Phlegar
 	 * @version Created: 08/28/2014
-	 * @param doc Document: XML Document to evaluate
-	 * @param xpath String: xpath to evaluate
-	 * @param value String: Depending on value given, will validate the xpath node or attribute value,
-	 *  		  	<br><br><b>Value syntax expressions:</b>
-	 *	            <br><b>value="abc"</b>  -- Indirectly states that the node value will be validated and expected to be "abc"
-	 *  	        <br><b>value="value:abc"</b>  -- Directly states that the node value will be validated and expected to be "abc"
-	 *      	    <br><b>value="attribute:attrName,abc"</b>  -- Directly states that the node attribute "attrName" will be validated and expected to be "abc"
-	 *            
+	 * @param doc
+	 *            Document: XML Document to evalute
+	 * @param xpath
+	 *            String: xpath to evaluate
+	 * @param value
+	 *            String: Depending on value given, will validate the xpath node
+	 *            or attribute value, <br>
+	 * <br>
+	 *            <b>Value syntax expressions:</b> <br>
+	 *            <b>value="abc"</b> -- Indirectly states that the node value
+	 *            will be validated and expected to be "abc" <br>
+	 *            <b>value="value:abc"</b> -- Directly states that the node
+	 *            value will be validated and expected to be "abc" <br>
+	 *            <b>value="attribute:attrName,abc"</b> -- Directly states that
+	 *            the node attribute "attrName" will be validated and expected
+	 *            to be "abc"
+	 * 
 	 */
 	public boolean validateNodeValueByXPath(Document doc, Object[][] scenarios) {
 		boolean status = true;
@@ -679,70 +740,117 @@ public abstract class SoapService{
 		buffer.append("<td style='width: 100px; color: black; text-align: center;'><b>Value</b></td>");
 		buffer.append("<td style='width: 100px; color: black; text-align: center;'><b>Status</b></td></tr>");
 		for (int x = 0; x < scenarios.length; x++) {
-			if (!XMLTools.validateNodeValueByXPath(doc, scenarios[x][0].toString(),
-					scenarios[x][1].toString())) {
+			if (!XMLTools.validateNodeValueByXPath(doc,
+					scenarios[x][0].toString(), scenarios[x][1].toString())) {
 				status = false;
 			}
 		}
 		buffer.append("</table>");
-		Reporter.log(buffer.toString()+ "<br/>");
+		Reporter.log(buffer.toString() + "<br/>");
 		return status;
 	}
 
-	/**
-	 * @summary Validate XML Response and reports findings
-	 * @author Justin Phlegar
-	 * @version Created: 08/28/2014
-	 * @param resourcePath: path of file to read
-	 * @param scenario String: scenario to validate 
-	 */
 	public boolean validateResponse(String resourcePath, String scenario) {
 		return validateNodeValueByXPath(getResponseDocument(),
 				getTestScenario(resourcePath, scenario));
 	}
 
-	/**
-	 * @summary Set the WSDL Endpoint for the class to use
-	 * @author Justin Phlegar
-	 * @version Created: 08/28/2014
-	 * @param endpoint String: Endpoint location of WSDL file. This can be a web location or local. 
-	 */	
+	protected String sendGetRequest(String strUrl) throws Exception {
+
+		StringBuilder rawResponse = new StringBuilder();
+
+		URL urlRequest = null;
+
+		try {
+			urlRequest = new URL(strUrl);
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		HttpURLConnection conn = (HttpURLConnection) urlRequest
+				.openConnection();
+		conn.setDoOutput(true);
+		conn.setDoInput(true);
+		conn.setRequestMethod("GET");
+
+		InputStream stream = conn.getInputStream();
+		BufferedReader bufferReader = new BufferedReader(new InputStreamReader(
+				stream));
+
+		String buffer = "";
+		while ((buffer = bufferReader.readLine()) != null) {
+			rawResponse.append(buffer);
+		}
+
+		return rawResponse.toString();
+	}
+
+	protected void setEnvironmentServiceURL(String service, String environment) {
+		setEnvironment(environment);
+
+		// include the %20 as whitespace for URL format
+		if (environment.toLowerCase().contains(" ")) {
+			environment.replaceAll(" ", "%20");
+		}
+
+		String url = "http://dmweb.wdw-ilab.wdw.disney.com:8081/EnvSrvcEndPntRepository/rest/retrieveServiceEndpoint/{environment}/{service}";
+		String responseXML = "";
+		Document responseDoc = null;
+		url = url.replace("{environment}", environment);
+		url = url.replace("{service}", service);
+
+		try {
+			responseXML = sendGetRequest(url);
+			responseDoc = XMLTools.makeXMLDocument(responseXML);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		setServiceURL(getFirstNodeValueByTagName(responseDoc, "endPoint")
+				+ "?wsdl");
+
+	}
+
 	protected void setEnvironmentServiceURL(String endpoint) {
-		if (endpoint.contains("http")){
+		if (endpoint.contains("http")) {
 			setServiceURL(endpoint + "?wsdl");
-		}else{
+		} else {
 			setServiceURL(endpoint + ".wsdl");
 		}
 	}
 
-	/**
-	 * @summary Opens the WSDL file that was loaded with the {@link setEnvironmentServiceURL} and load a XML Template for selected operation
-	 * @author Justin Phlegar
-	 * @version Created: 08/28/2014
-	 * @param operation String: operation to load
-	 */
-	protected String buildRequestFromWSDL(String operation) {
+	protected String buildRequestFromWSDL(String service) {
+		Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+		logger.setUseParentHandlers(false);
+		logger.setLevel(Level.OFF);
+
 		WsdlProject project = null;
-		WsdlInterface[] wsdls = null;
+
 		try {
 			project = new WsdlProject();
-			wsdls = WsdlImporter.importWsdl(project, getServiceURL());
-		} catch (XmlException xmle) {
-			throw new RuntimeException("Error loading XML: " + xmle.getCause());
-		} catch (IOException ioe) {
-			throw new RuntimeException("Error reading WSDL file: " + ioe.getCause());		
+		} catch (XmlException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		} catch (SoapUIException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (Exception e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
 		}
-		
+		WsdlInterface[] wsdls = null;
+		try {
+			wsdls = WsdlImporter.importWsdl(project, getServiceURL());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		WsdlInterface wsdl = wsdls[0];
-		WsdlOperation wsdlOperation = wsdl.getOperationByName(operation);
-		setResponseTemplate(wsdlOperation.createResponse(true));
-		return wsdlOperation.createRequest(true);
+		WsdlOperation op = wsdl.getOperationByName(service);
+		setResponseTemplate(op.createResponse(true));
+		return op.createRequest(true);
 	}
 
 	protected void removeComments() {
@@ -752,6 +860,11 @@ public abstract class SoapService{
 
 	protected void removeWhiteSpace() {
 		setRequestDocument(XMLTools.removeWhiteSpace(getRequestDocument()));
+	}
+
+	private String getFirstNodeValueByTagName(Document doc, String tag) {
+		NodeList nList = doc.getElementsByTagName(tag);
+		return nList.item(0).getTextContent();
 	}
 
 	public boolean validateRepsonseXML() {

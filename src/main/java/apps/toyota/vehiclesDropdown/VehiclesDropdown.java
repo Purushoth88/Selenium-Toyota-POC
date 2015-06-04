@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import ru.yandex.qatools.allure.annotations.Step;
+
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.TestEnvironment;
@@ -49,19 +51,19 @@ public class VehiclesDropdown extends com.orasi.utils.TestEnvironment{
 		super(te);
 		ElementFactory.initElements(getDriver(), this);  
 	}
-
-	public boolean pageLoaded(Element element) {
-		return this.pageLoaded(this.getClass(), element);
-	}
-
-	public void initializePage() {
-		this.initializePage(this.getClass());	
-	}
+//
+//	public boolean pageLoaded(Element element) {
+//		return this.pageLoaded(this.getClass(), element);
+//	}
+//
+//	public void initializePage() {
+//		this.initializePage(this.getClass());	
+//	}
 
 	// *************************************
 	// *** VehiclesDropdown Interactions ***
 	// *************************************
-	
+	@Step("Click Cars and Minivan")
 	private void clickCarsAndMinivan(){
 		List<WebElement> buttons = getDriver().findElements(By.tagName("button"));
 		Iterator buttonIt = buttons.iterator();
