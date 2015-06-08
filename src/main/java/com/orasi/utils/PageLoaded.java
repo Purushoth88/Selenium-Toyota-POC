@@ -26,7 +26,10 @@ public class PageLoaded {
 	private int timeout = 0;
 	
 	public PageLoaded(){
-		this.timeout = TestEnvironment.getDefaultTestTimeout();
+		
+		// TODO: Get Timeout from Test Environement
+//		this.timeout = TestEnvironment.getDefaultTestTimeout();
+		this.timeout = 60;
 	}
 	
 	public PageLoaded(TestEnvironment te){
