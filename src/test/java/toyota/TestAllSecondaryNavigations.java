@@ -16,6 +16,7 @@ import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 import apps.toyota.secondaryNavigation.SecondaryNavigation;
 
+import com.orasi.utils.Page;
 import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestNgTestClassMethods;
@@ -72,12 +73,16 @@ public class TestAllSecondaryNavigations extends TestEnvironment{
 
 		//Start the test and generate a driver
 		testStart(testName);
+		Page page = new Page(this);
+		page.secondaryNavigation().navigateAllSecondaryNavigationTabs();
 		
-		//Ensure the home page is loaded
-		TestReporter.assertTrue(pageLoaded(), "Load the Home Page");
-		TestReporter.log("Test the Secondary Navigation Bar Functionality");
-		SecondaryNavigation secNav = new SecondaryNavigation(this);
-		secNav.navigateAllSecondaryNavigationTabs();
+		/*OLD CODE
+		 * //Ensure the home page is loaded
+        		TestReporter.assertTrue(pageLoaded(), "Load the Home Page");
+        		TestReporter.log("Test the Secondary Navigation Bar Functionality");
+        		SecondaryNavigation secNav = new SecondaryNavigation(this);		
+        		secNav.navigateAllSecondaryNavigationTabs();
+        	*/
 	}
 	
 	    

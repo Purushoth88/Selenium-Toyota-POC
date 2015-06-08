@@ -11,6 +11,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
+import com.orasi.utils.Page;
 import com.orasi.utils.TestEnvironment;
 
 /**
@@ -18,11 +19,11 @@ import com.orasi.utils.TestEnvironment;
  * @version Created 03/23/2015
  * @author Waightstill W. Avery
  */
-public class VehiclesDropdown extends com.orasi.utils.TestEnvironment{
+public class VehiclesDropdown extends Page{
 	// *******************************
 	// *** VehiclesDropdown Fields ***
 	// *******************************
-	int timeout = getDefaultTestTimeout();
+	int timeout = te.getDefaultTestTimeout();
 	int loopCounter = 0;
 
 	// *********************************
@@ -49,15 +50,11 @@ public class VehiclesDropdown extends com.orasi.utils.TestEnvironment{
 	 */
 	public VehiclesDropdown(TestEnvironment te){
 		super(te);
-		ElementFactory.initElements(getDriver(), this);  
+		initElements(getDriver(), this);  
 	}
 
 	public boolean pageLoaded(Element element) {
-		return this.pageLoaded(this.getClass(), element);
-	}
-
-	public void initializePage() {
-		this.initializePage(this.getClass());	
+		return pageLoaded(this.getClass(), element);
 	}
 
 	// *************************************

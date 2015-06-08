@@ -4,18 +4,21 @@ import org.openqa.selenium.support.FindBy;
 
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
+import com.orasi.utils.Page;
 import com.orasi.utils.TestEnvironment;
+import com.orasi.utils.TestReporter;
 
 /**
  * @summary Contains the methods & objects for the Toyota.com homepage
  * @version Created 03/01/2015
  * @author Waightstill W. Avery
  */
-public class HomePage extends com.orasi.utils.TestEnvironment{
+public class HomePage{
 	// ***********************
 	// *** HomePage Fields ***
 	// ***********************
-	int timeout = getDefaultTestTimeout();
+    	TestEnvironment te = null;	
+	int timeout = te.getDefaultTestTimeout();
 	int loopCounter = 0;
 	
 	// *************************
@@ -39,8 +42,9 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 * 
 	 */
 	public HomePage(TestEnvironment te){
-		super(te);
-		ElementFactory.initElements(getDriver(), this);  
+	    this.te = te;
+	    TestReporter.assertTrue(te.pageLoaded(), "Verify Homepage is loaded");
+	    ElementFactory.initElements(te.getDriver(), this);  
 	}
 
 	// *****************************

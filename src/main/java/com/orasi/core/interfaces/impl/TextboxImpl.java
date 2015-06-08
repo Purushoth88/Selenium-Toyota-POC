@@ -50,7 +50,7 @@ public class TextboxImpl extends ElementImpl implements Textbox {
 			try {
 				getWrappedElement().clear();
 				getWrappedElement().sendKeys(text);
-				TestReporter.log(" Send Keys [ <b>" + text.toString() + "</b> ] to Textbox [ <b>@FindBy: " + getElementLocatorInfo() + " </b> ]");
+				TestReporter.interfaceLog("Send Keys [ <b>" + text.toString() + "</b> ] to Textbox [ <b>@FindBy: " + getElementLocatorInfo() + " </b> ]");
 			} catch (RuntimeException rte) {
 				TestReporter.interfaceLog("Send Keys [ <b>" + text.toString() + "</b> ] to Textbox [ <b>@FindBy: " + getElementLocatorInfo() + " </b> ]", true);
 				throw rte;
@@ -151,7 +151,7 @@ public class TextboxImpl extends ElementImpl implements Textbox {
         	getWrappedElement().sendKeys(Keys.CONTROL + "a");
         	getWrappedElement().sendKeys(Base64Coder.decodeString(text).toString());
         	getWrappedElement().sendKeys(Keys.TAB);
-        	TestReporter.log(" Send encoded text [ <b>" + text.toString() + "</b> ] to Textbox [  <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
+        	TestReporter.interfaceLog(" Send encoded text [ <b>" + text.toString() + "</b> ] to Textbox [  <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
             }catch(RuntimeException rte){
                 TestReporter.interfaceLog("Send encoded text [ <b>" + text.toString() + "</b> ] to Textbox [  <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]", true);
                 throw rte;

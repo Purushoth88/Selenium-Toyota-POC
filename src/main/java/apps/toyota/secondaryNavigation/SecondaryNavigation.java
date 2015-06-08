@@ -14,8 +14,10 @@ import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Link;
 import com.orasi.core.interfaces.Textbox;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
+import com.orasi.utils.Page;
 import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestEnvironment;
+import com.orasi.utils.TestReporter;
 
 
 /**
@@ -23,11 +25,11 @@ import com.orasi.utils.TestEnvironment;
  * @version Created 03/01/2015
  * @author Waightstill W. Avery
  */
-public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
+public class SecondaryNavigation extends Page{
 	// **************************************
 	// *** SecondaryNavigation Bar Fields ***
 	// **************************************
-	int timeout = getDefaultTestTimeout();
+	int timeout = te.getDefaultTestTimeout();
 	int loopCounter = 0;
 	
 	// ****************************************
@@ -101,7 +103,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment{
 	 */
 	public SecondaryNavigation(TestEnvironment te){
 		super(te);
-		ElementFactory.initElements(getDriver(), this);  
+		TestReporter.assertTrue(pageLoaded(), "Verify Secondary Navigation Bar is loaded");
+		initElements(getDriver(), this);  
 	}
 
 	// ****************************************

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
-
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -19,6 +18,7 @@ import ru.yandex.qatools.allure.annotations.Stories;
 import apps.toyota.mainNavigation.MainNavigation;
 
 import com.orasi.utils.Constants;
+import com.orasi.utils.Page;
 import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
 import com.orasi.utils.dataProviders.ExcelDataProvider;
@@ -88,16 +88,15 @@ public class ChangeZipCode extends TestEnvironment {
 
 	testStart(testName);
 
-	// Ensure the home page is loaded
-	TestReporter.logScenario(testScenario);
-	TestReporter
-		.assertTrue(pageLoaded(), "Verify Homepage is displayed");
-
 	// Change the zipcode
-	MainNavigation mainNav = new MainNavigation(this);
-	TestReporter.assertTrue(pageLoaded(),
-		"Verify Navigation Bar is loaded");
-	mainNav.changeZipCodes(zipCode);
+	Page page = new Page(this);
+	page.mainNavigation().changeZipCodes(zipCode);
+	
+	/* OLD CODE
+        	MainNavigation mainNav = new MainNavigation(this);
+        	TestReporter.assertTrue(pageLoaded(), "Verify Navigation Bar is loaded");
+        	mainNav.changeZipCodes(zipCode);
+	*/
     }
     
     @AfterTest
