@@ -22,8 +22,8 @@ import com.orasi.utils.TestReporter;
  * @version Created 03/01/2015
  * @author Waightstill W. Avery
  */
-public class MainNavigation extends Page{
-    	//TestEnvironment te = null;
+public class MainNavigation{
+    	TestEnvironment te = null;
 	// *****************************
 	// *** MainNavigation Fields ***
 	// *****************************
@@ -70,9 +70,9 @@ public class MainNavigation extends Page{
 	 * 
 	 */
 	public MainNavigation(TestEnvironment te){
-	    super(te);
-	    TestReporter.assertTrue(pageLoaded(), "Verify Navigation Bar is loaded");
-	    initElements(te.getDriver(), this);  
+	    this.te = te;
+	    TestReporter.assertTrue(te.pageLoaded(), "Verify Navigation Bar is loaded");
+	    ElementFactory.initElements(te.getDriver(), this);  
 	}
 	
 	// ***********************************
@@ -92,8 +92,8 @@ public class MainNavigation extends Page{
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
-			pageLoaded();
-			initializePage(this.getClass());
+			te.pageLoaded();
+			te.initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not opened after [" +String.valueOf(timeout)+ "] seconds.");
 		}while(!eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
@@ -107,7 +107,7 @@ public class MainNavigation extends Page{
 	 */
 	@Step("Change Zip Code to \"{0}\"")
 	public void changeZipCodes(@Parameter String zipCode){
-		pageLoaded(this.getClass(), btnYourLocation);
+		te.pageLoaded(this.getClass(), btnYourLocation);
 		//Capture the zipcode that currently exists in the UI
 		initialZipCode = captureCurrentZipCode();
 		TestReporter.log("Initial zip code: ["+initialZipCode+"].");
@@ -122,16 +122,16 @@ public class MainNavigation extends Page{
 		//If the zipcode is different, enter the zipcode to be used for the test
 		clickYourLocation();
 		
-		Assert.assertEquals(txtZipCode.syncVisible(getDriver()), true, "The zipcode textbox is not visible.");
-		txtZipCode.highlight(getDriver());
+		Assert.assertEquals(txtZipCode.syncVisible(te.getDriver()), true, "The zipcode textbox is not visible.");
+		txtZipCode.highlight(te.getDriver());
 		txtZipCode.set(zipCode);
 		txtZipCode.sendKeys(Keys.ENTER);
 		
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
-			pageLoaded();
-			initializePage(this.getClass());
+			te.pageLoaded();
+			te.initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The zipcode popup was not closed after [" +String.valueOf(timeout)+ "] seconds.");
 		}while(eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
@@ -139,8 +139,8 @@ public class MainNavigation extends Page{
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
-			pageLoaded();
-			initializePage(this.getClass());
+			te.pageLoaded();
+			te.initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The zipcode was found to not have changed within ["+String.valueOf(timeout)+"] seconds.");
 		}while(eleZipCode.getText().equalsIgnoreCase(initialZipCode));
@@ -169,7 +169,7 @@ public class MainNavigation extends Page{
 	 * @return: NA
 	 */
 	private String captureCurrentZipCode(){
-		pageLoaded(this.getClass(), eleZipCode);
+		te.pageLoaded(this.getClass(), eleZipCode);
 		return eleZipCode.getText().trim();
 	}
 }

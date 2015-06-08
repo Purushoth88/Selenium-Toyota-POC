@@ -25,7 +25,8 @@ import com.orasi.utils.TestReporter;
  * @version Created 03/01/2015
  * @author Waightstill W. Avery
  */
-public class SecondaryNavigation extends Page{
+public class SecondaryNavigation {
+    private TestEnvironment te = null;
 	// **************************************
 	// *** SecondaryNavigation Bar Fields ***
 	// **************************************
@@ -102,9 +103,9 @@ public class SecondaryNavigation extends Page{
 	 * 
 	 */
 	public SecondaryNavigation(TestEnvironment te){
-		super(te);
-		TestReporter.assertTrue(pageLoaded(), "Verify Secondary Navigation Bar is loaded");
-		initElements(getDriver(), this);  
+		this.te = te;
+		TestReporter.assertTrue(te.pageLoaded(), "Verify Secondary Navigation Bar is loaded");
+		ElementFactory.initElements(te.getDriver(), this);  
 	}
 
 	// ****************************************
@@ -124,12 +125,12 @@ public class SecondaryNavigation extends Page{
 	@Step("Click Select Vehicle Dropdown")
 	private void openSelectVehicleDropdown(){
 		//btnSelectVehicle.highlight(driver);
-		btnSelectVehicle.jsClick(getDriver());
+		btnSelectVehicle.jsClick(te.getDriver());
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
-			pageLoaded();
-			initializePage(this.getClass());
+			te.pageLoaded();
+			te.initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Select Vehicle dropdown did not open after ["+String.valueOf(timeout)+"] seconds.");
 		}while(!btnSelectVehicle.getAttribute("class").contains("open"));
@@ -138,12 +139,12 @@ public class SecondaryNavigation extends Page{
 	
 	private void closeSelectVehicleDropdown(){
 		//btnSelectVehicle.highlight(driver);
-		btnSelectVehicle.jsClick(getDriver());
+		btnSelectVehicle.jsClick(te.getDriver());
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
-			pageLoaded();
-			initializePage(this.getClass());
+			te.pageLoaded();
+			te.initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Select Vehicle dropdown was not closed after ["+String.valueOf(timeout)+"] seconds.");
 		}while(btnSelectVehicle.getAttribute("class").contains("open"));
@@ -152,12 +153,12 @@ public class SecondaryNavigation extends Page{
 	@Step("Click Shopping Tools Dropdown")
 	private void openShoppingToolsDropdown(){
 		//btnShoppingTools.highlight(driver);
-		btnShoppingTools.jsClick(getDriver());
+		btnShoppingTools.jsClick(te.getDriver());
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
-			pageLoaded();
-			initializePage(this.getClass());
+			te.pageLoaded();
+			te.initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Shopping Tools dropdown did not open after ["+String.valueOf(timeout)+"] seconds.");
 		}while(!btnShoppingTools.getAttribute("class").contains("open"));
@@ -165,12 +166,12 @@ public class SecondaryNavigation extends Page{
 	
 	private void closeShoppingToolsDropdown(){
 		//btnShoppingTools.highlight(driver);
-		btnShoppingTools.jsClick(getDriver());
+		btnShoppingTools.jsClick(te.getDriver());
 		loopCounter = 0;
 		do{
 			Sleeper.sleep(1000);
-			pageLoaded();
-			initializePage(this.getClass());
+			te.pageLoaded();
+			te.initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertEquals(loopCounter != timeout, true, "The Shopping Tools dropdown was not closed after ["+String.valueOf(timeout)+"] seconds.");
 //			initializePage(this.getClass());
@@ -181,29 +182,29 @@ public class SecondaryNavigation extends Page{
 	@Step("Click Find a Dealer")
 	private void clickFindADealer(){
 		//Grab the number of links on the current page
-		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
-		lnkFindADealer.jsClick(getDriver());
+		List<WebElement> list = te.getDriver().findElements(By.tagName("a")); 
+		lnkFindADealer.jsClick(te.getDriver());
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
 		List<WebElement> list2;
 		do{
 			Sleeper.sleep(1000);
-			pageLoaded();
-			initializePage(this.getClass());
+			te.pageLoaded();
+			te.initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The 'Find Your Toyota Dealer' page was not loaded after ["+String.valueOf(timeout)+"] seconds.");
-			list2 = getDriver().findElements(By.tagName("a"));		
+			list2 = te.getDriver().findElements(By.tagName("a"));		
 		}while(list2.size() == list.size());
 	}
 	
 	@Step("Click Build and Price")
 	private void clickBuildAndPrice(){
 		//Grab the number of links on the current page
-		List<WebElement> list = getDriver().findElements(By.tagName("a")); 
+		List<WebElement> list = te.getDriver().findElements(By.tagName("a")); 
 		//Click the link
-		lnkBuildAndPrice.jsClick(getDriver());
-		pageLoaded();
-		initializePage(this.getClass());
+		lnkBuildAndPrice.jsClick(te.getDriver());
+		te.pageLoaded();
+		te.initializePage(this.getClass());
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
 		List<WebElement> list2;
@@ -211,27 +212,27 @@ public class SecondaryNavigation extends Page{
 			Sleeper.sleep(1000);
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The 'Build Your Toyota' page was not loaded after ["+String.valueOf(timeout)+"] seconds.");
-			list2 = getDriver().findElements(By.tagName("a"));		
+			list2 = te.getDriver().findElements(By.tagName("a"));		
 		}while(list2.size() == list.size());
 	}
 	
 	@Step("Click Local Specials")
 	private void clickLocalSpecials(){
-		initializePage(this.getClass());
-		pageLoaded(this.getClass(), lnkLocalSpecials);
-		List<WebElement> list = getDriver().findElements(By.tagName("a")); 		
+	    te.initializePage(this.getClass());
+	    te.pageLoaded(this.getClass(), lnkLocalSpecials);
+		List<WebElement> list = te.getDriver().findElements(By.tagName("a")); 		
 		
-		lnkLocalSpecials.jsClick(getDriver());
+		lnkLocalSpecials.jsClick(te.getDriver());
 		//Loop until the number of links changes, thereby indicating that a new page was loaded
 		loopCounter = 0;
 		List<WebElement> list2;
 		do{
 			Sleeper.sleep(1000);
-			pageLoaded();
-			initializePage(this.getClass());
+			te.pageLoaded();
+			te.initializePage(this.getClass());
 			loopCounter++;
 			Assert.assertNotEquals(loopCounter, timeout, "The 'Local Specials' page was not loaded after ["+String.valueOf(timeout)+"] seconds.");
-			list2 = getDriver().findElements(By.tagName("a"));		
+			list2 = te.getDriver().findElements(By.tagName("a"));		
 		}while(list2.size() == list.size());
 	}
 }

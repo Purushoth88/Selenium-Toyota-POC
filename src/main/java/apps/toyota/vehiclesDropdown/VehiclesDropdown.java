@@ -19,7 +19,8 @@ import com.orasi.utils.TestEnvironment;
  * @version Created 03/23/2015
  * @author Waightstill W. Avery
  */
-public class VehiclesDropdown extends Page{
+public class VehiclesDropdown {
+    private TestEnvironment te = null;
 	// *******************************
 	// *** VehiclesDropdown Fields ***
 	// *******************************
@@ -49,12 +50,13 @@ public class VehiclesDropdown extends Page{
 	 * 
 	 */
 	public VehiclesDropdown(TestEnvironment te){
-		super(te);
-		initElements(getDriver(), this);  
+		this.te = te;
+		ElementFactory.initElements(te.getDriver(), this);  
+		
 	}
 
 	public boolean pageLoaded(Element element) {
-		return pageLoaded(this.getClass(), element);
+		return te.pageLoaded(this.getClass(), element);
 	}
 
 	// *************************************
@@ -62,7 +64,7 @@ public class VehiclesDropdown extends Page{
 	// *************************************
 	@Step("Click Cars and Minivan")
 	private void clickCarsAndMinivan(){
-		List<WebElement> buttons = getDriver().findElements(By.tagName("button"));
+		List<WebElement> buttons = te.getDriver().findElements(By.tagName("button"));
 		Iterator buttonIt = buttons.iterator();
 		
 		boolean buttonFound = false;
