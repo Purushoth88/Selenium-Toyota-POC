@@ -15,6 +15,8 @@
 // This module is provided "as is", without warranties of any kind.
 package com.orasi.utils;
 
+import org.testng.annotations.Test;
+
 /**
  * A Base64 encoder/decoder.
  *
@@ -299,5 +301,23 @@ public class Base64Coder {
 
 // Dummy constructor.
     public Base64Coder() {
+    }
+    
+    @Test
+    public void endcodString(){
+    	String username = "OrasiTesting";
+    	String key = "f0a63584-f52e-4d4b-9002-d7aeed40e4c3";
+    	
+    	String encodedUsername = encodeString(username);
+    	String encodedKey = encodeString(key);
+    	String decodedUsername = decodeString(encodedUsername);
+    	String decodedKey  = decodeString(encodedKey);
+    	
+    	System.out.println("Username: " + username);
+    	System.out.println("Encoded Username: " + encodedUsername);
+    	System.out.println("Decoded Username: " + decodedUsername);
+    	System.out.println("Key: " + key);
+    	System.out.println("Encoded Key: " + encodedKey);
+    	System.out.println("Decoded Key: " + decodedKey);
     }
 } // end class Base64Coder

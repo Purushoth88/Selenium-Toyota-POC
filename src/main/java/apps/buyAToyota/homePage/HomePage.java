@@ -4,8 +4,12 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.HasInputDevices;
+import org.openqa.selenium.interactions.Mouse;
+import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -70,7 +74,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		private Link lnkFindADealer;
 		
 		//Find Vehicles link
-		@FindBy(xpath = "//*[@id=\"nav-find-vehicles\"]/a/span")
+		@FindBy(xpath = "//*[@id=\"nav-find-vehicles\"]/a")
 		private Link lnkFindVehicles;
 		
 		//Tools link
@@ -205,12 +209,16 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	// *****************************
 	
 	public void testNavBarNavigation(){
+<<<<<<< HEAD
 		if(!(getOperatingSystem().equalsIgnoreCase("windows 7") 
 				&& getBrowserUnderTest().equalsIgnoreCase("iexplore")
 				&& (getBrowserVersion().equalsIgnoreCase("8"))))
 		{
 			ensureZipCodePromptHiddenOnStartup();	
 		}
+=======
+		ensureZipCodePromptHiddenOnStartup();
+>>>>>>> 2258917dbc35835c05a559be177335b9dbc9807f
 		testFindOffersLink();
 		testFindADealerLink();
 		testFindVehiclesLink();
@@ -463,8 +471,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	private void clickFindADealer(){
 		String linkName = "Find A Dealer";
 		initializePage(this.getClass());
-		pageLoaded().isDomComplete();
-//		lnkFindADealer = new LinkImpl(driver.findElement(By.id("nav-find-a-dealer")).findElement(By.tagName("a")));	
+		pageLoaded().isDomComplete();	
 		ensureLinkLoadsZipCodePrompt(lnkFindADealer, linkName);
 		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
 	}
@@ -473,7 +480,6 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		String linkName = "Find Vehicles";
 		initializePage(this.getClass());
 		pageLoaded().isDomComplete();
-//		lnkFindVehicles = new LinkImpl(driver.findElement(By.id("nav-find-vehicles")).findElement(By.tagName("a")));
 		ensureLinkLoadsDropdown(lnkFindVehicles, linkName, eleFindVehiclesDropdown);
 		TestReporter.assertTrue(true, "The Find Vehicles link was clicked successfully.");
 	}
@@ -482,7 +488,6 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		String linkName = "Tools";
 		initializePage(this.getClass());
 		pageLoaded().isDomComplete();
-//		lnkTools = new LinkImpl(driver.findElement(By.id("nav-tools")).findElement(By.tagName("a")));
 		ensureLinkLoadsDropdown(lnkTools, linkName, eleToolsDropdown);
 		TestReporter.assertTrue(true, "The Tools link was clicked successfully.");
 	}
@@ -491,7 +496,6 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		String linkName = "Inventory";
 		initializePage(this.getClass());
 		pageLoaded().isDomComplete();
-//		lnkInventory = new LinkImpl(driver.findElement(By.id("nav-inventory")).findElement(By.tagName("a")));
 		ensureLinkLoadsZipCodePrompt(lnkInventory, linkName);
 		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
 	}
@@ -525,22 +529,25 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			TestReporter.log("BEFORE FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
 			if(getOperatingSystem().equalsIgnoreCase("Windows 8.1") && getBrowserUnderTest().equalsIgnoreCase("iexplore")){
 				element.click();
-			}else if(getOperatingSystem().equalsIgnoreCase("MAC OS X 10.9") && getBrowserUnderTest().equalsIgnoreCase("safari")){
+			}else if(getOperatingSystem().toLowerCase().contains("mac os x") && getBrowserUnderTest().equalsIgnoreCase("safari")){
 				element.scrollIntoView(getDriver());
+				element.click();
 				element.jsClick(getDriver());
-				//element.jsHover(getDriver());
-				//element.onMouseOver(getDriver(), element);
 				element.sendKeys(Keys.ENTER);
 				element.sendKeys(Keys.TAB);
-				//element.moveToElement(getDriver(), element, By.id("nav-find-vehicles"));
-				int xPos = element.getCoordinates().onPage().x;
-				int yPos = element.getCoordinates().onPage().y;
-				int width = element.getSize().width;
-				int height = element.getSize().height;
-				float xMidpoint = (float)xPos + width/2;
-				float yMidpoint = (float)yPos + height/2;
-				//element.coordinateClick(getDriver(), xMidpoint, yMidpoint);
-				element.click();				
+			
+				element.coordinateClick(getDriver());		
+				element.moveToElement(getDriver(), element, By.xpath("//*[@id='nav-find-vehicles']/a"));
+				element.onMouseOver(getDriver());
+				element.onMouseOver(element, getDriver());
+				element.moveToElement(driver);
+				element.mouseHoverByJavaScript(getDriver());
+				
+				/**
+				 * Try on Windows or Mac
+				 */
+				//((RenderedWebElement) getDriver().findElement(By.cssSelector("div#navi_settings"))).click();;
+				
 				
 				
 			}else{
