@@ -48,8 +48,13 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	private Element eleZipCodePopupBody;
 	
 	//ZIP Code textbox
-	@FindBy(xpath = "//*[@id=\"tcom-nav-zip-flyout\"]/div/div/div[2]/div/input")
+	//@FindBy(xpath = "//*[@id=\"tcom-nav-zip-flyout\"]/div/div/div[2]/div/input")
+	@FindBy(xpath = "//*[@id=\"tcom-nav-zip-flyout\"]/div[1]/div/div/div[3]/div/input")
 	private Textbox txtZipCode;
+	
+	//ZIP Code Submit button
+	@FindBy(xpath = "//*[@id=\"tcom-nav-zip-flyout\"]/div[1]/div/div/a")
+	private Button btnZipCodeSubmit;
 	
 	//Actual ZIP Code Value element
 	@FindBy(xpath = "//*[@id=\"tcom-main-nav\"]/ul/li[3]/button/span/span")

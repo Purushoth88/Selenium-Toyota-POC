@@ -205,9 +205,14 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	// *****************************
 	
 	public void testNavBarNavigation(){
-		ensureZipCodePromptHiddenOnStartup();
-//		testFindOffersLink();
-//		testFindADealerLink();
+		if(!(getOperatingSystem().equalsIgnoreCase("windows 7") 
+				&& getBrowserUnderTest().equalsIgnoreCase("iexplore")
+				&& (getBrowserVersion().equalsIgnoreCase("8"))))
+		{
+			ensureZipCodePromptHiddenOnStartup();	
+		}
+		testFindOffersLink();
+		testFindADealerLink();
 		testFindVehiclesLink();
 		testToolsLink();
 		testInventoryLink();

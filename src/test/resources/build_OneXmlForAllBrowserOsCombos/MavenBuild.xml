@@ -22,6 +22,7 @@
 			</package>
 		</packages>
 	</test>
+	<!-- NOTE: Selenium Action moveToElement does not work in Safari 8-->
 	<test name="Mac_OS_X_10_10_Safari_8_buyAToyota">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="" />
