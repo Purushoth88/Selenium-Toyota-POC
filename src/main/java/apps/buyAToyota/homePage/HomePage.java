@@ -215,8 +215,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		{
 			ensureZipCodePromptHiddenOnStartup();	
 		}
-		testFindOffersLink();
-		testFindADealerLink();
+//		testFindOffersLink();
+//		testFindADealerLink();
 		testFindVehiclesLink();
 		testToolsLink();
 		testInventoryLink();
@@ -543,9 +543,6 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 				 * Try on Windows or Mac
 				 */
 				//((RenderedWebElement) getDriver().findElement(By.cssSelector("div#navi_settings"))).click();;
-				
-				
-				
 			}else{
 				element.focus(getDriver());
 			}
