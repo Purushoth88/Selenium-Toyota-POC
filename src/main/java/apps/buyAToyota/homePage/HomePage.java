@@ -1,15 +1,7 @@
 package apps.buyAToyota.homePage;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.RenderedWebElement;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Mouse;
-import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -19,8 +11,6 @@ import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Link;
 import com.orasi.core.interfaces.Textbox;
-import com.orasi.core.interfaces.impl.ElementImpl;
-import com.orasi.core.interfaces.impl.LinkImpl;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestEnvironment;
@@ -36,7 +26,6 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	// ***********************
 	// *** HomePage Fields ***
 	// ***********************
-	int timeout = getDefaultTestTimeout();
 	int loopCounter = 0;
 	
 	// *************************
@@ -417,7 +406,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			loopCounter++;
 			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, timeout, "The zipcode prompt was displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
+			Assert.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The zipcode prompt was displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
 		}while(isZipCodePromptDisplayed());
 		
 		Sleeper.sleep(2000);
@@ -441,7 +430,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
 			loopCounter++;
-			Assert.assertNotEquals(loopCounter, timeout, "The zip code prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
+			Assert.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The zip code prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
 			
 			try{
 				attributeText = eleZipModalPrompt.getAttribute("aria-hidden");
@@ -510,7 +499,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			loopCounter++;
 			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, timeout, "The Zip Code Prompt was not displayed after ["+String.valueOf(timeout)+"] seconds after clicking the "+linkName+" link");
+			Assert.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The Zip Code Prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the "+linkName+" link");
 		}while(isZipCodePromptHidden());
 	}
 	
@@ -551,7 +540,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			loopCounter++;
 			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, timeout, "The " + linkName + " dropdown was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the " + linkName + " link.");
+			Assert.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The " + linkName + " dropdown was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the " + linkName + " link.");
 		}while(isDropdownVisible(dropdown));
 	}
 }

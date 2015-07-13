@@ -13,7 +13,6 @@ import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Link;
 import com.orasi.core.interfaces.Textbox;
-import com.orasi.core.interfaces.impl.ElementImpl;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestEnvironment;

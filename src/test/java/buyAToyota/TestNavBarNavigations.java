@@ -1,10 +1,7 @@
 package buyAToyota;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
@@ -23,13 +20,6 @@ import com.saucelabs.testng.SauceOnDemandTestListener;
 @Listeners({ SauceOnDemandTestListener.class, com.orasi.utils.Screenshot.class })
 public class TestNavBarNavigations extends TestEnvironment {
 	private String application = "BuyAToyota";
-	/*
-	 * Define a collection of webdrivers and test names inside a Map. This
-	 * allows for more than one driver to be used within a test class. This also
-	 * allows for a particular driver to be tied to a specific test based on
-	 * test name.
-	 */
-	protected Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
 
 	// *********************
 	// Before-Test Behavior
@@ -61,7 +51,7 @@ public class TestNavBarNavigations extends TestEnvironment {
 	 */
 	@Features("General Usage")
 	@Stories("As any user, I can use all navigation items on the Navigation Bar")
-	@Test(groups = { "regression" }, singleThreaded = true)
+	@Test(groups = { "regression" })
 	public void testAllNavBarNavigations() {
 		testName = new Object() {
 		}.getClass().getEnclosingMethod().getName() + "_"

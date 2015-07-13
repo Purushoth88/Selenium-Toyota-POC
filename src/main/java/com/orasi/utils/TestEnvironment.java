@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 
 
+
 import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,6 +23,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.ITestResult;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.saucelabs.common.SauceOnDemandAuthentication;
@@ -336,13 +339,6 @@ public class TestEnvironment {
 		launchApplication();
 		drivers.put(testName, driver);
 		setDriver(drivers.get(testName));
-	}
-
-	protected void endTest(String testName) {
-		WebDriver driver = drivers.get(testName);
-		if (driver != null && driver.getWindowHandles().size() > 0) {
-			driver.quit();
-		}
 	}
 
 	/**

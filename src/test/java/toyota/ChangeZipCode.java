@@ -77,7 +77,7 @@ public class ChangeZipCode extends TestEnvironment {
 
 	@Features("General Usage")
 	@Stories("As any user, I can change the zip code on the main page")
-	@Test(dataProvider = "dataScenario", groups = { "regression" }, singleThreaded = true)
+	@Test(dataProvider = "dataScenario", groups = { "regression" })
 	public void testChangeZipCode(@Parameter String testScenario,
 			@Parameter String zipCode) {
 		testName = new Object() {
