@@ -489,20 +489,6 @@ public class TestEnvironment {
 				e.printStackTrace();
 			}
 			
-			
-			
-			//*******************************
-			//*******************************
-			//**						   **
-			//**   Define the build number **
-			//**						   **
-			//*******************************
-			//*******************************
-			capabilities.setCapability("build", Randomness.generateCurrentDatetime());
-			
-			
-			
-			
 			sessionId.set(((RemoteWebDriver) getWebDriver()).getSessionId()
 					.toString());
 			driver = webDriver.get();
@@ -598,6 +584,8 @@ public class TestEnvironment {
 			updates.put("passed", true);
 		}
 
+		updates.put("build", "Build -290");
+		
 		JSONArray tags = new JSONArray();
 		String[] groups = test.getMethod().getGroups();
 		for (int x = 0; x < groups.length; x++) {

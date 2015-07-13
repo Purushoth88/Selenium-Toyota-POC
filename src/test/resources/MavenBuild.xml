@@ -206,7 +206,7 @@
 		</packages>
 	</test>
 
-	<test name="Windows_7_IE_8_toyota">
+<!-- 	<test name="Windows_7_IE_8_toyota">
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
@@ -221,7 +221,7 @@
 			<package name="toyota">
 			</package>
 		</packages>
-	</test>
+	</test> -->
 <!-- 	<test name="Windows_7_IE_8_buyAToyota">
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
