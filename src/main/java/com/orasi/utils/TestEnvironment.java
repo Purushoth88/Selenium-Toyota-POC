@@ -463,7 +463,8 @@ public class TestEnvironment {
 			}
 
 			// Code for running on the selenium grid
-		} else if (getRunLocation().equalsIgnoreCase("remote")) {
+		} else if (getRunLocation().equalsIgnoreCase("remote")) 
+		{
 			DesiredCapabilities capabilities = new DesiredCapabilities();
 			capabilities.setCapability(CapabilityType.BROWSER_NAME,
 					getBrowserUnderTest());
@@ -487,6 +488,21 @@ public class TestEnvironment {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			
+			
+			//*******************************
+			//*******************************
+			//**						   **
+			//**   Define the build number **
+			//**						   **
+			//*******************************
+			//*******************************
+			capabilities.setCapability("build", Randomness.generateCurrentDatetime());
+			
+			
+			
+			
 			sessionId.set(((RemoteWebDriver) getWebDriver()).getSessionId()
 					.toString());
 			driver = webDriver.get();
