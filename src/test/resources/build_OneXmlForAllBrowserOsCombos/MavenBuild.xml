@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Toyota" parallel="tests" thread-count="20">
 	<listeners>
 		<listener class-name="com.orasi.utils.Screenshot" />
 	</listeners>
 
-	<!-- MAC OS X 10.10 -->
+	MAC OS X 10.10
 	<test name="Mac_OS_X_10_10_Safari_8_toyota">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="" />
@@ -22,7 +22,7 @@
 			</package>
 		</packages>
 	</test>
-	<!-- NOTE: Selenium Action moveToElement does not work in Safari 8-->
+	NOTE: Selenium Action moveToElement does not work in Safari 8
 	<test name="Mac_OS_X_10_10_Safari_8_buyAToyota">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="" />
@@ -40,7 +40,7 @@
 		</packages>
 	</test>
 
-	<!-- MAC OS X 10.9 -->
+	MAC OS X 10.9
 	<test name="Mac_OS_X_10_9_Safari_7_toyota">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="" />
@@ -140,7 +140,7 @@
 		</packages>
 	</test>
 
-	<!-- Windows 7 -->
+	Windows 7
 	<test name="Windows_7_Chrome_toyota">
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
@@ -273,7 +273,7 @@
 		</packages>
 	</test>
 
-	<!-- Windows 8.1 -->
+	Windows 8.1
 	<test name="Windows_8.1_Chrome_toyota">
 		<parameter name="browserUnderTest" value="chrome" />
 		<parameter name="environment" value="" />
@@ -355,7 +355,7 @@
 			<package name="toyota">
 			</package>
 		</packages>
-	</test> <!-- Windows_8_1_IE_11 -->
+	</test> Windows_8_1_IE_11
 	<test name="Windows_8_1_IE_11_buyAToyota">
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="" />
@@ -373,5 +373,6 @@
 			<package name="buyAToyota">
 			</package>
 		</packages>
-	</test> <!-- Windows_8_1_IE_11 -->
-</suite> <!-- Toyota -->
+	</test> Windows_8_1_IE_11
+</suite> Toyota
+ -->
