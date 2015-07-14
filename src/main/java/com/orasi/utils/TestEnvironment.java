@@ -584,7 +584,7 @@ public class TestEnvironment {
 			updates.put("passed", true);
 		}
 
-		updates.put("build", "Build - 296");
+		updates.put("build", "Build - 298");
 		
 		JSONArray tags = new JSONArray();
 		String[] groups = test.getMethod().getGroups();
