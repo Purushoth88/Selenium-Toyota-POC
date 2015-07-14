@@ -88,7 +88,10 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment{
 	 */
 	@Step("Click 'Your Location'")
 	private void clickYourLocation(){
-		//Attempt to use the Selenium 'click'
+		//Click the locatin button
+		pageLoaded();
+		initializePage(this.getClass());
+		btnYourLocation.highlight(driver);
 		btnYourLocation.jsClick(driver);
 		
 		//Loop until the popup is loaded
