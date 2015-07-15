@@ -66,17 +66,13 @@ public class TestEnvironment {
 	/*
 	 * URL and Credential Repository Field
 	 */
-	protected ResourceBundle appURLRepository = ResourceBundle
-			.getBundle(Constants.ENVIRONMENT_URL_PATH);
+	protected ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
 	/*
 	 * Selenium Hub Field
 	 */
 	protected String seleniumHubURL = "http://"
-			+ Base64Coder.decodeString(appURLRepository
-					.getString("SAUCELABS_USERNAME"))
-			+ ":"
-			+ Base64Coder.decodeString(appURLRepository
-					.getString("SAUCELABS_KEY"))
+			+ Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")) + ":"
+			+ Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY"))
 			+ "@ondemand.saucelabs.com:80/wd/hub";
 	/*
 	 * Sauce Labs Fields
@@ -89,10 +85,8 @@ public class TestEnvironment {
 	 * {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
 	 */
 	protected SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
-			Base64Coder.decodeString(appURLRepository
-					.getString("SAUCELABS_USERNAME")),
-			Base64Coder.decodeString(appURLRepository
-					.getString("SAUCELABS_KEY")));
+			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
+			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
 	/**
 	 * ThreadLocal variable which contains the {@link WebDriver} instance which
 	 * is used to perform browser interactions with.
@@ -109,8 +103,7 @@ public class TestEnvironment {
 	public TestEnvironment() {
 	};
 
-	public TestEnvironment(String application, String browserUnderTest,
-			String browserVersion, String operatingSystem,
+	public TestEnvironment(String application, String browserUnderTest, String browserVersion, String operatingSystem,
 			String setRunLocation, String environment) {
 		setApplicationUnderTest(application);
 		setBrowserUnderTest(browserUnderTest);
@@ -168,8 +161,7 @@ public class TestEnvironment {
 					|| System.getProperty("jenkinsBrowserVersion") == "null") {
 				this.browserVersion = "";
 			} else {
-				this.browserVersion = System.getProperty(
-						"jenkinsBrowserVersion").trim();
+				this.browserVersion = System.getProperty("jenkinsBrowserVersion").trim();
 			}
 		} else {
 			this.browserVersion = bv;
@@ -185,8 +177,7 @@ public class TestEnvironment {
 	 */
 	protected void setOperatingSystem(String os) {
 		if (os.equalsIgnoreCase("jenkinsParameter")) {
-			this.operatingSystem = System.getProperty("jenkinsOperatingSystem")
-					.trim();
+			this.operatingSystem = System.getProperty("jenkinsOperatingSystem").trim();
 		} else {
 			this.operatingSystem = os;
 		}
@@ -233,13 +224,11 @@ public class TestEnvironment {
 	 * Getter and setter for default test timeout
 	 */
 	public void setDefaultTestTimeout(int timeout) {
-		System.setProperty(Constants.TEST_DRIVER_TIMEOUT,
-				Integer.toString(timeout));
+		System.setProperty(Constants.TEST_DRIVER_TIMEOUT, Integer.toString(timeout));
 	}
 
 	public static int getDefaultTestTimeout() {
-		return Integer.parseInt(System
-				.getProperty(Constants.TEST_DRIVER_TIMEOUT));
+		return Integer.parseInt(System.getProperty(Constants.TEST_DRIVER_TIMEOUT));
 	}
 
 	/*
@@ -293,19 +282,16 @@ public class TestEnvironment {
 		String reportInfo = getBrowserUnderTest().toUpperCase();
 		if (!getBrowserVersion().isEmpty())
 			reportInfo += " v." + getBrowserVersion();
-		TestReporter.log("Launch " + reportInfo + " in OS "
-				+ getOperatingSystem().toUpperCase() + " with URL: " + URL);
+		TestReporter.log("Launch " + reportInfo + " in OS " + getOperatingSystem().toUpperCase() + " with URL: " + URL);
 		driver.get(URL);
 	}
 
 	private void launchApplication() {
 		if (this.getTestEnvironment().isEmpty()) {
-			launchApplication(appURLRepository
-					.getString(getApplicationUnderTest().toUpperCase()));
+			launchApplication(appURLRepository.getString(getApplicationUnderTest().toUpperCase()));
 		} else {
 			launchApplication(appURLRepository
-					.getString(getApplicationUnderTest().toUpperCase() + "_"
-							+ getTestEnvironment().toUpperCase()));
+					.getString(getApplicationUnderTest().toUpperCase() + "_" + getTestEnvironment().toUpperCase()));
 		}
 	}
 
@@ -357,35 +343,25 @@ public class TestEnvironment {
 
 			switch (getOperatingSystem().toLowerCase().trim().replace(" ", "")) {
 			case "windows":
-				if (getBrowserUnderTest().equalsIgnoreCase("Firefox")
-						|| getBrowserUnderTest().equalsIgnoreCase("FF")) {
+				if (getBrowserUnderTest().equalsIgnoreCase("Firefox") || getBrowserUnderTest().equalsIgnoreCase("FF")) {
 					driver = new FirefoxDriver();
 				}
 				// Internet explorer
 				else if (getBrowserUnderTest().equalsIgnoreCase("IE")
-						|| getBrowserUnderTest().replace(" ", "")
-								.equalsIgnoreCase("internetexplorer")) {
+						|| getBrowserUnderTest().replace(" ", "").equalsIgnoreCase("internetexplorer")) {
 					caps = DesiredCapabilities.internetExplorer();
 					caps.setCapability("ignoreZoomSetting", true);
 					caps.setCapability("enablePersistentHover", false);
-					file = new File(this
-							.getClass()
-							.getResource(
-									Constants.DRIVERS_PATH_LOCAL
-											+ "IEDriverServer.exe").getPath());
-					System.setProperty("webdriver.ie.driver",
-							file.getAbsolutePath());
+					file = new File(
+							this.getClass().getResource(Constants.DRIVERS_PATH_LOCAL + "IEDriverServer.exe").getPath());
+					System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 					driver = new InternetExplorerDriver(caps);
 				}
 				// Chrome
 				else if (getBrowserUnderTest().equalsIgnoreCase("Chrome")) {
-					file = new File(this
-							.getClass()
-							.getResource(
-									Constants.DRIVERS_PATH_LOCAL
-											+ "ChromeDriver.exe").getPath());
-					System.setProperty("webdriver.chrome.driver",
-							file.getAbsolutePath());
+					file = new File(
+							this.getClass().getResource(Constants.DRIVERS_PATH_LOCAL + "ChromeDriver.exe").getPath());
+					System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 					driver = new ChromeDriver();
 				}
 				// Headless - HTML unit driver
@@ -396,39 +372,29 @@ public class TestEnvironment {
 				else if (getBrowserUnderTest().equalsIgnoreCase("safari")) {
 					driver = new SafariDriver();
 				} else {
-					throw new RuntimeException(
-							"Parameter not set for browser type");
+					throw new RuntimeException("Parameter not set for browser type");
 				}
 				break;
 			case "mac":
 			case "macos":
-				if (getBrowserUnderTest().equalsIgnoreCase("Firefox")
-						|| getBrowserUnderTest().equalsIgnoreCase("FF")) {
+				if (getBrowserUnderTest().equalsIgnoreCase("Firefox") || getBrowserUnderTest().equalsIgnoreCase("FF")) {
 					driver = new FirefoxDriver();
 				}
 				// Internet explorer
 				else if (getBrowserUnderTest().equalsIgnoreCase("IE")
-						|| getBrowserUnderTest().replace(" ", "")
-								.equalsIgnoreCase("internetexplorer")) {
-					throw new RuntimeException(
-							"Currently there is no support for IE with Mac OS.");
+						|| getBrowserUnderTest().replace(" ", "").equalsIgnoreCase("internetexplorer")) {
+					throw new RuntimeException("Currently there is no support for IE with Mac OS.");
 				}
 				// Chrome
 				else if (getBrowserUnderTest().equalsIgnoreCase("Chrome")) {
-					file = new File(this
-							.getClass()
-							.getResource(
-									Constants.DRIVERS_PATH_LOCAL
-											+ "mac/chromedriver").getPath());
-					System.setProperty("webdriver.chrome.driver",
-							file.getAbsolutePath());
+					file = new File(
+							this.getClass().getResource(Constants.DRIVERS_PATH_LOCAL + "mac/chromedriver").getPath());
+					System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 					try {
 						// Ensure the permission on the driver include
 						// executable permissions
-						Process proc = Runtime
-								.getRuntime()
-								.exec(new String[] { "/bin/bash", "-c",
-										"chmod 777 " + file.getAbsolutePath() });
+						Process proc = Runtime.getRuntime()
+								.exec(new String[] { "/bin/bash", "-c", "chmod 777 " + file.getAbsolutePath() });
 						proc.waitFor();
 						driver = new ChromeDriver();
 					} catch (IllegalStateException ise) {
@@ -449,8 +415,7 @@ public class TestEnvironment {
 				else if (getBrowserUnderTest().equalsIgnoreCase("safari")) {
 					driver = new SafariDriver();
 				} else {
-					throw new RuntimeException(
-							"Parameter not set for browser type");
+					throw new RuntimeException("Parameter not set for browser type");
 				}
 				break;
 			default:
@@ -458,46 +423,34 @@ public class TestEnvironment {
 			}
 
 			// Code for running on the selenium grid
-		} else if (getRunLocation().equalsIgnoreCase("remote")) 
-		{
+		} else if (getRunLocation().equalsIgnoreCase("remote")) {
 			DesiredCapabilities capabilities = new DesiredCapabilities();
-			capabilities.setCapability(CapabilityType.BROWSER_NAME,
-					getBrowserUnderTest());
+			capabilities.setCapability(CapabilityType.BROWSER_NAME, getBrowserUnderTest());
 			if (getBrowserVersion() != null) {
-				capabilities.setCapability(CapabilityType.VERSION,
-						getBrowserVersion());
+				capabilities.setCapability(CapabilityType.VERSION, getBrowserVersion());
 			}
-			capabilities.setCapability(CapabilityType.PLATFORM,
-					getOperatingSystem());
+			capabilities.setCapability(CapabilityType.PLATFORM, getOperatingSystem());
 			if (getBrowserUnderTest().toLowerCase().contains("ie")
 					|| getBrowserUnderTest().toLowerCase().contains("iexplore")) {
 				capabilities.setCapability("ignoreZoomSetting", true);
 			}
 			capabilities.setCapability("name", getTestName());
 			try {
-				webDriver.set(new RemoteWebDriver(new URL("http://"
-						+ authentication.getUsername() + ":"
-						+ authentication.getAccessKey()
-						+ "@ondemand.saucelabs.com:80/wd/hub"), capabilities));
+				webDriver.set(new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":"
+						+ authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"), capabilities));
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			sessionId.set(((RemoteWebDriver) getWebDriver()).getSessionId()
-					.toString());
+
+			sessionId.set(((RemoteWebDriver) getWebDriver()).getSessionId().toString());
 			driver = webDriver.get();
 		} else {
-			throw new RuntimeException(
-					"Parameter for run [Location] was not set to 'Local' or 'Remote'");
+			throw new RuntimeException("Parameter for run [Location] was not set to 'Local' or 'Remote'");
 		}
 
-		driver.manage()
-				.timeouts()
-				.setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT,
-						TimeUnit.SECONDS)
-				.implicitlyWait(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT,
-						TimeUnit.SECONDS);
+		driver.manage().timeouts().setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS)
+				.implicitlyWait(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT, TimeUnit.SECONDS);
 		setDefaultTestTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
@@ -579,7 +532,7 @@ public class TestEnvironment {
 		} else {
 			updates.put("passed", true);
 		}
-		
+
 		JSONArray tags = new JSONArray();
 		String[] groups = test.getMethod().getGroups();
 		for (int x = 0; x < groups.length; x++) {
@@ -588,13 +541,9 @@ public class TestEnvironment {
 		updates.put("tags", tags);
 
 		if (runLocation.equalsIgnoreCase("remote")) {
-			SauceREST client = new SauceREST(
-					Base64Coder.decodeString(appURLRepository
-							.getString("SAUCELABS_USERNAME")),
-					Base64Coder.decodeString(appURLRepository
-							.getString("SAUCELABS_KEY")));
-			client.updateJobInfo(((RemoteWebDriver) driver).getSessionId()
-					.toString(), updates);
+			SauceREST client = new SauceREST(Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
+					Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+			client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
 		}
 
 		WebDriver driver = drivers.get(getTestName());

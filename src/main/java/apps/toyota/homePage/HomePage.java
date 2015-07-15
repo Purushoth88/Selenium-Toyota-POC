@@ -11,19 +11,18 @@ import com.orasi.utils.TestEnvironment;
  * @version Created 03/01/2015
  * @author Waightstill W. Avery
  */
-public class HomePage extends com.orasi.utils.TestEnvironment{
+public class HomePage extends com.orasi.utils.TestEnvironment {
 	// ***********************
 	// *** HomePage Fields ***
 	// ***********************
 	int timeout = getDefaultTestTimeout();
 	int loopCounter = 0;
-	
+
 	// *************************
 	// *** HomePage Elements ***
 	// *************************
 	@FindBy(id = "marquee")
 	private Element eleMarquee;
-
 
 	// *********************
 	// ** Build page area **
@@ -33,14 +32,16 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	 * @summary Constructor to initialize the page
 	 * @version Created 03/01/2015
 	 * @author Waightstill W Avery
-	 * @param te - TestEnvironment instance containing the WebDriver to be used for the page class
+	 * @param te
+	 *            - TestEnvironment instance containing the WebDriver to be used
+	 *            for the page class
 	 * @throws NA
 	 * @return NA
 	 * 
 	 */
-	public HomePage(TestEnvironment te){
+	public HomePage(TestEnvironment te) {
 		super(te);
-		ElementFactory.initElements(getDriver(), this);  
+		ElementFactory.initElements(getDriver(), this);
 	}
 
 	// *****************************

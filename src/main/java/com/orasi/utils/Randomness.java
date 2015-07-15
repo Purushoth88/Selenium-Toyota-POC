@@ -9,14 +9,16 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class Randomness {
 
 	public static String generateMessageId() {
-		return randomAlphaNumeric(8) + "-" + randomAlphaNumeric(6) + "-"
-				+ randomAlphaNumeric(6) + "-" + randomAlphaNumeric(6) + "-"
-				+ randomAlphaNumeric(10);
+		return randomAlphaNumeric(8) + "-" + randomAlphaNumeric(6) + "-" + randomAlphaNumeric(6) + "-"
+				+ randomAlphaNumeric(6) + "-" + randomAlphaNumeric(10);
 	}
 
 	public static String generateCurrentDatetime() {
 		String repDate = "";
-		DateFormat dfms = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"); // for display with milliseconds
+		DateFormat dfms = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"); // for
+																			// display
+																			// with
+																			// milliseconds
 		Calendar cal = Calendar.getInstance();
 		repDate = dfms.format(cal.getTime());
 
@@ -47,8 +49,7 @@ public class Randomness {
 
 		return adDate;
 	}
-	
-	
+
 	public static String generateCurrentXMLDate() {
 		DateFormat dfms = new SimpleDateFormat("yyyy-MM-dd"); // XML date time
 		Calendar cal = Calendar.getInstance();
@@ -65,6 +66,7 @@ public class Randomness {
 
 		return Date;
 	}
+
 	public static String randomNumber(int length) {
 		new RandomStringUtils();
 		return RandomStringUtils.randomNumeric(length);
@@ -79,6 +81,5 @@ public class Randomness {
 		new RandomStringUtils();
 		return RandomStringUtils.randomAlphanumeric(length);
 	}
-
 
 }

@@ -41,8 +41,7 @@ public class ChangeZipCode extends TestEnvironment {
 	// **************
 	@DataProvider(name = "dataScenario")
 	public Object[][] scenarios() {
-		Object[][] excelData = new ExcelDataProvider(
-				Constants.TOYOTA_DATAPROVIDER_PATH + "ChangeZipCode" + ".xlsx",
+		Object[][] excelData = new ExcelDataProvider(Constants.TOYOTA_DATAPROVIDER_PATH + "ChangeZipCode" + ".xlsx",
 				"ChangeZipCode").getTestData();
 		return excelData;
 	}
@@ -51,10 +50,9 @@ public class ChangeZipCode extends TestEnvironment {
 	// Before-Test Behavior
 	// *********************
 	@BeforeTest(groups = { "regression" })
-	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
-			"operatingSystem", "environment" })
-	public void setupClass(String runLocation, String browserUnderTest,
-			String browserVersion, String operatingSystem, String environment) {
+	@Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment" })
+	public void setupClass(String runLocation, String browserUnderTest, String browserVersion, String operatingSystem,
+			String environment) {
 		setApplicationUnderTest(application);
 		setBrowserUnderTest(browserUnderTest);
 		setBrowserVersion(browserVersion);
@@ -78,11 +76,9 @@ public class ChangeZipCode extends TestEnvironment {
 	@Features("General Usage")
 	@Stories("As any user, I can change the zip code on the main page")
 	@Test(dataProvider = "dataScenario", groups = { "regression" })
-	public void testChangeZipCode(@Parameter String testScenario,
-			@Parameter String zipCode) {
+	public void testChangeZipCode(@Parameter String testScenario, @Parameter String zipCode) {
 		testName = new Object() {
-		}.getClass().getEnclosingMethod().getName() + "_"
-				+ getOperatingSystem() + "_" + getBrowserUnderTest() + "_"
+		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem() + "_" + getBrowserUnderTest() + "_"
 				+ getBrowserVersion();
 
 		testStart(testName);
@@ -93,8 +89,7 @@ public class ChangeZipCode extends TestEnvironment {
 
 		// Change the zipcode
 		MainNavigation mainNav = new MainNavigation(this);
-		TestReporter
-				.assertTrue(pageLoaded().isDomComplete(), "Verify Navigation Bar is loaded");
+		TestReporter.assertTrue(pageLoaded().isDomComplete(), "Verify Navigation Bar is loaded");
 		mainNav.changeZipCodes(zipCode);
 	}
 

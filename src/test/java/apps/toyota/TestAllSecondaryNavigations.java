@@ -35,10 +35,9 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 	// Before-Test Behavior
 	// *********************
 	@BeforeTest(groups = { "regression" })
-	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
-			"operatingSystem", "environment" })
-	public void setupClass(String runLocation, String browserUnderTest,
-			String browserVersion, String operatingSystem, String environment) {
+	@Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment" })
+	public void setupClass(String runLocation, String browserUnderTest, String browserVersion, String operatingSystem,
+			String environment) {
 		setApplicationUnderTest(application);
 		setBrowserUnderTest(browserUnderTest);
 		setBrowserVersion(browserVersion);
@@ -64,8 +63,7 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 	@Test(groups = { "regression" }, singleThreaded = true)
 	public void testAllSecondaryNavigations() {
 		testName = new Object() {
-		}.getClass().getEnclosingMethod().getName() + "_"
-				+ getOperatingSystem() + "_" + getBrowserUnderTest() + "_"
+		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem() + "_" + getBrowserUnderTest() + "_"
 				+ getBrowserVersion();
 
 		// Start the test and generate a driver

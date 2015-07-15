@@ -11,25 +11,42 @@ public class SeleniumJobInfo {
 	private String buildable;
 	private String url;
 	private String nextBuildNumber;
-	
-	public String getDescription() {return description;}
-	public String getDisplayName() {return displayName;}
-	public String getName() {return name;}
-	public String getBuildable() {return buildable;}
-	public String getUrl() {return url;	}
-	public String getNextBuildNumber() {return nextBuildNumber;}
-	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getBuildable() {
+		return buildable;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public String getNextBuildNumber() {
+		return nextBuildNumber;
+	}
+
 	public static String lastBuildURL = "http://jenkins.orasi.com/job/OpenSandbox/job/Toyota-SauceLabs/lastBuild/api/json";
 	public static String lastBuildNumber = "https://jenkins.orasi.com/job/OpenSandbox/job/Toyota-SauceLabs/api/json?tree=builds[number]";
-	
+
 	private static RestService rest = new RestService();
 	private String restResponse = "";
-	
-	public SeleniumJobInfo(){
-		
+
+	public SeleniumJobInfo() {
+
 	}
-	
-	public static String getLastJenkinsBuildNumber() throws ClientProtocolException, IOException{
+
+	public static String getLastJenkinsBuildNumber() throws ClientProtocolException, IOException {
 		String buildNumber = rest.sendGetRequest(lastBuildNumber);
 		return buildNumber;
 	}

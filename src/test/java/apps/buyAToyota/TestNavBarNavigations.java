@@ -25,10 +25,9 @@ public class TestNavBarNavigations extends TestEnvironment {
 	// Before-Test Behavior
 	// *********************
 	@BeforeTest(groups = { "regression" })
-	@Parameters({ "runLocation", "browserUnderTest", "browserVersion",
-			"operatingSystem", "environment" })
-	public void setupClass(String runLocation, String browserUnderTest,
-			String browserVersion, String operatingSystem, String environment) {
+	@Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment" })
+	public void setupClass(String runLocation, String browserUnderTest, String browserVersion, String operatingSystem,
+			String environment) {
 		setApplicationUnderTest(application);
 		setBrowserUnderTest(browserUnderTest);
 		setBrowserVersion(browserVersion);
@@ -54,8 +53,7 @@ public class TestNavBarNavigations extends TestEnvironment {
 	@Test(groups = { "regression" })
 	public void testAllNavBarNavigations() {
 		testName = new Object() {
-		}.getClass().getEnclosingMethod().getName() + "_"
-				+ getOperatingSystem() + "_" + getBrowserUnderTest() + "_"
+		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem() + "_" + getBrowserUnderTest() + "_"
 				+ getBrowserVersion();
 
 		// Start the test and generate a driver

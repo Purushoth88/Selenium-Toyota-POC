@@ -94,8 +94,7 @@ public abstract class SoapService {
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
 		try {
-			transformer.transform(new DOMSource(getRequestDocument()),
-					new StreamResult(sw));
+			transformer.transform(new DOMSource(getRequestDocument()), new StreamResult(sw));
 		} catch (TransformerException e) {
 			throw new RuntimeException(
 					"Failed to transform Request XML Document. Ensure XML Document has been successfully loaded.");
@@ -127,8 +126,7 @@ public abstract class SoapService {
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
 		try {
-			transformer.transform(new DOMSource(getResponseDocument()),
-					new StreamResult(sw));
+			transformer.transform(new DOMSource(getResponseDocument()), new StreamResult(sw));
 		} catch (TransformerException e) {
 			throw new RuntimeException(
 					"Failed to transform Response XML Document. Ensure XML Document has been successfully loaded.");
@@ -244,7 +242,7 @@ public abstract class SoapService {
 	 *          Doc - Performance Environment 1 <br>
 	 *          Evil Queen - Performance Environment 2 <br>
 	 *          Grumpy - Pre-Production Staging Environment <br>
-	 * <br>
+	 *          <br>
 	 *          Can be retrieved by {@link #getEnvironment()}
 	 * @precondition The environment under test must be one of the environments
 	 *               listed above.
@@ -378,12 +376,10 @@ public abstract class SoapService {
 		return XMLTools.getValueByXpath(getResponseDocument(), xpath);
 	}
 
-	public String getResponseNodeValueByXPath(String xpath,
-			String[][] namespaces) {
+	public String getResponseNodeValueByXPath(String xpath, String[][] namespaces) {
 		SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
 		for (int nsCounter = 0; nsCounter < namespaces.length; nsCounter++) {
-			nsContext.addNamespace(namespaces[nsCounter][0],
-					namespaces[nsCounter][1]);
+			nsContext.addNamespace(namespaces[nsCounter][0], namespaces[nsCounter][1]);
 		}
 		XPathFactory xPathFactory = XPathFactory.newInstance();
 		XPath xPath = xPathFactory.newXPath();
@@ -446,8 +442,7 @@ public abstract class SoapService {
 			// This is set as the last row
 			for (int i = startRow + 1;; i++) {
 				try {
-					if (sheet.getCell(startCol + 1, i).getContents().toString()
-							.equals("")) {
+					if (sheet.getCell(startCol + 1, i).getContents().toString().equals("")) {
 						endRow = i;
 						break;
 					}
@@ -475,8 +470,7 @@ public abstract class SoapService {
 		} catch (BiffException be) {
 			throw new RuntimeException(be.getCause());
 		} catch (IOException ioe) {
-			throw new RuntimeException("Unable to open file " + file + "\n"
-					+ ioe.getCause());
+			throw new RuntimeException("Unable to open file " + file + "\n" + ioe.getCause());
 		}
 		return (tabArray);
 	}
@@ -504,12 +498,10 @@ public abstract class SoapService {
 		String url = getServiceURL();
 
 		try {
-			messageFactory = MessageFactory
-					.newInstance(SOAPConstants.SOAP_1_1_PROTOCOL);
+			messageFactory = MessageFactory.newInstance(SOAPConstants.SOAP_1_1_PROTOCOL);
 
 			// Convert XML Request to SoapMessage
-			request = messageFactory.createMessage(new MimeHeaders(),
-					new StringBufferInputStream(getRequest()));
+			request = messageFactory.createMessage(new MimeHeaders(), new StringBufferInputStream(getRequest()));
 			request.writeTo(System.out);
 			System.out.println();
 
@@ -523,22 +515,18 @@ public abstract class SoapService {
 			response.getSOAPBody().normalize();
 			responseBody = response.getSOAPBody();
 		} catch (UnsupportedOperationException uoe) {
-			throw new RuntimeException(
-					"Operation given did not match any operations in the service"
-							+ uoe.getCause());
+			throw new RuntimeException("Operation given did not match any operations in the service" + uoe.getCause());
 		} catch (SOAPException soape) {
 			throw new RuntimeException(soape.getCause());
 		} catch (IOException ioe) {
-			throw new RuntimeException("Failed to read the request properly"
-					+ ioe.getCause());
+			throw new RuntimeException("Failed to read the request properly" + ioe.getCause());
 		}
 
 		// Check for faults and report
 		if (responseBody.hasFault()) {
 			SOAPFault newFault = responseBody.getFault();
 			setRepsonseStatusCode(newFault.getFaultCode());
-			System.out
-					.println("sendSoapReq FAULT:  " + newFault.getFaultCode());
+			System.out.println("sendSoapReq FAULT:  " + newFault.getFaultCode());
 		} else {
 			setRepsonseStatusCode("200");
 		}
@@ -585,8 +573,7 @@ public abstract class SoapService {
 		String url = getServiceURL();
 
 		try {
-			messageFactory = MessageFactory
-					.newInstance(SOAPConstants.SOAP_1_1_PROTOCOL);
+			messageFactory = MessageFactory.newInstance(SOAPConstants.SOAP_1_1_PROTOCOL);
 
 			// Convert XML Request to SoapMessage
 
@@ -594,12 +581,10 @@ public abstract class SoapService {
 			headers.setHeader(headerName[0], headerValue[0]);
 			if (headerName.length > 1) {
 				for (int headerCounter = 0; headerCounter < headerName.length; headerCounter++) {
-					headers.addHeader(headerName[headerCounter],
-							headerValue[headerCounter]);
+					headers.addHeader(headerName[headerCounter], headerValue[headerCounter]);
 				}
 			}
-			request = messageFactory.createMessage(headers,
-					new StringBufferInputStream(getRequest()));
+			request = messageFactory.createMessage(headers, new StringBufferInputStream(getRequest()));
 			request.writeTo(System.out);
 			System.out.println();
 
@@ -613,22 +598,18 @@ public abstract class SoapService {
 			response.getSOAPBody().normalize();
 			responseBody = response.getSOAPBody();
 		} catch (UnsupportedOperationException uoe) {
-			throw new RuntimeException(
-					"Operation given did not match any operations in the service"
-							+ uoe.getCause());
+			throw new RuntimeException("Operation given did not match any operations in the service" + uoe.getCause());
 		} catch (SOAPException soape) {
 			throw new RuntimeException(soape.getCause());
 		} catch (IOException ioe) {
-			throw new RuntimeException("Failed to read the request properly"
-					+ ioe.getCause());
+			throw new RuntimeException("Failed to read the request properly" + ioe.getCause());
 		}
 
 		// Check for faults and report
 		if (responseBody.hasFault()) {
 			SOAPFault newFault = responseBody.getFault();
 			setRepsonseStatusCode(newFault.getFaultCode());
-			System.out
-					.println("sendSoapReq FAULT:  " + newFault.getFaultCode());
+			System.out.println("sendSoapReq FAULT:  " + newFault.getFaultCode());
 		} else {
 			setRepsonseStatusCode("200");
 		}
@@ -664,7 +645,7 @@ public abstract class SoapService {
 	 * @param value
 	 *            String: Depending on value given, will update the xpath value,
 	 *            attribute, or call a separate function. <br>
-	 * <br>
+	 *            <br>
 	 *            <b>Value syntax expressions:</b> <br>
 	 *            <b>value="abc"</b> -- Indirectly states that the node value
 	 *            will be set as "abc" <br>
@@ -691,7 +672,7 @@ public abstract class SoapService {
 	 * @param value
 	 *            String: Depending on value given, will update the xpath value,
 	 *            attribute, or call a separate function. <br>
-	 * <br>
+	 *            <br>
 	 *            <b>Value syntax expressions:</b> <br>
 	 *            <b>value="abc"</b> -- Indirectly states that the node value
 	 *            will be set as "abc" <br>
@@ -704,8 +685,8 @@ public abstract class SoapService {
 	 */
 	public void setRequestNodeValueByXPath(Object[][] scenarios) {
 		for (int x = 0; x < scenarios.length; x++) {
-			XMLTools.setRequestNodeValueByXPath(getRequestDocument(),
-					scenarios[x][0].toString(), scenarios[x][1].toString());
+			XMLTools.setRequestNodeValueByXPath(getRequestDocument(), scenarios[x][0].toString(),
+					scenarios[x][1].toString());
 		}
 	}
 
@@ -720,7 +701,7 @@ public abstract class SoapService {
 	 * @param value
 	 *            String: Depending on value given, will validate the xpath node
 	 *            or attribute value, <br>
-	 * <br>
+	 *            <br>
 	 *            <b>Value syntax expressions:</b> <br>
 	 *            <b>value="abc"</b> -- Indirectly states that the node value
 	 *            will be validated and expected to be "abc" <br>
@@ -740,8 +721,7 @@ public abstract class SoapService {
 		buffer.append("<td style='width: 100px; color: black; text-align: center;'><b>Value</b></td>");
 		buffer.append("<td style='width: 100px; color: black; text-align: center;'><b>Status</b></td></tr>");
 		for (int x = 0; x < scenarios.length; x++) {
-			if (!XMLTools.validateNodeValueByXPath(doc,
-					scenarios[x][0].toString(), scenarios[x][1].toString())) {
+			if (!XMLTools.validateNodeValueByXPath(doc, scenarios[x][0].toString(), scenarios[x][1].toString())) {
 				status = false;
 			}
 		}
@@ -751,8 +731,7 @@ public abstract class SoapService {
 	}
 
 	public boolean validateResponse(String resourcePath, String scenario) {
-		return validateNodeValueByXPath(getResponseDocument(),
-				getTestScenario(resourcePath, scenario));
+		return validateNodeValueByXPath(getResponseDocument(), getTestScenario(resourcePath, scenario));
 	}
 
 	protected String sendGetRequest(String strUrl) throws Exception {
@@ -768,15 +747,13 @@ public abstract class SoapService {
 			e1.printStackTrace();
 		}
 
-		HttpURLConnection conn = (HttpURLConnection) urlRequest
-				.openConnection();
+		HttpURLConnection conn = (HttpURLConnection) urlRequest.openConnection();
 		conn.setDoOutput(true);
 		conn.setDoInput(true);
 		conn.setRequestMethod("GET");
 
 		InputStream stream = conn.getInputStream();
-		BufferedReader bufferReader = new BufferedReader(new InputStreamReader(
-				stream));
+		BufferedReader bufferReader = new BufferedReader(new InputStreamReader(stream));
 
 		String buffer = "";
 		while ((buffer = bufferReader.readLine()) != null) {
@@ -808,8 +785,7 @@ public abstract class SoapService {
 			e.printStackTrace();
 		}
 
-		setServiceURL(getFirstNodeValueByTagName(responseDoc, "endPoint")
-				+ "?wsdl");
+		setServiceURL(getFirstNodeValueByTagName(responseDoc, "endPoint") + "?wsdl");
 
 	}
 
@@ -854,8 +830,7 @@ public abstract class SoapService {
 	}
 
 	protected void removeComments() {
-		setRequestDocument((Document) XMLTools
-				.removeComments(getRequestDocument()));
+		setRequestDocument((Document) XMLTools.removeComments(getRequestDocument()));
 	}
 
 	protected void removeWhiteSpace() {

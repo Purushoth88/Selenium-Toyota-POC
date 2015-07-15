@@ -20,7 +20,7 @@ import org.testng.xml.XmlSuite;
 
 import ru.yandex.qatools.allure.annotations.Attachment;
 
-public class Screenshot extends TestListenerAdapter implements IReporter{
+public class Screenshot extends TestListenerAdapter implements IReporter {
 
 	@Override
 	public void onTestFailure(ITestResult result) {
@@ -28,17 +28,16 @@ public class Screenshot extends TestListenerAdapter implements IReporter{
 		File directory = new File(".");
 		Object currentClass = result.getInstance();
 		WebDriver driver = ((TestEnvironment) currentClass).getDriver();
-		String runLocation = ((TestEnvironment) currentClass).getRunLocation()
-				.toLowerCase();		
-		
+		String runLocation = ((TestEnvironment) currentClass).getRunLocation().toLowerCase();
+
 		String destDir = null;
 		try {
-			destDir = directory.getCanonicalPath()
-					+ slash + "selenium-reports" + slash + "html" + slash + "screenshots";
+			destDir = directory.getCanonicalPath() + slash + "selenium-reports" + slash + "html" + slash
+					+ "screenshots";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (runLocation == "remote"){
+		if (runLocation == "remote") {
 			driver = new Augmenter().augment(driver);
 		}
 		Reporter.setCurrentTestResult(result);
@@ -48,10 +47,11 @@ public class Screenshot extends TestListenerAdapter implements IReporter{
 
 		String destFile = dateFormat.format(new Date()) + ".png";
 
-		//Capture a screenshot for TestNG reporting
-		//TestReporter.logScreenshot(driver, destDir + slash + destFile, slash, runLocation);
-		
-		//Capture a screenshot for Allure reporting
+		// Capture a screenshot for TestNG reporting
+		// TestReporter.logScreenshot(driver, destDir + slash + destFile, slash,
+		// runLocation);
+
+		// Capture a screenshot for Allure reporting
 		FailedScreenshot(driver);
 	}
 
@@ -71,10 +71,9 @@ public class Screenshot extends TestListenerAdapter implements IReporter{
 	}
 
 	@Override
-	public void generateReport(List<XmlSuite> xmlSuites,
-		List<ISuite> suites, String outputDirectory) {
-	    // TODO Auto-generated method stub
-	    
+	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -14,11 +14,12 @@ import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.TestEnvironment;
 
 /**
- * @summary Contains the methods & objects for the Toyota.com Vehicles Dropdown page
+ * @summary Contains the methods & objects for the Toyota.com Vehicles Dropdown
+ *          page
  * @version Created 03/23/2015
  * @author Waightstill W. Avery
  */
-public class VehiclesDropdown extends com.orasi.utils.TestEnvironment{
+public class VehiclesDropdown extends com.orasi.utils.TestEnvironment {
 	// *******************************
 	// *** VehiclesDropdown Fields ***
 	// *******************************
@@ -30,7 +31,7 @@ public class VehiclesDropdown extends com.orasi.utils.TestEnvironment{
 	// *********************************
 	@FindBy(id = "tcom-vehicles-dropdown")
 	private Element eleVehiclesDropdown;
-	
+
 	@FindBy(linkText = "Build your own")
 	private List<WebElement> lnkBuildYourOwn;
 
@@ -42,35 +43,37 @@ public class VehiclesDropdown extends com.orasi.utils.TestEnvironment{
 	 * @summary Constructor to initialize the page
 	 * @version Created 03/01/2015
 	 * @author Waightstill W Avery
-	 * @param te - TestEnvironment instance containing the WebDriver to be used for the page class
+	 * @param te
+	 *            - TestEnvironment instance containing the WebDriver to be used
+	 *            for the page class
 	 * @throws NA
 	 * @return NA
 	 * 
 	 */
-	public VehiclesDropdown(TestEnvironment te){
+	public VehiclesDropdown(TestEnvironment te) {
 		super(te);
-		ElementFactory.initElements(getDriver(), this);  
+		ElementFactory.initElements(getDriver(), this);
 	}
-//
-//	public boolean pageLoaded(Element element) {
-//		return this.pageLoaded(this.getClass(), element);
-//	}
-//
-//	public void initializePage() {
-//		this.initializePage(this.getClass());	
-//	}
+	//
+	// public boolean pageLoaded(Element element) {
+	// return this.pageLoaded(this.getClass(), element);
+	// }
+	//
+	// public void initializePage() {
+	// this.initializePage(this.getClass());
+	// }
 
 	// *************************************
 	// *** VehiclesDropdown Interactions ***
 	// *************************************
 	@Step("Click Cars and Minivan")
-	private void clickCarsAndMinivan(){
+	private void clickCarsAndMinivan() {
 		List<WebElement> buttons = getDriver().findElements(By.tagName("button"));
 		Iterator buttonIt = buttons.iterator();
-		
+
 		boolean buttonFound = false;
-		do{
-			
-		}while(!buttonFound);
+		do {
+
+		} while (!buttonFound);
 	}
 }
