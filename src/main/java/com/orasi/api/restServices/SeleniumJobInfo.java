@@ -1,8 +1,15 @@
 package com.orasi.api.restServices;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
+import org.testng.annotations.Test;
+
+import com.orasi.utils.TestReporter;
+
+import java.security.*;
 
 public class SeleniumJobInfo {
 	private String description;
@@ -49,5 +56,26 @@ public class SeleniumJobInfo {
 	public static String getLastJenkinsBuildNumber() throws ClientProtocolException, IOException {
 		String buildNumber = rest.sendGetRequest(lastBuildNumber);
 		return buildNumber;
+	}
+	
+	@Test
+	public void getJennkinsBuildNumber(){
+/*		Security.insertProviderAt( new Provider() {
+		}, 1);
+		KeyStore keyStore = KeyStore.getInstance("JKS");
+		String fileName = System.getProperty("java.home") + 
+		   "/lib/security/cacerts";
+		FileInputStream stream = new FileInputStream(new File(fileName));
+		keyStore.load( stream, "/Toyota/-.orasi.com".toCharArray());*/
+		
+		try {
+			TestReporter.log(getLastJenkinsBuildNumber());
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
