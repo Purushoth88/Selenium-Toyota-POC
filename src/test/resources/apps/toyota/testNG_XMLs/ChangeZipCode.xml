@@ -2,13 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="ChangeZipCode" parallel="false">
 	<test name="ChangeZipCode">
-		<parameter name="browserUnderTest" value="iexplore" />
+		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="" />
 		<parameter name="runLocation" value="remote" />
 		<parameter name="browserVersion" value="8" />
-		<parameter name="operatingSystem" value="Windows 7" />
+		<parameter name="operatingSystem" value="MAC OS X 10.10" />
 		<classes>
-			<class name="toyota.ChangeZipCode" />
+			<class name="apps.toyota.ChangeZipCode" />
 		</classes>
 	</test> <!-- ChangeZipCode -->
 </suite> <!-- ChangeZipCode -->

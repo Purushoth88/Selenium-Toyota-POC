@@ -18,7 +18,7 @@
 
 	<test name="TestAllSecondaryNavigations">
 		<classes>
-			<class name="toyota.TestAllSecondaryNavigations" />
+			<class name="apps.toyota.TestAllSecondaryNavigations" />
 		</classes>
 	</test> <!-- TestAllSecondaryNavigations -->
 </suite> <!-- TestAllSecondaryNavigations -->

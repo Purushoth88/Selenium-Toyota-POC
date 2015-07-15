@@ -18,8 +18,8 @@
 			</run>
 		</groups>
 		<packages>
-			<!-- <package name="toyota"></package> -->
-			<package name="buyAToyota"></package>
+			<!-- <package name="apps.toyota"></package> -->
+			<package name="apps.buyAToyota"></package>
 		</packages>
 	</test>
 </suite> <!-- Toyota -->

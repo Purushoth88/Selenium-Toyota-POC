@@ -52,8 +52,7 @@ public class Constants {
 	final static public int PAGE_TIMEOUT = 60;
 
 	/** Selenium hub URL */
-//	final static public String SELENIUM_HUB_URL = "http://dnhprpptst01.disid.disney.com:4444/wd/hub";
-	final static public String SELENIUM_HUB_URL = "";
+	final static public String SELENIUM_HUB_URL = "http://dnhprpptst01.disid.disney.com:4444/wd/hub";
 	
 	/** System properties */
 	public static final String BROWSER_PROPERTY = "selenium.browser";
