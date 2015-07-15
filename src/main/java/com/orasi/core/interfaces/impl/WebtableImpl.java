@@ -643,7 +643,9 @@ public class WebtableImpl extends ElementImpl implements Webtable {
 		}
 		driver.manage().timeouts().implicitlyWait(TestEnvironment.getDefaultTestTimeout(), TimeUnit.SECONDS);
 
-		int currentRow = 1, currentColumn = 1, rowFound = 0;
+		int currentRow = 1;
+		int currentColumn = 1;
+		int rowFound = 0;
 		String xpath = null;
 		Boolean found = false;
 

@@ -22,6 +22,7 @@ import com.orasi.core.interfaces.impl.internal.ElementFactory;
 public class PageLoaded {
 	
 	private WebDriver driver = null;
+	@SuppressWarnings("rawtypes")
 	private Class clazz = null;
 	private int timeout = 0;
 	
@@ -31,7 +32,7 @@ public class PageLoaded {
 	
 	public PageLoaded(TestEnvironment te){
 	    	this.driver = te.getDriver();
-		this.timeout = te.getDefaultTestTimeout();
+		this.timeout = TestEnvironment.getDefaultTestTimeout();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -50,6 +51,7 @@ public class PageLoaded {
 	 * @author 	Justin Phlegar
 	 * @return 	False if the element is not found after the timeout, true if is found
 	 */
+	@SuppressWarnings("rawtypes")
 	public boolean isElementLoaded(Class clazz, Element obj){
 		this.clazz = clazz;		
 		int count = 0;
@@ -93,6 +95,7 @@ public class PageLoaded {
 	 * @author 	Justin Phlegar
 	 * @return 	False if the element is not found after the timeout, true if is found
 	 */
+	@SuppressWarnings("rawtypes")
 	public boolean isElementLoaded(Class clazz, WebDriver driver, Element obj){
 		this.driver = driver;
 		this.clazz = clazz;		
@@ -111,6 +114,7 @@ public class PageLoaded {
 	 * @author 	Jessica Marshall
 	 * @return 	False if the element is not found after the timeout, true if is found
 	 */
+	@SuppressWarnings("rawtypes")
 	public boolean isElementLoaded(Class clazz, WebDriver driver, Element obj, int timeout){
 		this.timeout = timeout;
 		return isElementLoaded(clazz, driver, obj);

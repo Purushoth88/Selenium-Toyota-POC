@@ -9,9 +9,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
-
-
-
 import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,8 +20,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.saucelabs.common.SauceOnDemandAuthentication;
@@ -572,6 +567,7 @@ public class TestEnvironment {
 	 * @version 05/27/2015
 	 * @author Justin Phlegar
 	 */
+	@SuppressWarnings("unchecked")
 	protected void endSauceTest(ITestResult test) {
 		TestReporter.log("endSauceTest");
 		Map<String, Object> updates = new HashMap<String, Object>();
