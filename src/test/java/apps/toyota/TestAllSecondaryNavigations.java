@@ -44,6 +44,7 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 		setOperatingSystem(operatingSystem);
 		setRunLocation(runLocation);
 		setTestEnvironment(environment);
+		System.out.println("BUILD NUMBER:   " + System.getProperty("build_parameter"));
 	}
 
 	// *****
