@@ -4,11 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,6 +26,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.ITestResult;
 
+import com.orasi.api.restServices.RestService;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.saucerest.SauceREST;
@@ -51,6 +57,18 @@ public class TestEnvironment {
 	protected String testName = "";
 	protected String commandTimeout = "";
 	protected String idleTimeout = "";
+	/*
+	 * Mustard Fields
+	 */
+	private String mustardTestName = this.testName;
+	private String deviceID = "123456789";
+	private String status = "";
+	private String comment = "";
+	private String mustardIp = "http://10.238.242.85:3000/projects/1/results";
+	private RestService rest = new RestService();
+	private String restResponse = "";
+	private NameValuePair nameValuePair;
+	private List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 	/*
 	 * WebDriver Fields
 	 */
@@ -316,6 +334,7 @@ public class TestEnvironment {
 		// Uncomment the following line to have TestReporter outputs output to
 		// the console
 		TestReporter.setPrintToConsole(true);
+		closeMustardExecution();
 		driverSetup();
 		launchApplication();
 		drivers.put(testName, driver);
@@ -529,9 +548,14 @@ public class TestEnvironment {
 		if (test.getStatus() == ITestResult.FAILURE) {
 			// new Screenshot().takeScreenShot(test, driver);
 			updates.put("passed", false);
+			nameValuePairs.add(new BasicNameValuePair("status", "fail"));
+			nameValuePairs.add(new BasicNameValuePair("comment", test.getThrowable().getMessage()));
 		} else {
 			updates.put("passed", true);
+			nameValuePairs.add(new BasicNameValuePair("status", "pass"));
+			nameValuePairs.add(new BasicNameValuePair("comment", ""));
 		}
+		postTestToMustard();
 
 		JSONArray tags = new JSONArray();
 		String[] groups = test.getMethod().getGroups();
@@ -549,6 +573,20 @@ public class TestEnvironment {
 		WebDriver driver = drivers.get(getTestName());
 		if (driver != null && driver.getWindowHandles().size() > 0) {
 			driver.quit();
+		}
+	}
+	
+	private void closeMustardExecution(){
+	}
+	
+	private void postTestToMustard(){
+		nameValuePairs.add(new BasicNameValuePair("test_name", this.testName));
+		nameValuePairs.add(new BasicNameValuePair("device_id", this.deviceID));
+		try {
+			restResponse = rest.sendPostRequest(this.mustardIp, this.nameValuePairs);
+			TestReporter.log("Mustard Response: " + restResponse);
+		} catch (IOException e ) {
+			TestReporter.log("An error occurred trying to post the results of the test to Mustard");
 		}
 	}
 }
