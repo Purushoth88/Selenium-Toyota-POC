@@ -53,7 +53,7 @@ public class TestNavBarNavigations extends TestEnvironment {
 	@Test(groups = { "regression" })
 	public void testAllNavBarNavigations() {
 		testName = new Object() {
-		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem() + "_" + getBrowserUnderTest() + "_"
+		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem().replace(" ", "").replace(".", "") + "_" + getBrowserUnderTest() + "_"
 				+ getBrowserVersion();
 
 		// Start the test and generate a driver

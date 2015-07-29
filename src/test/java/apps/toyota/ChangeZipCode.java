@@ -78,7 +78,7 @@ public class ChangeZipCode extends TestEnvironment {
 	@Test(dataProvider = "dataScenario", groups = { "regression" })
 	public void testChangeZipCode(@Parameter String testScenario, @Parameter String zipCode) {
 		testName = new Object() {
-		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem() + "_" + getBrowserUnderTest() + "_"
+		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem().replace(" ", "").replace(".", "") + "_" + getBrowserUnderTest() + "_"
 				+ getBrowserVersion();
 
 		testStart(testName);

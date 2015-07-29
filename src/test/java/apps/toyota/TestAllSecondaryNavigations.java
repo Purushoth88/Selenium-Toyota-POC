@@ -44,7 +44,7 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 		setOperatingSystem(operatingSystem);
 		setRunLocation(runLocation);
 		setTestEnvironment(environment);
-		System.out.println("BUILD NUMBER:   " + System.getProperty("build_parameter"));
+//		System.out.println("BUILD NUMBER:   " + System.getProperty("build_parameter"));
 	}
 
 	// *****
@@ -64,7 +64,7 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 	@Test(groups = { "regression" }, singleThreaded = true)
 	public void testAllSecondaryNavigations() {
 		testName = new Object() {
-		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem() + "_" + getBrowserUnderTest() + "_"
+		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem().replace(" ", "").replace(".", "") + "_" + getBrowserUnderTest() + "_"
 				+ getBrowserVersion();
 
 		// Start the test and generate a driver
