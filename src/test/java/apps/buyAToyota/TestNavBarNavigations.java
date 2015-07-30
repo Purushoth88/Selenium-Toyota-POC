@@ -2,6 +2,7 @@ package apps.buyAToyota;
 
 import java.io.IOException;
 
+import org.apache.http.client.ClientProtocolException;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
@@ -67,7 +68,7 @@ public class TestNavBarNavigations extends TestEnvironment {
 	}
 
 	@AfterMethod(groups = { "regression" })
-	public void afterTest(ITestResult test) {
+	public void afterTest(ITestResult test) throws ClientProtocolException, IOException {
 		endSauceTest(test);
 	}
 }

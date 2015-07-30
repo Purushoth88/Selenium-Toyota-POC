@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.client.ClientProtocolException;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -78,7 +79,7 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 	}
 
 	@AfterMethod(groups = { "regression" })
-	public void afterTest(ITestResult test) {
+	public void afterTest(ITestResult test) throws ClientProtocolException, IOException {
 		endSauceTest(test);
 	}
 }
