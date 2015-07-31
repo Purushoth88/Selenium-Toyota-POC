@@ -70,7 +70,7 @@ public class TestEnvironment {
 	private String deviceID = "";
 	private String status = "";
 	private String comment = "";
-	private String mustardIp = "http://10.238.242.85:3000/projects/3/results";
+	private String mustardIp = "http://10.238.242.85:3000/projects/4/results";
 
 	/*
 	 * WebDriver Fields
@@ -558,6 +558,8 @@ public class TestEnvironment {
 		} else {
 			updates.put("passed", true);
 			status = "pass";
+			//Uncomment the below line to only take screenshots on failure
+			screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
 		}
 		
 		String fullTestName = this.testName;
