@@ -76,7 +76,7 @@ public class TestReporter {
 		try {
 			Assert.assertTrue(condition, description);
 		} catch (AssertionError failure) {
-			logFailure("Assert True - " + description);
+			logFailure("<font size = 2 color=\"red\"><b><u>Assert True - " + description + "</b></u></font><br />");
 			if (getPrintToConsole())
 				System.out.println(getTimestamp() + "Assert True - " + trimHtml(description));
 			Assert.fail(description);
@@ -91,7 +91,7 @@ public class TestReporter {
 		try {
 			Assert.assertFalse(condition, description);
 		} catch (AssertionError failure) {
-			logFailure("Assert False - " + description);
+			logFailure("<font size = 2 color=\"red\"><b><u>Assert False - " + description + "</b></u></font><br />");
 			if (getPrintToConsole())
 				System.out.println(getTimestamp() + "Assert False - " + trimHtml(description));
 			Assert.fail(description);
@@ -106,7 +106,7 @@ public class TestReporter {
 		try {
 			Assert.assertEquals(value1, value2, description);
 		} catch (AssertionError failure) {
-			logFailure("Assert Equals - " + description);
+			logFailure("<font size = 2 color=\"red\"><b><u>Assert Equals - " + description + "</b></u></font><br />");
 			if (getPrintToConsole())
 				System.out.println(getTimestamp() + "Assert Equals - " + trimHtml(description));
 			Assert.fail(description);
@@ -121,7 +121,7 @@ public class TestReporter {
 		try {
 			Assert.assertNotEquals(value1, value2, description);
 		} catch (AssertionError failure) {
-			logFailure("Assert Not Equals - " + description);
+			logFailure("<font size = 2 color=\"red\"><b><u>Assert Not Equals - " + description + "</b></u></font><br />");
 			if (getPrintToConsole())
 				System.out.println(getTimestamp() + "Assert Not Equals - " + trimHtml(description));
 			Assert.fail(description);
@@ -136,7 +136,7 @@ public class TestReporter {
 		try {
 			Assert.assertTrue(value > 0);
 		} catch (AssertionError failure) {
-			logFailure("Assert Greater Than Zero - " + value);
+			logFailure("<font size = 2 color=\"red\"><b><u>Assert Greater Than Zero - " + value + "</b></u></font><br />");
 			if (getPrintToConsole())
 				System.out.println(
 						getTimestamp() + "Assert Greater Than Zero - Assert " + value + " is greater than zero");
@@ -160,7 +160,7 @@ public class TestReporter {
 		try {
 			Assert.assertNull(condition, description);
 		} catch (AssertionError failure) {
-			logFailure("Assert Null - " + description);
+			logFailure("<font size = 2 color=\"red\"><b><u>Assert Null - " + description + "</b></u></font><br />");
 			if (getPrintToConsole())
 				System.out.println(getTimestamp() + "Assert Null - " + trimHtml(description));
 			Assert.fail(description);
@@ -175,7 +175,7 @@ public class TestReporter {
 		try {
 			Assert.assertNotNull(condition, description);
 		} catch (AssertionError failure) {
-			logFailure("Assert Not Null - " + description);
+			logFailure("<font size = 2 color=\"red\"><b><u>Assert Not Null - " + description + "</b></u></font><br />");
 			if (getPrintToConsole())
 				System.out.println(getTimestamp() + "Assert Not Null - " + trimHtml(description));
 			Assert.fail(description);
