@@ -88,12 +88,13 @@ public class TestEnvironment {
 	 * URL and Credential Repository Field
 	 */
 	protected ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
+	protected ResourceBundle userCredentialRepository = ResourceBundle.getBundle(Constants.USER_CREDENTIALS_PATH);
 	/*
 	 * Selenium Hub Field
 	 */
 	protected String seleniumHubURL = "http://"
-			+ Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")) + ":"
-			+ Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY"))
+			+ Base64Coder.decodeString(userCredentialRepository.getString("SAUCELABS_USERNAME")) + ":"
+			+ Base64Coder.decodeString(userCredentialRepository.getString("SAUCELABS_KEY"))
 			+ "@ondemand.saucelabs.com:80/wd/hub";
 	/*
 	 * Sauce Labs Fields
@@ -106,8 +107,8 @@ public class TestEnvironment {
 	 * {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
 	 */
 	protected SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
-			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
-			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+			Base64Coder.decodeString(userCredentialRepository.getString("SAUCELABS_USERNAME")),
+			Base64Coder.decodeString(userCredentialRepository.getString("SAUCELABS_KEY")));
 	/**
 	 * ThreadLocal variable which contains the {@link WebDriver} instance which
 	 * is used to perform browser interactions with.
@@ -121,8 +122,7 @@ public class TestEnvironment {
 	/*
 	 * Constructors for TestEnvironment class
 	 */
-	public TestEnvironment() {
-	};
+	public TestEnvironment() {};
 
 	public TestEnvironment(String application, String browserUnderTest, String browserVersion, String operatingSystem,
 			String setRunLocation, String environment) {
@@ -287,6 +287,9 @@ public class TestEnvironment {
 	 */
 	protected ResourceBundle getEnvironmentURLRepository() {
 		return appURLRepository;
+	}
+	protected ResourceBundle getUserCredentialRepository() {
+		return userCredentialRepository;
 	}
 
 	/**
@@ -567,7 +570,7 @@ public class TestEnvironment {
 		
 		mustardTestName = fullTestName.substring(0, index);
 		deviceID = fullTestName.substring(index + 1, fullTestName.length());
-		postTestToMustard();
+		//postTestToMustard();
 
 		JSONArray tags = new JSONArray();
 		String[] groups = test.getMethod().getGroups();
@@ -577,8 +580,8 @@ public class TestEnvironment {
 		updates.put("tags", tags);
 
 		if (runLocation.equalsIgnoreCase("remote")) {
-			SauceREST client = new SauceREST(Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
-					Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+			SauceREST client = new SauceREST(Base64Coder.decodeString(userCredentialRepository.getString("SAUCELABS_USERNAME")),
+					Base64Coder.decodeString(userCredentialRepository.getString("SAUCELABS_KEY")));
 			client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
 		}
 
