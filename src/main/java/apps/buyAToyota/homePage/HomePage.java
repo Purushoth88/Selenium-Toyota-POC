@@ -3,7 +3,6 @@ package apps.buyAToyota.homePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -406,7 +405,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			loopCounter++;
 			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The zipcode prompt was displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
+			TestReporter.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The zipcode prompt was displayed after ["+String.valueOf(loopCounter)+"] seconds.");
 		}while(isZipCodePromptDisplayed());
 		
 		Sleeper.sleep(2000);
@@ -430,7 +429,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
 			loopCounter++;
-			Assert.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The zip code prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
+			TestReporter.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The zip code prompt was not displayed after ["+String.valueOf(loopCounter)+"] seconds.");
 			
 			try{
 				attributeText = eleZipModalPrompt.getAttribute("aria-hidden");
@@ -499,7 +498,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			loopCounter++;
 			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The Zip Code Prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the "+linkName+" link");
+			TestReporter.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The Zip Code Prompt was not displayed after ["+String.valueOf(loopCounter)+"] seconds after clicking the "+linkName+" link");
 		}while(isZipCodePromptHidden());
 	}
 	
@@ -540,7 +539,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			loopCounter++;
 			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The " + linkName + " dropdown was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the " + linkName + " link.");
+			TestReporter.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The " + linkName + " dropdown was not displayed after ["+String.valueOf(loopCounter)+"] seconds after clicking the " + linkName + " link.");
 		}while(isDropdownVisible(dropdown));
 	}
 }

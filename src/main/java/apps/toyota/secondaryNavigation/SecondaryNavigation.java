@@ -5,7 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
+//import org.testng.Assert;
 
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -154,8 +154,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been reached
-			Assert.assertEquals(loopCounter != timeout, true,
-					"The Select Vehicle dropdown did not open after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertEquals(loopCounter != timeout, true,
+					"The Select Vehicle dropdown did not open after [" + String.valueOf(loopCounter) + "] seconds.");
 		} while (!btnSelectVehicle.getAttribute("class").contains("open"));
 	}
 
@@ -183,8 +183,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been reached
-			Assert.assertEquals(loopCounter != timeout, true,
-					"The Select Vehicle dropdown was not closed after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertEquals(loopCounter != timeout, true,
+					"The Select Vehicle dropdown was not closed after [" + String.valueOf(loopCounter) + "] seconds.");
 		} while (btnSelectVehicle.getAttribute("class").contains("open"));
 	}
 
@@ -212,8 +212,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been reached
-			Assert.assertEquals(loopCounter != timeout, true,
-					"The Shopping Tools dropdown did not open after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertEquals(loopCounter != timeout, true,
+					"The Shopping Tools dropdown did not open after [" + String.valueOf(loopCounter) + "] seconds.");
 		} while (!btnShoppingTools.getAttribute("class").contains("open"));
 	}
 
@@ -241,8 +241,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been reached
-			Assert.assertEquals(loopCounter != timeout, true,
-					"The Shopping Tools dropdown was not closed after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertEquals(loopCounter != timeout, true,
+					"The Shopping Tools dropdown was not closed after [" + String.valueOf(loopCounter) + "] seconds.");
 		} while (btnShoppingTools.getAttribute("class").contains("open"));
 	}
 
@@ -291,8 +291,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been reached
-			Assert.assertNotEquals(loopCounter, timeout, "The 'Find Your Toyota Dealer' page was not loaded after ["
-					+ String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertNotEquals(loopCounter, timeout, "The 'Find Your Toyota Dealer' page was not loaded after ["
+					+ String.valueOf(loopCounter) + "] seconds.");
 			list2 = getDriver().findElements(By.tagName("a"));
 		} while (list2.size() == list.size());
 	}
@@ -333,8 +333,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been reached
-			Assert.assertNotEquals(loopCounter, timeout,
-					"The 'Build Your Toyota' page was not loaded after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertNotEquals(loopCounter, timeout,
+					"The 'Build Your Toyota' page was not loaded after [" + String.valueOf(loopCounter) + "] seconds.");
 			// Grab the number of links on the current page for comparison
 			list2 = getDriver().findElements(By.tagName("a"));
 		} while (list2.size() == list.size());
@@ -378,8 +378,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been rea
-			Assert.assertNotEquals(loopCounter, timeout,
-					"The 'Local Specials' page was not loaded after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertNotEquals(loopCounter, timeout,
+					"The 'Local Specials' page was not loaded after [" + String.valueOf(loopCounter) + "] seconds.");
 			// Grab the number of links on the current page for comparison
 			list2 = getDriver().findElements(By.tagName("a"));
 		} while (list2.size() == list.size());
