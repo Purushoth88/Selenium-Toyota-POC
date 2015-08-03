@@ -5,13 +5,13 @@
 		<listener class-name="com.orasi.utils.NewScreenshot"/>
 	</listeners>
 	<parameter name="browserUnderTest" value="iexplore" />
-	<parameter name="environment" value="" />
+	<parameter name="environment" value="prod" />
 	<parameter name="runLocation" value="remote" />
 	<parameter name="browserVersion" value="8" />
 	<parameter name="operatingSystem" value="Windows 7" />
 
 <!-- 	<parameter name="browserUnderTest" value="chrome" />
-	<parameter name="environment" value="" />
+	<parameter name="environment" value="prod" />
 	<parameter name="runLocation" value="local" />
 	<parameter name="browserVersion" value="" />
 	<parameter name="operatingSystem" value="windows" /> -->

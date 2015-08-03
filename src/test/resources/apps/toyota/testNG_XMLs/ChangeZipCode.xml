@@ -3,7 +3,7 @@
 <suite name="ChangeZipCode" parallel="false">
 	<test name="ChangeZipCode">
 		<parameter name="browserUnderTest" value="safari" />
-		<parameter name="environment" value="" />
+		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="remote" />
 		<parameter name="browserVersion" value="8" />
 		<parameter name="operatingSystem" value="MAC OS X 10.10" />
