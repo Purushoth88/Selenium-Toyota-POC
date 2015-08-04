@@ -85,10 +85,12 @@ public class ChangeZipCode extends TestEnvironment {
 		testStart(testName);
 
 		// Ensure the home page is loaded
-		TestReporter.logScenario(testScenario);
 		TestReporter.assertTrue(pageLoaded().isDomComplete(), "Verify Homepage is displayed");
+		// Report the test scenario
+		TestReporter.logScenario(testScenario);
 
-		// Change the zipcode
+		// Test the functionality to change the zip code
+		TestReporter.logStep("Test the Functionality to Change the Zip Code");
 		MainNavigation mainNav = new MainNavigation(this);
 		TestReporter.assertTrue(pageLoaded().isDomComplete(), "Verify Navigation Bar is loaded");
 		mainNav.changeZipCodes(zipCode);

@@ -62,7 +62,11 @@ public class TestNavBarNavigations extends TestEnvironment {
 
 		// Ensure the home page is loaded
 		TestReporter.assertTrue(pageLoaded().isDomComplete(), "Load the Home Page");
+		// Report the test scenario
 		TestReporter.logScenario("Test the Navigation Bar Functionality");
+		
+		// Test the navigation bar functionality
+		TestReporter.logStep("Test the Navigation Bar Functionality");
 		HomePage homePage = new HomePage(this);
 		homePage.testNavBarNavigation();
 	}

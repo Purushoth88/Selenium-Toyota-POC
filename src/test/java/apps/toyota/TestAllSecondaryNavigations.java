@@ -45,7 +45,6 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 		setOperatingSystem(operatingSystem);
 		setRunLocation(runLocation);
 		setTestEnvironment(environment);
-//		System.out.println("BUILD NUMBER:   " + System.getProperty("build_parameter"));
 	}
 
 	// *****
@@ -73,7 +72,11 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 
 		// Ensure the home page is loaded
 		TestReporter.assertTrue(pageLoaded().isDomComplete(), "Load the Home Page");
+		// Report the test scenario
 		TestReporter.log("Test the Secondary Navigation Bar Functionality");
+		
+		// Test the secondary navigation bar functionality
+		TestReporter.logStep("Test the Secondary Navigation Bar Functionality");
 		SecondaryNavigation secNav = new SecondaryNavigation(this);
 		secNav.navigateAllSecondaryNavigationTabs();
 	}
