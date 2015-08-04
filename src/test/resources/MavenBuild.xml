@@ -52,7 +52,7 @@
 
 
 	<!-- MAC OS X 10.9 -->
-	<test name="Mac_OS_X_10_9_Safari_7_toyota">
+<!-- 	<test name="Mac_OS_X_10_9_Safari_7_toyota">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="remote" />
@@ -88,7 +88,7 @@
 			<package name="apps.buyAToyota">
 			</package>
 		</packages>
-	</test>
+	</test> -->
 	
 	
 	
