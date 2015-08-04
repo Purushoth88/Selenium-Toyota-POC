@@ -22,7 +22,13 @@
 			</package>
 		</packages>
 	</test>
-<!-- 	<test name="Mac_OS_X_10_10_Safari_8_buyAToyota">
+	
+	
+	
+	
+	
+	
+	<test name="Mac_OS_X_10_10_Safari_8_buyAToyota">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="remote" />
@@ -37,7 +43,13 @@
 			<package name="apps.buyAToyota">
 			</package>
 		</packages>
-	</test> -->
+	</test>
+
+
+
+
+
+
 
 	<!-- MAC OS X 10.9 -->
 	<test name="Mac_OS_X_10_9_Safari_7_toyota">
@@ -56,7 +68,12 @@
 			</package>
 		</packages>
 	</test>
-<!-- 	<test name="Mac_OS_X_10_9_Safari_7_buyAToyota">
+	
+	
+	
+	
+	
+	<test name="Mac_OS_X_10_9_Safari_7_buyAToyota">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="remote" />
@@ -71,7 +88,12 @@
 			<package name="apps.buyAToyota">
 			</package>
 		</packages>
-	</test> -->
+	</test>
+	
+	
+	
+	
+	
 
 	<test name="Mac_OS_X_10_9_Chrome_toyota">
 		<parameter name="browserUnderTest" value="chrome" />
@@ -206,7 +228,12 @@
 		</packages>
 	</test>
 
-<!-- 	<test name="Windows_7_IE_8_toyota">
+
+
+
+
+
+	<test name="Windows_7_IE_8_toyota">
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="remote" />
@@ -221,8 +248,8 @@
 			<package name="apps.toyota">
 			</package>
 		</packages>
-	</test> -->
-<!-- 	<test name="Windows_7_IE_8_buyAToyota">
+	</test>
+	<test name="Windows_7_IE_8_buyAToyota">
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="remote" />
@@ -237,7 +264,12 @@
 			<package name="apps.buyAToyota">
 			</package>
 		</packages>
-	</test> -->
+	</test>
+	
+	
+	
+	
+	
 
 	<test name="Windows_7_IE_11_toyota">
 		<parameter name="browserUnderTest" value="iexplore" />
