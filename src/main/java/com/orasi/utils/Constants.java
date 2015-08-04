@@ -82,5 +82,10 @@ public class Constants {
 	// https://docs.saucelabs.com/reference/troubleshooting-common-error-messages/#test-did-not-see-a-new-command-for-90-seconds-timing-out
 	final static public int IDLE_TIMEOUT = 30;
 
-	
+	//*************************
+	//*************************
+	//**  MUSTARD CONSTANTS  **
+	//*************************
+	//*************************
+	final static public boolean REPORT_TO_MUSTARD = false;
 }
