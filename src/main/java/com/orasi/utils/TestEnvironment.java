@@ -568,9 +568,11 @@ public class TestEnvironment {
 		String fullTestName = this.testName;
 		int index = fullTestName.indexOf("_");
 		
-		mustardTestName = fullTestName.substring(0, index);
-		deviceID = fullTestName.substring(index + 1, fullTestName.length());
-		//postTestToMustard();
+		if(Constants.REPORT_TO_MUSTARD){
+			mustardTestName = fullTestName.substring(0, index);
+			deviceID = fullTestName.substring(index + 1, fullTestName.length());
+			postTestToMustard();
+		}
 
 		JSONArray tags = new JSONArray();
 		String[] groups = test.getMethod().getGroups();
