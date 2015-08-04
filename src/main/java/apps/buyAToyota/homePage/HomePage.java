@@ -203,8 +203,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		{
 			ensureZipCodePromptHiddenOnStartup();	
 		}
-//		testFindOffersLink();
-//		testFindADealerLink();
+		testFindOffersLink();
+		testFindADealerLink();
 		testFindVehiclesLink();
 		testToolsLink();
 		testInventoryLink();
