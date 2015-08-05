@@ -1,7 +1,7 @@
 package com.orasi.core.interfaces.impl;
 
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.time.StopWatch;
 import org.openqa.selenium.By;
@@ -24,10 +24,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.orasi.core.interfaces.Element;
 import com.orasi.utils.Constants;
-import com.orasi.utils.Randomness;
 import com.orasi.utils.TestReporter;
-import com.orasi.utils.date.DateTimeConversion;
-import com.orasi.utils.date.SimpleDate;
 
 /**
  * An implementation of the Element interface. Delegates its work to an
@@ -40,8 +37,6 @@ public class ElementImpl implements Element {
 	private java.util.Date dateAfter = new Date();
 	private String message = "";
 	private StopWatch stopwatch = new StopWatch();
-	private long stopwatchStart;
-	private long stopwatchStop;
 
 	public ElementImpl(final WebElement element) {
 		this.element = element;
@@ -268,7 +263,9 @@ public class ElementImpl implements Element {
 				+ getElementLocatorInfo()
 				+ "</b> ] to be <b>PRESENT</b> in DOM within [ " + timeout
 				+ " ] seconds.</i>");
-
+		
+		stopwatch = new StopWatch();
+		stopwatch.start();
 		for (double seconds = 0; seconds < loopTimeout; seconds += 1) {
 
 			if (webElementPresent(driver, locator)) {
@@ -277,23 +274,22 @@ public class ElementImpl implements Element {
 			}
 			try {
 				Thread.sleep(100);
-
-			} catch (Exception e) {
-			}
+			} catch (Exception e) {}
 		}
-
+		stopwatch.stop();
+		
+		message = "<i>Element [<b>@FindBy: "
+				+ getElementLocatorInfo()
+				+ " </b>] is <<**>><b>PRESENT</b> on the page after [ "
+				+ String.valueOf((stopwatch.getTime()) / 1000.0)
+				+ " ] seconds.</i>";
 		if (!found && returnError) {
-			dateAfter = new java.util.Date();
-			TestReporter.interfaceLog("<i>Element [<b>@FindBy: "
-					+ getElementLocatorInfo()
-					+ " </b>] is not <b>PRESENT</b> on the page after [ "
-					+ (dateAfter.getTime() - date.getTime()) / 1000.0
-					+ " ] seconds.</i>");
-			throw new RuntimeException("Element [ @FindBy: "
-					+ getElementLocatorInfo()
-					+ " ] is not PRESENT on the page after [ "
-					+ (dateAfter.getTime() - date.getTime()) / 1000.0
-					+ " ] seconds.");
+			message = message.replace("<<**>>", "not ");
+			TestReporter.logFailure(message);
+			throw new RuntimeException(message);
+		}else{
+			message = message.replace("<<**>>", "");
+			TestReporter.interfaceLog(message);
 		}
 		return found;
 	}
@@ -357,15 +353,19 @@ public class ElementImpl implements Element {
 			} catch (Exception e) {}
 		}
 		stopwatch.stop();
-
+		
+		message = "Element [ @FindBy: "
+				+ getElementLocatorInfo()
+				+ " ] is <<**>>VISIBLE on the page after [ "
+				+ String.valueOf((stopwatch.getTime()/1000.0))
+				+ " ] seconds.";
 		if (!found && returnError) {
-			message = "Element [ @FindBy: "
-					+ getElementLocatorInfo()
-					+ " ] is not VISIBLE on the page after [ "
-					+ (stopwatch.getTime()/1000.0)
-					+ " ] seconds.";
+			message = message.replace("<<**>>", "not ");
 			TestReporter.logFailure(message);
 			throw new RuntimeException(message);
+		}else{
+			message = message.replace("<<**>>", " ");
+			TestReporter.interfaceLog(message);
 		}
 		return found;
 	}
@@ -414,6 +414,8 @@ public class ElementImpl implements Element {
 				+ "</b> ] to be <b>HIDDEN</b> within [ <b>" + timeout
 				+ "</b> ] seconds.</i>");
 
+		stopwatch = new StopWatch();
+		stopwatch.start();
 		for (double seconds = 0; seconds < loopTimeout; seconds += 1) {
 
 			if (!webElementVisible(driver, element)) {
@@ -422,23 +424,22 @@ public class ElementImpl implements Element {
 			}
 			try {
 				Thread.sleep(100);
-			} catch (Exception e) {
-			}
-
+			} catch (Exception e) {}
 		}
+		stopwatch.stop();
 
+		message = "<i>Element [<b>@FindBy: "
+				+ getElementLocatorInfo()
+				+ " </b>] is <<**>><b>HIDDEN</b> on the page after [ "
+				+ (stopwatch.getTime()) / 1000.0
+				+ " ] seconds.</i>";
 		if (!found && returnError) {
-			dateAfter = new java.util.Date();
-			TestReporter.interfaceLog("<i>Element [<b>@FindBy: "
-					+ getElementLocatorInfo()
-					+ " </b>] is not <b>HIDDEN</b> on the page after [ "
-					+ (dateAfter.getTime() - date.getTime()) / 1000.0
-					+ " ] seconds.</i>");
-			throw new RuntimeException("Element [ @FindBy: "
-					+ getElementLocatorInfo()
-					+ " ] is not HIDDEN on the page after [ "
-					+ (dateAfter.getTime() - date.getTime()) / 1000.0
-					+ " ] seconds.");
+			message = message.replace("<<**>>", "not ");
+			TestReporter.logFailure(message);
+			throw new RuntimeException(message);
+		}else{
+			message = message.replace("<<**>>", " ");
+			TestReporter.logFailure(message);
 		}
 		return found;
 	}
@@ -491,6 +492,8 @@ public class ElementImpl implements Element {
 				+ "</b> ] to be <b>ENABLED</b> within [ <b>" + timeout
 				+ "</b> ] seconds.</i>");
 
+		stopwatch = new StopWatch();
+		stopwatch.start();
 		for (double seconds = 0; seconds < loopTimeout; seconds += 1) {
 
 			if (webElementEnabled(driver, element)) {
@@ -499,23 +502,22 @@ public class ElementImpl implements Element {
 			}
 			try {
 				Thread.sleep(100);
-			} catch (Exception e) {
-			}
-
+			} catch (Exception e) {}
 		}
-
+		stopwatch.stop();
+		
+		message = "<i>Element [<b>@FindBy: "
+				+ getElementLocatorInfo()
+				+ " </b>] is <<**>><b>ENABLED</b> on the page after [ "
+				+ String.valueOf((stopwatch.getTime()) / 1000.0)
+				+ " ] seconds.</i>";
 		if (!found && returnError) {
-			dateAfter = new java.util.Date();
-			TestReporter.interfaceLog("<i>Element [<b>@FindBy: "
-					+ getElementLocatorInfo()
-					+ " </b>] is not <b>ENABLED</b> on the page after [ "
-					+ (dateAfter.getTime() - date.getTime()) / 1000.0
-					+ " ] seconds.</i>");
-			throw new RuntimeException("Element [ @FindBy: "
-					+ getElementLocatorInfo()
-					+ " ] is not ENABLED on the page after [ "
-					+ (dateAfter.getTime() - date.getTime()) / 1000.0
-					+ " ] seconds.");
+			message = message.replace("<<**>>", "not ");
+			TestReporter.logFailure(message);
+			throw new RuntimeException(message);
+		}else{
+			message = message.replace("<<**>>", " ");
+			TestReporter.logFailure(message);
 		}
 		return found;
 	}
@@ -569,6 +571,8 @@ public class ElementImpl implements Element {
 				+ "</b> ] to be <b>DISABLED</b> within [ <b>" + timeout
 				+ "</b> ] seconds.</i>");
 
+		stopwatch = new StopWatch();
+		stopwatch.start();
 		for (double seconds = 0; seconds < loopTimeout; seconds += 1) {
 
 			if (!webElementEnabled(driver, element)) {
@@ -577,23 +581,22 @@ public class ElementImpl implements Element {
 			}
 			try {
 				Thread.sleep(100);
-			} catch (Exception e) {
-			}
-
+			} catch (Exception e) {}
 		}
-
+		stopwatch.stop();
+		
+		message = "<i>Element [<b>@FindBy: "
+				+ getElementLocatorInfo()
+				+ " </b>] is <<**>><b>DISABLED</b> on the page after [ "
+				+ String.valueOf((stopwatch.getTime()) / 1000.0)
+				+ " ] seconds.</i>";
 		if (!found && returnError) {
-			dateAfter = new java.util.Date();
-			TestReporter.interfaceLog("<i>Element [<b>@FindBy: "
-					+ getElementLocatorInfo()
-					+ " </b>] is not <b>DISABLED</b> on the page after [ "
-					+ (dateAfter.getTime() - date.getTime()) / 1000.0
-					+ " ] seconds.</i>");
-			throw new RuntimeException("Element [ @FindBy: "
-					+ getElementLocatorInfo()
-					+ " ] is not DISABLED on the page after [ "
-					+ (dateAfter.getTime() - date.getTime()) / 1000.0
-					+ " ] seconds.");
+			message = message.replace("<<**>>", "not ");
+			TestReporter.logFailure(message);
+			throw new RuntimeException(message);
+		}else{
+			message = message.replace("<<**>>", " ");
+			TestReporter.logFailure(message);			
 		}
 		return found;
 	}
@@ -647,6 +650,8 @@ public class ElementImpl implements Element {
 				+ "</b> ] to be displayed within [ <b>" + timeout
 				+ "</b> ] seconds.</i>");
 
+		stopwatch = new StopWatch();
+		stopwatch.start();
 		for (double seconds = 0; seconds < loopTimeout; seconds += 1) {
 
 			if (webElementTextPresent(driver, element, text)) {
@@ -655,23 +660,22 @@ public class ElementImpl implements Element {
 			}
 			try {
 				Thread.sleep(100);
-			} catch (Exception e) {
-			}
-
+			} catch (Exception e) {}
 		}
+		stopwatch.stop();
 
+		message = "<i>Element [<b>@FindBy: "
+				+ getElementLocatorInfo()
+				+ " </b>] did <<**>>contain the text [ " + text
+				+ " ] after [ " + String.valueOf((stopwatch.getTime())
+				/ 1000.0) + " ] seconds.</i>";
 		if (!found && returnError) {
-			dateAfter = new java.util.Date();
-			TestReporter.interfaceLog("<i>Element [<b>@FindBy: "
-					+ getElementLocatorInfo()
-					+ " </b>] did not contain the text [ " + text
-					+ " ] after [ " + (dateAfter.getTime() - date.getTime())
-					/ 1000.0 + " ] seconds.</i>");
-			throw new RuntimeException("Element [ @FindBy: "
-					+ getElementLocatorInfo()
-					+ " ] did not contain the text [ " + text + " ] after [ "
-					+ (dateAfter.getTime() - date.getTime()) / 1000.0
-					+ " ] seconds.");
+			message = message.replace("<<**>>", "not ");
+			TestReporter.logFailure(message);
+			throw new RuntimeException(message);
+		}else{
+			message = message.replace("<<**>>", " ");
+			TestReporter.logFailure(message);
 		}
 		return found;
 	}
@@ -746,7 +750,6 @@ public class ElementImpl implements Element {
 
 		try {
 			return wait.until(ExpectedConditions.elementToBeClickable(element)) != null;
-			// return element.isEnabled();
 		} catch (NoSuchElementException | ClassCastException
 				| StaleElementReferenceException | TimeoutException e) {
 			return false;
