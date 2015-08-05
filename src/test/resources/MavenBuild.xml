@@ -22,13 +22,15 @@
 			</package>
 		</packages>
 	</test>
-	
-	
-	
-	
-	
-	
-	<test name="Mac_OS_X_10_10_Safari_8_buyAToyota">
+
+
+
+
+
+	<!-- NOTE: Safari 8 does not support Selenium Actions which are required 
+		for simulating mouse actions. Therefore, testing all navigation bar functionalities 
+		is invalid as hovering to trigger a dropdown is required -->
+<!-- 	<test name="Mac_OS_X_10_10_Safari_8_buyAToyota">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="remote" />
@@ -43,7 +45,7 @@
 			<package name="apps.buyAToyota">
 			</package>
 		</packages>
-	</test>
+	</test> -->
 
 
 
@@ -52,7 +54,7 @@
 
 
 	<!-- MAC OS X 10.9 -->
-<!-- 	<test name="Mac_OS_X_10_9_Safari_7_toyota">
+	<test name="Mac_OS_X_10_9_Safari_7_toyota">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="remote" />
@@ -72,8 +74,10 @@
 	
 	
 	
-	
-	<test name="Mac_OS_X_10_9_Safari_7_buyAToyota">
+	<!-- NOTE: Safari 8 does not support Selenium Actions which are required 
+		for simulating mouse actions. Therefore, testing all navigation bar functionalities 
+		is invalid as hovering to trigger a dropdown is required -->	
+<!-- 	<test name="Mac_OS_X_10_9_Safari_7_buyAToyota">
 		<parameter name="browserUnderTest" value="safari" />
 		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="remote" />
@@ -232,8 +236,9 @@
 
 
 
-
-	<test name="Windows_7_IE_8_toyota">
+	<!-- NOTE: The zipcode popup does not render in IE8, so testing the ability 
+		to change the zipcode is not valid -->
+<!-- 	<test name="Windows_7_IE_8_toyota">
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="remote" />
@@ -248,7 +253,22 @@
 			<package name="apps.toyota">
 			</package>
 		</packages>
+	</test> -->
+	<test name="Windows_7_IE_8_toyota">
+		<parameter name="browserUnderTest" value="iexplore" />
+		<parameter name="environment" value="prod" />
+		<parameter name="runLocation" value="remote" />
+		<parameter name="browserVersion" value="8" />
+		<parameter name="operatingSystem" value="Windows 7" />
+		<classes>
+			<class name="apps.toyota.TestAllSecondaryNavigations" />
+		</classes>
 	</test>
+	
+	
+	
+	
+	
 	<test name="Windows_7_IE_8_buyAToyota">
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="prod" />
@@ -265,12 +285,6 @@
 			</package>
 		</packages>
 	</test>
-	
-	
-	
-	
-	
-
 	<test name="Windows_7_IE_11_toyota">
 		<parameter name="browserUnderTest" value="iexplore" />
 		<parameter name="environment" value="prod" />
