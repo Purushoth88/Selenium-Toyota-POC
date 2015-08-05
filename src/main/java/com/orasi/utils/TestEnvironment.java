@@ -520,6 +520,10 @@ public class TestEnvironment {
 	public void setCommandTimeout() {
 		commandTimeout = String.valueOf(Constants.COMMAND_TIMEOUT);
 	}
+	
+	public void setCommandTimeout(String timeout) {
+		commandTimeout = timeout;
+	}
 
 	public String getCommandTimeout() {
 		return commandTimeout;
@@ -530,6 +534,10 @@ public class TestEnvironment {
 	 */
 	public void setIdleTimeout() {
 		idleTimeout = String.valueOf(Constants.IDLE_TIMEOUT);
+	}
+	
+	public void setIdleTimeout(String timeout) {
+		idleTimeout = timeout;
 	}
 
 	public String getIdleTimeout() {
