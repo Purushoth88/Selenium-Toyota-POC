@@ -1,5 +1,7 @@
 package apps.toyota.mainNavigation;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 
@@ -10,6 +12,7 @@ import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Textbox;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
+import com.orasi.utils.Constants;
 import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
@@ -139,12 +142,17 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 			zipCode = String.valueOf(intZipCode);
 		}
 
-		// If the zipcode is different, enter the zipcode to be used for the
-		// test
-		clickYourLocation();
-		// Ensure the zip code textbox is visible
-		TestReporter.assertEquals(txtZipCode.syncVisible(driver), true, "The zipcode textbox is not visible.");
-
+		if(getOperatingSystem().equalsIgnoreCase("Windows 7") && 
+				getBrowserUnderTest().equalsIgnoreCase("iexplore") && 
+				getBrowserVersion().equalsIgnoreCase("8")){
+			TestReporter.log("NOT CLICKING YOUR LOCATION");
+		}else{
+			clickYourLocation();
+			TestReporter.log("CLICKING YOUR LOCATION");
+		}
+		
+		TestReporter.assertEquals(txtZipCode.syncVisible(driver, 4, true), true, "The zipcode textbox is not visible.");
+		
 		// Enter the zip code and ensure the value remains in the textbox
 		loopCounter = 0;
 		do {
