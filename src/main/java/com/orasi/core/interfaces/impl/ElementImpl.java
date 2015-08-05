@@ -1,7 +1,9 @@
 package com.orasi.core.interfaces.impl;
 
 import java.util.List;
+import java.util.Date;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByClassName;
 import org.openqa.selenium.Dimension;
@@ -22,7 +24,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.orasi.core.interfaces.Element;
 import com.orasi.utils.Constants;
+import com.orasi.utils.Randomness;
 import com.orasi.utils.TestReporter;
+import com.orasi.utils.date.DateTimeConversion;
+import com.orasi.utils.date.SimpleDate;
 
 /**
  * An implementation of the Element interface. Delegates its work to an
@@ -31,8 +36,12 @@ import com.orasi.utils.TestReporter;
 public class ElementImpl implements Element {
 
 	protected WebElement element;
-	private java.util.Date date = new java.util.Date();
-	private java.util.Date dateAfter = new java.util.Date();
+	private java.util.Date date = new Date();
+	private java.util.Date dateAfter = new Date();
+	private String message = "";
+	private StopWatch stopwatch = new StopWatch();
+	private long stopwatchStart;
+	private long stopwatchStop;
 
 	public ElementImpl(final WebElement element) {
 		this.element = element;
@@ -335,7 +344,9 @@ public class ElementImpl implements Element {
 				+ "</b> ] to be <b>VISIBLE<b> within [ " + timeout
 				+ " ] seconds.</i>");
 
-		for (double seconds = 0; seconds < loopTimeout; seconds += 1) {
+		stopwatch = new StopWatch();
+		stopwatch.start();
+		for (double seconds = 0; seconds <= loopTimeout; seconds += 1) {
 
 			if (webElementVisible(driver, element)) {
 				found = true;
@@ -343,22 +354,18 @@ public class ElementImpl implements Element {
 			}
 			try {
 				Thread.sleep(100);
-			} catch (Exception e) {
-			}
+			} catch (Exception e) {}
 		}
+		stopwatch.stop();
 
 		if (!found && returnError) {
-			dateAfter = new java.util.Date();
-			TestReporter.interfaceLog("<i>Element [<b>@FindBy: "
-					+ getElementLocatorInfo()
-					+ " </b>] is not <b>VISIBLE</b> on the page after [ "
-					+ (dateAfter.getTime() - date.getTime()) / 1000.0
-					+ " ] seconds.</i>");
-			throw new RuntimeException("Element [ @FindBy: "
+			message = "Element [ @FindBy: "
 					+ getElementLocatorInfo()
 					+ " ] is not VISIBLE on the page after [ "
-					+ (dateAfter.getTime() - date.getTime()) / 1000.0
-					+ " ] seconds.");
+					+ (stopwatch.getTime()/1000.0)
+					+ " ] seconds.";
+			TestReporter.logFailure(message);
+			throw new RuntimeException(message);
 		}
 		return found;
 	}
