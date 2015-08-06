@@ -2,13 +2,13 @@ package com.orasi.core.angular;
 
 import org.openqa.selenium.JavascriptExecutor;
 
-import com.orasi.utils.WebDriverSetup;
+import com.orasi.utils.TestEnvironment;
 
 /*
  * Original Code from https://github.com/paul-hammant/ngWebDriver
  */
 
-public class WaitForAngularRequestsToFinish extends WebDriverSetup {
+public class WaitForAngularRequestsToFinish extends TestEnvironment {
 
 	public static void waitForAngularRequestsToFinish(JavascriptExecutor driver) {
 		// if(!WebDriverSetup.browser.equalsIgnoreCase("IE")){
