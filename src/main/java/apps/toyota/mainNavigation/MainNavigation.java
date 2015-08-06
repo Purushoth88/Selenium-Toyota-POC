@@ -66,16 +66,10 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 	// ** Build page area **
 	// *********************
 	/**
-	 * 
 	 * @summary Constructor to initialize the page
 	 * @version Created 03/01/2015
 	 * @author Waightstill W Avery
-	 * @param te
-	 *            - TestEnvironment instance containing the WebDriver to be used
-	 *            for the page class
-	 * @throws NA
-	 * @return NA
-	 * 
+	 * @param te - TestEnvironment instance containing the WebDriver to be used for the page class
 	 */
 	public MainNavigation(TestEnvironment te) {
 		super(te);
@@ -87,11 +81,8 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 	// ***********************************
 
 	/**
-	 * @summary: clicks on the locations link to allow a new zipcode to be
-	 *           entered
+	 * @summary: clicks on the locations link to allow a new zipcode to be entered
 	 * @author: Waightstill W Avery
-	 * @param: NA
-	 * @return: NA
 	 */
 	@Step("Click 'Your Location'")
 	private void clickYourLocation() {
@@ -122,9 +113,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 	 *           method will click the location icon, enter the new zipcode and
 	 *           verify the change is reflected in the UI
 	 * @author: Waightstill W Avery
-	 * @param: zipCode
-	 *             - String, value to be entered as the new zipcode to use
-	 * @return: NA
+	 * @param: zipCode - String, value to be entered as the new zipcode to use
 	 */
 	@Step("Change Zip Code to \"{0}\"")
 	public void changeZipCodes(@Parameter String zipCode) {
@@ -214,10 +203,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 	/**
 	 * @summary: verifies that the expected and actual zipcodes are equal
 	 * @author: Waightstill W Avery
-	 * @param: expectedZipCode
-	 *             - String, value of the zipcode that is expected to be
-	 *             reflected in the UI
-	 * @return: NA
+	 * @param: expectedZipCode - String, value of the zipcode that is expected to be reflected in the UI
 	 */
 	@Step("Verify the Zip Code is \"{0}\"")
 	private void verifyZipCodeValue(@Parameter String expectedZipCode) {
@@ -228,8 +214,6 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 	/**
 	 * @summary: captures the zipcode that is currently displayed in the UI
 	 * @author: Waightstill W Avery
-	 * @param: NA
-	 * @return: NA
 	 */
 	@Step("Capture the Current Zip Code")
 	private String captureCurrentZipCode() {
