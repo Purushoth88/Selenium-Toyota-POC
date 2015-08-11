@@ -1,8 +1,9 @@
 package apps.toyota.mainNavigation;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 import ru.yandex.qatools.allure.annotations.Parameter;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -11,6 +12,7 @@ import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Textbox;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
+import com.orasi.utils.Constants;
 import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
@@ -64,16 +66,10 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 	// ** Build page area **
 	// *********************
 	/**
-	 * 
 	 * @summary Constructor to initialize the page
 	 * @version Created 03/01/2015
 	 * @author Waightstill W Avery
-	 * @param te
-	 *            - TestEnvironment instance containing the WebDriver to be used
-	 *            for the page class
-	 * @throws NA
-	 * @return NA
-	 * 
+	 * @param te - TestEnvironment instance containing the WebDriver to be used for the page class
 	 */
 	public MainNavigation(TestEnvironment te) {
 		super(te);
@@ -85,11 +81,8 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 	// ***********************************
 
 	/**
-	 * @summary: clicks on the locations link to allow a new zipcode to be
-	 *           entered
+	 * @summary: clicks on the locations link to allow a new zipcode to be entered
 	 * @author: Waightstill W Avery
-	 * @param: NA
-	 * @return: NA
 	 */
 	@Step("Click 'Your Location'")
 	private void clickYourLocation() {
@@ -110,8 +103,8 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout is not reached
-			Assert.assertNotEquals(loopCounter, timeout,
-					"The zipcode popup was not opened after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertNotEquals(loopCounter, timeout,
+					"The zipcode popup was not opened after [" + String.valueOf(loopCounter) + "] seconds.");
 		} while (!eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
 	}
 
@@ -120,9 +113,7 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 	 *           method will click the location icon, enter the new zipcode and
 	 *           verify the change is reflected in the UI
 	 * @author: Waightstill W Avery
-	 * @param: zipCode
-	 *             - String, value to be entered as the new zipcode to use
-	 * @return: NA
+	 * @param: zipCode - String, value to be entered as the new zipcode to use
 	 */
 	@Step("Change Zip Code to \"{0}\"")
 	public void changeZipCodes(@Parameter String zipCode) {
@@ -140,12 +131,17 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 			zipCode = String.valueOf(intZipCode);
 		}
 
-		// If the zipcode is different, enter the zipcode to be used for the
-		// test
-		clickYourLocation();
-		// Ensure the zip code textbox is visible
-		Assert.assertEquals(txtZipCode.syncVisible(driver), true, "The zipcode textbox is not visible.");
-
+		if(getOperatingSystem().equalsIgnoreCase("Windows 7") && 
+				getBrowserUnderTest().equalsIgnoreCase("iexplore") && 
+				getBrowserVersion().equalsIgnoreCase("8")){
+			TestReporter.log("NOT CLICKING YOUR LOCATION");
+		}else{
+			clickYourLocation();
+			TestReporter.log("CLICKING YOUR LOCATION");
+		}
+		
+		TestReporter.assertEquals(txtZipCode.syncVisible(driver, 4, true), true, "The zipcode textbox is not visible.");
+		
 		// Enter the zip code and ensure the value remains in the textbox
 		loopCounter = 0;
 		do {
@@ -161,8 +157,8 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout is not reached
-			Assert.assertNotEquals(loopCounter, timeout,
-					"The zipcode was not entered after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertNotEquals(loopCounter, timeout,
+					"The zipcode was not entered after [" + String.valueOf(loopCounter) + "] seconds.");
 		} while (!txtZipCode.getText().equalsIgnoreCase(zipCode));
 
 		// Send the enter key to effectively change the zip code
@@ -179,8 +175,8 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout is not reached
-			Assert.assertNotEquals(loopCounter, timeout,
-					"The zipcode popup was not closed after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertNotEquals(loopCounter, timeout,
+					"The zipcode popup was not closed after [" + String.valueOf(loopCounter) + "] seconds.");
 		} while (eleZipCodePopup.getAttribute("class").toLowerCase().contains("open"));
 
 		// Loop until the initial zip code has been changed on the page
@@ -194,8 +190,8 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout is not reached
-			Assert.assertNotEquals(loopCounter, timeout,
-					"The zipcode was found to not have changed within [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertNotEquals(loopCounter, timeout,
+					"The zipcode was found to not have changed within [" + String.valueOf(loopCounter) + "] seconds.");
 		} while (eleZipCode.getText().equalsIgnoreCase(initialZipCode));
 		// Capture the newly modified zipcode from the UI
 		this.modifiedZipCode = captureCurrentZipCode();
@@ -207,22 +203,17 @@ public class MainNavigation extends com.orasi.utils.TestEnvironment {
 	/**
 	 * @summary: verifies that the expected and actual zipcodes are equal
 	 * @author: Waightstill W Avery
-	 * @param: expectedZipCode
-	 *             - String, value of the zipcode that is expected to be
-	 *             reflected in the UI
-	 * @return: NA
+	 * @param: expectedZipCode - String, value of the zipcode that is expected to be reflected in the UI
 	 */
 	@Step("Verify the Zip Code is \"{0}\"")
 	private void verifyZipCodeValue(@Parameter String expectedZipCode) {
-		Assert.assertEquals(captureCurrentZipCode(), expectedZipCode, "The actual zipcode [" + captureCurrentZipCode()
+		TestReporter.assertEquals(captureCurrentZipCode(), expectedZipCode, "The actual zipcode [" + captureCurrentZipCode()
 				+ "] did not match the expected zip code [" + expectedZipCode + "].");
 	}
 
 	/**
 	 * @summary: captures the zipcode that is currently displayed in the UI
 	 * @author: Waightstill W Avery
-	 * @param: NA
-	 * @return: NA
 	 */
 	@Step("Capture the Current Zip Code")
 	private String captureCurrentZipCode() {

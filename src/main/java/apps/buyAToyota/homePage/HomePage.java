@@ -3,7 +3,6 @@ package apps.buyAToyota.homePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -197,6 +196,11 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	// *** HomePage Interactions ***
 	// *****************************
 	
+	/**
+	 * @summary - High-level method, intended to be called at the test level,
+	 *          which contains methods to test navigation bar functionality
+	 * @author - Waightstill W Avery
+	 */
 	public void testNavBarNavigation(){
 		if(!(getOperatingSystem().equalsIgnoreCase("windows 7") 
 				&& getBrowserUnderTest().equalsIgnoreCase("iexplore")
@@ -204,8 +208,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		{
 			ensureZipCodePromptHiddenOnStartup();	
 		}
-//		testFindOffersLink();
-//		testFindADealerLink();
+		testFindOffersLink();
+		testFindADealerLink();
 		testFindVehiclesLink();
 		testToolsLink();
 		testInventoryLink();
@@ -213,10 +217,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	/**
-	 * @param - N/A
-	 * @return - N/A
-	 * @author - Waightstill W Avery
 	 * @summary - Tests that, when the Find Offers link is clicked, that the Zip Code Prompt is displayed.
+	 * @author - Waightstill W Avery
 	 */
 	@Step("Open Zip Code Prompt Using Find Offers")
 	public void testFindOffersLink(){
@@ -226,10 +228,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	/**
-	 * @param - N/A
-	 * @return - N/A
-	 * @author - Waightstill W Avery
 	 * @summary - Tests that, when the Find A Dealer link is clicked, that the Zip Code Prompt is displayed.
+	 * @author - Waightstill W Avery
 	 */
 	@Step("Open Zip Code Prompt Using Find A Dealer")
 	public void testFindADealerLink(){
@@ -239,10 +239,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	/**
-	 * @param - N/A
-	 * @return - N/A
-	 * @author - Waightstill W Avery
 	 * @summary - Tests that, when the Find Vehicles link is clicked, that the Find Vehicles Dropdown is displayed.
+	 * @author - Waightstill W Avery
 	 */
 	@Step("Open Find Vehicles Dropdown")
 	public void testFindVehiclesLink(){
@@ -251,10 +249,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	/**
-	 * @param - N/A
-	 * @return - N/A
-	 * @author - Waightstill W Avery
 	 * @summary - Tests that, when the Tools link is clicked, that the Tools Dropdown is displayed.
+	 * @author - Waightstill W Avery
 	 */
 	@Step("Open Tools Dropdown")
 	public void testToolsLink(){
@@ -263,10 +259,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	/**
-	 * @param - N/A
-	 * @return - N/A
-	 * @author - Waightstill W Avery
 	 * @summary - Tests that, when the Inventory link is clicked, that the Zip Code Prompt is displayed.
+	 * @author - Waightstill W Avery
 	 */
 	@Step("Open Zip Code Prompt Using Inventory")
 	public void testInventoryLink(){
@@ -276,10 +270,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	/**
-	 * @param - N/A
-	 * @return - N/A
-	 * @author - Waightstill W Avery
 	 * @summary - Tests that, when the Inventory link is clicked, that the Zip Code Prompt is displayed.
+	 * @author - Waightstill W Avery
 	 */
 	@Step("Change Zip Code And Validate The New Value")
 	public void testChangeZipCode(){
@@ -291,7 +283,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	/**
-	 * @param - N/A
+	 * @param - previousZipCode - string of the previous zip code
 	 * @return - String - the new zip code as seen in the app
 	 * @author - Waightstill W Avery
 	 * @summary - Click the textbox and enter the zip code.
@@ -345,7 +337,6 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	/**
-	 * @param - N/A
 	 * @return - boolean - true if the prompt is displayed, false otherwise
 	 * @author - Waightstill W Avery
 	 * @summary - Verify the zip code prompt is displayed
@@ -360,7 +351,6 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	/**
-	 * @param - N/A
 	 * @return - boolean - true if the prompt is hidden, false otherwise
 	 * @author - Waightstill W Avery
 	 * @summary - Verify the zip code prompt is hidden
@@ -375,7 +365,6 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	/**
-	 * @param - N/A
 	 * @return - boolean - true is the prompt is displayed, false otherwise
 	 * @author - Waightstill W Avery
 	 * @summary - Verify the Find Vehicles dropdown is displayed
@@ -390,10 +379,8 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 	}
 	
 	/**
-	 * @param - N/A
-	 * @return - N/A
-	 * @author - Waightstill W Avery
 	 * @summary - Close the zip code prompt
+	 * @author - Waightstill W Avery
 	 */
 	@Step("Close Zip Code Prompt")
 	private void closeZipCodePrompt(){
@@ -406,17 +393,15 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			loopCounter++;
 			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The zipcode prompt was displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
+			TestReporter.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The zipcode prompt was displayed after ["+String.valueOf(loopCounter)+"] seconds.");
 		}while(isZipCodePromptDisplayed());
 		
 		Sleeper.sleep(2000);
 	}
 	
 	/**
-	 * @param - N/A
-	 * @return - N/A
-	 * @author - Waightstill W Avery
 	 * @summary - The zip code prompt is displayed when the app is launched. Wait until the prompt is hidden.
+	 * @author - Waightstill W Avery
 	 */
 	@Step("Validate That The Zip Code Prompt Is Hidden At Startup")
 	private void ensureZipCodePromptHiddenOnStartup(){
@@ -430,7 +415,7 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
 			loopCounter++;
-			Assert.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The zip code prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds.");
+			TestReporter.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The zip code prompt was not displayed after ["+String.valueOf(loopCounter)+"] seconds.");
 			
 			try{
 				attributeText = eleZipModalPrompt.getAttribute("aria-hidden");
@@ -445,6 +430,10 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		closeZipCodePrompt();
 	}
 	
+	/**
+	 * @summary - click the Find Offers link and ensure that the zip code dropdown is loaded
+	 * @author - Waightstill W Avery
+	 */
 	private void clickFindOffer(){
 		String linkName = "Find Offers";
 		initializePage(this.getClass());
@@ -453,6 +442,10 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
 	}
 	
+	/**
+	 * @summary - click Find A Dealer link and ensure that the zip code dropdown is loaded
+	 * @author - Waightstill W Avery
+	 */
 	private void clickFindADealer(){
 		String linkName = "Find A Dealer";
 		initializePage(this.getClass());
@@ -461,6 +454,10 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
 	}
 	
+	/**
+	 * @summary - click the Find Vehicles link and ensure that the dropdown is loaded
+	 * @author - Waightstill W Avery
+	 */
 	private void clickFindVehicles(){
 		String linkName = "Find Vehicles";
 		initializePage(this.getClass());
@@ -469,6 +466,10 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		TestReporter.assertTrue(true, "The Find Vehicles link was clicked successfully.");
 	}
 	
+	/**
+	 * @summary - click the Tools link and ensure that the dropdown is loaded
+	 * @author - Waightstill W Avery
+	 */
 	private void clickTools(){
 		String linkName = "Tools";
 		initializePage(this.getClass());
@@ -477,6 +478,10 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		TestReporter.assertTrue(true, "The Tools link was clicked successfully.");
 	}
 	
+	/**
+	 * @summary - click the Inventory link and ensure that the dropdown is loaded
+	 * @author - Waightstill W Avery
+	 */
 	private void clickInventory(){
 		String linkName = "Inventory";
 		initializePage(this.getClass());
@@ -485,6 +490,12 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 		TestReporter.assertTrue(true, "The " + linkName + " link was clicked successfully.");
 	}
 	
+	/**
+	 * @summary - click a link and determine if the zip code prompt is displayed
+	 * @author - Waightstill W Avery
+	 * @param link - link to click
+	 * @param linkName - name of the link to click, for reporting purposes
+	 */
 	private void ensureLinkLoadsZipCodePrompt(Element link, String linkName){
 		loopCounter = 0;
 		link.highlight(getDriver());
@@ -499,48 +510,36 @@ public class HomePage extends com.orasi.utils.TestEnvironment{
 			loopCounter++;
 			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The Zip Code Prompt was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the "+linkName+" link");
+			TestReporter.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The Zip Code Prompt was not displayed after ["+String.valueOf(loopCounter)+"] seconds after clicking the "+linkName+" link");
 		}while(isZipCodePromptHidden());
 	}
 	
-	private void ensureLinkLoadsDropdown(Element element, String linkName, Element dropdown){		
-		TestReporter.log("Highlight Element");
+	/**
+	 * @summary - click a link and determine if a dropdown is displayed
+	 * @author - Waightstill W Avery
+	 * @param element - link element to click
+	 * @param linkName - link to click
+	 * @param dropdown - dropdown
+	 */
+	private void ensureLinkLoadsDropdown(Element element, String linkName, Element dropdown){	
 		element.highlight(getDriver());
-		TestReporter.log("Element Highlighted");
-		Sleeper.sleep(1000);
-		
 		loopCounter = 0;
+		
+		//Click the link and ensure the dropdown is visible
 		do{
-			TestReporter.log("BEFORE FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
-			if(getOperatingSystem().equalsIgnoreCase("Windows 8.1") && getBrowserUnderTest().equalsIgnoreCase("iexplore")){
+			if(getOperatingSystem().equalsIgnoreCase("Windows 8.1") 
+					&& getBrowserUnderTest().equalsIgnoreCase("iexplore")){
 				element.click();
-			}else if(getOperatingSystem().toLowerCase().contains("mac os x") && getBrowserUnderTest().equalsIgnoreCase("safari")){
-				element.scrollIntoView(getDriver());
-				element.click();
-				element.jsClick(getDriver());
-				element.sendKeys(Keys.ENTER);
-				element.sendKeys(Keys.TAB);
-			
-				element.coordinateClick(getDriver());		
-				element.moveToElement(getDriver(), element, By.xpath("//*[@id='nav-find-vehicles']/a"));
-				element.onMouseOver(getDriver());
-				element.onMouseOver(element, getDriver());
-				element.moveToElement(driver);
-				element.mouseHoverByJavaScript(getDriver());
-				
-				/**
-				 * Try on Windows or Mac
-				 */
-				//((RenderedWebElement) getDriver().findElement(By.cssSelector("div#navi_settings"))).click();;
-			}else{
+			}
+			else{
 				element.focus(getDriver());
 			}
-			TestReporter.log("AFTER FOCUS: " + dropdown.getCoordinates().onPage().x + ":" + dropdown.getCoordinates().onPage().y);
+			
 			Sleeper.sleep(1000);
 			loopCounter++;
 			pageLoaded().isDomComplete();
 			initializePage(this.getClass());
-			Assert.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The " + linkName + " dropdown was not displayed after ["+String.valueOf(getDefaultTestTimeout())+"] seconds after clicking the " + linkName + " link.");
+			TestReporter.assertNotEquals(loopCounter, getDefaultTestTimeout(), "The " + linkName + " dropdown was not displayed after ["+String.valueOf(loopCounter)+"] seconds after clicking the " + linkName + " link.");
 		}while(isDropdownVisible(dropdown));
 	}
 }

@@ -39,29 +39,16 @@ public class VehiclesDropdown extends com.orasi.utils.TestEnvironment {
 	// ** Build page area **
 	// *********************
 	/**
-	 * 
 	 * @summary Constructor to initialize the page
 	 * @version Created 03/01/2015
 	 * @author Waightstill W Avery
-	 * @param te
-	 *            - TestEnvironment instance containing the WebDriver to be used
-	 *            for the page class
-	 * @throws NA
-	 * @return NA
+	 * @param te - TestEnvironment instance containing the WebDriver to be used for the page class
 	 * 
 	 */
 	public VehiclesDropdown(TestEnvironment te) {
 		super(te);
 		ElementFactory.initElements(getDriver(), this);
 	}
-	//
-	// public boolean pageLoaded(Element element) {
-	// return this.pageLoaded(this.getClass(), element);
-	// }
-	//
-	// public void initializePage() {
-	// this.initializePage(this.getClass());
-	// }
 
 	// *************************************
 	// *** VehiclesDropdown Interactions ***

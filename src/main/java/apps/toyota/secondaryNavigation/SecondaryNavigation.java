@@ -5,7 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
+//import org.testng.Assert;
 
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -96,11 +96,7 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 	 * @summary Constructor to initialize the page
 	 * @version Created 03/01/2015
 	 * @author Waightstill W Avery
-	 * @param te
-	 *            - TestEnvironment instance containing the WebDriver to be used
-	 *            for the page class
-	 * @throws NA
-	 * @return NA
+	 * @param te - TestEnvironment instance containing the WebDriver to be used for the page class
 	 * 
 	 */
 	public SecondaryNavigation(TestEnvironment te) {
@@ -114,9 +110,6 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 
 	/**
 	 * @author Waightstill W Avery
-	 * @param -
-	 *            N/A
-	 * @return - N/A
 	 * @summary - Clicks all links in the secondary navigation bar and validates
 	 *          that the page loads..
 	 */
@@ -132,9 +125,6 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 
 	/**
 	 * @author Waightstill W Avery
-	 * @param -
-	 *            N/A
-	 * @return - N/A
 	 * @summary - Clicks the "Select Vehicle" link to open the dropdown.
 	 */
 	@Step("Open Select Vehicle Dropdown")
@@ -154,16 +144,13 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been reached
-			Assert.assertEquals(loopCounter != timeout, true,
-					"The Select Vehicle dropdown did not open after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertEquals(loopCounter != timeout, true,
+					"The Select Vehicle dropdown did not open after [" + String.valueOf(loopCounter) + "] seconds.");
 		} while (!btnSelectVehicle.getAttribute("class").contains("open"));
 	}
 
 	/**
 	 * @author Waightstill W Avery
-	 * @param -
-	 *            N/A
-	 * @return - N/A
 	 * @summary - Clicks the "Select Vehicle" link to close the dropdown.
 	 */
 	@Step("Close Select Vehicle Dropdown")
@@ -183,16 +170,13 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been reached
-			Assert.assertEquals(loopCounter != timeout, true,
-					"The Select Vehicle dropdown was not closed after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertEquals(loopCounter != timeout, true,
+					"The Select Vehicle dropdown was not closed after [" + String.valueOf(loopCounter) + "] seconds.");
 		} while (btnSelectVehicle.getAttribute("class").contains("open"));
 	}
 
 	/**
 	 * @author Waightstill W Avery
-	 * @param -
-	 *            N/A
-	 * @return - N/A
 	 * @summary - Clicks the "Shopping Tools" link to open the dropdown.
 	 */
 	@Step("Open Shopping Tools Dropdown")
@@ -212,16 +196,13 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been reached
-			Assert.assertEquals(loopCounter != timeout, true,
-					"The Shopping Tools dropdown did not open after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertEquals(loopCounter != timeout, true,
+					"The Shopping Tools dropdown did not open after [" + String.valueOf(loopCounter) + "] seconds.");
 		} while (!btnShoppingTools.getAttribute("class").contains("open"));
 	}
 
 	/**
 	 * @author Waightstill W Avery
-	 * @param -
-	 *            N/A
-	 * @return - N/A
 	 * @summary - Clicks the "Shopping Tools" link to close the dropdown.
 	 */
 	@Step("Close Shopping Tools Dropdown")
@@ -241,16 +222,13 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been reached
-			Assert.assertEquals(loopCounter != timeout, true,
-					"The Shopping Tools dropdown was not closed after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertEquals(loopCounter != timeout, true,
+					"The Shopping Tools dropdown was not closed after [" + String.valueOf(loopCounter) + "] seconds.");
 		} while (btnShoppingTools.getAttribute("class").contains("open"));
 	}
 
 	/**
 	 * @author Waightstill W Avery
-	 * @param -
-	 *            N/A
-	 * @return - N/A
 	 * @summary - Clicks the "Find A Dealer" link and loops until either the
 	 *          page is loaded or the test timeout is reached.
 	 */
@@ -291,17 +269,15 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been reached
-			Assert.assertNotEquals(loopCounter, timeout, "The 'Find Your Toyota Dealer' page was not loaded after ["
-					+ String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertNotEquals(loopCounter, timeout,
+					"The 'Find Your Toyota Dealer' page was not loaded after [" + String.valueOf(loopCounter)
+							+ "] seconds.");
 			list2 = getDriver().findElements(By.tagName("a"));
 		} while (list2.size() == list.size());
 	}
 
 	/**
 	 * @author Waightstill W Avery
-	 * @param -
-	 *            N/A
-	 * @return - N/A
 	 * @summary - Clicks the "Build & Price" link and loops until either the
 	 *          page is loaded or the test timeout is reached.
 	 */
@@ -333,8 +309,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been reached
-			Assert.assertNotEquals(loopCounter, timeout,
-					"The 'Build Your Toyota' page was not loaded after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertNotEquals(loopCounter, timeout,
+					"The 'Build Your Toyota' page was not loaded after [" + String.valueOf(loopCounter) + "] seconds.");
 			// Grab the number of links on the current page for comparison
 			list2 = getDriver().findElements(By.tagName("a"));
 		} while (list2.size() == list.size());
@@ -342,9 +318,6 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 
 	/**
 	 * @author Waightstill W Avery
-	 * @param -
-	 *            N/A
-	 * @return - N/A
 	 * @summary - Clicks the "Local Specials" link and loops until either the
 	 *          page is loaded or the test timeout is reached.
 	 */
@@ -378,8 +351,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 			// Iterate the counter
 			loopCounter++;
 			// Ensure the timeout has not been rea
-			Assert.assertNotEquals(loopCounter, timeout,
-					"The 'Local Specials' page was not loaded after [" + String.valueOf(timeout) + "] seconds.");
+			TestReporter.assertNotEquals(loopCounter, timeout,
+					"The 'Local Specials' page was not loaded after [" + String.valueOf(loopCounter) + "] seconds.");
 			// Grab the number of links on the current page for comparison
 			list2 = getDriver().findElements(By.tagName("a"));
 		} while (list2.size() == list.size());
@@ -387,9 +360,6 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 
 	/**
 	 * @author Waightstill W Avery
-	 * @param -
-	 *            N/A
-	 * @return - N/A
 	 * @summary - Performance issues have been seen with the Windows 7
 	 *          configurations. This method will allow for an arbitrary wait
 	 *          period to allow for the page to load.
@@ -400,12 +370,8 @@ public class SecondaryNavigation extends com.orasi.utils.TestEnvironment {
 
 	/**
 	 * @author Waightstill W Avery
-	 * @param -
-	 *            N/A
-	 * @return - true if the operating system under test is Windows 7, false
-	 *         otherwise
-	 * @summary - Tests to determine if the operating system under test is
-	 *          Windows 7
+	 * @return - true if the operating system under test is Windows 7, false otherwise
+	 * @summary - Tests to determine if the operating system under test is Windows 7
 	 */
 	private boolean isWindows7() {
 		boolean isWindows7 = false;

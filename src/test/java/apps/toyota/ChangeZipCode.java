@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.client.ClientProtocolException;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -78,23 +79,25 @@ public class ChangeZipCode extends TestEnvironment {
 	@Test(dataProvider = "dataScenario", groups = { "regression" })
 	public void testChangeZipCode(@Parameter String testScenario, @Parameter String zipCode) {
 		testName = new Object() {
-		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem() + "_" + getBrowserUnderTest() + "_"
+		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem().replace(" ", "").replace(".", "") + "_" + getBrowserUnderTest() + "_"
 				+ getBrowserVersion();
 
 		testStart(testName);
 
 		// Ensure the home page is loaded
-		TestReporter.logScenario(testScenario);
 		TestReporter.assertTrue(pageLoaded().isDomComplete(), "Verify Homepage is displayed");
+		// Report the test scenario
+		TestReporter.logScenario(testScenario);
 
-		// Change the zipcode
+		// Test the functionality to change the zip code
+		TestReporter.logStep("Test the Functionality to Change the Zip Code");
 		MainNavigation mainNav = new MainNavigation(this);
 		TestReporter.assertTrue(pageLoaded().isDomComplete(), "Verify Navigation Bar is loaded");
 		mainNav.changeZipCodes(zipCode);
 	}
 
 	@AfterMethod(groups = { "regression" })
-	public void afterTest(ITestResult test) {
+	public void afterTest(ITestResult test) throws ClientProtocolException, IOException {
 		endSauceTest(test);
 	}
 }

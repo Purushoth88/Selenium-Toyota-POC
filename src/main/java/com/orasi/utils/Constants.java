@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 public class Constants {
 
+	/** Date-Time constants */
 	final static public int CURRENT_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 	final static public int CURRENT_MONTH = Calendar.getInstance().get(Calendar.MONTH);
 	final static public int CURRENT_DAY = Calendar.getInstance().get(Calendar.DATE);
@@ -40,15 +41,10 @@ public class Constants {
 	/** The default timeout in seconds, should be a generous default time */
 	final static public int DEFAULT_GLOBAL_DRIVER_TIMEOUT = 60;
 
-	/**
-	 * The timeout (seconds) for finding web elements on a page, shouldn't be
-	 * too long
-	 */
+	/** The timeout (seconds) for finding web elements on a page, shouldn't be too long */
 	final static public int ELEMENT_TIMEOUT = 10;
 
-	/**
-	 * The timeout (seconds) for page/DOM/transitions, should also be a generous
-	 */
+	/** The timeout (seconds) for page/DOM/transitions, should also be a generous */
 	final static public int PAGE_TIMEOUT = 60;
 
 	/** Selenium hub URL */
@@ -61,7 +57,7 @@ public class Constants {
 	/**
 	 * Defaults to "./" if there's an exception of any sort.
 	 * 
-	 * @warning Exceptions are swallowed.
+	 * @warning Exceptions are absorbed.
 	 * @return Constants.DIR_SEPARATOR
 	 */
 	final private static String determineCurrentPath() {
@@ -73,20 +69,23 @@ public class Constants {
 		return "." + Constants.DIR_SEPARATOR;
 	}
 
-	/**************************
-	 * /************************** / SAUCE LABS CONSTANTS
-	 * /************************** /************************** /** The timeout
-	 * (seconds) for the Selenium server to execute a command; default is 300
-	 * seconds
-	 */
+	//****************************
+	//****************************
+	//**  SAUCE LABS CONSTANTS  **
+	//****************************
+	//****************************
+	
+	// The timeout (seconds) for the Selenium server to execute a command; default is 300 seconds
 	final static public int COMMAND_TIMEOUT = 120;
 
-	/**
-	 * The timeout (seconds) for the SauceLabs waiting on a command from the
-	 * Selenium script
-	 * https://docs.saucelabs.com/reference/troubleshooting-common-error-
-	 * messages/#test-did-not-see-a-new-command-for-90-seconds-timing-out
-	 */
+	//  The timeout (seconds) for the SauceLabs waiting on a command from the Selenium script
+	// https://docs.saucelabs.com/reference/troubleshooting-common-error-messages/#test-did-not-see-a-new-command-for-90-seconds-timing-out
 	final static public int IDLE_TIMEOUT = 30;
 
+	//*************************
+	//*************************
+	//**  MUSTARD CONSTANTS  **
+	//*************************
+	//*************************
+	final static public boolean REPORT_TO_MUSTARD = false;
 }

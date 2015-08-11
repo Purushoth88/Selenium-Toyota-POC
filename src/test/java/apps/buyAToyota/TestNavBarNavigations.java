@@ -2,6 +2,7 @@ package apps.buyAToyota;
 
 import java.io.IOException;
 
+import org.apache.http.client.ClientProtocolException;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
@@ -53,7 +54,7 @@ public class TestNavBarNavigations extends TestEnvironment {
 	@Test(groups = { "regression" })
 	public void testAllNavBarNavigations() {
 		testName = new Object() {
-		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem() + "_" + getBrowserUnderTest() + "_"
+		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem().replace(" ", "").replace(".", "") + "_" + getBrowserUnderTest() + "_"
 				+ getBrowserVersion();
 
 		// Start the test and generate a driver
@@ -61,13 +62,17 @@ public class TestNavBarNavigations extends TestEnvironment {
 
 		// Ensure the home page is loaded
 		TestReporter.assertTrue(pageLoaded().isDomComplete(), "Load the Home Page");
+		// Report the test scenario
 		TestReporter.logScenario("Test the Navigation Bar Functionality");
+		
+		// Test the navigation bar functionality
+		TestReporter.logStep("Test the Navigation Bar Functionality");
 		HomePage homePage = new HomePage(this);
 		homePage.testNavBarNavigation();
 	}
 
 	@AfterMethod(groups = { "regression" })
-	public void afterTest(ITestResult test) {
+	public void afterTest(ITestResult test) throws ClientProtocolException, IOException {
 		endSauceTest(test);
 	}
 }

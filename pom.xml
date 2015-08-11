@@ -9,7 +9,10 @@
 		<testNGSourceDirectory>src/test/resources</testNGSourceDirectory>
 		<allure.version>1.4.13</allure.version>
 		<aspectj.version>1.8.5</aspectj.version>
+		<property environment="env" />
+		<property name="build_parameter"  value="${env.BUILD_NUMBER}"/>
 	</properties>
+	
 
 	<repositories>
 		<repository>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.client.ClientProtocolException;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -63,7 +64,7 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 	@Test(groups = { "regression" }, singleThreaded = true)
 	public void testAllSecondaryNavigations() {
 		testName = new Object() {
-		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem() + "_" + getBrowserUnderTest() + "_"
+		}.getClass().getEnclosingMethod().getName() + "_" + getOperatingSystem().replace(" ", "").replace(".", "") + "_" + getBrowserUnderTest() + "_"
 				+ getBrowserVersion();
 
 		// Start the test and generate a driver
@@ -71,13 +72,17 @@ public class TestAllSecondaryNavigations extends TestEnvironment {
 
 		// Ensure the home page is loaded
 		TestReporter.assertTrue(pageLoaded().isDomComplete(), "Load the Home Page");
+		// Report the test scenario
 		TestReporter.log("Test the Secondary Navigation Bar Functionality");
+		
+		// Test the secondary navigation bar functionality
+		TestReporter.logStep("Test the Secondary Navigation Bar Functionality");
 		SecondaryNavigation secNav = new SecondaryNavigation(this);
 		secNav.navigateAllSecondaryNavigationTabs();
 	}
 
 	@AfterMethod(groups = { "regression" })
-	public void afterTest(ITestResult test) {
+	public void afterTest(ITestResult test) throws ClientProtocolException, IOException {
 		endSauceTest(test);
 	}
 }

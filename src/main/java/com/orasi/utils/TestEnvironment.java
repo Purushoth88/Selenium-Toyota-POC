@@ -9,7 +9,18 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONArray;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -51,6 +62,16 @@ public class TestEnvironment {
 	protected String testName = "";
 	protected String commandTimeout = "";
 	protected String idleTimeout = "";
+	protected File screenshot = null;
+	/*
+	 * Mustard Fields
+	 */
+	private String mustardTestName = "";
+	private String deviceID = "";
+	private String status = "";
+	private String comment = "";
+	private String mustardIp = "http://10.238.242.85:3000/projects/4/results";
+
 	/*
 	 * WebDriver Fields
 	 */
@@ -67,12 +88,13 @@ public class TestEnvironment {
 	 * URL and Credential Repository Field
 	 */
 	protected ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
+	protected ResourceBundle userCredentialRepository = ResourceBundle.getBundle(Constants.USER_CREDENTIALS_PATH);
 	/*
 	 * Selenium Hub Field
 	 */
 	protected String seleniumHubURL = "http://"
-			+ Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")) + ":"
-			+ Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY"))
+			+ Base64Coder.decodeString(userCredentialRepository.getString("SAUCELABS_USERNAME")) + ":"
+			+ Base64Coder.decodeString(userCredentialRepository.getString("SAUCELABS_KEY"))
 			+ "@ondemand.saucelabs.com:80/wd/hub";
 	/*
 	 * Sauce Labs Fields
@@ -85,8 +107,8 @@ public class TestEnvironment {
 	 * {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
 	 */
 	protected SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
-			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
-			Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+			Base64Coder.decodeString(userCredentialRepository.getString("SAUCELABS_USERNAME")),
+			Base64Coder.decodeString(userCredentialRepository.getString("SAUCELABS_KEY")));
 	/**
 	 * ThreadLocal variable which contains the {@link WebDriver} instance which
 	 * is used to perform browser interactions with.
@@ -100,8 +122,7 @@ public class TestEnvironment {
 	/*
 	 * Constructors for TestEnvironment class
 	 */
-	public TestEnvironment() {
-	};
+	public TestEnvironment() {};
 
 	public TestEnvironment(String application, String browserUnderTest, String browserVersion, String operatingSystem,
 			String setRunLocation, String environment) {
@@ -267,6 +288,9 @@ public class TestEnvironment {
 	protected ResourceBundle getEnvironmentURLRepository() {
 		return appURLRepository;
 	}
+	protected ResourceBundle getUserCredentialRepository() {
+		return userCredentialRepository;
+	}
 
 	/**
 	 * Launches the application under test. Gets the URL from an environment
@@ -316,6 +340,7 @@ public class TestEnvironment {
 		// Uncomment the following line to have TestReporter outputs output to
 		// the console
 		TestReporter.setPrintToConsole(true);
+		closeMustardExecution();
 		driverSetup();
 		launchApplication();
 		drivers.put(testName, driver);
@@ -495,6 +520,10 @@ public class TestEnvironment {
 	public void setCommandTimeout() {
 		commandTimeout = String.valueOf(Constants.COMMAND_TIMEOUT);
 	}
+	
+	public void setCommandTimeout(String timeout) {
+		commandTimeout = timeout;
+	}
 
 	public String getCommandTimeout() {
 		return commandTimeout;
@@ -505,6 +534,10 @@ public class TestEnvironment {
 	 */
 	public void setIdleTimeout() {
 		idleTimeout = String.valueOf(Constants.IDLE_TIMEOUT);
+	}
+	
+	public void setIdleTimeout(String timeout) {
+		idleTimeout = timeout;
 	}
 
 	public String getIdleTimeout() {
@@ -519,18 +552,34 @@ public class TestEnvironment {
 	 *            - test results
 	 * @version 05/27/2015
 	 * @author Justin Phlegar
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
 	 */
 	@SuppressWarnings("unchecked")
-	protected void endSauceTest(ITestResult test) {
+	protected void endSauceTest(ITestResult test) throws ClientProtocolException, IOException {
 		TestReporter.log("endSauceTest");
 		Map<String, Object> updates = new HashMap<String, Object>();
 		updates.put("name", getTestName());
 
 		if (test.getStatus() == ITestResult.FAILURE) {
-			// new Screenshot().takeScreenShot(test, driver);
 			updates.put("passed", false);
+			status = "fail";
+			comment = test.getThrowable().getMessage();
+			screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
 		} else {
 			updates.put("passed", true);
+			status = "pass";
+			//Uncomment the below line to only take screenshots on failure
+			screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+		}
+		
+		String fullTestName = this.testName;
+		int index = fullTestName.indexOf("_");
+		
+		if(Constants.REPORT_TO_MUSTARD){
+			mustardTestName = fullTestName.substring(0, index);
+			deviceID = fullTestName.substring(index + 1, fullTestName.length());
+			postTestToMustard();
 		}
 
 		JSONArray tags = new JSONArray();
@@ -541,8 +590,8 @@ public class TestEnvironment {
 		updates.put("tags", tags);
 
 		if (runLocation.equalsIgnoreCase("remote")) {
-			SauceREST client = new SauceREST(Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
-					Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
+			SauceREST client = new SauceREST(Base64Coder.decodeString(userCredentialRepository.getString("SAUCELABS_USERNAME")),
+					Base64Coder.decodeString(userCredentialRepository.getString("SAUCELABS_KEY")));
 			client.updateJobInfo(((RemoteWebDriver) driver).getSessionId().toString(), updates);
 		}
 
@@ -550,5 +599,52 @@ public class TestEnvironment {
 		if (driver != null && driver.getWindowHandles().size() > 0) {
 			driver.quit();
 		}
+	}
+	
+	private void closeMustardExecution(){
+	}
+	
+	private void postTestToMustard() throws ClientProtocolException, IOException{	
+		//Create a default HTTP client
+		HttpClient httpclient = HttpClients.createDefault();
+		//Create an HTTP POST object with the Mustard IP address
+	    HttpPost httppost = new HttpPost(mustardIp);
+
+	    //Create a multipart entity that will hold the image and  be added to the post request
+	    MultipartEntityBuilder mpEntity = MultipartEntityBuilder.create();
+	    
+		/*
+		 * USING FILEBODY
+		 */
+	    if(screenshot != null){
+	    	FileBody fileBody = new FileBody(screenshot);
+	    	mpEntity.addPart("screenshot", fileBody);
+	    }
+		mpEntity.addTextBody("status", status);
+		mpEntity.addTextBody("comment", comment);
+		mpEntity.addTextBody("test_name", mustardTestName);
+		mpEntity.addTextBody("device_id", deviceID);
+	    
+	    //Build the multipart entity into an HTTP entity
+	    HttpEntity entity = mpEntity.build();
+
+	    //Use the HTTP entity to define the entity used by the HTTP POST object
+	    httppost.setEntity(entity);
+	    
+	    System.out.println("executing request " + httppost.getRequestLine());
+	    //Use the HTTP POST object with the HTTP client to execute the POST
+	    HttpResponse response = httpclient.execute(httppost);
+	    //Grab the response entity
+	    HttpEntity resEntity = response.getEntity();
+
+	    //Output the status
+	    System.out.println(response.getStatusLine());
+	    //If the response is not null, output the entire response
+	    if (resEntity != null) {
+	      System.out.println(EntityUtils.toString(resEntity));
+	    }
+	    
+	    resEntity.getContent().close();
+	    httppost.releaseConnection();
 	}
 }
